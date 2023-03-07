@@ -7,7 +7,7 @@ Collection interfaces in C.
 - butterflyfish\_[stream](doc/Streams.md)\__x_
   - butterflyfish\_[collection](doc/Collections.md)\__x_
     - butterflyfish\_[queue](doc/Queues.md)\__x_
-    - butterflyfish\_[stack](doc/Stack.md)\__x_
+    - butterflyfish\_[stack](doc/Stacks.md)\__x_
     - butterflyfish\_[fixed_list](doc/FixedLists.md)\__x_
       - butterflyfish\_[reducible_list](doc/ReducibleLists.md)\__x_
         - butterflyfish\_[list](doc/Lists.md)\__x_
