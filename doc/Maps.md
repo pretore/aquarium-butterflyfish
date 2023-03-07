@@ -1,6 +1,7 @@
 ## Maps
 
-``Maps`` _are_ ``Collections`` containing only entries with unique keys.
+[Maps](Maps.md) _are_ [Collections](Collections.md) containing only entries 
+with unique keys.
 - add value for key
 - set value for key
 - replace value for key
@@ -17,5 +18,5 @@
 - contains all keys
 - get value for key
 - get entry for key
-- ``Sets`` view of keys
-- ``ReducibleLists`` view of values
+- [Sets](Sets.md) view of keys
+- [ReducibleLists](ReducibleLists.md) view of values

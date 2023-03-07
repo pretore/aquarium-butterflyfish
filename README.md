@@ -1,16 +1,20 @@
 # aquarium-butterflyfish
 
+![main](https://github.com/pretore/aquarium-butterflyfish/actions/workflows/cmake.yml/badge.svg?branch=main)
+
 Collection interfaces in C.
 
 - butterflyfish\_[stream](doc/Streams.md)\__x_
   - butterflyfish\_[collection](doc/Collections.md)\__x_
+    - butterflyfish\_[queue](doc/Queues.md)\__x_
+    - butterflyfish\_[stack](doc/Stack.md)\__x_
     - butterflyfish\_[fixed_list](doc/FixedLists.md)\__x_
       - butterflyfish\_[reducible_list](doc/ReducibleLists.md)\__x_
         - butterflyfish\_[list](doc/Lists.md)\__x_
     - butterflyfish\_[set](doc/Sets.md)\__x_
       - butterflyfish\_[ordered_set](doc/OrderedSets.md)\__x_
         - butterflyfish\_[sorted_set](doc/SortedSets.md)\__x_
-        
+
 - butterflyfish\_[stream](doc/Streams.md)\__x\_y_
   - butterflyfish\_[collection](doc/Collections.md)\__x\_y_
     - butterflyfish\_[map](doc/Maps.md)\__x\_y_

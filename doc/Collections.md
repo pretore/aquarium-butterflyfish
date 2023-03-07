@@ -1,6 +1,6 @@
 ## Collections
 
-``Collections`` _are_ finite ``Streams``. 
+[Collections](Collections.md) _are_ finite [Streams](Streams.md). 
 - count of items
-- last item
-- previous item from given item
+- get last item
+- get previous item from given item
