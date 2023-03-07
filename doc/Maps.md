@@ -17,5 +17,5 @@
 - contains all keys
 - get value for key
 - get entry for key
-- ``Set`` view of keys
+- ``Sets`` view of keys
 - ``ReducibleLists`` view of values

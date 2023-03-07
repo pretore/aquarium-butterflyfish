@@ -8,6 +8,7 @@
 #include "collection_i_i.h"
 
 struct sea_turtle_integer;
+struct butterflyfish_stream_i;
 struct butterflyfish_set_i;
 struct butterflyfish_reducible_list_i;
 

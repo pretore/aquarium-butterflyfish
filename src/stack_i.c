@@ -86,7 +86,7 @@ int butterflyfish_stack_i_prev(
             .prev(object, item, out);
 }
 
-#pragma mark stack -
+#pragma mark stack_i -
 
 int butterflyfish_stack_i_push(
         struct butterflyfish_stack_i *const object,

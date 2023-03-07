@@ -21,41 +21,71 @@ include(cmake/FetchAquariumTriggerfish.cmake)
 # Sources
 set(EXPORTED_HEADER_FILES
         include/butterflyfish/collection_i.h
+        include/butterflyfish/collection_s.h
         include/butterflyfish/collection_i_i.h
+        include/butterflyfish/collection_s_s.h
         include/butterflyfish/fixed_list_i.h
+        include/butterflyfish/fixed_list_s.h
         include/butterflyfish/list_i.h
+        include/butterflyfish/list_s.h
         include/butterflyfish/map_entry_i_i.h
+        include/butterflyfish/map_entry_s_s.h
         include/butterflyfish/map_i_i.h
+        include/butterflyfish/map_s_s.h
         include/butterflyfish/ordered_map_i_i.h
+        include/butterflyfish/ordered_map_s_s.h
         include/butterflyfish/ordered_set_i.h
+        include/butterflyfish/ordered_set_s.h
         include/butterflyfish/queue_i.h
+        include/butterflyfish/queue_s.h
         include/butterflyfish/reducible_list_i.h
+        include/butterflyfish/reducible_list_s.h
         include/butterflyfish/set_i.h
+        include/butterflyfish/set_s.h
         include/butterflyfish/sorted_map_i_i.h
+        include/butterflyfish/sorted_map_s_s.h
         include/butterflyfish/sorted_set_i.h
+        include/butterflyfish/sorted_set_s.h
         include/butterflyfish/stack_i.h
+        include/butterflyfish/stack_s.h
         include/butterflyfish/stream_i.h
+        include/butterflyfish/stream_s.h
         include/butterflyfish/stream_i_i.h
+        include/butterflyfish/stream_s_s.h
         include/butterflyfish.h)
 set(SOURCES
         ${EXPORTED_HEADER_FILES}
         src/butterflyfish.c
         src/collection_i.c
+        src/collection_s.c
         src/collection_i_i.c
+        src/collection_s_s.c
         src/fixed_list_i.c
+        src/fixed_list_s.c
         src/list_i.c
-        src/map_entry_i_i.c
+        src/list_s.c
         src/map_i_i.c
+        src/map_s_s.c
         src/ordered_map_i_i.c
+        src/ordered_map_s_s.c
         src/ordered_set_i.c
+        src/ordered_set_s.c
         src/queue_i.c
+        src/queue_s.c
         src/reducible_list_i.c
+        src/reducible_list_s.c
         src/set_i.c
+        src/set_s.c
         src/sorted_map_i_i.c
+        src/sorted_map_s_s.c
         src/sorted_set_i.c
+        src/sorted_set_s.c
         src/stack_i.c
+        src/stack_s.c
         src/stream_i.c
-        src/stream_i_i.c)
+        src/stream_s.c
+        src/stream_i_i.c
+        src/stream_s_s.c)
 
 if (DOXYGEN_FOUND)
     set(DOXYGEN_EXTRACT_ALL YES)
@@ -208,17 +238,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-map-i-i-unit-test
             ${PROJECT_NAME}-map-i-i-unit-test)
-    # aquarium-butterflyfish-map-entry-i-i-unit-test
-    add_executable(${PROJECT_NAME}-map-entry-i-i-unit-test
-            test/test_map_entry_i_i.c)
-    target_include_directories(${PROJECT_NAME}-map-entry-i-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(${PROJECT_NAME}-map-entry-i-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    add_test(${PROJECT_NAME}-map-entry-i-i-unit-test
-            ${PROJECT_NAME}-map-entry-i-i-unit-test)
     # aquarium-butterflyfish-ordered-map-i-i-unit-test
     add_executable(${PROJECT_NAME}-ordered-map-i-i-unit-test
             test/test_ordered_map_i_i.c)
@@ -261,6 +280,164 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-stack-i-unit-test
             ${PROJECT_NAME}-stack-i-unit-test)
+    # aquarium-butterflyfish-stream-s-unit-test
+    add_executable(${PROJECT_NAME}-stream-s-unit-test test/test_stream_s.c)
+    target_include_directories(${PROJECT_NAME}-stream-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-stream-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-stream-s-unit-test
+            ${PROJECT_NAME}-stream-s-unit-test)
+    # aquarium-butterflyfish-collection-s-unit-test
+    add_executable(${PROJECT_NAME}-collection-s-unit-test
+            test/test_collection_s.c)
+    target_include_directories(${PROJECT_NAME}-collection-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-collection-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-collection-s-unit-test
+            ${PROJECT_NAME}-collection-s-unit-test)
+    # aquarium-butterflyfish-set-s-unit-test
+    add_executable(${PROJECT_NAME}-set-s-unit-test test/test_set_s.c)
+    target_include_directories(${PROJECT_NAME}-set-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-set-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-set-s-unit-test ${PROJECT_NAME}-set-s-unit-test)
+    # aquarium-butterflyfish-ordered-set-s-unit-test
+    add_executable(${PROJECT_NAME}-ordered-set-s-unit-test
+                test/test_ordered_set_s.c)
+    target_include_directories(${PROJECT_NAME}-ordered-set-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-ordered-set-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-ordered-set-s-unit-test
+            ${PROJECT_NAME}-ordered-set-s-unit-test)
+    # aquarium-butterflyfish-sorted-set-s-unit-test
+    add_executable(${PROJECT_NAME}-sorted-set-s-unit-test
+            test/test_sorted_set_s.c)
+    target_include_directories(${PROJECT_NAME}-sorted-set-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-sorted-set-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-sorted-set-s-unit-test
+            ${PROJECT_NAME}-sorted-set-s-unit-test)
+    # aquarium-butterflyfish-fixed-list-s-unit-test
+    add_executable(${PROJECT_NAME}-fixed-list-s-unit-test
+            test/test_fixed_list_s.c)
+    target_include_directories(${PROJECT_NAME}-fixed-list-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-fixed-list-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-fixed-list-s-unit-test
+            ${PROJECT_NAME}-fixed-list-s-unit-test)
+    # aquarium-butterflyfish-reducible-list-s-unit-test
+    add_executable(${PROJECT_NAME}-reducible-list-s-unit-test
+            test/test_reducible_list_s.c)
+    target_include_directories(${PROJECT_NAME}-reducible-list-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-list-s-unit-test
+            PRIVATE
+            ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-list-s-unit-test
+            ${PROJECT_NAME}-reducible-list-s-unit-test)
+    # aquarium-butterflyfish-list-s-unit-test
+    add_executable(${PROJECT_NAME}-list-s-unit-test test/test_list_s.c)
+    target_include_directories(${PROJECT_NAME}-list-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-list-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-list-s-unit-test ${PROJECT_NAME}-list-s-unit-test)
+    # aquarium-butterflyfish-stream-s-s-unit-test
+    add_executable(${PROJECT_NAME}-stream-s-s-unit-test
+            test/test_stream_s_s.c)
+    target_include_directories(${PROJECT_NAME}-stream-s-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-stream-s-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-stream-s-s-unit-test
+            ${PROJECT_NAME}-stream-s-s-unit-test)
+    # aquarium-butterflyfish-collection-s-s-unit-test
+    add_executable(${PROJECT_NAME}-collection-s-s-unit-test
+            test/test_collection_s_s.c)
+    target_include_directories(${PROJECT_NAME}-collection-s-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-collection-s-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-collection-s-s-unit-test
+            ${PROJECT_NAME}-collection-s-s-unit-test)
+    # aquarium-butterflyfish-map-s-s-unit-test
+    add_executable(${PROJECT_NAME}-map-s-s-unit-test
+            test/test_map_s_s.c)
+    target_include_directories(${PROJECT_NAME}-map-s-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-map-s-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-map-s-s-unit-test
+            ${PROJECT_NAME}-map-s-s-unit-test)
+    # aquarium-butterflyfish-ordered-map-s-s-unit-test
+    add_executable(${PROJECT_NAME}-ordered-map-s-s-unit-test
+            test/test_ordered_map_s_s.c)
+    target_include_directories(${PROJECT_NAME}-ordered-map-s-s-unit-test
+            PRIVATE
+            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-ordered-map-s-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-ordered-map-s-s-unit-test
+            ${PROJECT_NAME}-ordered-map-s-s-unit-test)
+    # aquarium-butterflyfish-sorted-map-s-s-unit-test
+    add_executable(${PROJECT_NAME}-sorted-map-s-s-unit-test
+            test/test_sorted_map_s_s.c)
+    target_include_directories(${PROJECT_NAME}-sorted-map-s-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-sorted-map-s-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-sorted-map-s-s-unit-test
+            ${PROJECT_NAME}-sorted-map-s-s-unit-test)
+    # aquarium-butterflyfish-queue-s-unit-test
+    add_executable(${PROJECT_NAME}-queue-s-unit-test test/test_queue_s.c)
+    target_include_directories(${PROJECT_NAME}-queue-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-queue-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-queue-s-unit-test
+            ${PROJECT_NAME}-queue-s-unit-test)
+    # aquarium-butterflyfish-stack-s-unit-test
+    add_executable(${PROJECT_NAME}-stack-s-unit-test test/test_stack_s.c)
+    target_include_directories(${PROJECT_NAME}-stack-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-stack-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-stack-s-unit-test
+            ${PROJECT_NAME}-stack-s-unit-test)
 else ()
     add_library(${PROJECT_NAME} "")
     target_sources(${PROJECT_NAME}
