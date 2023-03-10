@@ -250,7 +250,7 @@ int butterflyfish_sorted_set_s_get(
             .get(object, value, out);
 }
 
-#pragma mark sorted_set_s -
+#pragma mark ordered_set_s -
 #pragma mark sorted_set_s -
 
 int butterflyfish_sorted_set_s_ceiling(

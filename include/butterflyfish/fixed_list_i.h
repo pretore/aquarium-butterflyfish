@@ -144,11 +144,12 @@ int butterflyfish_fixed_list_i_get(
  * @brief Set value of item at index.
  * @param [in] object fixed list instance.
  * @param [in] at index of item to set.
- * @param [in] value to of item to be set to.
+ * @param [in] value to which item is to be set to.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_VALUE_IS_NULL if value is
+ * <i>NULL</i>.
  * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS if at does
  * not refer to an item contained within the fixed list.
  * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED if there

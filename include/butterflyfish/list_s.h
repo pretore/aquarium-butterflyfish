@@ -139,10 +139,10 @@ int butterflyfish_list_s_get(
  * @brief Set value of item at index.
  * @param [in] object list instance.
  * @param [in] at index of item to set.
- * @param [in] value to of item to be set to.
+ * @param [in] value to which item is to be set to.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_S_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_LIST_S_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_S_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_S_ERROR_INDEX_IS_OUT_OF_BOUNDS if at does not
  * refer to an item contained within the list.
  * @throws BUTTERFLYFISH_LIST_S_ERROR_MEMORY_ALLOCATION_FAILED if there is
