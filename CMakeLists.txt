@@ -24,66 +24,82 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/collection_ni.h
         include/butterflyfish/collection_p.h
         include/butterflyfish/collection_s.h
+        include/butterflyfish/collection_sr.h
         include/butterflyfish/collection_i_i.h
         include/butterflyfish/collection_ni_ni.h
         include/butterflyfish/collection_p_p.h
         include/butterflyfish/collection_s_s.h
+        include/butterflyfish/collection_sr_sr.h
         include/butterflyfish/fixed_list_i.h
         include/butterflyfish/fixed_list_ni.h
         include/butterflyfish/fixed_list_p.h
         include/butterflyfish/fixed_list_s.h
+        include/butterflyfish/fixed_list_sr.h
         include/butterflyfish/list_i.h
         include/butterflyfish/list_ni.h
         include/butterflyfish/list_p.h
         include/butterflyfish/list_s.h
+        include/butterflyfish/list_sr.h
         include/butterflyfish/map_entry_i_i.h
         include/butterflyfish/map_entry_ni_ni.h
         include/butterflyfish/map_entry_p_p.h
         include/butterflyfish/map_entry_s_s.h
+        include/butterflyfish/map_entry_sr_sr.h
         include/butterflyfish/map_i_i.h
         include/butterflyfish/map_ni_ni.h
         include/butterflyfish/map_p_p.h
         include/butterflyfish/map_s_s.h
+        include/butterflyfish/map_sr_sr.h
         include/butterflyfish/ordered_map_i_i.h
         include/butterflyfish/ordered_map_ni_ni.h
         include/butterflyfish/ordered_map_p_p.h
         include/butterflyfish/ordered_map_s_s.h
+        include/butterflyfish/ordered_map_sr_sr.h
         include/butterflyfish/ordered_set_i.h
         include/butterflyfish/ordered_set_ni.h
         include/butterflyfish/ordered_set_p.h
         include/butterflyfish/ordered_set_s.h
+        include/butterflyfish/ordered_set_sr.h
         include/butterflyfish/queue_i.h
         include/butterflyfish/queue_ni.h
         include/butterflyfish/queue_p.h
         include/butterflyfish/queue_s.h
+        include/butterflyfish/queue_sr.h
         include/butterflyfish/reducible_list_i.h
         include/butterflyfish/reducible_list_ni.h
         include/butterflyfish/reducible_list_p.h
         include/butterflyfish/reducible_list_s.h
+        include/butterflyfish/reducible_list_sr.h
         include/butterflyfish/set_i.h
         include/butterflyfish/set_ni.h
         include/butterflyfish/set_p.h
         include/butterflyfish/set_s.h
+        include/butterflyfish/set_sr.h
         include/butterflyfish/sorted_map_i_i.h
         include/butterflyfish/sorted_map_ni_ni.h
         include/butterflyfish/sorted_map_p_p.h
         include/butterflyfish/sorted_map_s_s.h
+        include/butterflyfish/sorted_map_sr_sr.h
         include/butterflyfish/sorted_set_i.h
         include/butterflyfish/sorted_set_ni.h
         include/butterflyfish/sorted_set_p.h
         include/butterflyfish/sorted_set_s.h
+        include/butterflyfish/sorted_set_sr.h
         include/butterflyfish/stack_i.h
         include/butterflyfish/stack_ni.h
         include/butterflyfish/stack_p.h
         include/butterflyfish/stack_s.h
+        include/butterflyfish/stack_sr.h
         include/butterflyfish/stream_i.h
         include/butterflyfish/stream_ni.h
         include/butterflyfish/stream_p.h
         include/butterflyfish/stream_s.h
+        include/butterflyfish/stream_sr.h
         include/butterflyfish/stream_i_i.h
         include/butterflyfish/stream_ni_ni.h
         include/butterflyfish/stream_p_p.h
         include/butterflyfish/stream_s_s.h
+        include/butterflyfish/stream_sr_sr.h
         include/butterflyfish.h)
 set(SOURCES
         ${EXPORTED_HEADER_FILES}
@@ -92,62 +108,77 @@ set(SOURCES
         src/collection_ni.c
         src/collection_p.c
         src/collection_s.c
+        src/collection_sr.c
         src/collection_i_i.c
         src/collection_ni_ni.c
         src/collection_p_p.c
         src/collection_s_s.c
+        src/collection_sr_sr.c
         src/fixed_list_i.c
         src/fixed_list_ni.c
         src/fixed_list_p.c
         src/fixed_list_s.c
+        src/fixed_list_sr.c
         src/list_i.c
         src/list_ni.c
         src/list_p.c
         src/list_s.c
+        src/list_sr.c
         src/map_i_i.c
         src/map_ni_ni.c
         src/map_p_p.c
         src/map_s_s.c
+        src/map_sr_sr.c
         src/ordered_map_i_i.c
         src/ordered_map_ni_ni.c
         src/ordered_map_p_p.c
         src/ordered_map_s_s.c
+        src/ordered_map_sr_sr.c
         src/ordered_set_i.c
         src/ordered_set_ni.c
         src/ordered_set_p.c
         src/ordered_set_s.c
+        src/ordered_set_sr.c
         src/queue_i.c
         src/queue_ni.c
         src/queue_p.c
         src/queue_s.c
+        src/queue_sr.c
         src/reducible_list_i.c
         src/reducible_list_ni.c
         src/reducible_list_p.c
         src/reducible_list_s.c
+        src/reducible_list_sr.c
         src/set_i.c
         src/set_ni.c
         src/set_p.c
         src/set_s.c
+        src/set_sr.c
         src/sorted_map_i_i.c
         src/sorted_map_ni_ni.c
         src/sorted_map_p_p.c
         src/sorted_map_s_s.c
+        src/sorted_map_sr_sr.c
         src/sorted_set_i.c
         src/sorted_set_ni.c
         src/sorted_set_p.c
         src/sorted_set_s.c
+        src/sorted_set_sr.c
         src/stack_i.c
         src/stack_ni.c
         src/stack_p.c
         src/stack_s.c
+        src/stack_sr.c
         src/stream_i.c
         src/stream_ni.c
         src/stream_p.c
         src/stream_s.c
+        src/stream_sr.c
         src/stream_i_i.c
         src/stream_ni_ni.c
         src/stream_p_p.c
-        src/stream_s_s.c)
+        src/stream_s_s.c
+        src/stream_sr_sr.c)
 
 if (DOXYGEN_FOUND)
     set(DOXYGEN_EXTRACT_ALL YES)
@@ -817,6 +848,165 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-stack-p-unit-test
             ${PROJECT_NAME}-stack-p-unit-test)
+    # aquarium-butterflyfish-stream-sr-unit-test
+    add_executable(${PROJECT_NAME}-stream-sr-unit-test test/test_stream_sr.c)
+    target_include_directories(${PROJECT_NAME}-stream-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-stream-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-stream-sr-unit-test
+            ${PROJECT_NAME}-stream-sr-unit-test)
+    # aquarium-butterflyfish-collection-sr-unit-test
+    add_executable(${PROJECT_NAME}-collection-sr-unit-test
+            test/test_collection_sr.c)
+    target_include_directories(${PROJECT_NAME}-collection-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-collection-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-collection-sr-unit-test
+            ${PROJECT_NAME}-collection-sr-unit-test)
+    # aquarium-butterflyfish-set-sr-unit-test
+    add_executable(${PROJECT_NAME}-set-sr-unit-test test/test_set_sr.c)
+    target_include_directories(${PROJECT_NAME}-set-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-set-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-set-sr-unit-test ${PROJECT_NAME}-set-sr-unit-test)
+    # aquarium-butterflyfish-ordered-set-sr-unit-test
+    add_executable(${PROJECT_NAME}-ordered-set-sr-unit-test
+            test/test_ordered_set_sr.c)
+    target_include_directories(${PROJECT_NAME}-ordered-set-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-ordered-set-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-ordered-set-sr-unit-test
+            ${PROJECT_NAME}-ordered-set-sr-unit-test)
+    # aquarium-butterflyfish-sorted-set-sr-unit-test
+    add_executable(${PROJECT_NAME}-sorted-set-sr-unit-test
+            test/test_sorted_set_sr.c)
+    target_include_directories(${PROJECT_NAME}-sorted-set-sr-unit-test
+            PRIVATE
+            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-sorted-set-sr-unit-test
+            PRIVATE
+            ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-sorted-set-sr-unit-test
+            ${PROJECT_NAME}-sorted-set-sr-unit-test)
+    # aquarium-butterflyfish-fixed-list-sr-unit-test
+    add_executable(${PROJECT_NAME}-fixed-list-sr-unit-test
+            test/test_fixed_list_sr.c)
+    target_include_directories(${PROJECT_NAME}-fixed-list-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-fixed-list-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-fixed-list-sr-unit-test
+            ${PROJECT_NAME}-fixed-list-sr-unit-test)
+    # aquarium-butterflyfish-reducible-list-sr-unit-test
+    add_executable(${PROJECT_NAME}-reducible-list-sr-unit-test
+            test/test_reducible_list_sr.c)
+    target_include_directories(${PROJECT_NAME}-reducible-list-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-list-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-list-sr-unit-test
+            ${PROJECT_NAME}-reducible-list-sr-unit-test)
+    # aquarium-butterflyfish-list-sr-unit-test
+    add_executable(${PROJECT_NAME}-list-sr-unit-test test/test_list_sr.c)
+    target_include_directories(${PROJECT_NAME}-list-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-list-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-list-sr-unit-test
+            ${PROJECT_NAME}-list-sr-unit-test)
+    # aquarium-butterflyfish-stream-sr-sr-unit-test
+    add_executable(${PROJECT_NAME}-stream-sr-sr-unit-test
+            test/test_stream_sr_sr.c)
+    target_include_directories(${PROJECT_NAME}-stream-sr-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-stream-sr-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-stream-sr-sr-unit-test
+            ${PROJECT_NAME}-stream-sr-sr-unit-test)
+    # aquarium-butterflyfish-collection-sr-sr-unit-test
+    add_executable(${PROJECT_NAME}-collection-sr-sr-unit-test
+            test/test_collection_sr_sr.c)
+    target_include_directories(${PROJECT_NAME}-collection-sr-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-collection-sr-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-collection-sr-sr-unit-test
+            ${PROJECT_NAME}-collection-sr-sr-unit-test)
+    # aquarium-butterflyfish-map-sr-sr-unit-test
+    add_executable(${PROJECT_NAME}-map-sr-sr-unit-test
+            test/test_map_sr_sr.c)
+    target_include_directories(${PROJECT_NAME}-map-sr-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-map-sr-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-map-sr-sr-unit-test
+            ${PROJECT_NAME}-map-sr-sr-unit-test)
+    # aquarium-butterflyfish-ordered-map-sr-sr-unit-test
+    add_executable(${PROJECT_NAME}-ordered-map-sr-sr-unit-test
+            test/test_ordered_map_sr_sr.c)
+    target_include_directories(${PROJECT_NAME}-ordered-map-sr-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-ordered-map-sr-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-ordered-map-sr-sr-unit-test
+            ${PROJECT_NAME}-ordered-map-sr-sr-unit-test)
+    # aquarium-butterflyfish-sorted-map-sr-sr-unit-test
+    add_executable(${PROJECT_NAME}-sorted-map-sr-sr-unit-test
+            test/test_sorted_map_sr_sr.c)
+    target_include_directories(${PROJECT_NAME}-sorted-map-sr-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-sorted-map-sr-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-sorted-map-sr-sr-unit-test
+            ${PROJECT_NAME}-sorted-map-sr-sr-unit-test)
+    # aquarium-butterflyfish-queue-sr-unit-test
+    add_executable(${PROJECT_NAME}-queue-sr-unit-test test/test_queue_sr.c)
+    target_include_directories(${PROJECT_NAME}-queue-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-queue-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-queue-sr-unit-test
+            ${PROJECT_NAME}-queue-sr-unit-test)
+    # aquarium-butterflyfish-stack-sr-unit-test
+    add_executable(${PROJECT_NAME}-stack-sr-unit-test test/test_stack_sr.c)
+    target_include_directories(${PROJECT_NAME}-stack-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-stack-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-stack-sr-unit-test
+            ${PROJECT_NAME}-stack-sr-unit-test)
 else ()
     add_library(${PROJECT_NAME} "")
     target_sources(${PROJECT_NAME}
