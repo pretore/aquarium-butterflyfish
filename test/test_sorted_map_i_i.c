@@ -2035,7 +2035,7 @@ static void check_ceiling_error_on_key_not_found(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
-static void check_ceiling_error_memory_allocation_failed(void **state) {
+static void check_ceiling_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .ceiling = get_emit_error
     };
@@ -2095,7 +2095,7 @@ static void check_floor_error_on_key_not_found(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
-static void check_floor_error_memory_allocation_failed(void **state) {
+static void check_floor_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .floor = get_emit_error
     };
@@ -2155,7 +2155,7 @@ static void check_higher_error_on_key_not_found(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
-static void check_higher_error_memory_allocation_failed(void **state) {
+static void check_higher_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .higher = get_emit_error
     };
@@ -2215,7 +2215,7 @@ static void check_lower_error_on_key_not_found(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
-static void check_lower_error_memory_allocation_failed(void **state) {
+static void check_lower_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .lower = get_emit_error
     };
@@ -2278,7 +2278,8 @@ static void check_ceiling_entry_error_on_key_not_found(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
-static void check_ceiling_entry_error_memory_allocation_failed(void **state) {
+static void
+check_ceiling_entry_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .ceiling_entry = get_entry_emit_error
     };
@@ -2341,7 +2342,8 @@ static void check_floor_entry_error_on_key_not_found(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
-static void check_floor_entry_error_memory_allocation_failed(void **state) {
+static void
+check_floor_entry_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .floor_entry = get_entry_emit_error
     };
@@ -2404,7 +2406,8 @@ static void check_higher_entry_error_on_key_not_found(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
-static void check_higher_entry_error_memory_allocation_failed(void **state) {
+static void
+check_higher_entry_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .higher_entry = get_entry_emit_error
     };
@@ -2467,7 +2470,8 @@ static void check_lower_entry_error_on_key_not_found(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
-static void check_lower_entry_error_memory_allocation_failed(void **state) {
+static void
+check_lower_entry_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .lower_entry = get_entry_emit_error
     };
@@ -2622,42 +2626,42 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_ceiling_error_on_key_is_null),
             cmocka_unit_test(check_ceiling_error_on_out_is_null),
             cmocka_unit_test(check_ceiling_error_on_key_not_found),
-            cmocka_unit_test(check_ceiling_error_memory_allocation_failed),
+            cmocka_unit_test(check_ceiling_error_on_memory_allocation_failed),
             cmocka_unit_test(check_floor_error_on_object_is_null),
             cmocka_unit_test(check_floor_error_on_key_is_null),
             cmocka_unit_test(check_floor_error_on_out_is_null),
             cmocka_unit_test(check_floor_error_on_key_not_found),
-            cmocka_unit_test(check_floor_error_memory_allocation_failed),
+            cmocka_unit_test(check_floor_error_on_memory_allocation_failed),
             cmocka_unit_test(check_higher_error_on_object_is_null),
             cmocka_unit_test(check_higher_error_on_key_is_null),
             cmocka_unit_test(check_higher_error_on_out_is_null),
             cmocka_unit_test(check_higher_error_on_key_not_found),
-            cmocka_unit_test(check_higher_error_memory_allocation_failed),
+            cmocka_unit_test(check_higher_error_on_memory_allocation_failed),
             cmocka_unit_test(check_lower_error_on_object_is_null),
             cmocka_unit_test(check_lower_error_on_key_is_null),
             cmocka_unit_test(check_lower_error_on_out_is_null),
             cmocka_unit_test(check_lower_error_on_key_not_found),
-            cmocka_unit_test(check_lower_error_memory_allocation_failed),
+            cmocka_unit_test(check_lower_error_on_memory_allocation_failed),
             cmocka_unit_test(check_ceiling_entry_error_on_object_is_null),
             cmocka_unit_test(check_ceiling_entry_error_on_key_is_null),
             cmocka_unit_test(check_ceiling_entry_error_on_out_is_null),
             cmocka_unit_test(check_ceiling_entry_error_on_key_not_found),
-            cmocka_unit_test(check_ceiling_entry_error_memory_allocation_failed),
+            cmocka_unit_test(check_ceiling_entry_error_on_memory_allocation_failed),
             cmocka_unit_test(check_floor_entry_error_on_object_is_null),
             cmocka_unit_test(check_floor_entry_error_on_key_is_null),
             cmocka_unit_test(check_floor_entry_error_on_out_is_null),
             cmocka_unit_test(check_floor_entry_error_on_key_not_found),
-            cmocka_unit_test(check_floor_entry_error_memory_allocation_failed),
+            cmocka_unit_test(check_floor_entry_error_on_memory_allocation_failed),
             cmocka_unit_test(check_higher_entry_error_on_object_is_null),
             cmocka_unit_test(check_higher_entry_error_on_key_is_null),
             cmocka_unit_test(check_higher_entry_error_on_out_is_null),
             cmocka_unit_test(check_higher_entry_error_on_key_not_found),
-            cmocka_unit_test(check_higher_entry_error_memory_allocation_failed),
+            cmocka_unit_test(check_higher_entry_error_on_memory_allocation_failed),
             cmocka_unit_test(check_lower_entry_error_on_object_is_null),
             cmocka_unit_test(check_lower_entry_error_on_key_is_null),
             cmocka_unit_test(check_lower_entry_error_on_out_is_null),
             cmocka_unit_test(check_lower_entry_error_on_key_not_found),
-            cmocka_unit_test(check_lower_entry_error_memory_allocation_failed),
+            cmocka_unit_test(check_lower_entry_error_on_memory_allocation_failed),
     };
     //cmocka_set_message_output(CM_OUTPUT_XML);
     return cmocka_run_group_tests(tests, NULL, NULL);

@@ -17,8 +17,6 @@
     BUTTERFLYFISH_FIXED_LIST_P_ERROR_ITEM_IS_NULL
 #define BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_END_OF_SEQUENCE \
     BUTTERFLYFISH_FIXED_LIST_P_ERROR_END_OF_SEQUENCE
-#define BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_VALUE_IS_NULL \
-    BUTTERFLYFISH_FIXED_LIST_P_ERROR_VALUE_IS_NULL
 #define BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED \
     BUTTERFLYFISH_FIXED_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED
 #define BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS \
@@ -153,8 +151,6 @@ int butterflyfish_reducible_list_p_get(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS if at
  * does not refer to an item contained within the reducible list.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if
@@ -164,6 +160,27 @@ int butterflyfish_reducible_list_p_get(
 int butterflyfish_reducible_list_p_set(
         struct butterflyfish_reducible_list_p *object,
         uintmax_t at,
+        const void *value);
+
+/**
+ * @brief Set value of item.
+ * @param [in] object reducible list instance.
+ * @param [in] item to set.
+ * @param [in] value to which item is to be set to.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_NULL if item is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS if item
+ * is not contained within the reducible list.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if
+ * there is not enough memory to set the item to value.
+ * @note <b>value</b> is copied and then item is set to it.
+ */
+int butterflyfish_reducible_list_p_set_item(
+        struct butterflyfish_reducible_list_p *object,
+        void *item,
         const void *value);
 
 /**

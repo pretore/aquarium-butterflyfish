@@ -114,7 +114,7 @@ int butterflyfish_list_ni_get(
 }
 
 int butterflyfish_list_ni_set(
-        struct butterflyfish_list_ni *object,
+        struct butterflyfish_list_ni *const object,
         uintmax_t at,
         const uintmax_t value) {
     if (!object) {
@@ -123,6 +123,21 @@ int butterflyfish_list_ni_set(
     return INVOKABLE->reducible_list_ni
             .fixed_list_ni
             .set(object, at, value);
+}
+
+int butterflyfish_list_ni_set_item(
+        struct butterflyfish_list_ni *const object,
+        uintmax_t *const item,
+        uintmax_t value) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_NULL;
+    }
+    return INVOKABLE->reducible_list_ni
+            .fixed_list_ni
+            .set_item(object, item, value);
 }
 
 int butterflyfish_list_ni_at(
@@ -214,6 +229,19 @@ int butterflyfish_list_ni_insert(
     return INVOKABLE->insert(object, at, value);
 }
 
+int butterflyfish_list_ni_insert_item(
+        struct butterflyfish_list_ni *const object,
+        uintmax_t *const item,
+        const uintmax_t value) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_NULL;
+    }
+    return INVOKABLE->insert_item(object, item, value);
+}
+
 int butterflyfish_list_ni_insert_all(
         struct butterflyfish_list_ni *const object,
         const uintmax_t at,
@@ -225,4 +253,20 @@ int butterflyfish_list_ni_insert_all(
         return BUTTERFLYFISH_LIST_NI_ERROR_OTHER_IS_NULL;
     }
     return INVOKABLE->insert_all(object, at, other);
+}
+
+int butterflyfish_list_ni_insert_all_item(
+        struct butterflyfish_list_ni *const object,
+        uintmax_t *const item,
+        const struct butterflyfish_stream_ni *const other) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OTHER_IS_NULL;
+    }
+    return INVOKABLE->insert_all_item(object, item, other);
 }

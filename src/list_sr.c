@@ -114,9 +114,9 @@ int butterflyfish_list_sr_get(
 }
 
 int butterflyfish_list_sr_set(
-        struct butterflyfish_list_sr *object,
+        struct butterflyfish_list_sr *const object,
         uintmax_t at,
-        struct triggerfish_strong *value) {
+        struct triggerfish_strong *const value) {
     if (!object) {
         return BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL;
     }
@@ -126,6 +126,24 @@ int butterflyfish_list_sr_set(
     return INVOKABLE->reducible_list_sr
             .fixed_list_sr
             .set(object, at, value);
+}
+
+int butterflyfish_list_sr_set_item(
+        struct butterflyfish_list_sr *const object,
+        struct triggerfish_strong *const item,
+        struct triggerfish_strong *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_LIST_SR_ERROR_VALUE_IS_NULL;
+    }
+    return INVOKABLE->reducible_list_sr
+            .fixed_list_sr
+            .set_item(object, item, value);
 }
 
 int butterflyfish_list_sr_at(
@@ -223,6 +241,22 @@ int butterflyfish_list_sr_insert(
     return INVOKABLE->insert(object, at, value);
 }
 
+int butterflyfish_list_sr_insert_item(
+        struct butterflyfish_list_sr *const object,
+        struct triggerfish_strong *const item,
+        struct triggerfish_strong *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_LIST_SR_ERROR_VALUE_IS_NULL;
+    }
+    return INVOKABLE->insert_item(object, item, value);
+}
+
 int butterflyfish_list_sr_insert_all(
         struct butterflyfish_list_sr *const object,
         const uintmax_t at,
@@ -234,4 +268,20 @@ int butterflyfish_list_sr_insert_all(
         return BUTTERFLYFISH_LIST_SR_ERROR_OTHER_IS_NULL;
     }
     return INVOKABLE->insert_all(object, at, other);
+}
+
+int butterflyfish_list_sr_insert_all_item(
+        struct butterflyfish_list_sr *const object,
+        struct triggerfish_strong *const item,
+        const struct butterflyfish_stream_sr *const other) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_LIST_SR_ERROR_OTHER_IS_NULL;
+    }
+    return INVOKABLE->insert_all_item(object, item, other);
 }

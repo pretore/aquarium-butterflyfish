@@ -23,10 +23,6 @@ struct butterflyfish_reducible_list_p;
     BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_END_OF_SEQUENCE
 #define BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OTHER_IS_NULL \
     BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OTHER_IS_NULL
-#define BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL \
-    BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL
-#define BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_VALUE_IS_NULL \
-    BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_VALUE_IS_NULL
 #define BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_ALREADY_EXISTS \
     BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_ALREADY_EXISTS
 #define BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED \
@@ -192,10 +188,6 @@ int butterflyfish_sorted_map_p_p_remove_all_entries(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_ALREADY_EXISTS if key is
  * already present in the map.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if
@@ -215,10 +207,6 @@ int butterflyfish_sorted_map_p_p_add(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if
  * there is insufficient memory to association value with key.
  * @note <b>key</b>, if not already present, and <b>value</b> are copied and
@@ -237,10 +225,6 @@ int butterflyfish_sorted_map_p_p_put(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_NOT_FOUND if key is not
  * present in the map.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if
@@ -258,8 +242,6 @@ int butterflyfish_sorted_map_p_p_replace(
  * @param [in] key of key-value association to be removed.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if
  * there is insufficient memory to lookup key.
@@ -384,8 +366,6 @@ int butterflyfish_sorted_map_p_p_merge(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if
@@ -424,8 +404,6 @@ int butterflyfish_sorted_map_p_p_contains_all_keys(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_NOT_FOUND if key not found
@@ -445,8 +423,6 @@ int butterflyfish_sorted_map_p_p_get(
  * @param [out] out receive value.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
@@ -468,8 +444,6 @@ int butterflyfish_sorted_map_p_p_ceiling(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_NOT_FOUND if key not found
@@ -489,8 +463,6 @@ int butterflyfish_sorted_map_p_p_floor(
  * @param [out] out receive value.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
@@ -512,8 +484,6 @@ int butterflyfish_sorted_map_p_p_higher(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_NOT_FOUND if key not found
@@ -533,8 +503,6 @@ int butterflyfish_sorted_map_p_p_lower(
  * @param [out] out receive entry.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
@@ -556,8 +524,6 @@ int butterflyfish_sorted_map_p_p_get_entry(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_NOT_FOUND if key not found
@@ -577,8 +543,6 @@ int butterflyfish_sorted_map_p_p_ceiling_entry(
  * @param [out] out receive entry.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
@@ -600,8 +564,6 @@ int butterflyfish_sorted_map_p_p_floor_entry(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_NOT_FOUND if key not found
@@ -621,8 +583,6 @@ int butterflyfish_sorted_map_p_p_higher_entry(
  * @param [out] out receive entry.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_P_P_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.

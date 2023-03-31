@@ -39,9 +39,17 @@ struct butterflyfish_list_ni {
                         uintmax_t at,
                         const uintmax_t value);
 
+    int (*const insert_item)(void *object,
+                             uintmax_t *item,
+                             const uintmax_t value);
+
     int (*const insert_all)(void *object,
                             uintmax_t at,
                             const struct butterflyfish_stream_ni *other);
+
+    int (*const insert_all_item)(void *object,
+                                 uintmax_t *item,
+                                 const struct butterflyfish_stream_ni *other);
 };
 
 /**
@@ -150,6 +158,24 @@ int butterflyfish_list_ni_set(
         uintmax_t value);
 
 /**
+ * @brief Set value of item.
+ * @param [in] object list instance.
+ * @param [in] item to set.
+ * @param [in] value to which item is to be set to.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to set the item to value.
+ * @note <b>value</b> is copied and then item is set to it.
+ */
+int butterflyfish_list_ni_set_item(
+        struct butterflyfish_list_ni *object,
+        uintmax_t *item,
+        uintmax_t value);
+
+/**
  * @brief Get index of item.
  * @param [in] object list instance.
  * @param [in] item whose index we are to determine.
@@ -186,8 +212,8 @@ int butterflyfish_list_ni_remove(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
- * @throws BUTTERFLYFISH_LIST_NI_ERROR_INDEX_IS_OUT_OF_BOUNDS if at does not
- * refer to an item contained within the list.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
  */
 int butterflyfish_list_ni_remove_item(
         struct butterflyfish_list_ni *object,
@@ -253,6 +279,25 @@ int butterflyfish_list_ni_insert(
         uintmax_t value);
 
 /**
+ * @brief Insert value at item.
+ * @param [in] object list instance.
+ * @param [in] item where value is to be inserted.
+ * @param [in] value to insert.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to insert value.
+ * @note <b>value</b> is copied and then inserted at item.
+ */
+int butterflyfish_list_ni_insert_item(
+        struct butterflyfish_list_ni *object,
+        uintmax_t *item,
+        uintmax_t value);
+
+/**
  * @brief Insert all the values at index.
  * @param [in] object list instance.
  * @param [in] at index of where values are to be inserted.
@@ -264,11 +309,31 @@ int butterflyfish_list_ni_insert(
  * refer to an item contained within the list.
  * @throws BUTTERFLYFISH_LIST_NI_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * not enough memory to add the values.
- * @note Each <b>value</b> is copied and then added to the end.
+ * @note Each <b>value</b> is copied and then inserted in order.
  */
 int butterflyfish_list_ni_insert_all(
         struct butterflyfish_list_ni *object,
         uintmax_t at,
+        const struct butterflyfish_stream_ni *other);
+
+/**
+ * @brief Insert all the values at item.
+ * @param [in] object list instance.
+ * @param [in] item where values are to be inserted.
+ * @param [in] other stream of values which are to be inserted.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
+ * @throws BUTTERFLYFISH_LIST_NI_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to add the values.
+ * @note Each <b>value</b> is copied and then inserted in order.
+ */
+int butterflyfish_list_ni_insert_all_item(
+        struct butterflyfish_list_ni *object,
+        uintmax_t *item,
         const struct butterflyfish_stream_ni *other);
 
 #endif /* _BUTTERFLYFISH_LIST_NI_H_ */

@@ -8,5 +8,6 @@ items.
 - remove value
 - add all values
 - remove all values
-- contain value
+- contains value
+- contains all values
 - get item by value

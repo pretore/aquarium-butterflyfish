@@ -288,12 +288,6 @@ static void check_push_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_STACK_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_push_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_stack_p_push((void *) 1, NULL),
-            BUTTERFLYFISH_STACK_P_ERROR_VALUE_IS_NULL);
-}
-
 static int push_emit_error(void *const object,
                            const void *const value) {
     function_called();
@@ -385,7 +379,6 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_prev_error_on_out_is_null),
             cmocka_unit_test(check_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_push_error_on_object_is_null),
-            cmocka_unit_test(check_push_error_on_value_is_null),
             cmocka_unit_test(check_push_error_on_memory_allocation_failed),
             cmocka_unit_test(check_pop_error_on_object_is_null),
             cmocka_unit_test(check_pop_error_on_out_is_null),

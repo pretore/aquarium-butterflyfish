@@ -418,18 +418,6 @@ static void check_add_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_add_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_add((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL);
-}
-
-static void check_add_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_add((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_VALUE_IS_NULL);
-}
-
 static int apr_emit_error(void *const object,
                           const void *const key,
                           const void *const value) {
@@ -530,18 +518,6 @@ static void check_put_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_put_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_put((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL);
-}
-
-static void check_put_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_put((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_VALUE_IS_NULL);
-}
-
 static void check_put_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_ordered_map_p_p ordered_map_p_p = {
             .map_p_p.put = apr_emit_error
@@ -588,18 +564,6 @@ static void check_replace_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_p_p_replace(NULL, (void *) 1, (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_replace_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_replace((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL);
-}
-
-static void check_replace_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_replace((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_VALUE_IS_NULL);
 }
 
 static void check_replace_error_on_key_not_found(void **state) {
@@ -691,12 +655,6 @@ static void check_remove_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_p_p_remove(NULL, (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_remove_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_remove((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL);
 }
 
 static int remove_emit_error(void *const object,
@@ -1112,12 +1070,6 @@ static void check_contains_key_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_contains_key_error_on_other_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_contains_key((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL);
-}
-
 static void check_contains_key_error_on_out_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_p_p_contains_key((void *) 1, (void *) 1, NULL),
@@ -1261,12 +1213,6 @@ static void check_get_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_get_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_get((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL);
-}
-
 static void check_get_error_on_out_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_p_p_get((void *) 1, (void *) 1, NULL),
@@ -1372,12 +1318,6 @@ static void check_get_entry_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_p_p_get_entry(NULL, (void *) 1, (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_get_entry_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_p_p_get_entry((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL);
 }
 
 static void check_get_entry_error_on_out_is_null(void **state) {
@@ -1539,26 +1479,19 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_remove_all_entries_error_on_object_is_null),
             cmocka_unit_test(check_remove_all_entries_error_on_other_is_null),
             cmocka_unit_test(check_add_error_on_object_is_null),
-            cmocka_unit_test(check_add_error_on_key_is_null),
-            cmocka_unit_test(check_add_error_on_value_is_null),
             cmocka_unit_test(check_add_error_on_key_already_exists),
             cmocka_unit_test(check_as_map_add_error_on_key_already_exists),
             cmocka_unit_test(check_add_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_add_error_on_memory_allocation_failed),
             cmocka_unit_test(check_put_error_on_object_is_null),
-            cmocka_unit_test(check_put_error_on_key_is_null),
-            cmocka_unit_test(check_put_error_on_value_is_null),
             cmocka_unit_test(check_put_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_put_error_on_memory_allocation_failed),
             cmocka_unit_test(check_replace_error_on_object_is_null),
-            cmocka_unit_test(check_replace_error_on_key_is_null),
-            cmocka_unit_test(check_replace_error_on_value_is_null),
             cmocka_unit_test(check_replace_error_on_key_not_found),
             cmocka_unit_test(check_as_map_replace_error_on_key_not_found),
             cmocka_unit_test(check_replace_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_replace_error_on_memory_allocation_failed),
             cmocka_unit_test(check_remove_error_on_object_is_null),
-            cmocka_unit_test(check_remove_error_on_key_is_null),
             cmocka_unit_test(check_remove_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_remove_error_on_memory_allocation_failed),
             cmocka_unit_test(check_add_all_error_on_object_is_null),
@@ -1587,7 +1520,6 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_merge_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_merge_error_on_memory_allocation_failed),
             cmocka_unit_test(check_contains_key_error_on_object_is_null),
-            cmocka_unit_test(check_contains_key_error_on_other_is_null),
             cmocka_unit_test(check_contains_key_error_on_out_is_null),
             cmocka_unit_test(check_contains_key_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_contains_key_error_on_memory_allocation_failed),
@@ -1597,14 +1529,12 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_contains_all_keys_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_contains_all_keys_error_on_memory_allocation_failed),
             cmocka_unit_test(check_get_error_on_object_is_null),
-            cmocka_unit_test(check_get_error_on_key_is_null),
             cmocka_unit_test(check_get_error_on_out_is_null),
             cmocka_unit_test(check_get_error_on_key_not_found),
             cmocka_unit_test(check_as_map_get_error_on_key_not_found),
             cmocka_unit_test(check_get_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_get_error_on_memory_allocation_failed),
             cmocka_unit_test(check_get_entry_error_on_object_is_null),
-            cmocka_unit_test(check_get_entry_error_on_key_is_null),
             cmocka_unit_test(check_get_entry_error_on_out_is_null),
             cmocka_unit_test(check_get_entry_error_on_key_not_found),
             cmocka_unit_test(check_as_map_get_entry_error_on_key_not_found),

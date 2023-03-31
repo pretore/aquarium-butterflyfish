@@ -114,18 +114,30 @@ int butterflyfish_list_p_get(
 }
 
 int butterflyfish_list_p_set(
-        struct butterflyfish_list_p *object,
+        struct butterflyfish_list_p *const object,
         uintmax_t at,
-        const void *value) {
+        const void *const value) {
     if (!object) {
         return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_NULL;
     }
     return INVOKABLE->reducible_list_p
             .fixed_list_p
             .set(object, at, value);
+}
+
+int butterflyfish_list_p_set_item(
+        struct butterflyfish_list_p *const object,
+        void *const item,
+        const void *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_NULL;
+    }
+    return INVOKABLE->reducible_list_p
+            .fixed_list_p
+            .set_item(object, item, value);
 }
 
 int butterflyfish_list_p_at(
@@ -192,9 +204,6 @@ int butterflyfish_list_p_add(
     if (!object) {
         return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_NULL;
-    }
     return INVOKABLE->add(object, value);
 }
 
@@ -217,10 +226,20 @@ int butterflyfish_list_p_insert(
     if (!object) {
         return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_NULL;
-    }
     return INVOKABLE->insert(object, at, value);
+}
+
+int butterflyfish_list_p_insert_item(
+        struct butterflyfish_list_p *const object,
+        void *const item,
+        const void *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_NULL;
+    }
+    return INVOKABLE->insert_item(object, item, value);
 }
 
 int butterflyfish_list_p_insert_all(
@@ -234,4 +253,20 @@ int butterflyfish_list_p_insert_all(
         return BUTTERFLYFISH_LIST_P_ERROR_OTHER_IS_NULL;
     }
     return INVOKABLE->insert_all(object, at, other);
+}
+
+int butterflyfish_list_p_insert_all_item(
+        struct butterflyfish_list_p *const object,
+        void *const item,
+        const struct butterflyfish_stream_p *const other) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OTHER_IS_NULL;
+    }
+    return INVOKABLE->insert_all_item(object, item, other);
 }

@@ -19,8 +19,6 @@
     BUTTERFLYFISH_SET_P_ERROR_END_OF_SEQUENCE
 #define BUTTERFLYFISH_ORDERED_SET_P_ERROR_OTHER_IS_NULL \
     BUTTERFLYFISH_SET_P_ERROR_OTHER_IS_NULL
-#define BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_IS_NULL \
-    SEA_URCHIN_ERROR_VALUE_IS_NULL
 #define BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_ALREADY_EXISTS \
     SEA_URCHIN_ERROR_VALUE_ALREADY_EXISTS
 #define BUTTERFLYFISH_ORDERED_SET_P_ERROR_MEMORY_ALLOCATION_FAILED \
@@ -150,8 +148,6 @@ int butterflyfish_ordered_set_p_prev(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_ALREADY_EXISTS if value is
  * already present in the ordered set.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_MEMORY_ALLOCATION_FAILED if
@@ -186,8 +182,6 @@ int butterflyfish_ordered_set_p_add_all(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_NOT_FOUND if value is not
  * in the ordered set instance.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_MEMORY_ALLOCATION_FAILED if
@@ -221,8 +215,6 @@ int butterflyfish_ordered_set_p_remove_all(
  * @param [out] out receive true if value is present, otherwise false.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_IS_NULL if value is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_MEMORY_ALLOCATION_FAILED if
@@ -277,8 +269,6 @@ int butterflyfish_ordered_set_p_retain_all(
  * @param [out] out receive the item.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_IS_NULL if value is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_SET_P_ERROR_ITEM_NOT_FOUND if there is no

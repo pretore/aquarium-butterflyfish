@@ -2,7 +2,9 @@
 
 [Lists](Lists.md) _are_ [ReducibleLists](ReducibleLists.md) with the ability 
 to add items.
-- add item at end
-- add all items at end
-- insert item at index
-- insert all items at index
+- add value at end
+- add all values at end
+- insert value at index
+- insert value at item
+- insert all values at index
+- insert all values at item

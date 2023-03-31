@@ -102,9 +102,9 @@ int butterflyfish_fixed_list_sr_get(
 }
 
 int butterflyfish_fixed_list_sr_set(
-        struct butterflyfish_fixed_list_sr *object,
+        struct butterflyfish_fixed_list_sr *const object,
         uintmax_t at,
-        struct triggerfish_strong *value) {
+        struct triggerfish_strong *const value) {
     if (!object) {
         return BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OBJECT_IS_NULL;
     }
@@ -112,6 +112,22 @@ int butterflyfish_fixed_list_sr_set(
         return BUTTERFLYFISH_FIXED_LIST_SR_ERROR_VALUE_IS_NULL;
     }
     return INVOKABLE->set(object, at, value);
+}
+
+int butterflyfish_fixed_list_sr_set_item(
+        struct butterflyfish_fixed_list_sr *const object,
+        struct triggerfish_strong *const item,
+        struct triggerfish_strong *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_FIXED_LIST_SR_ERROR_ITEM_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_FIXED_LIST_SR_ERROR_VALUE_IS_NULL;
+    }
+    return INVOKABLE->set_item(object, item, value);
 }
 
 int butterflyfish_fixed_list_sr_at(

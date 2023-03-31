@@ -23,10 +23,6 @@ struct butterflyfish_reducible_list_p;
     BUTTERFLYFISH_COLLECTION_P_P_ERROR_END_OF_SEQUENCE
 #define BUTTERFLYFISH_MAP_P_P_ERROR_OTHER_IS_NULL \
     SEA_URCHIN_ERROR_OTHER_IS_NULL
-#define BUTTERFLYFISH_MAP_P_P_ERROR_KEY_IS_NULL \
-    SEA_URCHIN_ERROR_KEY_IS_NULL
-#define BUTTERFLYFISH_MAP_P_P_ERROR_VALUE_IS_NULL \
-    SEA_URCHIN_ERROR_VALUE_IS_NULL
 #define BUTTERFLYFISH_MAP_P_P_ERROR_KEY_ALREADY_EXISTS \
     SEA_URCHIN_ERROR_VALUE_ALREADY_EXISTS
 #define BUTTERFLYFISH_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED \
@@ -208,8 +204,6 @@ int butterflyfish_map_p_p_remove_all_entries(
  * @param [in] value that will returned from a lookup of key.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_IS_NULL if key is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_ALREADY_EXISTS if key is already
  * present in the map.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
@@ -228,8 +222,6 @@ int butterflyfish_map_p_p_add(
  * @param [in] value that will returned from a lookup of key.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_IS_NULL if key is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to association value with key.
  * @note <b>key</b>, if not already present, and <b>value</b> are copied and
@@ -247,8 +239,6 @@ int butterflyfish_map_p_p_put(
  * @param [in] value that will returned from a lookup of key.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_IS_NULL if key is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_NOT_FOUND if key is not present in
  * the map.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
@@ -266,7 +256,6 @@ int butterflyfish_map_p_p_replace(
  * @param [in] key of key-value association to be removed.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_IS_NULL if key is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to lookup key.
  */
@@ -377,7 +366,6 @@ int butterflyfish_map_p_p_merge(
  * @param [out] out receive true if present, false otherwise.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_IS_NULL if key is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to lookup key.
@@ -411,7 +399,6 @@ int butterflyfish_map_p_p_contains_all_keys(
  * @param [out] out receive value.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_IS_NULL if key is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_NOT_FOUND if key not found in map.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
@@ -429,7 +416,6 @@ int butterflyfish_map_p_p_get(
  * @param [out] out receive entry.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_IS_NULL if key is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_NOT_FOUND if key not found in map.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if there is

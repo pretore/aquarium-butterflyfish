@@ -169,6 +169,29 @@ int butterflyfish_reducible_list_s_set(
         const struct sea_turtle_string *value);
 
 /**
+ * @brief Set value of item at index.
+ * @param [in] object reducible list instance.
+ * @param [in] at index of item to set.
+ * @param [in] value to which item is to be set to.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_ITEM_IS_NULL if item is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_VALUE_IS_NULL if value is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_ITEM_IS_OUT_OF_BOUNDS if item
+ * is not contained within the reducible list.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_MEMORY_ALLOCATION_FAILED if
+ * there is not enough memory to set the item to value.
+ * @note <b>value</b> is copied and then item at index is set to it.
+ */
+int butterflyfish_reducible_list_s_set_item(
+        struct butterflyfish_reducible_list_s *object,
+        struct sea_turtle_string *item,
+        const struct sea_turtle_string *value);
+
+/**
  * @brief Get index of item.
  * @param [in] object reducible list instance.
  * @param [in] item whose index we are to determine.

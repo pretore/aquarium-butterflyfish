@@ -94,9 +94,6 @@ int butterflyfish_queue_p_add(
     if (!object) {
         return BUTTERFLYFISH_QUEUE_I_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_QUEUE_I_ERROR_VALUE_IS_NULL;
-    }
     return INVOKABLE->add(object, value);
 }
 

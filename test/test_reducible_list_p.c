@@ -409,7 +409,7 @@ static int get_emit_error(const void *const object,
     return mock();
 }
 
-static void check_get_error_index_out_of_bounds(void **state) {
+static void check_get_error_on_index_out_of_bounds(void **state) {
     const struct butterflyfish_reducible_list_p reducible_list_p = {
             .fixed_list_p.get = get_emit_error
     };
@@ -430,7 +430,8 @@ static void check_get_error_index_out_of_bounds(void **state) {
             BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS);
 }
 
-static void check_as_fixed_list_get_error_index_out_of_bounds(void **state) {
+static void
+check_as_fixed_list_get_error_on_index_out_of_bounds(void **state) {
     const struct butterflyfish_reducible_list_p reducible_list_p = {
             .fixed_list_p.get = get_emit_error
     };
@@ -457,12 +458,6 @@ static void check_set_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_set_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_p_set((void *) 1, 0, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_VALUE_IS_NULL);
-}
-
 static int set_emit_error(void *const object,
                           const uintmax_t at,
                           const void *const value) {
@@ -472,7 +467,7 @@ static int set_emit_error(void *const object,
     return mock();
 }
 
-static void check_set_error_index_out_of_bounds(void **state) {
+static void check_set_error_on_index_out_of_bounds(void **state) {
     const struct butterflyfish_reducible_list_p reducible_list_p = {
             .fixed_list_p.set = set_emit_error
     };
@@ -493,7 +488,8 @@ static void check_set_error_index_out_of_bounds(void **state) {
             BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS);
 }
 
-static void check_as_fixed_list_set_error_index_out_of_bounds(void **state) {
+static void
+check_as_fixed_list_set_error_on_index_out_of_bounds(void **state) {
     const struct butterflyfish_reducible_list_p reducible_list_p = {
             .fixed_list_p.set = set_emit_error
     };
@@ -514,7 +510,7 @@ static void check_as_fixed_list_set_error_index_out_of_bounds(void **state) {
             BUTTERFLYFISH_FIXED_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS);
 }
 
-static void check_set_error_memory_allocation_failed(void **state) {
+static void check_set_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_reducible_list_p reducible_list_p = {
             .fixed_list_p.set = set_emit_error
     };
@@ -536,7 +532,7 @@ static void check_set_error_memory_allocation_failed(void **state) {
 }
 
 static void
-check_as_fixed_list_set_error_memory_allocation_failed(void **state) {
+check_as_fixed_list_set_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_reducible_list_p reducible_list_p = {
             .fixed_list_p.set = set_emit_error
     };
@@ -555,6 +551,115 @@ check_as_fixed_list_set_error_memory_allocation_failed(void **state) {
                     0,
                     (void *) 1),
             BUTTERFLYFISH_FIXED_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED);
+}
+
+static void check_set_item_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_list_p_set_item(
+                    NULL, (void *) 1, 0),
+            BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_set_item_error_on_item_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_list_p_set_item(
+                    (void *) 1, NULL, 0),
+            BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_NULL);
+}
+
+static int set_item_emit_error(void *const object,
+                               const void *const item,
+                               const void *value) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(item);
+    return mock();
+}
+
+static void check_set_item_error_on_item_is_out_of_bounds(void **state) {
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .fixed_list_p.set_item = set_item_emit_error,
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(set_item_emit_error);
+    will_return(set_item_emit_error,
+                BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS);
+    assert_int_equal(
+            butterflyfish_reducible_list_p_set_item(
+                    (struct butterflyfish_reducible_list_p *) &instance,
+                    (void *) 1,
+                    0),
+            BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS);
+}
+
+static void
+check_set_item_as_fixed_list_error_on_item_is_out_of_bounds(void **state) {
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .fixed_list_p.set_item = set_item_emit_error,
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(set_item_emit_error);
+    will_return(set_item_emit_error,
+                BUTTERFLYFISH_FIXED_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS);
+    assert_int_equal(
+            butterflyfish_fixed_list_p_set_item(
+                    (struct butterflyfish_fixed_list_p *) &instance,
+                    (void *) 1,
+                    0),
+            BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS);
+}
+
+static void check_set_item_error_on_memory_allocation_failed(void **state) {
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .fixed_list_p.set_item = set_item_emit_error,
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(set_item_emit_error);
+    will_return(set_item_emit_error,
+                BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(
+            butterflyfish_reducible_list_p_set_item(
+                    (struct butterflyfish_reducible_list_p *) &instance,
+                    (void *) 1,
+                    0),
+            BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED);
+}
+
+static void
+check_set_item_as_fixed_list_error_on_memory_allocation_failed(void **state) {
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .fixed_list_p.set_item = set_item_emit_error,
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(set_item_emit_error);
+    will_return(set_item_emit_error,
+                BUTTERFLYFISH_FIXED_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(
+            butterflyfish_fixed_list_p_set_item(
+                    (struct butterflyfish_fixed_list_p *) &instance,
+                    (void *) 1,
+                    0),
+            BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 static void check_at_error_on_object_is_null(void **state) {
@@ -585,7 +690,7 @@ static int at_emit_error(const void *const object,
     return mock();
 }
 
-static void check_at_error_item_is_out_of_bounds(void **state) {
+static void check_at_error_on_item_is_out_of_bounds(void **state) {
     const struct butterflyfish_reducible_list_p reducible_list_p = {
             .fixed_list_p.at = at_emit_error
     };
@@ -606,7 +711,8 @@ static void check_at_error_item_is_out_of_bounds(void **state) {
             BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS);
 }
 
-static void check_as_fixed_list_at_error_item_is_out_of_bounds(void **state) {
+static void
+check_as_fixed_list_at_error_on_item_is_out_of_bounds(void **state) {
     const struct butterflyfish_reducible_list_p reducible_list_p = {
             .fixed_list_p.at = at_emit_error
     };
@@ -742,19 +848,24 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_collection_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_get_error_on_object_is_null),
             cmocka_unit_test(check_get_error_on_out),
-            cmocka_unit_test(check_get_error_index_out_of_bounds),
-            cmocka_unit_test(check_as_fixed_list_get_error_index_out_of_bounds),
+            cmocka_unit_test(check_get_error_on_index_out_of_bounds),
+            cmocka_unit_test(check_as_fixed_list_get_error_on_index_out_of_bounds),
             cmocka_unit_test(check_set_error_on_object_is_null),
-            cmocka_unit_test(check_set_error_on_value_is_null),
-            cmocka_unit_test(check_set_error_index_out_of_bounds),
-            cmocka_unit_test(check_as_fixed_list_set_error_index_out_of_bounds),
-            cmocka_unit_test(check_set_error_memory_allocation_failed),
-            cmocka_unit_test(check_as_fixed_list_set_error_memory_allocation_failed),
+            cmocka_unit_test(check_set_error_on_index_out_of_bounds),
+            cmocka_unit_test(check_as_fixed_list_set_error_on_index_out_of_bounds),
+            cmocka_unit_test(check_set_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_as_fixed_list_set_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_set_item_error_on_object_is_null),
+            cmocka_unit_test(check_set_item_error_on_item_is_null),
+            cmocka_unit_test(check_set_item_error_on_item_is_out_of_bounds),
+            cmocka_unit_test(check_set_item_as_fixed_list_error_on_item_is_out_of_bounds),
+            cmocka_unit_test(check_set_item_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_set_item_as_fixed_list_error_on_memory_allocation_failed),
             cmocka_unit_test(check_at_error_on_object_is_null),
             cmocka_unit_test(check_at_error_on_item_is_null),
             cmocka_unit_test(check_at_error_on_out_is_null),
-            cmocka_unit_test(check_at_error_item_is_out_of_bounds),
-            cmocka_unit_test(check_as_fixed_list_at_error_item_is_out_of_bounds),
+            cmocka_unit_test(check_at_error_on_item_is_out_of_bounds),
+            cmocka_unit_test(check_as_fixed_list_at_error_on_item_is_out_of_bounds),
             cmocka_unit_test(check_remove_error_on_object_is_null),
             cmocka_unit_test(check_remove_error_on_index_out_of_bounds),
             cmocka_unit_test(check_remove_item_error_on_object_is_null),

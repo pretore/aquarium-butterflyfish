@@ -108,7 +108,7 @@ int butterflyfish_reducible_list_ni_get(
 }
 
 int butterflyfish_reducible_list_ni_set(
-        struct butterflyfish_reducible_list_ni *object,
+        struct butterflyfish_reducible_list_ni *const object,
         uintmax_t at,
         const uintmax_t value) {
     if (!object) {
@@ -116,6 +116,20 @@ int butterflyfish_reducible_list_ni_set(
     }
     return INVOKABLE->fixed_list_ni
             .set(object, at, value);
+}
+
+int butterflyfish_reducible_list_ni_set_item(
+        struct butterflyfish_reducible_list_ni *const object,
+        uintmax_t *const item,
+        uintmax_t value) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_ITEM_IS_NULL;
+    }
+    return INVOKABLE->fixed_list_ni
+            .set_item(object, item, value);
 }
 
 int butterflyfish_reducible_list_ni_at(

@@ -99,9 +99,6 @@ int butterflyfish_ordered_set_p_add(
     if (!object) {
         return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_IS_NULL;
-    }
     return INVOKABLE->set_p
             .add(object, value);
 }
@@ -124,9 +121,6 @@ int butterflyfish_ordered_set_p_remove(
         const void *const value) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_IS_NULL;
     }
     return INVOKABLE->set_p
             .remove(object, value);
@@ -178,9 +172,6 @@ int butterflyfish_ordered_set_p_contains(
     if (!object) {
         return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_IS_NULL;
-    }
     if (!out) {
         return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OUT_IS_NULL;
     }
@@ -224,9 +215,6 @@ int butterflyfish_ordered_set_p_get(
         const void **const out) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_VALUE_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OUT_IS_NULL;

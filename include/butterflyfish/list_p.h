@@ -17,8 +17,6 @@
     BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_NULL
 #define BUTTERFLYFISH_LIST_P_ERROR_END_OF_SEQUENCE \
     BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_END_OF_SEQUENCE
-#define BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_NULL \
-    BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_VALUE_IS_NULL
 #define BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED \
     BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED
 #define BUTTERFLYFISH_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS \
@@ -41,9 +39,17 @@ struct butterflyfish_list_p {
                         uintmax_t at,
                         const void *value);
 
+    int (*const insert_item)(void *object,
+                             void *item,
+                             const void *value);
+
     int (*const insert_all)(void *object,
                             uintmax_t at,
                             const struct butterflyfish_stream_p *other);
+
+    int (*const insert_all_item)(void *object,
+                                 void *item,
+                                 const struct butterflyfish_stream_p *other);
 };
 
 /**
@@ -140,7 +146,6 @@ int butterflyfish_list_p_get(
  * @param [in] value to which item is to be set to.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS if at does not
  * refer to an item contained within the list.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
@@ -150,6 +155,25 @@ int butterflyfish_list_p_get(
 int butterflyfish_list_p_set(
         struct butterflyfish_list_p *object,
         uintmax_t at,
+        const void *value);
+
+/**
+ * @brief Set value of item.
+ * @param [in] object list instance.
+ * @param [in] item to set.
+ * @param [in] value to which item is to be set to.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to set the item to value.
+ * @note <b>value</b> is copied and then item is set to it.
+ */
+int butterflyfish_list_p_set_item(
+        struct butterflyfish_list_p *object,
+        void *item,
         const void *value);
 
 /**
@@ -189,8 +213,8 @@ int butterflyfish_list_p_remove(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
- * @throws BUTTERFLYFISH_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS if at does not
- * refer to an item contained within the list.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
  */
 int butterflyfish_list_p_remove_item(
         struct butterflyfish_list_p *object,
@@ -245,7 +269,6 @@ int butterflyfish_list_p_add_all(
  * @param [in] value to insert.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS if at does not
  * refer to an item contained within the list.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
@@ -255,6 +278,25 @@ int butterflyfish_list_p_add_all(
 int butterflyfish_list_p_insert(
         struct butterflyfish_list_p *object,
         uintmax_t at,
+        const void *value);
+
+/**
+ * @brief Insert value at item.
+ * @param [in] object list instance.
+ * @param [in] item where value is to be inserted.
+ * @param [in] value to insert.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS if at does not
+ * refer to an item contained within the list.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to insert value.
+ * @note <b>value</b> is copied and then inserted at item.
+ */
+int butterflyfish_list_p_insert_item(
+        struct butterflyfish_list_p *object,
+        void *item,
         const void *value);
 
 /**
@@ -269,11 +311,31 @@ int butterflyfish_list_p_insert(
  * refer to an item contained within the list.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * not enough memory to add the values.
- * @note Each <b>value</b> is copied and then added to the end.
+ * @note Each <b>value</b> is copied and then inserted in order.
  */
 int butterflyfish_list_p_insert_all(
         struct butterflyfish_list_p *object,
         uintmax_t at,
+        const struct butterflyfish_stream_p *other);
+
+/**
+ * @brief Insert all the values at item.
+ * @param [in] object list instance.
+ * @param [in] item where values are to be inserted.
+ * @param [in] other stream of values which are to be inserted.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is
+ * not contained within the list.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to add the values.
+ * @note Each <b>value</b> is copied and then inserted in order.
+ */
+int butterflyfish_list_p_insert_all_item(
+        struct butterflyfish_list_p *object,
+        void *item,
         const struct butterflyfish_stream_p *other);
 
 #endif /* _BUTTERFLYFISH_LIST_P_H_ */

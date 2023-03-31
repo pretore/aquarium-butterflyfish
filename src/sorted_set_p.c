@@ -104,9 +104,6 @@ int butterflyfish_sorted_set_p_add(
     if (!object) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL;
-    }
     return INVOKABLE->ordered_set_p
             .set_p
             .add(object, value);
@@ -131,9 +128,6 @@ int butterflyfish_sorted_set_p_remove(
         const void *const value) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL;
     }
     return INVOKABLE->ordered_set_p
             .set_p
@@ -189,9 +183,6 @@ int butterflyfish_sorted_set_p_contains(
     if (!object) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL;
-    }
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
     }
@@ -239,9 +230,6 @@ int butterflyfish_sorted_set_p_get(
     if (!object) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL;
-    }
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
     }
@@ -260,9 +248,6 @@ int butterflyfish_sorted_set_p_ceiling(
     if (!object) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL;
-    }
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
     }
@@ -275,9 +260,6 @@ int butterflyfish_sorted_set_p_floor(
         const void **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
@@ -292,9 +274,6 @@ int butterflyfish_sorted_set_p_higher(
     if (!object) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL;
-    }
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
     }
@@ -307,9 +286,6 @@ int butterflyfish_sorted_set_p_lower(
         const void **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;

@@ -39,6 +39,10 @@ struct butterflyfish_fixed_list_i {
                      uintmax_t at,
                      const struct sea_turtle_integer *value);
 
+    int (*const set_item)(void *object,
+                          struct sea_turtle_integer *item,
+                          const struct sea_turtle_integer *value);
+
     int (*const at)(const void *object,
                     const struct sea_turtle_integer *item,
                     uintmax_t *out);
@@ -159,6 +163,28 @@ int butterflyfish_fixed_list_i_get(
 int butterflyfish_fixed_list_i_set(
         struct butterflyfish_fixed_list_i *object,
         uintmax_t at,
+        const struct sea_turtle_integer *value);
+
+/**
+ * @brief Set value of item.
+ * @param [in] object fixed list instance.
+ * @param [in] item to set.
+ * @param [in] value to which item is to be set to.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_VALUE_IS_NULL if value is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is
+ * not contained within the fixed list.
+ * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED if there
+ * is not enough memory to set the item to value.
+ * @note <b>value</b> is copied and then item is set to it.
+ */
+int butterflyfish_fixed_list_i_set_item(
+        struct butterflyfish_fixed_list_i *object,
+        struct sea_turtle_integer *item,
         const struct sea_turtle_integer *value);
 
 /**

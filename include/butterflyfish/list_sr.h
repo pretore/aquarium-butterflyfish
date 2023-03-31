@@ -43,9 +43,17 @@ struct butterflyfish_list_sr {
                         uintmax_t at,
                         struct triggerfish_strong *value);
 
+    int (*const insert_item)(void *object,
+                             struct triggerfish_strong *item,
+                             struct triggerfish_strong *value);
+
     int (*const insert_all)(void *object,
                             uintmax_t at,
                             const struct butterflyfish_stream_sr *other);
+
+    int (*const insert_all_item)(void *object,
+                                 struct triggerfish_strong *item,
+                                 const struct butterflyfish_stream_sr *other);
 };
 
 /**
@@ -154,6 +162,26 @@ int butterflyfish_list_sr_set(
         struct triggerfish_strong *value);
 
 /**
+ * @brief Set value of item.
+ * @param [in] object list instance.
+ * @param [in] item to set.
+ * @param [in] value to which item is to be set to.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to set the item to value.
+ * @note <b>value</b> is copied and then item is set to it.
+ */
+int butterflyfish_list_sr_set_item(
+        struct butterflyfish_list_sr *object,
+        struct triggerfish_strong *item,
+        struct triggerfish_strong *value);
+
+/**
  * @brief Get index of item.
  * @param [in] object list instance.
  * @param [in] item whose index we are to determine.
@@ -190,8 +218,8 @@ int butterflyfish_list_sr_remove(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
- * @throws BUTTERFLYFISH_LIST_SR_ERROR_INDEX_IS_OUT_OF_BOUNDS if at does not
- * refer to an item contained within the list.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
  */
 int butterflyfish_list_sr_remove_item(
         struct butterflyfish_list_sr *object,
@@ -256,6 +284,26 @@ int butterflyfish_list_sr_insert(
         struct triggerfish_strong *value);
 
 /**
+ * @brief Insert value at item.
+ * @param [in] object list instance.
+ * @param [in] item where value is to be inserted.
+ * @param [in] value to insert.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
+ * @throws BUTTERFLYFISH_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to insert value.
+ * @note <b>value</b> is copied and then inserted at item.
+ */
+int butterflyfish_list_sr_insert_item(
+        struct butterflyfish_list_sr *object,
+        struct triggerfish_strong *item,
+        struct triggerfish_strong *value);
+
+/**
  * @brief Insert all the values at index.
  * @param [in] object list instance.
  * @param [in] at index of where values are to be inserted.
@@ -267,10 +315,31 @@ int butterflyfish_list_sr_insert(
  * refer to an item contained within the list.
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * not enough memory to add the values.
+ * @note Each <b>value</b> is copied and then inserted in order.
  */
 int butterflyfish_list_sr_insert_all(
         struct butterflyfish_list_sr *object,
         uintmax_t at,
+        const struct butterflyfish_stream_sr *other);
+
+/**
+ * @brief Insert all the values at item.
+ * @param [in] object list instance.
+ * @param [in] item where values are to be inserted.
+ * @param [in] other stream of values which are to be inserted.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
+ * contained within the list.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to add the values.
+ * @note Each <b>value</b> is copied and then inserted in order.
+ */
+int butterflyfish_list_sr_insert_all_item(
+        struct butterflyfish_list_sr *object,
+        struct triggerfish_strong *item,
         const struct butterflyfish_stream_sr *other);
 
 #endif /* _BUTTERFLYFISH_LIST_SR_H_ */

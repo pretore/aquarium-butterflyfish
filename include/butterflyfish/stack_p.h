@@ -17,8 +17,6 @@
     BUTTERFLYFISH_COLLECTION_P_ERROR_ITEM_IS_NULL
 #define BUTTERFLYFISH_STACK_P_ERROR_END_OF_SEQUENCE \
     BUTTERFLYFISH_COLLECTION_P_ERROR_END_OF_SEQUENCE
-#define BUTTERFLYFISH_STACK_P_ERROR_VALUE_IS_NULL \
-    SEA_URCHIN_ERROR_VALUE_IS_NULL
 #define BUTTERFLYFISH_STACK_P_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 
@@ -109,7 +107,6 @@ int butterflyfish_stack_p_prev(
  * @param [in] value to add to the top.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_STACK_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_STACK_P_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_STACK_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to add value.
  * @note <b>value</b> is copied and then added to the top of the stack.

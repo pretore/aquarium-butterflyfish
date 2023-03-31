@@ -39,6 +39,10 @@ struct butterflyfish_fixed_list_sr {
                      uintmax_t at,
                      struct triggerfish_strong *value);
 
+    int (*const set_item)(void *object,
+                          struct triggerfish_strong *item,
+                          struct triggerfish_strong *value);
+
     int (*const at)(const void *object,
                     const struct triggerfish_strong *item,
                     uintmax_t *out);
@@ -95,7 +99,8 @@ int butterflyfish_fixed_list_sr_last(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_ITEM_IS_NULL if item is
+ * <i>NULL</i>.
  * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_END_OF_SEQUENCE if there is no
  * next item.
@@ -113,7 +118,8 @@ int butterflyfish_fixed_list_sr_next(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_ITEM_IS_NULL if item is
+ * <i>NULL</i>.
  * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_END_OF_SEQUENCE if there is no
  * previous item.
@@ -158,6 +164,28 @@ int butterflyfish_fixed_list_sr_get(
 int butterflyfish_fixed_list_sr_set(
         struct butterflyfish_fixed_list_sr *object,
         uintmax_t at,
+        struct triggerfish_strong *value);
+
+/**
+ * @brief Set value of item.
+ * @param [in] object fixed list instance.
+ * @param [in] item to set.
+ * @param [in] value to which item is to be set to.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_ITEM_IS_NULL if item is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_VALUE_IS_NULL if value is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is
+ * not contained within the fixed list.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_MEMORY_ALLOCATION_FAILED if there
+ * is not enough memory to set the item to value.
+ */
+int butterflyfish_fixed_list_sr_set_item(
+        struct butterflyfish_fixed_list_sr *object,
+        struct triggerfish_strong *item,
         struct triggerfish_strong *value);
 
 /**

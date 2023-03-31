@@ -126,12 +126,6 @@ int butterflyfish_ordered_map_p_p_add(
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!key) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_VALUE_IS_NULL;
-    }
     return INVOKABLE->map_p_p
             .add(object, key, value);
 }
@@ -142,12 +136,6 @@ int butterflyfish_ordered_map_p_p_put(
         const void *const value) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
-    }
-    if (!key) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_VALUE_IS_NULL;
     }
     return INVOKABLE->map_p_p
             .put(object, key, value);
@@ -160,12 +148,6 @@ int butterflyfish_ordered_map_p_p_replace(
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!key) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_VALUE_IS_NULL;
-    }
     return INVOKABLE->map_p_p
             .replace(object, key, value);
 }
@@ -175,9 +157,6 @@ int butterflyfish_ordered_map_p_p_remove(
         const void *const key) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
-    }
-    if (!key) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL;
     }
     return INVOKABLE->map_p_p
             .remove(object, key);
@@ -275,9 +254,6 @@ int butterflyfish_ordered_map_p_p_contains_key(
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!key) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL;
-    }
     if (!out) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OUT_IS_NULL;
     }
@@ -309,9 +285,6 @@ int butterflyfish_ordered_map_p_p_get(
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!key) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL;
-    }
     if (!out) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OUT_IS_NULL;
     }
@@ -325,9 +298,6 @@ int butterflyfish_ordered_map_p_p_get_entry(
         struct butterflyfish_map_entry_p_p **const out) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
-    }
-    if (!key) {
-        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_KEY_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OUT_IS_NULL;

@@ -108,9 +108,9 @@ int butterflyfish_reducible_list_wr_get(
 }
 
 int butterflyfish_reducible_list_wr_set(
-        struct butterflyfish_reducible_list_wr *object,
+        struct butterflyfish_reducible_list_wr *const object,
         uintmax_t at,
-        const struct triggerfish_weak *value) {
+        const struct triggerfish_weak *const value) {
     if (!object) {
         return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_OBJECT_IS_NULL;
     }
@@ -119,6 +119,23 @@ int butterflyfish_reducible_list_wr_set(
     }
     return INVOKABLE->fixed_list_wr
             .set(object, at, value);
+}
+
+int butterflyfish_reducible_list_wr_set_item(
+        struct butterflyfish_reducible_list_wr *const object,
+        struct triggerfish_weak *const item,
+        const struct triggerfish_weak *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_ITEM_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_VALUE_IS_NULL;
+    }
+    return INVOKABLE->fixed_list_wr
+            .set_item(object, item, value);
 }
 
 int butterflyfish_reducible_list_wr_at(

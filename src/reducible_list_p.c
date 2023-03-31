@@ -108,17 +108,28 @@ int butterflyfish_reducible_list_p_get(
 }
 
 int butterflyfish_reducible_list_p_set(
-        struct butterflyfish_reducible_list_p *object,
+        struct butterflyfish_reducible_list_p *const object,
         uintmax_t at,
-        const void *value) {
+        const void *const value) {
     if (!object) {
         return BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!value) {
-        return BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_VALUE_IS_NULL;
-    }
     return INVOKABLE->fixed_list_p
             .set(object, at, value);
+}
+
+int butterflyfish_reducible_list_p_set_item(
+        struct butterflyfish_reducible_list_p *const object,
+        void *const item,
+        const void *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_NULL;
+    }
+    return INVOKABLE->fixed_list_p
+            .set_item(object, item, value);
 }
 
 int butterflyfish_reducible_list_p_at(

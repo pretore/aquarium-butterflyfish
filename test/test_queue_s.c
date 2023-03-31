@@ -350,7 +350,7 @@ static void check_remove_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_QUEUE_S_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_remove_error_on_value_is_null(void **state) {
+static void check_remove_error_on_out_is_null(void **state) {
     assert_int_equal(
             butterflyfish_queue_s_remove((void *) 1, NULL),
             BUTTERFLYFISH_QUEUE_S_ERROR_OUT_IS_NULL);
@@ -411,7 +411,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_add_error_on_value_is_null),
             cmocka_unit_test(check_add_error_on_memory_allocation_failed),
             cmocka_unit_test(check_remove_error_on_object_is_null),
-            cmocka_unit_test(check_remove_error_on_value_is_null),
+            cmocka_unit_test(check_remove_error_on_out_is_null),
             cmocka_unit_test(check_remove_error_on_queue_is_empty),
     };
     //cmocka_set_message_output(CM_OUTPUT_XML);

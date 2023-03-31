@@ -499,12 +499,6 @@ static void check_add_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_add_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_sorted_set_p_add((void *) 1, NULL),
-            BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL);
-}
-
 static int ar_emit_error(void *const object,
                          const void *const value) {
     function_called();
@@ -724,12 +718,6 @@ static void check_remove_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_remove_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_sorted_set_p_remove((void *) 1, NULL),
-            BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL);
-}
-
 static void check_remove_error_on_value_not_found(void **state) {
     const struct butterflyfish_sorted_set_p sorted_set_p = {
             .ordered_set_p.set_p.remove = ar_emit_error
@@ -932,12 +920,6 @@ static void check_contains_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_set_p_contains(NULL, (void *) 1, (void *) 1),
             BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_contains_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_sorted_set_p_contains((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL);
 }
 
 static void check_contains_error_on_out_is_null(void **state) {
@@ -1211,12 +1193,6 @@ static void check_get_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_get_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_sorted_set_p_get((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL);
-}
-
 static void check_get_error_on_out_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_set_p_get((void *) 1, (void *) 1, NULL),
@@ -1366,12 +1342,6 @@ static void check_ceiling_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_ceiling_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_sorted_set_p_ceiling( (void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL);
-}
-
 static void check_ceiling_error_on_out_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_set_p_ceiling( (void *) 1, (void *) 1, NULL),
@@ -1424,12 +1394,6 @@ static void check_floor_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_set_p_floor(NULL, (void *) 1, (void *) 1),
             BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_floor_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_sorted_set_p_floor( (void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL);
 }
 
 static void check_floor_error_on_out_is_null(void **state) {
@@ -1486,12 +1450,6 @@ static void check_higher_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_higher_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_sorted_set_p_higher( (void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL);
-}
-
 static void check_higher_error_on_out_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_set_p_higher( (void *) 1, (void *) 1, NULL),
@@ -1544,12 +1502,6 @@ static void check_lower_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_set_p_lower(NULL, (void *) 1, (void *) 1),
             BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_lower_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_sorted_set_p_lower( (void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_SET_P_ERROR_VALUE_IS_NULL);
 }
 
 static void check_lower_error_on_out_is_null(void **state) {
@@ -1637,7 +1589,6 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_set_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_as_collection_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_add_error_on_object_is_null),
-            cmocka_unit_test(check_add_error_on_value_is_null),
             cmocka_unit_test(check_add_error_on_value_already_exits),
             cmocka_unit_test(check_as_ordered_set_add_error_on_value_already_exits),
             cmocka_unit_test(check_as_set_add_error_on_value_already_exits),
@@ -1650,7 +1601,6 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_ordered_set_add_all_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_set_add_all_error_on_memory_allocation_failed),
             cmocka_unit_test(check_remove_error_on_object_is_null),
-            cmocka_unit_test(check_remove_error_on_value_is_null),
             cmocka_unit_test(check_remove_error_on_value_not_found),
             cmocka_unit_test(check_as_ordered_set_remove_error_on_value_not_found),
             cmocka_unit_test(check_as_set_remove_error_on_value_not_found),
@@ -1663,7 +1613,6 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_ordered_set_remove_all_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_set_remove_all_error_on_memory_allocation_failed),
             cmocka_unit_test(check_contains_error_on_object_is_null),
-            cmocka_unit_test(check_contains_error_on_value_is_null),
             cmocka_unit_test(check_contains_error_on_out_is_null),
             cmocka_unit_test(check_contains_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_ordered_set_contains_error_on_memory_allocation_failed),
@@ -1680,7 +1629,6 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_ordered_set_retain_all_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_set_retain_all_error_on_memory_allocation_failed),
             cmocka_unit_test(check_get_error_on_object_is_null),
-            cmocka_unit_test(check_get_error_on_value_is_null),
             cmocka_unit_test(check_get_error_on_out_is_null),
             cmocka_unit_test(check_get_error_on_item_not_found),
             cmocka_unit_test(check_as_ordered_set_get_error_on_item_not_found),
@@ -1689,22 +1637,18 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_ordered_set_get_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_set_get_error_on_memory_allocation_failed),
             cmocka_unit_test(check_ceiling_error_on_object_is_null),
-            cmocka_unit_test(check_ceiling_error_on_value_is_null),
             cmocka_unit_test(check_ceiling_error_on_out_is_null),
             cmocka_unit_test(check_ceiling_error_on_item_not_found),
             cmocka_unit_test(check_ceiling_error_on_memory_allocation_failed),
             cmocka_unit_test(check_floor_error_on_object_is_null),
-            cmocka_unit_test(check_floor_error_on_value_is_null),
             cmocka_unit_test(check_floor_error_on_out_is_null),
             cmocka_unit_test(check_floor_error_on_item_not_found),
             cmocka_unit_test(check_floor_error_on_memory_allocation_failed),
             cmocka_unit_test(check_higher_error_on_object_is_null),
-            cmocka_unit_test(check_higher_error_on_value_is_null),
             cmocka_unit_test(check_higher_error_on_out_is_null),
             cmocka_unit_test(check_higher_error_on_item_not_found),
             cmocka_unit_test(check_higher_error_on_memory_allocation_failed),
             cmocka_unit_test(check_lower_error_on_object_is_null),
-            cmocka_unit_test(check_lower_error_on_value_is_null),
             cmocka_unit_test(check_lower_error_on_out_is_null),
             cmocka_unit_test(check_lower_error_on_item_not_found),
             cmocka_unit_test(check_lower_error_on_memory_allocation_failed),

@@ -108,9 +108,9 @@ int butterflyfish_reducible_list_i_get(
 }
 
 int butterflyfish_reducible_list_i_set(
-        struct butterflyfish_reducible_list_i *object,
+        struct butterflyfish_reducible_list_i *const object,
         uintmax_t at,
-        const struct sea_turtle_integer *value) {
+        const struct sea_turtle_integer *const value) {
     if (!object) {
         return BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL;
     }
@@ -119,6 +119,23 @@ int butterflyfish_reducible_list_i_set(
     }
     return INVOKABLE->fixed_list_i
             .set(object, at, value);
+}
+
+int butterflyfish_reducible_list_i_set_item(
+        struct butterflyfish_reducible_list_i *const object,
+        struct sea_turtle_integer *const item,
+        const struct sea_turtle_integer *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_VALUE_IS_NULL;
+    }
+    return INVOKABLE->fixed_list_i
+            .set_item(object, item, value);
 }
 
 int butterflyfish_reducible_list_i_at(
