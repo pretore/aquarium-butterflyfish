@@ -11,7 +11,7 @@
 
 int butterflyfish_stream_ni_ni_first(
         const struct butterflyfish_stream_ni_ni *const object,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_STREAM_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -24,7 +24,7 @@ int butterflyfish_stream_ni_ni_first(
 int butterflyfish_stream_ni_ni_next(
         const struct butterflyfish_stream_ni_ni *const object,
         const struct butterflyfish_map_entry_ni_ni *const entry,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_STREAM_NI_NI_ERROR_OBJECT_IS_NULL;
     }

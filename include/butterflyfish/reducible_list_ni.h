@@ -224,8 +224,8 @@ int butterflyfish_reducible_list_ni_remove(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_ITEM_IS_NULL if item is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_INDEX_IS_OUT_OF_BOUNDS if at
- * does not refer to an item contained within the reducible list.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_ITEM_IS_OUT_OF_BOUNDS if item
+ * is not contained within the reducible list.
  */
 int butterflyfish_reducible_list_ni_remove_item(
         struct butterflyfish_reducible_list_ni *object,

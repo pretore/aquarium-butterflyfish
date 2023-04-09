@@ -53,19 +53,19 @@ struct butterflyfish_sorted_map_ni_ni {
 
     int (*const ceiling_entry)(const void *object,
                                const uintmax_t key,
-                               struct butterflyfish_map_entry_ni_ni **out);
+                               const struct butterflyfish_map_entry_ni_ni **out);
 
     int (*const floor_entry)(const void *object,
                              const uintmax_t key,
-                             struct butterflyfish_map_entry_ni_ni **out);
+                             const struct butterflyfish_map_entry_ni_ni **out);
 
     int (*const higher_entry)(const void *object,
                               const uintmax_t key,
-                              struct butterflyfish_map_entry_ni_ni **out);
+                              const struct butterflyfish_map_entry_ni_ni **out);
 
     int (*const lower_entry)(const void *object,
                              const uintmax_t key,
-                             struct butterflyfish_map_entry_ni_ni **out);
+                             const struct butterflyfish_map_entry_ni_ni **out);
 };
 
 /**
@@ -95,7 +95,7 @@ int butterflyfish_sorted_map_ni_ni_count(
  */
 int butterflyfish_sorted_map_ni_ni_first(
         const struct butterflyfish_sorted_map_ni_ni *object,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Last entry of the map.
@@ -110,7 +110,7 @@ int butterflyfish_sorted_map_ni_ni_first(
  */
 int butterflyfish_sorted_map_ni_ni_last(
         const struct butterflyfish_sorted_map_ni_ni *object,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve next entry.
@@ -130,7 +130,7 @@ int butterflyfish_sorted_map_ni_ni_last(
 int butterflyfish_sorted_map_ni_ni_next(
         const struct butterflyfish_sorted_map_ni_ni *object,
         const struct butterflyfish_map_entry_ni_ni *entry,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve the previous entry.
@@ -150,7 +150,7 @@ int butterflyfish_sorted_map_ni_ni_next(
 int butterflyfish_sorted_map_ni_ni_prev(
         const struct butterflyfish_sorted_map_ni_ni *object,
         const struct butterflyfish_map_entry_ni_ni *entry,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Remove entry.
@@ -516,7 +516,7 @@ int butterflyfish_sorted_map_ni_ni_lower(
 int butterflyfish_sorted_map_ni_ni_get_entry(
         const struct butterflyfish_sorted_map_ni_ni *object,
         uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve entry for key or next higher key.
@@ -536,7 +536,7 @@ int butterflyfish_sorted_map_ni_ni_get_entry(
 int butterflyfish_sorted_map_ni_ni_ceiling_entry(
         const struct butterflyfish_sorted_map_ni_ni *object,
         uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve entry for key or next lower key.
@@ -556,7 +556,7 @@ int butterflyfish_sorted_map_ni_ni_ceiling_entry(
 int butterflyfish_sorted_map_ni_ni_floor_entry(
         const struct butterflyfish_sorted_map_ni_ni *object,
         uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve entry for next higher key.
@@ -576,7 +576,7 @@ int butterflyfish_sorted_map_ni_ni_floor_entry(
 int butterflyfish_sorted_map_ni_ni_higher_entry(
         const struct butterflyfish_sorted_map_ni_ni *object,
         uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve entry for next lower key.
@@ -596,7 +596,7 @@ int butterflyfish_sorted_map_ni_ni_higher_entry(
 int butterflyfish_sorted_map_ni_ni_lower_entry(
         const struct butterflyfish_sorted_map_ni_ni *object,
         uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Set view of map keys.

@@ -92,7 +92,7 @@ struct butterflyfish_map_p_p {
 
     int (*const get_entry)(const void *object,
                            const void *key,
-                           struct butterflyfish_map_entry_p_p **out);
+                           const struct butterflyfish_map_entry_p_p **out);
 
     int (*const keys)(void *object,
                       struct butterflyfish_set_p **out);
@@ -124,7 +124,7 @@ int butterflyfish_map_p_p_count(
  */
 int butterflyfish_map_p_p_first(
         const struct butterflyfish_map_p_p *object,
-        struct butterflyfish_map_entry_p_p **out);
+        const struct butterflyfish_map_entry_p_p **out);
 
 /**
  * @brief Last entry of the map.
@@ -137,7 +137,7 @@ int butterflyfish_map_p_p_first(
  */
 int butterflyfish_map_p_p_last(
         const struct butterflyfish_map_p_p *object,
-        struct butterflyfish_map_entry_p_p **out);
+        const struct butterflyfish_map_entry_p_p **out);
 
 /**
  * @brief Retrieve next entry.
@@ -154,7 +154,7 @@ int butterflyfish_map_p_p_last(
 int butterflyfish_map_p_p_next(
         const struct butterflyfish_map_p_p *object,
         const struct butterflyfish_map_entry_p_p *entry,
-        struct butterflyfish_map_entry_p_p **out);
+        const struct butterflyfish_map_entry_p_p **out);
 
 /**
  * @brief Retrieve the previous entry.
@@ -171,7 +171,7 @@ int butterflyfish_map_p_p_next(
 int butterflyfish_map_p_p_prev(
         const struct butterflyfish_map_p_p *object,
         const struct butterflyfish_map_entry_p_p *entry,
-        struct butterflyfish_map_entry_p_p **out);
+        const struct butterflyfish_map_entry_p_p **out);
 
 /**
  * @brief Remove entry.
@@ -424,7 +424,7 @@ int butterflyfish_map_p_p_get(
 int butterflyfish_map_p_p_get_entry(
         const struct butterflyfish_map_p_p *object,
         const void *key,
-        struct butterflyfish_map_entry_p_p **out);
+        const struct butterflyfish_map_entry_p_p **out);
 
 /**
  * @brief Set view of map keys.

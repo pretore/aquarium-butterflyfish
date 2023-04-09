@@ -11,7 +11,7 @@
 
 int butterflyfish_ordered_map_ni_ni_first(
         const struct butterflyfish_ordered_map_ni_ni *const object,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -27,7 +27,7 @@ int butterflyfish_ordered_map_ni_ni_first(
 int butterflyfish_ordered_map_ni_ni_next(
         const struct butterflyfish_ordered_map_ni_ni *const object,
         const struct butterflyfish_map_entry_ni_ni *const entry,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -61,7 +61,7 @@ int butterflyfish_ordered_map_ni_ni_count(
 
 int butterflyfish_ordered_map_ni_ni_last(
         const struct butterflyfish_ordered_map_ni_ni *const object,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -76,7 +76,7 @@ int butterflyfish_ordered_map_ni_ni_last(
 int butterflyfish_ordered_map_ni_ni_prev(
         const struct butterflyfish_ordered_map_ni_ni *const object,
         const struct butterflyfish_map_entry_ni_ni *const entry,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -295,7 +295,7 @@ int butterflyfish_ordered_map_ni_ni_get(
 int butterflyfish_ordered_map_ni_ni_get_entry(
         const struct butterflyfish_ordered_map_ni_ni *const object,
         const uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }

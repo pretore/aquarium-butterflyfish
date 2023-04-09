@@ -11,7 +11,7 @@
 
 int butterflyfish_stream_s_s_first(
         const struct butterflyfish_stream_s_s *const object,
-        struct butterflyfish_map_entry_s_s **const out) {
+        const struct butterflyfish_map_entry_s_s **const out) {
     if (!object) {
         return BUTTERFLYFISH_STREAM_S_S_ERROR_OBJECT_IS_NULL;
     }
@@ -24,7 +24,7 @@ int butterflyfish_stream_s_s_first(
 int butterflyfish_stream_s_s_next(
         const struct butterflyfish_stream_s_s *const object,
         const struct butterflyfish_map_entry_s_s *const entry,
-        struct butterflyfish_map_entry_s_s **const out) {
+        const struct butterflyfish_map_entry_s_s **const out) {
     if (!object) {
         return BUTTERFLYFISH_STREAM_S_S_ERROR_OBJECT_IS_NULL;
     }

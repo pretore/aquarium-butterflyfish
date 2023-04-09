@@ -11,7 +11,7 @@
 
 int butterflyfish_sorted_map_ni_ni_first(
         const struct butterflyfish_sorted_map_ni_ni *const object,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -28,7 +28,7 @@ int butterflyfish_sorted_map_ni_ni_first(
 int butterflyfish_sorted_map_ni_ni_next(
         const struct butterflyfish_sorted_map_ni_ni *const object,
         const struct butterflyfish_map_entry_ni_ni *const entry,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -64,7 +64,7 @@ int butterflyfish_sorted_map_ni_ni_count(
 
 int butterflyfish_sorted_map_ni_ni_last(
         const struct butterflyfish_sorted_map_ni_ni *const object,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -80,7 +80,7 @@ int butterflyfish_sorted_map_ni_ni_last(
 int butterflyfish_sorted_map_ni_ni_prev(
         const struct butterflyfish_sorted_map_ni_ni *const object,
         const struct butterflyfish_map_entry_ni_ni *const entry,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -315,7 +315,7 @@ int butterflyfish_sorted_map_ni_ni_get(
 int butterflyfish_sorted_map_ni_ni_get_entry(
         const struct butterflyfish_sorted_map_ni_ni *const object,
         const uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -413,7 +413,7 @@ int butterflyfish_sorted_map_ni_ni_lower(
 int butterflyfish_sorted_map_ni_ni_ceiling_entry(
         const struct butterflyfish_sorted_map_ni_ni *const object,
         const uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -426,7 +426,7 @@ int butterflyfish_sorted_map_ni_ni_ceiling_entry(
 int butterflyfish_sorted_map_ni_ni_floor_entry(
         const struct butterflyfish_sorted_map_ni_ni *const object,
         const uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -439,7 +439,7 @@ int butterflyfish_sorted_map_ni_ni_floor_entry(
 int butterflyfish_sorted_map_ni_ni_lower_entry(
         const struct butterflyfish_sorted_map_ni_ni *const object,
         const uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }
@@ -452,7 +452,7 @@ int butterflyfish_sorted_map_ni_ni_lower_entry(
 int butterflyfish_sorted_map_ni_ni_higher_entry(
         const struct butterflyfish_sorted_map_ni_ni *const object,
         const uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **const out) {
+        const struct butterflyfish_map_entry_ni_ni **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL;
     }

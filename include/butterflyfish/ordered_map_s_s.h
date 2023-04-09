@@ -68,7 +68,7 @@ int butterflyfish_ordered_map_s_s_count(
  */
 int butterflyfish_ordered_map_s_s_first(
         const struct butterflyfish_ordered_map_s_s *object,
-        struct butterflyfish_map_entry_s_s **out);
+        const struct butterflyfish_map_entry_s_s **out);
 
 /**
  * @brief Last entry of the map.
@@ -83,7 +83,7 @@ int butterflyfish_ordered_map_s_s_first(
  */
 int butterflyfish_ordered_map_s_s_last(
         const struct butterflyfish_ordered_map_s_s *object,
-        struct butterflyfish_map_entry_s_s **out);
+        const struct butterflyfish_map_entry_s_s **out);
 
 /**
  * @brief Retrieve next entry.
@@ -103,7 +103,7 @@ int butterflyfish_ordered_map_s_s_last(
 int butterflyfish_ordered_map_s_s_next(
         const struct butterflyfish_ordered_map_s_s *object,
         const struct butterflyfish_map_entry_s_s *entry,
-        struct butterflyfish_map_entry_s_s **out);
+        const struct butterflyfish_map_entry_s_s **out);
 
 /**
  * @brief Retrieve the previous entry.
@@ -123,7 +123,7 @@ int butterflyfish_ordered_map_s_s_next(
 int butterflyfish_ordered_map_s_s_prev(
         const struct butterflyfish_ordered_map_s_s *object,
         const struct butterflyfish_map_entry_s_s *entry,
-        struct butterflyfish_map_entry_s_s **out);
+        const struct butterflyfish_map_entry_s_s **out);
 
 /**
  * @brief Remove entry.
@@ -427,7 +427,7 @@ int butterflyfish_ordered_map_s_s_get(
 int butterflyfish_ordered_map_s_s_get_entry(
         const struct butterflyfish_ordered_map_s_s *object,
         const struct sea_turtle_string *key,
-        struct butterflyfish_map_entry_s_s **out);
+        const struct butterflyfish_map_entry_s_s **out);
 
 /**
  * @brief Set view of map keys.

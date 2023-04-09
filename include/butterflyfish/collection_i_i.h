@@ -25,11 +25,11 @@ struct butterflyfish_collection_i_i {
                        uintmax_t *out);
 
     int (*const last)(const void *object,
-                      struct butterflyfish_map_entry_i_i **out);
+                      const struct butterflyfish_map_entry_i_i **out);
 
     int (*const prev)(const void *object,
                       const struct butterflyfish_map_entry_i_i *entry,
-                      struct butterflyfish_map_entry_i_i **out);
+                      const struct butterflyfish_map_entry_i_i **out);
 };
 
 /**
@@ -56,9 +56,9 @@ int butterflyfish_collection_i_i_count(
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_COLLECTION_IS_EMPTY if collection
  * is empty.
  */
-int  butterflyfish_collection_i_i_first(
+int butterflyfish_collection_i_i_first(
         const struct butterflyfish_collection_i_i *object,
-        struct butterflyfish_map_entry_i_i **out);
+        const struct butterflyfish_map_entry_i_i **out);
 
 /**
  * @brief Last entry of the collection.
@@ -73,7 +73,7 @@ int  butterflyfish_collection_i_i_first(
  */
 int butterflyfish_collection_i_i_last(
         const struct butterflyfish_collection_i_i *object,
-        struct butterflyfish_map_entry_i_i **out);
+        const struct butterflyfish_map_entry_i_i **out);
 
 /**
  * @brief Retrieve next entry.
@@ -92,7 +92,7 @@ int butterflyfish_collection_i_i_last(
 int butterflyfish_collection_i_i_next(
         const struct butterflyfish_collection_i_i *object,
         const struct butterflyfish_map_entry_i_i *entry,
-        struct butterflyfish_map_entry_i_i **out);
+        const struct butterflyfish_map_entry_i_i **out);
 
 /**
  * @brief Retrieve the previous entry.
@@ -111,6 +111,6 @@ int butterflyfish_collection_i_i_next(
 int butterflyfish_collection_i_i_prev(
         const struct butterflyfish_collection_i_i *object,
         const struct butterflyfish_map_entry_i_i *entry,
-        struct butterflyfish_map_entry_i_i **out);
+        const struct butterflyfish_map_entry_i_i **out);
 
 #endif /* _BUTTERFLYFISH_COLLECTION_I_I_H_ */

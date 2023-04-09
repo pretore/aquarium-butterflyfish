@@ -33,7 +33,7 @@ static void check_first_error_on_out_is_null(void **state) {
 
 static int
 fl_emit_error(const void *const object,
-              struct butterflyfish_map_entry_p_p **const out) {
+              const struct butterflyfish_map_entry_p_p **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -260,7 +260,7 @@ static void check_next_error_on_out_is_null(void **state) {
 static int
 np_emit_error(const void *const object,
               const struct butterflyfish_map_entry_p_p *const entry,
-              struct butterflyfish_map_entry_p_p **const out) {
+              const struct butterflyfish_map_entry_p_p **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(entry);
@@ -1774,7 +1774,7 @@ static void check_get_entry_error_on_out_is_null(void **state) {
 static int
 get_entry_emit_error(const void *const object,
                      const void *const key,
-                     struct butterflyfish_map_entry_p_p **const out) {
+                     const struct butterflyfish_map_entry_p_p **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(key);

@@ -63,7 +63,7 @@ int butterflyfish_ordered_map_ni_ni_count(
  */
 int butterflyfish_ordered_map_ni_ni_first(
         const struct butterflyfish_ordered_map_ni_ni *object,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Last entry of the map.
@@ -78,7 +78,7 @@ int butterflyfish_ordered_map_ni_ni_first(
  */
 int butterflyfish_ordered_map_ni_ni_last(
         const struct butterflyfish_ordered_map_ni_ni *object,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve next entry.
@@ -98,7 +98,7 @@ int butterflyfish_ordered_map_ni_ni_last(
 int butterflyfish_ordered_map_ni_ni_next(
         const struct butterflyfish_ordered_map_ni_ni *object,
         const struct butterflyfish_map_entry_ni_ni *entry,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve the previous entry.
@@ -118,7 +118,7 @@ int butterflyfish_ordered_map_ni_ni_next(
 int butterflyfish_ordered_map_ni_ni_prev(
         const struct butterflyfish_ordered_map_ni_ni *object,
         const struct butterflyfish_map_entry_ni_ni *entry,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Remove entry.
@@ -402,7 +402,7 @@ int butterflyfish_ordered_map_ni_ni_get(
 int butterflyfish_ordered_map_ni_ni_get_entry(
         const struct butterflyfish_ordered_map_ni_ni *object,
         uintmax_t key,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Set view of map keys.

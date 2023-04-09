@@ -11,7 +11,7 @@
 
 int butterflyfish_collection_s_s_first(
         const struct butterflyfish_collection_s_s *const object,
-        struct butterflyfish_map_entry_s_s **const out) {
+        const struct butterflyfish_map_entry_s_s **const out) {
     if (!object) {
         return BUTTERFLYFISH_COLLECTION_S_S_ERROR_OBJECT_IS_NULL;
     }
@@ -25,7 +25,7 @@ int butterflyfish_collection_s_s_first(
 int butterflyfish_collection_s_s_next(
         const struct butterflyfish_collection_s_s *const object,
         const struct butterflyfish_map_entry_s_s *const entry,
-        struct butterflyfish_map_entry_s_s **const out) {
+        const struct butterflyfish_map_entry_s_s **const out) {
     if (!object) {
         return BUTTERFLYFISH_COLLECTION_S_S_ERROR_OBJECT_IS_NULL;
     }
@@ -55,7 +55,7 @@ int butterflyfish_collection_s_s_count(
 
 int butterflyfish_collection_s_s_last(
         const struct butterflyfish_collection_s_s *const object,
-        struct butterflyfish_map_entry_s_s **const out) {
+        const struct butterflyfish_map_entry_s_s **const out) {
     if (!object) {
         return BUTTERFLYFISH_COLLECTION_S_S_ERROR_OBJECT_IS_NULL;
     }
@@ -68,7 +68,7 @@ int butterflyfish_collection_s_s_last(
 int butterflyfish_collection_s_s_prev(
         const struct butterflyfish_collection_s_s *const object,
         const struct butterflyfish_map_entry_s_s *const entry,
-        struct butterflyfish_map_entry_s_s **const out) {
+        const struct butterflyfish_map_entry_s_s **const out) {
     if (!object) {
         return BUTTERFLYFISH_COLLECTION_S_S_ERROR_OBJECT_IS_NULL;
     }

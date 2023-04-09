@@ -25,11 +25,11 @@ struct butterflyfish_collection_ni_ni {
                        uintmax_t *out);
 
     int (*const last)(const void *object,
-                      struct butterflyfish_map_entry_ni_ni **out);
+                      const struct butterflyfish_map_entry_ni_ni **out);
 
     int (*const prev)(const void *object,
                       const struct butterflyfish_map_entry_ni_ni *entry,
-                      struct butterflyfish_map_entry_ni_ni **out);
+                      const struct butterflyfish_map_entry_ni_ni **out);
 };
 
 /**
@@ -58,9 +58,9 @@ int butterflyfish_collection_ni_ni_count(
  * @throws BUTTERFLYFISH_COLLECTION_NI_NI_ERROR_COLLECTION_IS_EMPTY if
  * collection is empty.
  */
-int  butterflyfish_collection_ni_ni_first(
+int butterflyfish_collection_ni_ni_first(
         const struct butterflyfish_collection_ni_ni *object,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Last entry of the collection.
@@ -76,7 +76,7 @@ int  butterflyfish_collection_ni_ni_first(
  */
 int butterflyfish_collection_ni_ni_last(
         const struct butterflyfish_collection_ni_ni *object,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve next entry.
@@ -96,7 +96,7 @@ int butterflyfish_collection_ni_ni_last(
 int butterflyfish_collection_ni_ni_next(
         const struct butterflyfish_collection_ni_ni *object,
         const struct butterflyfish_map_entry_ni_ni *entry,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve the previous entry.
@@ -116,6 +116,6 @@ int butterflyfish_collection_ni_ni_next(
 int butterflyfish_collection_ni_ni_prev(
         const struct butterflyfish_collection_ni_ni *object,
         const struct butterflyfish_map_entry_ni_ni *entry,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 #endif /* _BUTTERFLYFISH_COLLECTION_NI_NI_H_ */

@@ -21,11 +21,11 @@ struct butterflyfish_map_entry_ni_ni;
 
 struct butterflyfish_stream_ni_ni {
     int (*const first)(const void *object,
-                       struct butterflyfish_map_entry_ni_ni **out);
+                       const struct butterflyfish_map_entry_ni_ni **out);
 
     int (*const next)(const void *object,
                       const struct butterflyfish_map_entry_ni_ni *entry,
-                      struct butterflyfish_map_entry_ni_ni **out);
+                      const struct butterflyfish_map_entry_ni_ni **out);
 };
 
 /**
@@ -40,7 +40,7 @@ struct butterflyfish_stream_ni_ni {
  */
 int butterflyfish_stream_ni_ni_first(
         const struct butterflyfish_stream_ni_ni *object,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 /**
  * @brief Retrieve next entry.
@@ -59,6 +59,6 @@ int butterflyfish_stream_ni_ni_first(
 int butterflyfish_stream_ni_ni_next(
         const struct butterflyfish_stream_ni_ni *object,
         const struct butterflyfish_map_entry_ni_ni *entry,
-        struct butterflyfish_map_entry_ni_ni **out);
+        const struct butterflyfish_map_entry_ni_ni **out);
 
 #endif /* _BUTTERFLYFISH_STREAM_NI_NI_H_ */
