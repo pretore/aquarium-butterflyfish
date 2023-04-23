@@ -909,6 +909,66 @@ static int remove_emit_error(void *const object,
     return mock();
 }
 
+static void check_remove_error_on_key_not_found(void **state) {
+    const struct butterflyfish_sorted_map_sr_sr sorted_map_sr_sr = {
+            .ordered_map_sr_sr.map_sr_sr.remove = remove_emit_error
+    };
+    struct object {
+        const struct butterflyfish_sorted_map_sr_sr *sorted_map_sr_sr;
+    };
+    struct object instance = {
+            .sorted_map_sr_sr = &sorted_map_sr_sr
+    };
+    expect_function_call(remove_emit_error);
+    will_return(remove_emit_error,
+                BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_KEY_NOT_FOUND);
+    assert_int_equal(
+            butterflyfish_sorted_map_sr_sr_remove(
+                    (struct butterflyfish_sorted_map_sr_sr *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_KEY_NOT_FOUND);
+}
+
+static void check_as_ordered_map_remove_error_on_key_not_found(void **state) {
+    const struct butterflyfish_sorted_map_sr_sr sorted_map_sr_sr = {
+            .ordered_map_sr_sr.map_sr_sr.remove = remove_emit_error
+    };
+    struct object {
+        const struct butterflyfish_sorted_map_sr_sr *sorted_map_sr_sr;
+    };
+    struct object instance = {
+            .sorted_map_sr_sr = &sorted_map_sr_sr
+    };
+    expect_function_call(remove_emit_error);
+    will_return(remove_emit_error,
+                BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_KEY_NOT_FOUND);
+    assert_int_equal(
+            butterflyfish_ordered_map_sr_sr_remove(
+                    (struct butterflyfish_ordered_map_sr_sr *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_SR_SR_ERROR_KEY_NOT_FOUND);
+}
+
+static void check_as_map_remove_error_on_key_not_found(void **state) {
+    const struct butterflyfish_sorted_map_sr_sr sorted_map_sr_sr = {
+            .ordered_map_sr_sr.map_sr_sr.remove = remove_emit_error
+    };
+    struct object {
+        const struct butterflyfish_sorted_map_sr_sr *sorted_map_sr_sr;
+    };
+    struct object instance = {
+            .sorted_map_sr_sr = &sorted_map_sr_sr
+    };
+    expect_function_call(remove_emit_error);
+    will_return(remove_emit_error,
+                BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_KEY_NOT_FOUND);
+    assert_int_equal(
+            butterflyfish_map_sr_sr_remove(
+                    (struct butterflyfish_map_sr_sr *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_MAP_SR_SR_ERROR_KEY_NOT_FOUND);
+}
+
 static void check_remove_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_sorted_map_sr_sr sorted_map_sr_sr = {
             .ordered_map_sr_sr.map_sr_sr.remove = remove_emit_error
@@ -2554,6 +2614,9 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_map_replace_error_on_memory_allocation_failed),
             cmocka_unit_test(check_remove_error_on_object_is_null),
             cmocka_unit_test(check_remove_error_on_key_is_null),
+            cmocka_unit_test(check_remove_error_on_key_not_found),
+            cmocka_unit_test(check_as_ordered_map_remove_error_on_key_not_found),
+            cmocka_unit_test(check_as_map_remove_error_on_key_not_found),
             cmocka_unit_test(check_remove_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_ordered_map_remove_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_remove_error_on_memory_allocation_failed),

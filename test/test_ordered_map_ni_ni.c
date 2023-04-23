@@ -662,6 +662,46 @@ static int remove_emit_error(void *const object,
     return mock();
 }
 
+static void check_remove_error_on_key_not_found(void **state) {
+    const struct butterflyfish_ordered_map_ni_ni ordered_map_ni_ni = {
+            .map_ni_ni.remove = remove_emit_error
+    };
+    struct object {
+        const struct butterflyfish_ordered_map_ni_ni *ordered_map_ni_ni;
+    };
+    struct object instance = {
+            .ordered_map_ni_ni = &ordered_map_ni_ni
+    };
+    expect_function_call(remove_emit_error);
+    will_return(remove_emit_error,
+                BUTTERFLYFISH_ORDERED_MAP_NI_NI_ERROR_KEY_NOT_FOUND);
+    assert_int_equal(
+            butterflyfish_ordered_map_ni_ni_remove(
+                    (struct butterflyfish_ordered_map_ni_ni *) &instance,
+                    0),
+            BUTTERFLYFISH_ORDERED_MAP_NI_NI_ERROR_KEY_NOT_FOUND);
+}
+
+static void check_as_map_remove_error_on_key_not_found(void **state) {
+    const struct butterflyfish_ordered_map_ni_ni ordered_map_ni_ni = {
+            .map_ni_ni.remove = remove_emit_error
+    };
+    struct object {
+        const struct butterflyfish_ordered_map_ni_ni *ordered_map_ni_ni;
+    };
+    struct object instance = {
+            .ordered_map_ni_ni = &ordered_map_ni_ni
+    };
+    expect_function_call(remove_emit_error);
+    will_return(remove_emit_error,
+                BUTTERFLYFISH_ORDERED_MAP_NI_NI_ERROR_KEY_NOT_FOUND);
+    assert_int_equal(
+            butterflyfish_map_ni_ni_remove(
+                    (struct butterflyfish_map_ni_ni *) &instance,
+                    0),
+            BUTTERFLYFISH_MAP_NI_NI_ERROR_KEY_NOT_FOUND);
+}
+
 static void check_remove_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_ordered_map_ni_ni ordered_map_ni_ni = {
             .map_ni_ni.remove = remove_emit_error
@@ -1486,6 +1526,8 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_replace_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_replace_error_on_memory_allocation_failed),
             cmocka_unit_test(check_remove_error_on_object_is_null),
+            cmocka_unit_test(check_remove_error_on_key_not_found),
+            cmocka_unit_test(check_as_map_remove_error_on_key_not_found),
             cmocka_unit_test(check_remove_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_map_remove_error_on_memory_allocation_failed),
             cmocka_unit_test(check_add_all_error_on_object_is_null),

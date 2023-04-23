@@ -256,6 +256,8 @@ int butterflyfish_map_p_p_replace(
  * @param [in] key of key-value association to be removed.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_MAP_P_P_ERROR_KEY_NOT_FOUND if key is not present in
+ * the map.
  * @throws BUTTERFLYFISH_MAP_P_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to lookup key.
  */

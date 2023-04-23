@@ -230,6 +230,8 @@ int butterflyfish_ordered_map_i_i_replace(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND if key is not
+ * present in the map.
  * @throws BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED if
  * there is insufficient memory to lookup key.
  */

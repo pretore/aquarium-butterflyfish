@@ -519,6 +519,26 @@ static int remove_emit_error(void *const object,
     return mock();
 }
 
+static void check_remove_error_on_key_not_found(void **state) {
+    const struct butterflyfish_map_i_i map_i_i = {
+            .remove = remove_emit_error
+    };
+    struct object {
+        const struct butterflyfish_map_i_i *map_i_i;
+    };
+    struct object instance = {
+            .map_i_i = &map_i_i
+    };
+    expect_function_call(remove_emit_error);
+    will_return(remove_emit_error,
+                BUTTERFLYFISH_MAP_I_I_ERROR_KEY_NOT_FOUND);
+    assert_int_equal(
+            butterflyfish_map_i_i_remove(
+                    (struct butterflyfish_map_i_i *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_MAP_I_I_ERROR_KEY_NOT_FOUND);
+}
+
 static void check_remove_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_map_i_i map_i_i = {
             .remove = remove_emit_error
@@ -1084,6 +1104,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_replace_error_on_memory_allocation_failed),
             cmocka_unit_test(check_remove_error_on_object_is_null),
             cmocka_unit_test(check_remove_error_on_key_is_null),
+            cmocka_unit_test(check_remove_error_on_key_not_found),
             cmocka_unit_test(check_remove_error_on_memory_allocation_failed),
             cmocka_unit_test(check_add_all_error_on_object_is_null),
             cmocka_unit_test(check_add_all_error_on_key_is_null),
