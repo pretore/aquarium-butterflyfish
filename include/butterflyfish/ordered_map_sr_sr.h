@@ -9,7 +9,7 @@
 
 struct triggerfish_strong;
 struct butterflyfish_stream_sr;
-struct butterflyfish_set_sr;
+struct butterflyfish_ordered_set_sr;
 struct butterflyfish_reducible_list_sr;
 
 #define BUTTERFLYFISH_ORDERED_MAP_SR_SR_ERROR_OBJECT_IS_NULL \
@@ -39,6 +39,9 @@ struct butterflyfish_reducible_list_sr;
 
 struct butterflyfish_ordered_map_sr_sr {
     const struct butterflyfish_map_sr_sr map_sr_sr;
+
+    int (*const keys)(void *object,
+                      struct butterflyfish_ordered_set_sr **out);
 };
 
 /**
@@ -443,7 +446,7 @@ int butterflyfish_ordered_map_sr_sr_get_entry(
  */
 int butterflyfish_ordered_map_sr_sr_keys(
         struct butterflyfish_ordered_map_sr_sr *object,
-        struct butterflyfish_set_sr **out);
+        struct butterflyfish_ordered_set_sr **out);
 
 /**
  * @brief Reducible list view of map values.

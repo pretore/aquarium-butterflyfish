@@ -9,7 +9,7 @@
 
 struct sea_turtle_integer;
 struct butterflyfish_stream_i;
-struct butterflyfish_set_i;
+struct butterflyfish_ordered_set_i;
 struct butterflyfish_reducible_list_i;
 
 #define BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL \
@@ -39,6 +39,9 @@ struct butterflyfish_reducible_list_i;
 
 struct butterflyfish_ordered_map_i_i {
     const struct butterflyfish_map_i_i map_i_i;
+
+    int (*const keys)(void *object,
+                      struct butterflyfish_ordered_set_i **out);
 };
 
 /**
@@ -443,7 +446,7 @@ int butterflyfish_ordered_map_i_i_get_entry(
  */
 int butterflyfish_ordered_map_i_i_keys(
         struct butterflyfish_ordered_map_i_i *object,
-        struct butterflyfish_set_i **out);
+        struct butterflyfish_ordered_set_i **out);
 
 /**
  * @brief Reducible list view of map values.

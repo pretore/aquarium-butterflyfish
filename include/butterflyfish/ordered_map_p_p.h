@@ -8,7 +8,7 @@
 #include "map_p_p.h"
 
 struct butterflyfish_stream_p;
-struct butterflyfish_set_p;
+struct butterflyfish_ordered_set_p;
 struct butterflyfish_reducible_list_p;
 
 #define BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL \
@@ -34,6 +34,9 @@ struct butterflyfish_reducible_list_p;
 
 struct butterflyfish_ordered_map_p_p {
     const struct butterflyfish_map_p_p map_p_p;
+
+    int (*const keys)(void *object,
+                      struct butterflyfish_ordered_set_p **out);
 };
 
 /**
@@ -418,7 +421,7 @@ int butterflyfish_ordered_map_p_p_get_entry(
  */
 int butterflyfish_ordered_map_p_p_keys(
         struct butterflyfish_ordered_map_p_p *object,
-        struct butterflyfish_set_p **out);
+        struct butterflyfish_ordered_set_p **out);
 
 /**
  * @brief Reducible list view of map values.

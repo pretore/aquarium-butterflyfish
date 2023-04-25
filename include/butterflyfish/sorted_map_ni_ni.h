@@ -8,7 +8,7 @@
 #include "ordered_map_ni_ni.h"
 
 struct butterflyfish_stream_ni;
-struct butterflyfish_set_ni;
+struct butterflyfish_sorted_set_ni;
 struct butterflyfish_reducible_list_ni;
 
 #define BUTTERFLYFISH_SORTED_MAP_NI_NI_ERROR_OBJECT_IS_NULL \
@@ -34,6 +34,9 @@ struct butterflyfish_reducible_list_ni;
 
 struct butterflyfish_sorted_map_ni_ni {
     const struct butterflyfish_ordered_map_ni_ni ordered_map_ni_ni;
+
+    int (*const keys)(void *object,
+                      struct butterflyfish_sorted_set_ni **out);
 
     int (*const ceiling)(const void *object,
                          const uintmax_t key,
@@ -612,7 +615,7 @@ int butterflyfish_sorted_map_ni_ni_lower_entry(
  */
 int butterflyfish_sorted_map_ni_ni_keys(
         struct butterflyfish_sorted_map_ni_ni *object,
-        struct butterflyfish_set_ni **out);
+        struct butterflyfish_sorted_set_ni **out);
 
 /**
  * @brief Reducible list view of map values.

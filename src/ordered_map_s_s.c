@@ -336,19 +336,6 @@ int butterflyfish_ordered_map_s_s_get_entry(
             .get_entry(object, key, out);
 }
 
-int butterflyfish_ordered_map_s_s_keys(
-        struct butterflyfish_ordered_map_s_s *const object,
-        struct butterflyfish_set_s **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OBJECT_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OUT_IS_NULL;
-    }
-    return INVOKABLE->map_s_s
-            .keys(object, out);
-}
-
 int butterflyfish_ordered_map_s_s_values(
         struct butterflyfish_ordered_map_s_s *const object,
         struct butterflyfish_reducible_list_s **const out) {
@@ -364,3 +351,14 @@ int butterflyfish_ordered_map_s_s_values(
 
 #pragma mark ordered_map_s_s -
 
+int butterflyfish_ordered_map_s_s_keys(
+        struct butterflyfish_ordered_map_s_s *const object,
+        struct butterflyfish_ordered_set_s **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OUT_IS_NULL;
+    }
+    return INVOKABLE->keys(object, out);
+}
