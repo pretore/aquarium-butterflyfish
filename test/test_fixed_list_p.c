@@ -404,7 +404,7 @@ static void check_set_error_on_memory_allocation_failed(void **state) {
 }
 
 static int set_item_emit_error(void *const object,
-                               const void *const item,
+                               void *const item,
                                const void *const value) {
     function_called();
     assert_non_null(object);

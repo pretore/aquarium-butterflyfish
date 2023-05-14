@@ -36,7 +36,7 @@ struct butterflyfish_fixed_list_p {
                      const void *value);
 
     int (*const set_item)(void *object,
-                          const void *item,
+                          void *item,
                           const void *value);
 
     int (*const at)(const void *object,
@@ -176,7 +176,7 @@ int butterflyfish_fixed_list_p_set(
  */
 int butterflyfish_fixed_list_p_set_item(
         struct butterflyfish_fixed_list_p *object,
-        const void *item,
+        void *item,
         const void *value);
 
 /**

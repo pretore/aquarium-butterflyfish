@@ -113,7 +113,7 @@ int butterflyfish_fixed_list_p_set(
 
 int butterflyfish_fixed_list_p_set_item(
         struct butterflyfish_fixed_list_p *object,
-        const void *const item,
+        void *const item,
         const void *const value) {
     if (!object) {
         return BUTTERFLYFISH_FIXED_LIST_P_ERROR_OBJECT_IS_NULL;
