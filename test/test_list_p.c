@@ -728,7 +728,7 @@ static void check_set_item_error_on_item_is_null(void **state) {
 }
 
 static int set_item_emit_error(void *const object,
-                               const void *const item,
+                               void *const item,
                                const void *value) {
     function_called();
     assert_non_null(object);
