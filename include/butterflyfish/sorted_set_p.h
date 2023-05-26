@@ -31,6 +31,20 @@
 struct butterflyfish_sorted_set_p {
     const struct butterflyfish_ordered_set_p ordered_set_p;
 
+    int (*const first)(const void *object,
+                       const void **out);
+
+    int (*const next)(const void *object,
+                      const void *item,
+                      const void **out);
+
+    int (*const last)(const void *object,
+                      const void **out);
+
+    int (*const prev)(const void *object,
+                      const void *item,
+                      const void **out);
+
     int (*const ceiling)(const void *object,
                          const void *value,
                          const void **out);

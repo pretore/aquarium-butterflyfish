@@ -35,6 +35,20 @@ struct triggerfish_strong;
 struct butterflyfish_sorted_set_sr {
     const struct butterflyfish_ordered_set_sr ordered_set_sr;
 
+    int (*const first)(const void *object,
+                       struct triggerfish_strong **out);
+
+    int (*const next)(const void *object,
+                      const struct triggerfish_strong *item,
+                      struct triggerfish_strong **out);
+
+    int (*const last)(const void *object,
+                      struct triggerfish_strong **out);
+
+    int (*const prev)(const void *object,
+                      const struct triggerfish_strong *item,
+                      struct triggerfish_strong **out);
+
     int (*const ceiling)(const void *object,
                          const struct triggerfish_strong *value,
                          struct triggerfish_strong **out);

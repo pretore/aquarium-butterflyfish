@@ -40,6 +40,20 @@ struct butterflyfish_reducible_list_i;
 struct butterflyfish_sorted_map_s_s {
     const struct butterflyfish_ordered_map_s_s ordered_map_s_s;
 
+    int (*const first)(const void *object,
+                       const struct butterflyfish_map_entry_s_s **out);
+
+    int (*const next)(const void *object,
+                      const struct butterflyfish_map_entry_s_s *entry,
+                      const struct butterflyfish_map_entry_s_s **out);
+
+    int (*const last)(const void *object,
+                      const struct butterflyfish_map_entry_s_s **out);
+
+    int (*const prev)(const void *object,
+                      const struct butterflyfish_map_entry_s_s *entry,
+                      const struct butterflyfish_map_entry_s_s **out);
+
     int (*const keys)(void *object,
                       struct butterflyfish_sorted_set_s **out);
 

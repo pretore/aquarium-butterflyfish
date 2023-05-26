@@ -18,11 +18,13 @@ int butterflyfish_sorted_set_ni_first(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_ni
-            .set_ni
-            .collection_ni
-            .stream_ni
-            .first(object, out);
+    return (INVOKABLE->first
+            ? INVOKABLE->first
+            : INVOKABLE->ordered_set_ni
+                    .set_ni
+                    .collection_ni
+                    .stream_ni
+                    .first)(object, out);
 }
 
 int butterflyfish_sorted_set_ni_next(
@@ -38,11 +40,13 @@ int butterflyfish_sorted_set_ni_next(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_ni
-            .set_ni
-            .collection_ni
-            .stream_ni
-            .next(object, item, out);
+    return (INVOKABLE->next
+            ? INVOKABLE->next
+            : INVOKABLE->ordered_set_ni
+                    .set_ni
+                    .collection_ni
+                    .stream_ni
+                    .next)(object, item, out);
 }
 
 #pragma mark collection_ni -
@@ -71,10 +75,12 @@ int butterflyfish_sorted_set_ni_last(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_ni
-            .set_ni
-            .collection_ni
-            .last(object, out);
+    return (INVOKABLE->last
+            ? INVOKABLE->last
+            : INVOKABLE->ordered_set_ni
+                    .set_ni
+                    .collection_ni
+                    .last)(object, out);
 }
 
 int butterflyfish_sorted_set_ni_prev(
@@ -90,10 +96,12 @@ int butterflyfish_sorted_set_ni_prev(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_ni
-            .set_ni
-            .collection_ni
-            .prev(object, item, out);
+    return (INVOKABLE->prev
+            ? INVOKABLE->prev
+            : INVOKABLE->ordered_set_ni
+                    .set_ni
+                    .collection_ni
+                    .prev)(object, item, out);
 }
 
 #pragma mark set_ni -

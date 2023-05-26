@@ -42,6 +42,26 @@ fl_emit_error(const void *const object,
 
 static void check_first_error_on_map_is_empty(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
+            .first = fl_emit_error
+    };
+    struct object {
+        const struct butterflyfish_sorted_map_i_i *sorted_map_i_i;
+    };
+    struct object instance = {
+            .sorted_map_i_i = &sorted_map_i_i
+    };
+    expect_function_call(fl_emit_error);
+    will_return(fl_emit_error,
+                BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MAP_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_sorted_map_i_i_first(
+                    (const struct butterflyfish_sorted_map_i_i *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MAP_IS_EMPTY);
+}
+
+static void check_as_sorted_map_first_error_on_map_is_empty(void **state) {
+    const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .ordered_map_i_i.map_i_i.collection_i_i.stream_i_i.first
             = fl_emit_error
     };
@@ -160,6 +180,26 @@ static void check_last_error_on_out_is_null(void **state) {
 
 static void check_last_error_on_map_is_empty(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
+            .last = fl_emit_error
+    };
+    struct object {
+        const struct butterflyfish_sorted_map_i_i *sorted_map_i_i;
+    };
+    struct object instance = {
+            .sorted_map_i_i = &sorted_map_i_i
+    };
+    expect_function_call(fl_emit_error);
+    will_return(fl_emit_error,
+                BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MAP_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_sorted_map_i_i_last(
+                    (const struct butterflyfish_sorted_map_i_i *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MAP_IS_EMPTY);
+}
+
+static void check_as_sorted_map_last_error_on_map_is_empty(void **state) {
+    const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .ordered_map_i_i.map_i_i.collection_i_i.last = fl_emit_error
     };
     struct object {
@@ -269,6 +309,27 @@ np_emit_error(const void *const object,
 }
 
 static void check_next_error_on_end_of_sequence(void **state) {
+    const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
+            .next = np_emit_error
+    };
+    struct object {
+        const struct butterflyfish_sorted_map_i_i *sorted_map_i_i;
+    };
+    struct object instance = {
+            .sorted_map_i_i = &sorted_map_i_i
+    };
+    expect_function_call(np_emit_error);
+    will_return(np_emit_error,
+                BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(
+            butterflyfish_sorted_map_i_i_next(
+                    (const struct butterflyfish_sorted_map_i_i *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_END_OF_SEQUENCE);
+}
+
+static void check_as_sorted_map_next_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .ordered_map_i_i.map_i_i.collection_i_i.stream_i_i.next
             = np_emit_error
@@ -397,6 +458,27 @@ static void check_prev_error_on_out_is_null(void **state) {
 }
 
 static void check_prev_error_on_end_of_sequence(void **state) {
+    const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
+            .prev = np_emit_error
+    };
+    struct object {
+        const struct butterflyfish_sorted_map_i_i *sorted_map_i_i;
+    };
+    struct object instance = {
+            .sorted_map_i_i = &sorted_map_i_i
+    };
+    expect_function_call(np_emit_error);
+    will_return(np_emit_error,
+                BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(
+            butterflyfish_sorted_map_i_i_prev(
+                    (const struct butterflyfish_sorted_map_i_i *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_END_OF_SEQUENCE);
+}
+
+static void check_as_sorted_map_prev_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
             .ordered_map_i_i.map_i_i.collection_i_i.prev = np_emit_error
     };
@@ -2559,6 +2641,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_map_is_empty),
+            cmocka_unit_test(check_as_sorted_map_first_error_on_map_is_empty),
             cmocka_unit_test(check_as_ordered_map_first_error_on_map_is_empty),
             cmocka_unit_test(check_as_map_first_error_on_map_is_empty),
             cmocka_unit_test(check_as_collection_first_error_on_collection_is_empty),
@@ -2566,6 +2649,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_last_error_on_object_is_null),
             cmocka_unit_test(check_last_error_on_out_is_null),
             cmocka_unit_test(check_last_error_on_map_is_empty),
+            cmocka_unit_test(check_as_sorted_map_last_error_on_map_is_empty),
             cmocka_unit_test(check_as_ordered_map_last_error_on_map_is_empty),
             cmocka_unit_test(check_as_map_last_error_on_map_is_empty),
             cmocka_unit_test(check_as_collection_last_error_on_collection_is_empty),
@@ -2573,6 +2657,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_next_error_on_entry_is_null),
             cmocka_unit_test(check_next_error_on_out_is_null),
             cmocka_unit_test(check_next_error_on_end_of_sequence),
+            cmocka_unit_test(check_as_sorted_map_next_error_on_end_of_sequence),
             cmocka_unit_test(check_as_ordered_map_next_error_on_end_of_sequence),
             cmocka_unit_test(check_as_map_next_error_on_end_of_sequence),
             cmocka_unit_test(check_as_collection_next_error_on_end_of_sequence),
@@ -2581,6 +2666,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_prev_error_on_entry_is_null),
             cmocka_unit_test(check_prev_error_on_out_is_null),
             cmocka_unit_test(check_prev_error_on_end_of_sequence),
+            cmocka_unit_test(check_as_sorted_map_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_as_ordered_map_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_as_map_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_as_collection_prev_error_on_end_of_sequence),

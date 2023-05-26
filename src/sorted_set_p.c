@@ -18,11 +18,13 @@ int butterflyfish_sorted_set_p_first(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_p
-            .set_p
-            .collection_p
-            .stream_p
-            .first(object, out);
+    return (INVOKABLE->first
+            ? INVOKABLE->first
+            : INVOKABLE->ordered_set_p
+                    .set_p
+                    .collection_p
+                    .stream_p
+                    .first)(object, out);
 }
 
 int butterflyfish_sorted_set_p_next(
@@ -38,11 +40,13 @@ int butterflyfish_sorted_set_p_next(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_p
-            .set_p
-            .collection_p
-            .stream_p
-            .next(object, item, out);
+    return (INVOKABLE->next
+            ? INVOKABLE->next
+            : INVOKABLE->ordered_set_p
+                    .set_p
+                    .collection_p
+                    .stream_p
+                    .next)(object, item, out);
 }
 
 #pragma mark collection_p -
@@ -71,10 +75,12 @@ int butterflyfish_sorted_set_p_last(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_p
-            .set_p
-            .collection_p
-            .last(object, out);
+    return (INVOKABLE->last
+            ? INVOKABLE->last
+            : INVOKABLE->ordered_set_p
+                    .set_p
+                    .collection_p
+                    .last)(object, out);
 }
 
 int butterflyfish_sorted_set_p_prev(
@@ -90,10 +96,12 @@ int butterflyfish_sorted_set_p_prev(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_p
-            .set_p
-            .collection_p
-            .prev(object, item, out);
+    return (INVOKABLE->prev
+            ? INVOKABLE->prev
+            : INVOKABLE->ordered_set_p
+                    .set_p
+                    .collection_p
+                    .prev)(object, item, out);
 }
 
 #pragma mark set_p -

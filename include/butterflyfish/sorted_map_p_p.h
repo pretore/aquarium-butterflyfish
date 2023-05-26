@@ -35,6 +35,20 @@ struct butterflyfish_reducible_list_p;
 struct butterflyfish_sorted_map_p_p {
     const struct butterflyfish_ordered_map_p_p ordered_map_p_p;
 
+    int (*const first)(const void *object,
+                       const struct butterflyfish_map_entry_p_p **out);
+
+    int (*const next)(const void *object,
+                      const struct butterflyfish_map_entry_p_p *entry,
+                      const struct butterflyfish_map_entry_p_p **out);
+
+    int (*const last)(const void *object,
+                      const struct butterflyfish_map_entry_p_p **out);
+
+    int (*const prev)(const void *object,
+                      const struct butterflyfish_map_entry_p_p *entry,
+                      const struct butterflyfish_map_entry_p_p **out);
+
     int (*const keys)(void *object,
                       struct butterflyfish_sorted_set_p **out);
 

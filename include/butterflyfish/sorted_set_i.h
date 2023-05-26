@@ -35,6 +35,20 @@ struct sea_turtle_integer;
 struct butterflyfish_sorted_set_i {
     const struct butterflyfish_ordered_set_i ordered_set_i;
 
+    int (*const first)(const void *object,
+                       const struct sea_turtle_integer **out);
+
+    int (*const next)(const void *object,
+                      const struct sea_turtle_integer *item,
+                      const struct sea_turtle_integer **out);
+
+    int (*const last)(const void *object,
+                      const struct sea_turtle_integer **out);
+
+    int (*const prev)(const void *object,
+                      const struct sea_turtle_integer *item,
+                      const struct sea_turtle_integer **out);
+
     int (*const ceiling)(const void *object,
                          const struct sea_turtle_integer *value,
                          const struct sea_turtle_integer **out);

@@ -18,11 +18,13 @@ int butterflyfish_sorted_set_sr_first(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_sr
-            .set_sr
-            .collection_sr
-            .stream_sr
-            .first(object, out);
+    return (INVOKABLE->first
+            ? INVOKABLE->first
+            : INVOKABLE->ordered_set_sr
+                    .set_sr
+                    .collection_sr
+                    .stream_sr
+                    .first)(object, out);
 }
 
 int butterflyfish_sorted_set_sr_next(
@@ -38,11 +40,13 @@ int butterflyfish_sorted_set_sr_next(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_sr
-            .set_sr
-            .collection_sr
-            .stream_sr
-            .next(object, item, out);
+    return (INVOKABLE->next
+            ? INVOKABLE->next
+            : INVOKABLE->ordered_set_sr
+                    .set_sr
+                    .collection_sr
+                    .stream_sr
+                    .next)(object, item, out);
 }
 
 #pragma mark collection_sr -
@@ -71,10 +75,12 @@ int butterflyfish_sorted_set_sr_last(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_sr
-            .set_sr
-            .collection_sr
-            .last(object, out);
+    return (INVOKABLE->last
+            ? INVOKABLE->last
+            : INVOKABLE->ordered_set_sr
+                    .set_sr
+                    .collection_sr
+                    .last)(object, out);
 }
 
 int butterflyfish_sorted_set_sr_prev(
@@ -90,10 +96,12 @@ int butterflyfish_sorted_set_sr_prev(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_sr
-            .set_sr
-            .collection_sr
-            .prev(object, item, out);
+    return (INVOKABLE->prev
+            ? INVOKABLE->prev
+            : INVOKABLE->ordered_set_sr
+                    .set_sr
+                    .collection_sr
+                    .prev)(object, item, out);
 }
 
 #pragma mark set_sr -

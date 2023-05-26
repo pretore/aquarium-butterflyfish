@@ -31,6 +31,20 @@
 struct butterflyfish_sorted_set_ni {
     const struct butterflyfish_ordered_set_ni ordered_set_ni;
 
+    int (*const first)(const void *object,
+                       const uintmax_t **out);
+
+    int (*const next)(const void *object,
+                      const uintmax_t *item,
+                      const uintmax_t **out);
+
+    int (*const last)(const void *object,
+                      const uintmax_t **out);
+
+    int (*const prev)(const void *object,
+                      const uintmax_t *item,
+                      const uintmax_t **out);
+
     int (*const ceiling)(const void *object,
                          const uintmax_t value,
                          const uintmax_t **out);

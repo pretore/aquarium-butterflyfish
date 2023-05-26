@@ -18,11 +18,13 @@ int butterflyfish_sorted_map_sr_sr_first(
     if (!out) {
         return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_map_sr_sr
-            .map_sr_sr
-            .collection_sr_sr
-            .stream_sr_sr
-            .first(object, out);
+    return (INVOKABLE->first
+            ? INVOKABLE->first
+            : INVOKABLE->ordered_map_sr_sr
+                    .map_sr_sr
+                    .collection_sr_sr
+                    .stream_sr_sr
+                    .first)(object, out);
 }
 
 int butterflyfish_sorted_map_sr_sr_next(
@@ -38,11 +40,13 @@ int butterflyfish_sorted_map_sr_sr_next(
     if (!out) {
         return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_map_sr_sr
-            .map_sr_sr
-            .collection_sr_sr
-            .stream_sr_sr
-            .next(object, entry, out);
+    return (INVOKABLE->next
+            ? INVOKABLE->next
+            : INVOKABLE->ordered_map_sr_sr
+                    .map_sr_sr
+                    .collection_sr_sr
+                    .stream_sr_sr
+                    .next)(object, entry, out);
 }
 
 #pragma mark collection_sr_sr -
@@ -71,10 +75,12 @@ int butterflyfish_sorted_map_sr_sr_last(
     if (!out) {
         return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_map_sr_sr
-            .map_sr_sr
-            .collection_sr_sr
-            .last(object, out);
+    return (INVOKABLE->last
+            ? INVOKABLE->last
+            : INVOKABLE->ordered_map_sr_sr
+                    .map_sr_sr
+                    .collection_sr_sr
+                    .last)(object, out);
 }
 
 int butterflyfish_sorted_map_sr_sr_prev(
@@ -90,10 +96,12 @@ int butterflyfish_sorted_map_sr_sr_prev(
     if (!out) {
         return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_map_sr_sr
-            .map_sr_sr
-            .collection_sr_sr
-            .prev(object, entry, out);
+    return (INVOKABLE->prev
+            ? INVOKABLE->prev
+            : INVOKABLE->ordered_map_sr_sr
+                    .map_sr_sr
+                    .collection_sr_sr
+                    .prev)(object, entry, out);
 }
 
 #pragma mark map_sr_sr -
