@@ -29,7 +29,7 @@ static int fl_emit_error(const void *const object,
 
 static void check_first_error_on_queue_is_empty(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .collection_ni.stream_ni.first = fl_emit_error
+            .reducible_queue_ni.collection_ni.stream_ni.first = fl_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -48,9 +48,30 @@ static void check_first_error_on_queue_is_empty(void **state) {
 }
 
 static void
+check_as_reducible_queue_first_error_on_queue_is_empty(void **state) {
+    const struct butterflyfish_queue_ni queue_ni = {
+            .reducible_queue_ni.collection_ni.stream_ni.first = fl_emit_error
+    };
+    struct object {
+        const struct butterflyfish_queue_ni *queue_ni;
+    };
+    struct object instance = {
+            .queue_ni = &queue_ni
+    };
+    expect_function_call(fl_emit_error);
+    will_return(fl_emit_error,
+                BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_reducible_queue_ni_first(
+                    (const struct butterflyfish_reducible_queue_ni *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
+}
+
+static void
 check_as_collection_first_error_on_collection_is_empty(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .collection_ni.stream_ni.first = fl_emit_error
+            .reducible_queue_ni.collection_ni.stream_ni.first = fl_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -70,7 +91,7 @@ check_as_collection_first_error_on_collection_is_empty(void **state) {
 
 static void check_as_stream_first_error_on_stream_is_empty(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .collection_ni.stream_ni.first = fl_emit_error
+            .reducible_queue_ni.collection_ni.stream_ni.first = fl_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -114,7 +135,7 @@ static void check_last_error_on_out_is_null(void **state) {
 
 static void check_last_error_on_queue_is_empty(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .collection_ni.last = fl_emit_error
+            .reducible_queue_ni.collection_ni.last = fl_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -130,6 +151,27 @@ static void check_last_error_on_queue_is_empty(void **state) {
                     (const struct butterflyfish_queue_ni *) &instance,
                     (void *) 1),
             BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
+}
+
+static void
+check_as_reducible_queue_last_error_on_queue_is_empty(void **state) {
+    const struct butterflyfish_queue_ni queue_ni = {
+            .reducible_queue_ni.collection_ni.last = fl_emit_error
+    };
+    struct object {
+        const struct butterflyfish_queue_ni *queue_ni;
+    };
+    struct object instance = {
+            .queue_ni = &queue_ni
+    };
+    expect_function_call(fl_emit_error);
+    will_return(fl_emit_error,
+                BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_reducible_queue_ni_last(
+                    (const struct butterflyfish_reducible_queue_ni *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
 }
 
 static void
@@ -183,7 +225,7 @@ static int np_emit_error(const void *const object,
 
 static void check_next_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .collection_ni.stream_ni.next = np_emit_error
+            .reducible_queue_ni.collection_ni.stream_ni.next = np_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -202,9 +244,31 @@ static void check_next_error_on_end_of_sequence(void **state) {
             BUTTERFLYFISH_QUEUE_NI_ERROR_END_OF_SEQUENCE);
 }
 
+static void
+check_as_reducible_queue_next_error_on_end_of_sequence(void **state) {
+    const struct butterflyfish_queue_ni queue_ni = {
+            .reducible_queue_ni.collection_ni.stream_ni.next = np_emit_error
+    };
+    struct object {
+        const struct butterflyfish_queue_ni *queue_ni;
+    };
+    struct object instance = {
+            .queue_ni = &queue_ni
+    };
+    expect_function_call(np_emit_error);
+    will_return(np_emit_error,
+                BUTTERFLYFISH_QUEUE_NI_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(
+            butterflyfish_reducible_queue_ni_next(
+                    (const struct butterflyfish_reducible_queue_ni *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_QUEUE_NI_ERROR_END_OF_SEQUENCE);
+}
+
 static void check_as_collection_next_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .collection_ni.stream_ni.next = np_emit_error
+            .reducible_queue_ni.collection_ni.stream_ni.next = np_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -225,7 +289,7 @@ static void check_as_collection_next_error_on_end_of_sequence(void **state) {
 
 static void check_as_stream_next_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .collection_ni.stream_ni.next = np_emit_error
+            .reducible_queue_ni.collection_ni.stream_ni.next = np_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -264,7 +328,7 @@ static void check_prev_error_on_out_is_null(void **state) {
 
 static void check_prev_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .collection_ni.prev = np_emit_error
+            .reducible_queue_ni.collection_ni.prev = np_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -283,9 +347,31 @@ static void check_prev_error_on_end_of_sequence(void **state) {
             BUTTERFLYFISH_QUEUE_NI_ERROR_END_OF_SEQUENCE);
 }
 
+static void
+check_as_reducible_queue_prev_error_on_end_of_sequence(void **state) {
+    const struct butterflyfish_queue_ni queue_ni = {
+            .reducible_queue_ni.collection_ni.prev = np_emit_error
+    };
+    struct object {
+        const struct butterflyfish_queue_ni *queue_ni;
+    };
+    struct object instance = {
+            .queue_ni = &queue_ni
+    };
+    expect_function_call(np_emit_error);
+    will_return(np_emit_error,
+                BUTTERFLYFISH_QUEUE_NI_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(
+            butterflyfish_reducible_queue_ni_prev(
+                    (const struct butterflyfish_reducible_queue_ni *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_QUEUE_NI_ERROR_END_OF_SEQUENCE);
+}
+
 static void check_as_collection_prev_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .collection_ni.prev = np_emit_error
+            .reducible_queue_ni.collection_ni.prev = np_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -302,6 +388,68 @@ static void check_as_collection_prev_error_on_end_of_sequence(void **state) {
                     (void *) 1,
                     (void *) 1),
             BUTTERFLYFISH_COLLECTION_NI_ERROR_END_OF_SEQUENCE);
+}
+
+static void check_remove_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_queue_ni_remove(NULL, (void *) 1),
+            BUTTERFLYFISH_QUEUE_NI_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_remove_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_queue_ni_remove((void *) 1, NULL),
+            BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL);
+}
+
+static int
+remove_emit_error(void *const object,
+                  uintmax_t *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
+static void check_remove_error_on_queue_is_empty(void **state) {
+    const struct butterflyfish_queue_ni queue_ni = {
+            .reducible_queue_ni.remove = remove_emit_error
+    };
+    struct object {
+        const struct butterflyfish_queue_ni *queue_ni;
+    };
+    struct object instance = {
+            .queue_ni = &queue_ni
+    };
+    expect_function_call(remove_emit_error);
+    will_return(remove_emit_error,
+                BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_queue_ni_remove(
+                    (struct butterflyfish_queue_ni *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
+}
+
+static void
+check_as_reducible_queue_remove_error_on_queue_is_empty(void **state) {
+    const struct butterflyfish_queue_ni queue_ni = {
+            .reducible_queue_ni.remove = remove_emit_error
+    };
+    struct object {
+        const struct butterflyfish_queue_ni *queue_ni;
+    };
+    struct object instance = {
+            .queue_ni = &queue_ni
+    };
+    expect_function_call(remove_emit_error);
+    will_return(remove_emit_error,
+                BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_reducible_queue_ni_remove(
+                    (struct butterflyfish_reducible_queue_ni *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
 }
 
 static void check_add_error_on_object_is_null(void **state) {
@@ -337,30 +485,30 @@ static void check_add_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_QUEUE_NI_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
-static void check_remove_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_queue_ni_remove(NULL, (void *) 1),
-            BUTTERFLYFISH_QUEUE_NI_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_remove_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_queue_ni_remove((void *) 1, NULL),
-            BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL);
-}
-
 static int
-remove_emit_error(void *const object,
-                  uintmax_t *const out) {
+add_all_emit_error(void *const object,
+                   const struct butterflyfish_stream_ni *const other) {
     function_called();
     assert_non_null(object);
-    assert_non_null(out);
+    assert_non_null(other);
     return mock();
 }
 
-static void check_remove_error_on_queue_is_empty(void **state) {
+static void check_add_all_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_queue_ni_add_all(NULL, (void *) 1),
+            BUTTERFLYFISH_QUEUE_NI_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_add_all_error_on_other_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_queue_ni_add_all((void *) 1, NULL),
+            BUTTERFLYFISH_QUEUE_NI_ERROR_OTHER_IS_NULL);
+}
+
+static void check_add_all_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_queue_ni queue_ni = {
-            .remove = remove_emit_error
+            .add_all = add_all_emit_error
     };
     struct object {
         const struct butterflyfish_queue_ni *queue_ni;
@@ -368,14 +516,14 @@ static void check_remove_error_on_queue_is_empty(void **state) {
     struct object instance = {
             .queue_ni = &queue_ni
     };
-    expect_function_call(remove_emit_error);
-    will_return(remove_emit_error,
-                BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
+    expect_function_call(add_all_emit_error);
+    will_return(add_all_emit_error,
+                BUTTERFLYFISH_QUEUE_NI_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
-            butterflyfish_queue_ni_remove(
-                    (struct butterflyfish_queue_ni *) &instance,
+            butterflyfish_queue_i_add_all(
+                    (struct butterflyfish_queue_i *) &instance,
                     (void *) 1),
-            BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY);
+            BUTTERFLYFISH_QUEUE_NI_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 int main(int argc, char *argv[]) {
@@ -385,26 +533,36 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_queue_is_empty),
+            cmocka_unit_test(check_as_reducible_queue_first_error_on_queue_is_empty),
             cmocka_unit_test(check_as_collection_first_error_on_collection_is_empty),
             cmocka_unit_test(check_as_stream_first_error_on_stream_is_empty),
             cmocka_unit_test(check_last_error_on_object_is_null),
             cmocka_unit_test(check_last_error_on_out_is_null),
-            cmocka_unit_test(check_as_collection_last_error_on_collection_is_empty),
             cmocka_unit_test(check_last_error_on_queue_is_empty),
+            cmocka_unit_test(check_as_reducible_queue_last_error_on_queue_is_empty),
+            cmocka_unit_test(check_as_collection_last_error_on_collection_is_empty),
             cmocka_unit_test(check_next_error_on_object_is_null),
             cmocka_unit_test(check_next_error_on_item_is_null),
             cmocka_unit_test(check_next_error_on_out_is_null),
             cmocka_unit_test(check_next_error_on_end_of_sequence),
+            cmocka_unit_test(check_as_reducible_queue_next_error_on_end_of_sequence),
+            cmocka_unit_test(check_as_collection_next_error_on_end_of_sequence),
             cmocka_unit_test(check_as_stream_next_error_on_end_of_sequence),
             cmocka_unit_test(check_prev_error_on_object_is_null),
             cmocka_unit_test(check_prev_error_on_item_is_null),
             cmocka_unit_test(check_prev_error_on_out_is_null),
             cmocka_unit_test(check_prev_error_on_end_of_sequence),
-            cmocka_unit_test(check_add_error_on_object_is_null),
-            cmocka_unit_test(check_add_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_as_reducible_queue_prev_error_on_end_of_sequence),
+            cmocka_unit_test(check_as_collection_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_remove_error_on_object_is_null),
             cmocka_unit_test(check_remove_error_on_out_is_null),
             cmocka_unit_test(check_remove_error_on_queue_is_empty),
+            cmocka_unit_test(check_as_reducible_queue_remove_error_on_queue_is_empty),
+            cmocka_unit_test(check_add_error_on_object_is_null),
+            cmocka_unit_test(check_add_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_add_all_error_on_object_is_null),
+            cmocka_unit_test(check_add_all_error_on_other_is_null),
+            cmocka_unit_test(check_add_all_error_on_memory_allocation_failed),
     };
     //cmocka_set_message_output(CM_OUTPUT_XML);
     return cmocka_run_group_tests(tests, NULL, NULL);

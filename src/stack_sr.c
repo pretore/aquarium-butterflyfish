@@ -18,7 +18,8 @@ int butterflyfish_stack_sr_first(
     if (!out) {
         return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_sr
+    return INVOKABLE->reducible_stack_sr
+            .collection_sr
             .stream_sr
             .first(object, out);
 }
@@ -36,7 +37,8 @@ int butterflyfish_stack_sr_next(
     if (!out) {
         return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_sr
+    return INVOKABLE->reducible_stack_sr
+            .collection_sr
             .stream_sr
             .next(object, item, out);
 }
@@ -52,7 +54,8 @@ int butterflyfish_stack_sr_count(
     if (!out) {
         return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_sr
+    return INVOKABLE->reducible_stack_sr
+            .collection_sr
             .count(object, out);
 }
 
@@ -65,7 +68,8 @@ int butterflyfish_stack_sr_last(
     if (!out) {
         return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_sr
+    return INVOKABLE->reducible_stack_sr
+            .collection_sr
             .last(object, out);
 }
 
@@ -82,8 +86,24 @@ int butterflyfish_stack_sr_prev(
     if (!out) {
         return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_sr
+    return INVOKABLE->reducible_stack_sr
+            .collection_sr
             .prev(object, item, out);
+}
+
+#pragma mark reducible_stack_sr -
+
+int butterflyfish_stack_sr_pop(
+        struct butterflyfish_stack_sr *const object,
+        struct triggerfish_strong **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
+    }
+    return INVOKABLE->reducible_stack_sr
+            .pop(object, out);
 }
 
 #pragma mark stack_sr -
@@ -100,15 +120,14 @@ int butterflyfish_stack_sr_push(
     return INVOKABLE->push(object, value);
 }
 
-int butterflyfish_stack_sr_pop(
+int butterflyfish_stack_sr_push_all(
         struct butterflyfish_stack_sr *const object,
-        struct triggerfish_strong **const out) {
+        const struct butterflyfish_stream_sr *const other) {
     if (!object) {
         return BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL;
     }
-    if (!out) {
-        return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
+    if (!other) {
+        return BUTTERFLYFISH_STACK_SR_ERROR_OTHER_IS_NULL;
     }
-    return INVOKABLE->pop(object, out);
+    return INVOKABLE->push_all(object, other);
 }
-

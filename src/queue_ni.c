@@ -18,7 +18,8 @@ int butterflyfish_queue_ni_first(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_ni
+    return INVOKABLE->reducible_queue_ni
+            .collection_ni
             .stream_ni
             .first(object, out);
 }
@@ -36,7 +37,8 @@ int butterflyfish_queue_ni_next(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_ni
+    return INVOKABLE->reducible_queue_ni
+            .collection_ni
             .stream_ni
             .next(object, item, out);
 }
@@ -52,7 +54,8 @@ int butterflyfish_queue_ni_count(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_ni
+    return INVOKABLE->reducible_queue_ni
+            .collection_ni
             .count(object, out);
 }
 
@@ -65,7 +68,8 @@ int butterflyfish_queue_ni_last(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_ni
+    return INVOKABLE->reducible_queue_ni
+            .collection_ni
             .last(object, out);
 }
 
@@ -82,8 +86,24 @@ int butterflyfish_queue_ni_prev(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_ni
+    return INVOKABLE->reducible_queue_ni
+            .collection_ni
             .prev(object, item, out);
+}
+
+#pragma mark reducible_queue_ni -
+
+int butterflyfish_queue_ni_remove(
+        struct butterflyfish_queue_ni *const object,
+        uintmax_t *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_QUEUE_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL;
+    }
+    return INVOKABLE->reducible_queue_ni
+            .remove(object, out);
 }
 
 #pragma mark queue_ni -
@@ -97,14 +117,14 @@ int butterflyfish_queue_ni_add(
     return INVOKABLE->add(object, value);
 }
 
-int butterflyfish_queue_ni_remove(
+int butterflyfish_queue_ni_add_all(
         struct butterflyfish_queue_ni *const object,
-        uintmax_t *const out) {
+        const struct butterflyfish_stream_ni *const other) {
     if (!object) {
-        return BUTTERFLYFISH_QUEUE_NI_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_QUEUE_I_ERROR_OBJECT_IS_NULL;
     }
-    if (!out) {
-        return BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL;
+    if (!other) {
+        return BUTTERFLYFISH_QUEUE_I_ERROR_OTHER_IS_NULL;
     }
-    return INVOKABLE->remove(object, out);
+    return INVOKABLE->add_all(object, other);
 }

@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "collection_s.h"
+#include "reducible_stack_s.h"
 
 struct sea_turtle_string;
 
@@ -21,17 +21,19 @@ struct sea_turtle_string;
     BUTTERFLYFISH_COLLECTION_S_ERROR_END_OF_SEQUENCE
 #define BUTTERFLYFISH_STACK_S_ERROR_VALUE_IS_NULL \
     SEA_URCHIN_ERROR_VALUE_IS_NULL
+#define BUTTERFLYFISH_STACK_S_ERROR_OTHER_IS_NULL \
+    SEA_URCHIN_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_STACK_S_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 
 struct butterflyfish_stack_s {
-    const struct butterflyfish_collection_s collection_s;
+    const struct butterflyfish_reducible_stack_s reducible_stack_s;
 
     int (*const push)(void *object,
                       const struct sea_turtle_string *value);
 
-    int (*const pop)(void *object,
-                     struct sea_turtle_string **out);
+    int (*const push_all)(void *object,
+                          const struct butterflyfish_stream_s *other);
 };
 
 /**
@@ -106,6 +108,19 @@ int butterflyfish_stack_s_prev(
         const struct sea_turtle_string **out);
 
 /**
+ * @brief Pop value off the top of the stack.
+ * @param [in] object stack instance.
+ * @param [out] out receive value on the top of the stack.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_STACK_S_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STACK_S_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STACK_S_ERROR_STACK_IS_EMPTY if stack is empty.
+ */
+int butterflyfish_stack_s_pop(
+        struct butterflyfish_stack_s *object,
+        struct sea_turtle_string **out);
+
+/**
  * @brief Add value to the top of the stack.
  * @param [in] object stack instance.
  * @param [in] value to add to the top.
@@ -121,16 +136,18 @@ int butterflyfish_stack_s_push(
         const struct sea_turtle_string *value);
 
 /**
- * @brief Pop value off the top of the stack.
+ * @brief Add all values to the top of the stack.
  * @param [in] object stack instance.
- * @param [out] out receive value on the top of the stack.
+ * @param [in] other stream of values which are added.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_STACK_S_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_STACK_S_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_STACK_S_ERROR_STACK_IS_EMPTY if stack is empty.
+ * @throws BUTTERFLYFISH_STACK_S_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STACK_S_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to add the values.
+ * @note Each <b>value</b> is copied and to the top of the stack.
  */
-int butterflyfish_stack_s_pop(
+int butterflyfish_stack_s_push_all(
         struct butterflyfish_stack_s *object,
-        struct sea_turtle_string **out);
+        const struct butterflyfish_stream_s *other);
 
 #endif /* _BUTTERFLYFISH_STACK_S_H_ */

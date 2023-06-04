@@ -5,29 +5,31 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "collection_ni.h"
+#include "reducible_queue_ni.h"
 
 #define BUTTERFLYFISH_QUEUE_NI_ERROR_OBJECT_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_NI_ERROR_OBJECT_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_NI_ERROR_OBJECT_IS_NULL
 #define BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_NI_ERROR_OUT_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_NI_ERROR_OUT_IS_NULL
 #define BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY \
-    BUTTERFLYFISH_COLLECTION_NI_ERROR_COLLECTION_IS_EMPTY
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_NI_ERROR_QUEUE_IS_EMPTY
 #define BUTTERFLYFISH_QUEUE_NI_ERROR_ITEM_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_NI_ERROR_ITEM_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_NI_ERROR_ITEM_IS_NULL
 #define BUTTERFLYFISH_QUEUE_NI_ERROR_END_OF_SEQUENCE \
-    BUTTERFLYFISH_COLLECTION_NI_ERROR_END_OF_SEQUENCE
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_NI_ERROR_END_OF_SEQUENCE
+#define BUTTERFLYFISH_QUEUE_NI_ERROR_OTHER_IS_NULL \
+    SEA_URCHIN_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_QUEUE_NI_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 
 struct butterflyfish_queue_ni {
-    const struct butterflyfish_collection_ni collection_ni;
+    const struct butterflyfish_reducible_queue_ni reducible_queue_ni;
 
     int (*const add)(void *object,
                      const uintmax_t value);
 
-    int (*const remove)(void *object,
-                        uintmax_t *out);
+    int (*const add_all)(void *object,
+                         const struct butterflyfish_stream_ni *other);
 };
 
 /**
@@ -78,7 +80,8 @@ int butterflyfish_queue_ni_last(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
  * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_END_OF_SEQUENCE if there is no next item.
+ * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_END_OF_SEQUENCE if there is no next
+ * item.
  */
 int butterflyfish_queue_ni_next(
         const struct butterflyfish_queue_ni *object,
@@ -103,6 +106,19 @@ int butterflyfish_queue_ni_prev(
         const uintmax_t **out);
 
 /**
+ * @brief Remove value from the front the queue.
+ * @param [in] object queue instance.
+ * @param [out] out receive the value in the front of the queue.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY if queue is empty.
+ */
+int butterflyfish_queue_ni_remove(
+        struct butterflyfish_queue_ni *object,
+        uintmax_t *out);
+
+/**
  * @brief Add value to the end the queue.
  * @param [in] object queue instance.
  * @param [in] value to add to the end.
@@ -118,16 +134,18 @@ int butterflyfish_queue_ni_add(
         uintmax_t value);
 
 /**
- * @brief Remove value from the front the queue.
+ * @brief Add all the values to the end.
  * @param [in] object queue instance.
- * @param [out] out receive the value in the front of the queue.
+ * @param [in] other stream of values which are added.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_QUEUE_IS_EMPTY if queue is empty.
+ * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to add the values.
+ * @note Each <b>value</b> is copied and then appended to the queue.
  */
-int butterflyfish_queue_ni_remove(
+int butterflyfish_queue_ni_add_all(
         struct butterflyfish_queue_ni *object,
-        uintmax_t *out);
+        const struct butterflyfish_stream_ni *other);
 
 #endif /* _BUTTERFLYFISH_QUEUE_NI_H_ */

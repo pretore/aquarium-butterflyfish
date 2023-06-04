@@ -29,7 +29,7 @@ static int fl_emit_error(const void *const object,
 
 static void check_first_error_on_stack_is_empty(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .collection_sr.stream_sr.first = fl_emit_error
+            .reducible_stack_sr.collection_sr.stream_sr.first = fl_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -47,9 +47,31 @@ static void check_first_error_on_stack_is_empty(void **state) {
             BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY);
 }
 
-static void check_as_collection_first_error_on_stack_is_empty(void **state) {
+static void
+check_as_reducible_stack_first_error_on_stack_is_empty(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .collection_sr.stream_sr.first = fl_emit_error
+            .reducible_stack_sr.collection_sr.stream_sr.first = fl_emit_error
+    };
+    struct object {
+        const struct butterflyfish_stack_sr *stack_sr;
+    };
+    struct object instance = {
+            .stack_sr = &stack_sr
+    };
+    expect_function_call(fl_emit_error);
+    will_return(fl_emit_error,
+                BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_reducible_stack_sr_first(
+                    (const struct butterflyfish_reducible_stack_sr *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_STACK_SR_ERROR_STACK_IS_EMPTY);
+}
+
+static void
+check_as_collection_first_error_on_collection_is_empty(void **state) {
+    const struct butterflyfish_stack_sr stack_sr = {
+            .reducible_stack_sr.collection_sr.stream_sr.first = fl_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -69,7 +91,7 @@ static void check_as_collection_first_error_on_stack_is_empty(void **state) {
 
 static void check_as_stream_first_error_on_stream_is_empty(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .collection_sr.stream_sr.first = fl_emit_error
+            .reducible_stack_sr.collection_sr.stream_sr.first = fl_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -113,7 +135,7 @@ static void check_last_error_on_out_is_null(void **state) {
 
 static void check_last_error_on_stack_is_empty(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .collection_sr.last = fl_emit_error
+            .reducible_stack_sr.collection_sr.last = fl_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -129,6 +151,48 @@ static void check_last_error_on_stack_is_empty(void **state) {
                     (const struct butterflyfish_stack_sr *) &instance,
                     (void *) 1),
             BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY);
+}
+
+static void
+check_as_reducible_stack_last_error_on_stack_is_empty(void **state) {
+    const struct butterflyfish_stack_sr stack_sr = {
+            .reducible_stack_sr.collection_sr.last = fl_emit_error
+    };
+    struct object {
+        const struct butterflyfish_stack_sr *stack_sr;
+    };
+    struct object instance = {
+            .stack_sr = &stack_sr
+    };
+    expect_function_call(fl_emit_error);
+    will_return(fl_emit_error,
+                BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_reducible_stack_sr_last(
+                    (const struct butterflyfish_reducible_stack_sr *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_STACK_SR_ERROR_STACK_IS_EMPTY);
+}
+
+static void
+check_as_collection_last_error_on_collection_is_empty(void **state) {
+    const struct butterflyfish_stack_sr stack_sr = {
+            .reducible_stack_sr.collection_sr.last = fl_emit_error
+    };
+    struct object {
+        const struct butterflyfish_stack_sr *stack_sr;
+    };
+    struct object instance = {
+            .stack_sr = &stack_sr
+    };
+    expect_function_call(fl_emit_error);
+    will_return(fl_emit_error,
+                BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_collection_sr_last(
+                    (const struct butterflyfish_collection_sr *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_COLLECTION_SR_ERROR_COLLECTION_IS_EMPTY);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
@@ -161,7 +225,7 @@ static int np_emit_error(const void *const object,
 
 static void check_next_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .collection_sr.stream_sr.next = np_emit_error
+            .reducible_stack_sr.collection_sr.stream_sr.next = np_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -180,9 +244,31 @@ static void check_next_error_on_end_of_sequence(void **state) {
             BUTTERFLYFISH_STACK_SR_ERROR_END_OF_SEQUENCE);
 }
 
+static void
+check_as_reducible_stack_next_error_on_end_of_sequence(void **state) {
+    const struct butterflyfish_stack_sr stack_sr = {
+            .reducible_stack_sr.collection_sr.stream_sr.next = np_emit_error
+    };
+    struct object {
+        const struct butterflyfish_stack_sr *stack_sr;
+    };
+    struct object instance = {
+            .stack_sr = &stack_sr
+    };
+    expect_function_call(np_emit_error);
+    will_return(np_emit_error,
+                BUTTERFLYFISH_STACK_SR_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(
+            butterflyfish_reducible_stack_sr_next(
+                    (const struct butterflyfish_reducible_stack_sr *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_STACK_SR_ERROR_END_OF_SEQUENCE);
+}
+
 static void check_as_collection_next_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .collection_sr.stream_sr.next = np_emit_error
+            .reducible_stack_sr.collection_sr.stream_sr.next = np_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -203,7 +289,7 @@ static void check_as_collection_next_error_on_end_of_sequence(void **state) {
 
 static void check_as_stream_next_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .collection_sr.stream_sr.next = np_emit_error
+            .reducible_stack_sr.collection_sr.stream_sr.next = np_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -242,7 +328,7 @@ static void check_prev_error_on_out_is_null(void **state) {
 
 static void check_prev_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .collection_sr.prev = np_emit_error
+            .reducible_stack_sr.collection_sr.prev = np_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -261,9 +347,31 @@ static void check_prev_error_on_end_of_sequence(void **state) {
             BUTTERFLYFISH_STACK_SR_ERROR_END_OF_SEQUENCE);
 }
 
+static void
+check_as_reducible_stack_prev_error_on_end_of_sequence(void **state) {
+    const struct butterflyfish_stack_sr stack_sr = {
+            .reducible_stack_sr.collection_sr.prev = np_emit_error
+    };
+    struct object {
+        const struct butterflyfish_stack_sr *stack_sr;
+    };
+    struct object instance = {
+            .stack_sr = &stack_sr
+    };
+    expect_function_call(np_emit_error);
+    will_return(np_emit_error,
+                BUTTERFLYFISH_STACK_SR_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(
+            butterflyfish_reducible_stack_sr_prev(
+                    (const struct butterflyfish_reducible_stack_sr *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_STACK_SR_ERROR_END_OF_SEQUENCE);
+}
+
 static void check_as_collection_prev_error_on_end_of_sequence(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .collection_sr.prev = np_emit_error
+            .reducible_stack_sr.collection_sr.prev = np_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -280,6 +388,46 @@ static void check_as_collection_prev_error_on_end_of_sequence(void **state) {
                     (void *) 1,
                     (void *) 1),
             BUTTERFLYFISH_COLLECTION_SR_ERROR_END_OF_SEQUENCE);
+}
+
+static void check_pop_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_sr_pop(NULL, (void *) 1),
+            BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_pop_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_sr_pop((void *) 1, NULL),
+            BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL);
+}
+
+static int pop_emit_error(void *const object,
+                          struct triggerfish_strong **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
+static void check_pop_error_on_stack_is_empty(void **state) {
+    const struct butterflyfish_stack_sr stack_sr = {
+            .reducible_stack_sr.pop = pop_emit_error
+    };
+    struct object {
+        const struct butterflyfish_stack_sr *stack_sr;
+    };
+    struct object instance = {
+            .stack_sr = &stack_sr
+    };
+    expect_function_call(pop_emit_error);
+    will_return(pop_emit_error,
+                BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY);
+    assert_int_equal(
+            butterflyfish_stack_sr_pop(
+                    (struct butterflyfish_stack_sr *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY);
 }
 
 static void check_push_error_on_object_is_null(void **state) {
@@ -322,29 +470,30 @@ static void check_push_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_STACK_SR_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
-static void check_pop_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_stack_sr_pop(NULL, (void *) 1),
-            BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_pop_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_stack_sr_pop((void *) 1, NULL),
-            BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL);
-}
-
-static int pop_emit_error(void *const object,
-                          struct triggerfish_strong **const out) {
+static int
+push_all_emit_error(void *const object,
+                    const struct butterflyfish_stream_sr *const other) {
     function_called();
     assert_non_null(object);
-    assert_non_null(out);
+    assert_non_null(other);
     return mock();
 }
 
-static void check_pop_error_on_stack_is_empty(void **state) {
+static void check_push_all_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_sr_push_all(NULL, (void *) 1),
+            BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_push_all_error_on_other_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_sr_push_all((void *) 1, NULL),
+            BUTTERFLYFISH_STACK_SR_ERROR_OTHER_IS_NULL);
+}
+
+static void check_push_all_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_stack_sr stack_sr = {
-            .pop = pop_emit_error
+            .push_all = push_all_emit_error
     };
     struct object {
         const struct butterflyfish_stack_sr *stack_sr;
@@ -352,14 +501,14 @@ static void check_pop_error_on_stack_is_empty(void **state) {
     struct object instance = {
             .stack_sr = &stack_sr
     };
-    expect_function_call(pop_emit_error);
-    will_return(pop_emit_error,
-                BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY);
+    expect_function_call(push_all_emit_error);
+    will_return(push_all_emit_error,
+                BUTTERFLYFISH_STACK_SR_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
-            butterflyfish_stack_sr_pop(
+            butterflyfish_stack_sr_push_all(
                     (struct butterflyfish_stack_sr *) &instance,
                     (void *) 1),
-            BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY);
+            BUTTERFLYFISH_STACK_SR_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 int main(int argc, char *argv[]) {
@@ -369,27 +518,36 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_stack_is_empty),
-            cmocka_unit_test(check_as_collection_first_error_on_stack_is_empty),
+            cmocka_unit_test(check_as_reducible_stack_first_error_on_stack_is_empty),
+            cmocka_unit_test(check_as_collection_first_error_on_collection_is_empty),
             cmocka_unit_test(check_as_stream_first_error_on_stream_is_empty),
             cmocka_unit_test(check_last_error_on_object_is_null),
             cmocka_unit_test(check_last_error_on_out_is_null),
             cmocka_unit_test(check_last_error_on_stack_is_empty),
+            cmocka_unit_test(check_as_reducible_stack_last_error_on_stack_is_empty),
+            cmocka_unit_test(check_as_collection_last_error_on_collection_is_empty),
             cmocka_unit_test(check_next_error_on_object_is_null),
             cmocka_unit_test(check_next_error_on_item_is_null),
             cmocka_unit_test(check_next_error_on_out_is_null),
             cmocka_unit_test(check_next_error_on_end_of_sequence),
+            cmocka_unit_test(check_as_reducible_stack_next_error_on_end_of_sequence),
             cmocka_unit_test(check_as_collection_next_error_on_end_of_sequence),
             cmocka_unit_test(check_as_stream_next_error_on_end_of_sequence),
             cmocka_unit_test(check_prev_error_on_object_is_null),
             cmocka_unit_test(check_prev_error_on_item_is_null),
             cmocka_unit_test(check_prev_error_on_out_is_null),
             cmocka_unit_test(check_prev_error_on_end_of_sequence),
-            cmocka_unit_test(check_push_error_on_object_is_null),
-            cmocka_unit_test(check_push_error_on_value_is_null),
-            cmocka_unit_test(check_push_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_as_reducible_stack_prev_error_on_end_of_sequence),
+            cmocka_unit_test(check_as_collection_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_pop_error_on_object_is_null),
             cmocka_unit_test(check_pop_error_on_out_is_null),
             cmocka_unit_test(check_pop_error_on_stack_is_empty),
+            cmocka_unit_test(check_push_error_on_object_is_null),
+            cmocka_unit_test(check_push_error_on_value_is_null),
+            cmocka_unit_test(check_push_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_push_all_error_on_object_is_null),
+            cmocka_unit_test(check_push_all_error_on_other_is_null),
+            cmocka_unit_test(check_push_all_error_on_memory_allocation_failed),
     };
     //cmocka_set_message_output(CM_OUTPUT_XML);
     return cmocka_run_group_tests(tests, NULL, NULL);

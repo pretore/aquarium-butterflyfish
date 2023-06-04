@@ -18,7 +18,8 @@ int butterflyfish_stack_i_first(
     if (!out) {
         return BUTTERFLYFISH_STACK_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_stack_i
+            .collection_i
             .stream_i
             .first(object, out);
 }
@@ -36,7 +37,8 @@ int butterflyfish_stack_i_next(
     if (!out) {
         return BUTTERFLYFISH_STACK_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_stack_i
+            .collection_i
             .stream_i
             .next(object, item, out);
 }
@@ -52,7 +54,8 @@ int butterflyfish_stack_i_count(
     if (!out) {
         return BUTTERFLYFISH_STACK_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_stack_i
+            .collection_i
             .count(object, out);
 }
 
@@ -65,7 +68,8 @@ int butterflyfish_stack_i_last(
     if (!out) {
         return BUTTERFLYFISH_STACK_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_stack_i
+            .collection_i
             .last(object, out);
 }
 
@@ -82,8 +86,24 @@ int butterflyfish_stack_i_prev(
     if (!out) {
         return BUTTERFLYFISH_STACK_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_stack_i
+            .collection_i
             .prev(object, item, out);
+}
+
+#pragma mark reducible_stack_i -
+
+int butterflyfish_stack_i_pop(
+        struct butterflyfish_stack_i *const object,
+        struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_STACK_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STACK_I_ERROR_OUT_IS_NULL;
+    }
+    return INVOKABLE->reducible_stack_i
+            .pop(object, out);
 }
 
 #pragma mark stack_i -
@@ -100,15 +120,15 @@ int butterflyfish_stack_i_push(
     return INVOKABLE->push(object, value);
 }
 
-int butterflyfish_stack_i_pop(
+int butterflyfish_stack_i_push_all(
         struct butterflyfish_stack_i *const object,
-        struct sea_turtle_integer **const out) {
+        const struct butterflyfish_stream_i *const other) {
     if (!object) {
         return BUTTERFLYFISH_STACK_I_ERROR_OBJECT_IS_NULL;
     }
-    if (!out) {
-        return BUTTERFLYFISH_STACK_I_ERROR_OUT_IS_NULL;
+    if (!other) {
+        return BUTTERFLYFISH_STACK_I_ERROR_OTHER_IS_NULL;
     }
-    return INVOKABLE->pop(object, out);
+    return INVOKABLE->push_all(object, other);
 }
 

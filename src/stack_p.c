@@ -18,7 +18,8 @@ int butterflyfish_stack_p_first(
     if (!out) {
         return BUTTERFLYFISH_STACK_P_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_p
+    return INVOKABLE->reducible_stack_p
+            .collection_p
             .stream_p
             .first(object, out);
 }
@@ -36,7 +37,8 @@ int butterflyfish_stack_p_next(
     if (!out) {
         return BUTTERFLYFISH_STACK_P_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_p
+    return INVOKABLE->reducible_stack_p
+            .collection_p
             .stream_p
             .next(object, item, out);
 }
@@ -52,7 +54,8 @@ int butterflyfish_stack_p_count(
     if (!out) {
         return BUTTERFLYFISH_STACK_P_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_p
+    return INVOKABLE->reducible_stack_p
+            .collection_p
             .count(object, out);
 }
 
@@ -65,7 +68,8 @@ int butterflyfish_stack_p_last(
     if (!out) {
         return BUTTERFLYFISH_STACK_P_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_p
+    return INVOKABLE->reducible_stack_p
+            .collection_p
             .last(object, out);
 }
 
@@ -82,8 +86,24 @@ int butterflyfish_stack_p_prev(
     if (!out) {
         return BUTTERFLYFISH_STACK_P_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_p
+    return INVOKABLE->reducible_stack_p
+            .collection_p
             .prev(object, item, out);
+}
+
+#pragma mark reducible_stack_p -
+
+int butterflyfish_stack_p_pop(
+        struct butterflyfish_stack_p *const object,
+        void **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_STACK_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STACK_P_ERROR_OUT_IS_NULL;
+    }
+    return INVOKABLE->reducible_stack_p
+            .pop(object, out);
 }
 
 #pragma mark stack_p -
@@ -97,15 +117,14 @@ int butterflyfish_stack_p_push(
     return INVOKABLE->push(object, value);
 }
 
-int butterflyfish_stack_p_pop(
+int butterflyfish_stack_p_push_all(
         struct butterflyfish_stack_p *const object,
-        void **const out) {
+        const struct butterflyfish_stream_p *const other) {
     if (!object) {
         return BUTTERFLYFISH_STACK_P_ERROR_OBJECT_IS_NULL;
     }
-    if (!out) {
-        return BUTTERFLYFISH_STACK_P_ERROR_OUT_IS_NULL;
+    if (!other) {
+        return BUTTERFLYFISH_STACK_P_ERROR_OTHER_IS_NULL;
     }
-    return INVOKABLE->pop(object, out);
+    return INVOKABLE->push_all(object, other);
 }
-

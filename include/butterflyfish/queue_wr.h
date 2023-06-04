@@ -5,33 +5,35 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "collection_wr.h"
+#include "reducible_queue_wr.h"
 
 struct triggerfish_weak;
 
 #define BUTTERFLYFISH_QUEUE_WR_ERROR_OBJECT_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_WR_ERROR_OBJECT_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_WR_ERROR_OBJECT_IS_NULL
 #define BUTTERFLYFISH_QUEUE_WR_ERROR_OUT_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_WR_ERROR_OUT_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_WR_ERROR_OUT_IS_NULL
 #define BUTTERFLYFISH_QUEUE_WR_ERROR_QUEUE_IS_EMPTY \
-    BUTTERFLYFISH_COLLECTION_WR_ERROR_COLLECTION_IS_EMPTY
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_WR_ERROR_QUEUE_IS_EMPTY
 #define BUTTERFLYFISH_QUEUE_WR_ERROR_ITEM_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_WR_ERROR_ITEM_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_WR_ERROR_ITEM_IS_NULL
 #define BUTTERFLYFISH_QUEUE_WR_ERROR_END_OF_SEQUENCE \
-    BUTTERFLYFISH_COLLECTION_WR_ERROR_END_OF_SEQUENCE
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_WR_ERROR_END_OF_SEQUENCE
 #define BUTTERFLYFISH_QUEUE_WR_ERROR_VALUE_IS_NULL \
     SEA_URCHIN_ERROR_VALUE_IS_NULL
+#define BUTTERFLYFISH_QUEUE_WR_ERROR_OTHER_IS_NULL \
+    SEA_URCHIN_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_QUEUE_WR_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 
 struct butterflyfish_queue_wr {
-    const struct butterflyfish_collection_wr collection_wr;
+    const struct butterflyfish_reducible_queue_wr reducible_queue_wr;
 
     int (*const add)(void *object,
                      const struct triggerfish_weak *value);
 
-    int (*const remove)(void *object,
-                        struct triggerfish_weak **out);
+    int (*const add_all)(void *object,
+                         const struct butterflyfish_stream_wr *other);
 };
 
 /**
@@ -107,6 +109,19 @@ int butterflyfish_queue_wr_prev(
         const struct triggerfish_weak **out);
 
 /**
+ * @brief Remove value from the front the queue.
+ * @param [in] object queue instance.
+ * @param [out] out receive the value in the front of the queue.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_QUEUE_WR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_WR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_WR_ERROR_QUEUE_IS_EMPTY if queue is empty.
+ */
+int butterflyfish_queue_wr_remove(
+        struct butterflyfish_queue_wr *object,
+        struct triggerfish_weak **out);
+
+/**
  * @brief Add value to the end the queue.
  * @param [in] object queue instance.
  * @param [in] value to add to the end.
@@ -122,16 +137,18 @@ int butterflyfish_queue_wr_add(
         const struct triggerfish_weak *value);
 
 /**
- * @brief Remove value from the front the queue.
+ * @brief Add all the values to the end.
  * @param [in] object queue instance.
- * @param [out] out receive the value in the front of the queue.
+ * @param [in] other stream of values which are added.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_QUEUE_WR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_QUEUE_WR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_QUEUE_WR_ERROR_QUEUE_IS_EMPTY if queue is empty.
+ * @throws BUTTERFLYFISH_QUEUE_WR_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_WR_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to add the values.
+ * @note Each <b>value</b> is copied and then appended to the queue.
  */
-int butterflyfish_queue_wr_remove(
+int butterflyfish_queue_wr_add_all(
         struct butterflyfish_queue_wr *object,
-        struct triggerfish_weak **out);
+        const struct butterflyfish_stream_wr *other);
 
 #endif /* _BUTTERFLYFISH_QUEUE_WR_H_ */

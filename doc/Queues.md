@@ -1,6 +1,6 @@
 ## Queues
 
-[Queues](Queues.md) _are_ [Collections](Collections.md) where values are 
-appended at the end and removed from the front.
+[Queues](Queues.md) _are_ [ReducibleQueues](ReducibleQueues.md) where values 
+are appended at the end.
 - add value
-- remove value
+- add all values

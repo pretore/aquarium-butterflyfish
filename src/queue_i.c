@@ -18,7 +18,8 @@ int butterflyfish_queue_i_first(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_queue_i
+            .collection_i
             .stream_i
             .first(object, out);
 }
@@ -36,7 +37,8 @@ int butterflyfish_queue_i_next(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_queue_i
+            .collection_i
             .stream_i
             .next(object, item, out);
 }
@@ -52,7 +54,8 @@ int butterflyfish_queue_i_count(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_queue_i
+            .collection_i
             .count(object, out);
 }
 
@@ -65,7 +68,8 @@ int butterflyfish_queue_i_last(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_queue_i
+            .collection_i
             .last(object, out);
 }
 
@@ -82,8 +86,24 @@ int butterflyfish_queue_i_prev(
     if (!out) {
         return BUTTERFLYFISH_QUEUE_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i
+    return INVOKABLE->reducible_queue_i
+            .collection_i
             .prev(object, item, out);
+}
+
+#pragma mark reducible_queue_i -
+
+int butterflyfish_queue_i_remove(
+        struct butterflyfish_queue_i *const object,
+        struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_QUEUE_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_QUEUE_I_ERROR_OUT_IS_NULL;
+    }
+    return INVOKABLE->reducible_queue_i
+            .remove(object, out);
 }
 
 #pragma mark queue_i -
@@ -100,14 +120,14 @@ int butterflyfish_queue_i_add(
     return INVOKABLE->add(object, value);
 }
 
-int butterflyfish_queue_i_remove(
+int butterflyfish_queue_i_add_all(
         struct butterflyfish_queue_i *const object,
-        struct sea_turtle_integer **const out) {
+        const struct butterflyfish_stream_i *const other) {
     if (!object) {
         return BUTTERFLYFISH_QUEUE_I_ERROR_OBJECT_IS_NULL;
     }
-    if (!out) {
-        return BUTTERFLYFISH_QUEUE_I_ERROR_OUT_IS_NULL;
+    if (!other) {
+        return BUTTERFLYFISH_QUEUE_I_ERROR_OTHER_IS_NULL;
     }
-    return INVOKABLE->remove(object, out);
+    return INVOKABLE->add_all(object, other);
 }

@@ -5,33 +5,35 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "collection_sr.h"
+#include "reducible_queue_sr.h"
 
 struct triggerfish_strong;
 
 #define BUTTERFLYFISH_QUEUE_SR_ERROR_OBJECT_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_OBJECT_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_SR_ERROR_OBJECT_IS_NULL
 #define BUTTERFLYFISH_QUEUE_SR_ERROR_OUT_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_OUT_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_SR_ERROR_OUT_IS_NULL
 #define BUTTERFLYFISH_QUEUE_SR_ERROR_QUEUE_IS_EMPTY \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_COLLECTION_IS_EMPTY
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_SR_ERROR_QUEUE_IS_EMPTY
 #define BUTTERFLYFISH_QUEUE_SR_ERROR_ITEM_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_ITEM_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_SR_ERROR_ITEM_IS_NULL
 #define BUTTERFLYFISH_QUEUE_SR_ERROR_END_OF_SEQUENCE \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_END_OF_SEQUENCE
+    BUTTERFLYFISH_REDUCIBLE_QUEUE_SR_ERROR_END_OF_SEQUENCE
 #define BUTTERFLYFISH_QUEUE_SR_ERROR_VALUE_IS_NULL \
     SEA_URCHIN_ERROR_VALUE_IS_NULL
+#define BUTTERFLYFISH_QUEUE_SR_ERROR_OTHER_IS_NULL \
+    SEA_URCHIN_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_QUEUE_SR_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 
 struct butterflyfish_queue_sr {
-    const struct butterflyfish_collection_sr collection_sr;
+    const struct butterflyfish_reducible_queue_sr reducible_queue_sr;
 
     int (*const add)(void *object,
                      struct triggerfish_strong *value);
 
-    int (*const remove)(void *object,
-                        struct triggerfish_strong **out);
+    int (*const add_all)(void *object,
+                         const struct butterflyfish_stream_sr *other);
 };
 
 /**
@@ -82,7 +84,8 @@ int butterflyfish_queue_sr_last(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
  * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_END_OF_SEQUENCE if there is no next item.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_END_OF_SEQUENCE if there is no next
+ * item.
  */
 int butterflyfish_queue_sr_next(
         const struct butterflyfish_queue_sr *object,
@@ -107,6 +110,19 @@ int butterflyfish_queue_sr_prev(
         struct triggerfish_strong **out);
 
 /**
+ * @brief Remove value from the front the queue.
+ * @param [in] object queue instance.
+ * @param [out] out receive the value in the front of the queue.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_QUEUE_IS_EMPTY if queue is empty.
+ */
+int butterflyfish_queue_sr_remove(
+        struct butterflyfish_queue_sr *object,
+        struct triggerfish_strong **out);
+
+/**
  * @brief Add value to the end the queue.
  * @param [in] object queue instance.
  * @param [in] value to add to the end.
@@ -122,16 +138,18 @@ int butterflyfish_queue_sr_add(
         struct triggerfish_strong *value);
 
 /**
- * @brief Remove value from the front the queue.
+ * @brief Add all the values to the end.
  * @param [in] object queue instance.
- * @param [out] out receive the value in the front of the queue.
+ * @param [in] other stream of values which are added.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_QUEUE_IS_EMPTY if queue is empty.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to add the values.
+ * @note Each <b>value</b> is copied and then appended to the queue.
  */
-int butterflyfish_queue_sr_remove(
+int butterflyfish_queue_sr_add_all(
         struct butterflyfish_queue_sr *object,
-        struct triggerfish_strong **out);
+        const struct butterflyfish_stream_sr *other);
 
 #endif /* _BUTTERFLYFISH_QUEUE_SR_H_ */

@@ -5,33 +5,35 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "collection_sr.h"
+#include "reducible_stack_sr.h"
 
 struct triggerfish_strong;
 
 #define BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_OBJECT_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_STACK_SR_ERROR_OBJECT_IS_NULL
 #define BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_OUT_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_STACK_SR_ERROR_OUT_IS_NULL
 #define BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_COLLECTION_IS_EMPTY
+    BUTTERFLYFISH_REDUCIBLE_STACK_SR_ERROR_STACK_IS_EMPTY
 #define BUTTERFLYFISH_STACK_SR_ERROR_ITEM_IS_NULL \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_ITEM_IS_NULL
+    BUTTERFLYFISH_REDUCIBLE_STACK_SR_ERROR_ITEM_IS_NULL
 #define BUTTERFLYFISH_STACK_SR_ERROR_END_OF_SEQUENCE \
-    BUTTERFLYFISH_COLLECTION_SR_ERROR_END_OF_SEQUENCE
+    BUTTERFLYFISH_REDUCIBLE_STACK_SR_ERROR_END_OF_SEQUENCE
 #define BUTTERFLYFISH_STACK_SR_ERROR_VALUE_IS_NULL \
     SEA_URCHIN_ERROR_VALUE_IS_NULL
+#define BUTTERFLYFISH_STACK_SR_ERROR_OTHER_IS_NULL \
+    SEA_URCHIN_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_STACK_SR_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 
 struct butterflyfish_stack_sr {
-    const struct butterflyfish_collection_sr collection_sr;
+    const struct butterflyfish_reducible_stack_sr reducible_stack_sr;
 
     int (*const push)(void *object,
                       struct triggerfish_strong *value);
 
-    int (*const pop)(void *object,
-                     struct triggerfish_strong **out);
+    int (*const push_all)(void *object,
+                          const struct butterflyfish_stream_sr *other);
 };
 
 /**
@@ -106,6 +108,19 @@ int butterflyfish_stack_sr_prev(
         struct triggerfish_strong **out);
 
 /**
+ * @brief Pop value off the top of the stack.
+ * @param [in] object stack instance.
+ * @param [out] out receive value on the top of the stack.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY if stack is empty.
+ */
+int butterflyfish_stack_sr_pop(
+        struct butterflyfish_stack_sr *object,
+        struct triggerfish_strong **out);
+
+/**
  * @brief Add value to the top of the stack.
  * @param [in] object stack instance.
  * @param [in] value to add to the top.
@@ -121,16 +136,18 @@ int butterflyfish_stack_sr_push(
         struct triggerfish_strong *value);
 
 /**
- * @brief Pop value off the top of the stack.
+ * @brief Add all values to the top of the stack.
  * @param [in] object stack instance.
- * @param [out] out receive value on the top of the stack.
+ * @param [in] other stream of values which are added.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_STACK_SR_ERROR_STACK_IS_EMPTY if stack is empty.
+ * @throws BUTTERFLYFISH_STACK_SR_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STACK_SR_ERROR_MEMORY_ALLOCATION_FAILED if there is
+ * not enough memory to add the values.
+ * @note Each <b>value</b> is copied and to the top of the stack.
  */
-int butterflyfish_stack_sr_pop(
+int butterflyfish_stack_sr_push_all(
         struct butterflyfish_stack_sr *object,
-        struct triggerfish_strong **out);
+        const struct butterflyfish_stream_sr *other);
 
 #endif /* _BUTTERFLYFISH_STACK_SR_H_ */

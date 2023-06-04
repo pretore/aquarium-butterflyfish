@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(aquarium-butterflyfish VERSION 2.0.0
+project(aquarium-butterflyfish VERSION 3.0.0
         LANGUAGES C
         DESCRIPTION "Collection interfaces in C")
 
@@ -75,6 +75,18 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/reducible_list_s.h
         include/butterflyfish/reducible_list_sr.h
         include/butterflyfish/reducible_list_wr.h
+        include/butterflyfish/reducible_queue_i.h
+        include/butterflyfish/reducible_queue_ni.h
+        include/butterflyfish/reducible_queue_p.h
+        include/butterflyfish/reducible_queue_s.h
+        include/butterflyfish/reducible_queue_sr.h
+        include/butterflyfish/reducible_queue_wr.h
+        include/butterflyfish/reducible_stack_i.h
+        include/butterflyfish/reducible_stack_ni.h
+        include/butterflyfish/reducible_stack_p.h
+        include/butterflyfish/reducible_stack_s.h
+        include/butterflyfish/reducible_stack_sr.h
+        include/butterflyfish/reducible_stack_wr.h
         include/butterflyfish/set_i.h
         include/butterflyfish/set_ni.h
         include/butterflyfish/set_p.h
@@ -161,6 +173,18 @@ set(SOURCES
         src/reducible_list_s.c
         src/reducible_list_sr.c
         src/reducible_list_wr.c
+        src/reducible_queue_i.c
+        src/reducible_queue_ni.c
+        src/reducible_queue_p.c
+        src/reducible_queue_s.c
+        src/reducible_queue_sr.c
+        src/reducible_queue_wr.c
+        src/reducible_stack_i.c
+        src/reducible_stack_ni.c
+        src/reducible_stack_p.c
+        src/reducible_stack_s.c
+        src/reducible_stack_sr.c
+        src/reducible_stack_wr.c
         src/set_i.c
         src/set_ni.c
         src/set_p.c
@@ -367,6 +391,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-sorted-map-i-i-unit-test
             ${PROJECT_NAME}-sorted-map-i-i-unit-test)
+    # aquarium-butterflyfish-reducible-queue-i-unit-test
+    add_executable(${PROJECT_NAME}-reducible-queue-i-unit-test
+            test/test_reducible_queue_i.c)
+    target_include_directories(${PROJECT_NAME}-reducible-queue-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-queue-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-queue-i-unit-test
+            ${PROJECT_NAME}-reducible-queue-i-unit-test)
     # aquarium-butterflyfish-queue-i-unit-test
     add_executable(${PROJECT_NAME}-queue-i-unit-test test/test_queue_i.c)
     target_include_directories(${PROJECT_NAME}-queue-i-unit-test
@@ -377,6 +412,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-queue-i-unit-test
             ${PROJECT_NAME}-queue-i-unit-test)
+    # aquarium-butterflyfish-reducible-stack-i-unit-test
+    add_executable(${PROJECT_NAME}-reducible-stack-i-unit-test
+            test/test_reducible_stack_i.c)
+    target_include_directories(${PROJECT_NAME}-reducible-stack-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-stack-i-unit-test
+            PRIVATE
+            ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-stack-i-unit-test
+            ${PROJECT_NAME}-reducible-stack-i-unit-test)
     # aquarium-butterflyfish-stack-i-unit-test
     add_executable(${PROJECT_NAME}-stack-i-unit-test test/test_stack_i.c)
     target_include_directories(${PROJECT_NAME}-stack-i-unit-test
@@ -525,6 +571,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-sorted-map-s-s-unit-test
             ${PROJECT_NAME}-sorted-map-s-s-unit-test)
+    # aquarium-butterflyfish-reducible-queue-s-unit-test
+    add_executable(${PROJECT_NAME}-reducible-queue-s-unit-test
+            test/test_reducible_queue_s.c)
+    target_include_directories(${PROJECT_NAME}-reducible-queue-s-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-queue-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-queue-s-unit-test
+            ${PROJECT_NAME}-reducible-queue-s-unit-test)
     # aquarium-butterflyfish-queue-s-unit-test
     add_executable(${PROJECT_NAME}-queue-s-unit-test test/test_queue_s.c)
     target_include_directories(${PROJECT_NAME}-queue-s-unit-test
@@ -535,6 +592,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-queue-s-unit-test
             ${PROJECT_NAME}-queue-s-unit-test)
+    # aquarium-butterflyfish-reducible-stack-s-unit-test
+    add_executable(${PROJECT_NAME}-reducible-stack-s-unit-test
+            test/test_reducible_stack_s.c)
+    target_include_directories(${PROJECT_NAME}-reducible-stack-s-unit-test
+            PRIVATE
+            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-stack-s-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-stack-s-unit-test
+            ${PROJECT_NAME}-reducible-stack-s-unit-test)
     # aquarium-butterflyfish-stack-s-unit-test
     add_executable(${PROJECT_NAME}-stack-s-unit-test test/test_stack_s.c)
     target_include_directories(${PROJECT_NAME}-stack-s-unit-test
@@ -684,6 +752,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-sorted-map-ni-ni-unit-test
             ${PROJECT_NAME}-sorted-map-ni-ni-unit-test)
+    # aquarium-butterflyfish-reducible-queue-ni-unit-test
+    add_executable(${PROJECT_NAME}-reducible-queue-ni-unit-test
+            test/test_reducible_queue_ni.c)
+    target_include_directories(${PROJECT_NAME}-reducible-queue-ni-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-queue-ni-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-queue-ni-unit-test
+            ${PROJECT_NAME}-reducible-queue-ni-unit-test)
     # aquarium-butterflyfish-queue-ni-unit-test
     add_executable(${PROJECT_NAME}-queue-ni-unit-test test/test_queue_ni.c)
     target_include_directories(${PROJECT_NAME}-queue-ni-unit-test
@@ -694,6 +773,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-queue-ni-unit-test
             ${PROJECT_NAME}-queue-ni-unit-test)
+    # aquarium-butterflyfish-reducible-stack-ni-unit-test
+    add_executable(${PROJECT_NAME}-reducible-stack-ni-unit-test
+            test/test_reducible_stack_ni.c)
+    target_include_directories(${PROJECT_NAME}-reducible-stack-ni-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-stack-ni-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-stack-ni-unit-test
+            ${PROJECT_NAME}-reducible-stack-ni-unit-test)
     # aquarium-butterflyfish-stack-ni-unit-test
     add_executable(${PROJECT_NAME}-stack-ni-unit-test test/test_stack_ni.c)
     target_include_directories(${PROJECT_NAME}-stack-ni-unit-test
@@ -842,6 +932,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-sorted-map-p-p-unit-test
             ${PROJECT_NAME}-sorted-map-p-p-unit-test)
+    # aquarium-butterflyfish-reducible-queue-p-unit-test
+    add_executable(${PROJECT_NAME}-reducible-queue-p-unit-test
+            test/test_reducible_queue_p.c)
+    target_include_directories(${PROJECT_NAME}-reducible-queue-p-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-queue-p-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-queue-p-unit-test
+            ${PROJECT_NAME}-reducible-queue-p-unit-test)
     # aquarium-butterflyfish-queue-p-unit-test
     add_executable(${PROJECT_NAME}-queue-p-unit-test test/test_queue_p.c)
     target_include_directories(${PROJECT_NAME}-queue-p-unit-test
@@ -852,6 +953,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-queue-p-unit-test
             ${PROJECT_NAME}-queue-p-unit-test)
+    # aquarium-butterflyfish-reducible-stack-p-unit-test
+    add_executable(${PROJECT_NAME}-reducible-stack-p-unit-test
+            test/test_reducible_stack_p.c)
+    target_include_directories(${PROJECT_NAME}-reducible-stack-p-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-stack-p-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-stack-p-unit-test
+            ${PROJECT_NAME}-reducible-stack-p-unit-test)
     # aquarium-butterflyfish-stack-p-unit-test
     add_executable(${PROJECT_NAME}-stack-p-unit-test test/test_stack_p.c)
     target_include_directories(${PROJECT_NAME}-stack-p-unit-test
@@ -1001,6 +1113,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-sorted-map-sr-sr-unit-test
             ${PROJECT_NAME}-sorted-map-sr-sr-unit-test)
+    # aquarium-butterflyfish-reducible-queue-sr-unit-test
+    add_executable(${PROJECT_NAME}-reducible-queue-sr-unit-test
+            test/test_reducible_queue_sr.c)
+    target_include_directories(${PROJECT_NAME}-reducible-queue-sr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-queue-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-queue-sr-unit-test
+            ${PROJECT_NAME}-reducible-queue-sr-unit-test)
     # aquarium-butterflyfish-queue-sr-unit-test
     add_executable(${PROJECT_NAME}-queue-sr-unit-test test/test_queue_sr.c)
     target_include_directories(${PROJECT_NAME}-queue-sr-unit-test
@@ -1011,6 +1134,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-queue-sr-unit-test
             ${PROJECT_NAME}-queue-sr-unit-test)
+    # aquarium-butterflyfish-reducible-stack-sr-unit-test
+    add_executable(${PROJECT_NAME}-reducible-stack-sr-unit-test
+            test/test_reducible_stack_sr.c)
+    target_include_directories(${PROJECT_NAME}-reducible-stack-sr-unit-test
+            PRIVATE
+            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-stack-sr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-stack-sr-unit-test
+            ${PROJECT_NAME}-reducible-stack-sr-unit-test)
     # aquarium-butterflyfish-stack-sr-unit-test
     add_executable(${PROJECT_NAME}-stack-sr-unit-test test/test_stack_sr.c)
     target_include_directories(${PROJECT_NAME}-stack-sr-unit-test
@@ -1074,6 +1208,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-list-wr-unit-test
             ${PROJECT_NAME}-list-wr-unit-test)
+    # aquarium-butterflyfish-reducible-queue-wr-unit-test
+    add_executable(${PROJECT_NAME}-reducible-queue-wr-unit-test
+            test/test_reducible_queue_wr.c)
+    target_include_directories(${PROJECT_NAME}-reducible-queue-wr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-queue-wr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-queue-wr-unit-test
+            ${PROJECT_NAME}-reducible-queue-wr-unit-test)
     # aquarium-butterflyfish-queue-wr-unit-test
     add_executable(${PROJECT_NAME}-queue-wr-unit-test test/test_queue_wr.c)
     target_include_directories(${PROJECT_NAME}-queue-wr-unit-test
@@ -1084,6 +1229,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${PROJECT_NAME})
     add_test(${PROJECT_NAME}-queue-wr-unit-test
             ${PROJECT_NAME}-queue-wr-unit-test)
+    # aquarium-butterflyfish-reducible-stack-wr-unit-test
+    add_executable(${PROJECT_NAME}-reducible-stack-wr-unit-test
+            test/test_reducible_stack_wr.c)
+    target_include_directories(${PROJECT_NAME}-reducible-stack-wr-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-reducible-stack-wr-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    add_test(${PROJECT_NAME}-reducible-stack-wr-unit-test
+            ${PROJECT_NAME}-reducible-stack-wr-unit-test)
     # aquarium-butterflyfish-stack-wr-unit-test
     add_executable(${PROJECT_NAME}-stack-wr-unit-test test/test_stack_wr.c)
     target_include_directories(${PROJECT_NAME}-stack-wr-unit-test
