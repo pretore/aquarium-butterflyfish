@@ -559,6 +559,48 @@ check_as_fixed_list_set_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_FIXED_LIST_S_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
+static void check_set_error_on_value_is_invalid(void **state) {
+    const struct butterflyfish_reducible_list_s reducible_list_s = {
+            .fixed_list_s.set = set_emit_error
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_s *reducible_list_s;
+    };
+    struct object instance = {
+            .reducible_list_s = &reducible_list_s
+    };
+    expect_function_call(set_emit_error);
+    will_return(set_emit_error,
+                BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(
+            butterflyfish_reducible_list_s_set(
+                    (struct butterflyfish_reducible_list_s *) &instance,
+                    0,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_VALUE_IS_INVALID);
+}
+
+static void check_as_fixed_list_set_error_on_value_is_invalid(void **state) {
+    const struct butterflyfish_reducible_list_s reducible_list_s = {
+            .fixed_list_s.set = set_emit_error
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_s *reducible_list_s;
+    };
+    struct object instance = {
+            .reducible_list_s = &reducible_list_s
+    };
+    expect_function_call(set_emit_error);
+    will_return(set_emit_error,
+                BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(
+            butterflyfish_fixed_list_s_set(
+                    (struct butterflyfish_fixed_list_s *) &instance,
+                    0,
+                    (void *) 1),
+            BUTTERFLYFISH_FIXED_LIST_S_ERROR_VALUE_IS_INVALID);
+}
+
 static void check_set_item_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_reducible_list_s_set_item(
@@ -674,6 +716,49 @@ check_set_item_as_fixed_list_error_on_memory_allocation_failed(void **state) {
                     (void *) 1,
                     (void *) 1),
             BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_MEMORY_ALLOCATION_FAILED);
+}
+
+static void check_set_item_error_on_value_is_invalid(void **state) {
+    const struct butterflyfish_reducible_list_s reducible_list_s = {
+            .fixed_list_s.set_item = set_item_emit_error,
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_s *reducible_list_s;
+    };
+    struct object instance = {
+            .reducible_list_s = &reducible_list_s
+    };
+    expect_function_call(set_item_emit_error);
+    will_return(set_item_emit_error,
+                BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(
+            butterflyfish_reducible_list_s_set_item(
+                    (struct butterflyfish_reducible_list_s *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_VALUE_IS_INVALID);
+}
+
+static void
+check_set_item_as_fixed_list_error_on_value_is_invalid(void **state) {
+    const struct butterflyfish_reducible_list_s reducible_list_s = {
+            .fixed_list_s.set_item = set_item_emit_error,
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_s *reducible_list_s;
+    };
+    struct object instance = {
+            .reducible_list_s = &reducible_list_s
+    };
+    expect_function_call(set_item_emit_error);
+    will_return(set_item_emit_error,
+                BUTTERFLYFISH_FIXED_LIST_S_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(
+            butterflyfish_fixed_list_s_set_item(
+                    (struct butterflyfish_fixed_list_s *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_VALUE_IS_INVALID);
 }
 
 static void check_at_error_on_object_is_null(void **state) {
@@ -870,6 +955,8 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_fixed_list_set_error_on_index_out_of_bounds),
             cmocka_unit_test(check_set_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_fixed_list_set_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_set_error_on_value_is_null),
+            cmocka_unit_test(check_as_fixed_list_set_error_on_value_is_invalid),
             cmocka_unit_test(check_set_item_error_on_object_is_null),
             cmocka_unit_test(check_set_item_error_on_item_is_null),
             cmocka_unit_test(check_set_item_error_on_value_is_null),
@@ -877,6 +964,8 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_set_item_as_fixed_list_error_on_item_is_out_of_bounds),
             cmocka_unit_test(check_set_item_error_on_memory_allocation_failed),
             cmocka_unit_test(check_set_item_as_fixed_list_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_set_item_error_on_value_is_invalid),
+            cmocka_unit_test(check_set_item_as_fixed_list_error_on_value_is_invalid),
             cmocka_unit_test(check_at_error_on_object_is_null),
             cmocka_unit_test(check_at_error_on_item_is_null),
             cmocka_unit_test(check_at_error_on_out_is_null),

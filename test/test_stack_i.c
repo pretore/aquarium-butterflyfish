@@ -470,6 +470,26 @@ static void check_push_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_STACK_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
+static void check_push_error_on_value_is_invalid(void **state) {
+    const struct butterflyfish_stack_i stack_i = {
+            .push = push_emit_error
+    };
+    struct object {
+        const struct butterflyfish_stack_i *stack_i;
+    };
+    struct object instance = {
+            .stack_i = &stack_i
+    };
+    expect_function_call(push_emit_error);
+    will_return(push_emit_error,
+                BUTTERFLYFISH_STACK_I_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(
+            butterflyfish_stack_i_push(
+                    (struct butterflyfish_stack_i *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_STACK_I_ERROR_VALUE_IS_INVALID);
+}
+
 static int
 push_all_emit_error(void *const object,
                    const struct butterflyfish_stream_i *const other) {
@@ -545,6 +565,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_push_error_on_object_is_null),
             cmocka_unit_test(check_push_error_on_value_is_null),
             cmocka_unit_test(check_push_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_push_error_on_value_is_invalid),
             cmocka_unit_test(check_push_all_error_on_object_is_null),
             cmocka_unit_test(check_push_all_error_on_other_is_null),
             cmocka_unit_test(check_push_all_error_on_memory_allocation_failed),

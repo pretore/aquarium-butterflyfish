@@ -492,6 +492,26 @@ static void check_add_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_QUEUE_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
+static void check_add_error_on_value_is_invalid(void **state) {
+    const struct butterflyfish_queue_i queue_i = {
+            .add = add_emit_error
+    };
+    struct object {
+        const struct butterflyfish_queue_i *queue_i;
+    };
+    struct object instance = {
+            .queue_i = &queue_i
+    };
+    expect_function_call(add_emit_error);
+    will_return(add_emit_error,
+                BUTTERFLYFISH_QUEUE_I_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(
+            butterflyfish_queue_i_add(
+                    (struct butterflyfish_queue_i *) &instance,
+                    (void *) 1),
+            BUTTERFLYFISH_QUEUE_I_ERROR_VALUE_IS_INVALID);
+}
+
 static int
 add_all_emit_error(void *const object,
                    const struct butterflyfish_stream_i *const other) {
@@ -568,6 +588,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_add_error_on_object_is_null),
             cmocka_unit_test(check_add_error_on_value_is_null),
             cmocka_unit_test(check_add_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_add_error_on_value_is_invalid),
             cmocka_unit_test(check_add_all_error_on_object_is_null),
             cmocka_unit_test(check_add_all_error_on_other_is_null),
             cmocka_unit_test(check_add_all_error_on_memory_allocation_failed),

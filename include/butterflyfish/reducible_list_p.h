@@ -23,6 +23,8 @@
     BUTTERFLYFISH_FIXED_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS
 #define BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS \
     BUTTERFLYFISH_FIXED_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS
+#define BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_VALUE_IS_INVALID \
+    BUTTERFLYFISH_FIXED_LIST_P_ERROR_VALUE_IS_INVALID
 #define BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OTHER_IS_NULL \
     SEA_URCHIN_ERROR_OBJECT_IS_NULL
 
@@ -155,6 +157,8 @@ int butterflyfish_reducible_list_p_get(
  * does not refer to an item contained within the reducible list.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if
  * there is not enough memory to set the item to value.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_VALUE_IS_INVALID if value is
+ * invalid.
  * @note <b>value</b> is copied and then item at index is set to it.
  */
 int butterflyfish_reducible_list_p_set(
@@ -176,6 +180,8 @@ int butterflyfish_reducible_list_p_set(
  * is not contained within the reducible list.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if
  * there is not enough memory to set the item to value.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_VALUE_IS_INVALID if value is
+ * invalid.
  * @note <b>value</b> is copied and then item is set to it.
  */
 int butterflyfish_reducible_list_p_set_item(

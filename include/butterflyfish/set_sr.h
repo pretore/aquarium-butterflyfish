@@ -181,7 +181,7 @@ int butterflyfish_set_sr_add(
         struct triggerfish_strong *value);
 
 /**
- * @brief Add values to the set.
+ * @brief Add all the values to the set.
  * @param [in] object set instance.
  * @param [in] other stream whose values will be added, ignoring duplicates.
  * @return On success <i>0</i>, otherwise an error code.

@@ -21,6 +21,8 @@
     SEA_URCHIN_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_STACK_NI_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
+#define BUTTERFLYFISH_STACK_NI_ERROR_VALUE_IS_INVALID \
+    SEA_URCHIN_ERROR_VALUE_IS_INVALID
 
 struct butterflyfish_stack_ni {
     const struct butterflyfish_reducible_stack_ni reducible_stack_ni;
@@ -124,6 +126,7 @@ int butterflyfish_stack_ni_pop(
  * @throws BUTTERFLYFISH_STACK_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_STACK_NI_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to add value.
+ * @throws BUTTERFLYFISH_STACK_NI_ERROR_VALUE_IS_INVALID if value is invalid.
  * @note <b>value</b> is copied and then added to the top of the stack.
  */
 int butterflyfish_stack_ni_push(
@@ -133,7 +136,8 @@ int butterflyfish_stack_ni_push(
 /**
  * @brief Add all values to the top of the stack.
  * @param [in] object stack instance.
- * @param [in] other stream of values which are added.
+ * @param [in] other stream of values which are added, ignoring the invalid
+ * values.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_STACK_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_STACK_NI_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.

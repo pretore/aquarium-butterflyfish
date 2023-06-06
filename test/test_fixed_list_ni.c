@@ -402,6 +402,27 @@ static void check_set_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_FIXED_LIST_NI_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
+static void check_set_error_on_value_is_invalid(void **state) {
+    const struct butterflyfish_fixed_list_ni fixed_list_ni = {
+            .set = set_emit_error
+    };
+    struct object {
+        const struct butterflyfish_fixed_list_ni *fixed_list_ni;
+    };
+    struct object instance = {
+            .fixed_list_ni = &fixed_list_ni
+    };
+    expect_function_call(set_emit_error);
+    will_return(set_emit_error,
+                BUTTERFLYFISH_FIXED_LIST_NI_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(
+            butterflyfish_fixed_list_ni_set(
+                    (struct butterflyfish_fixed_list_ni *) &instance,
+                    0,
+                    0),
+            BUTTERFLYFISH_FIXED_LIST_NI_ERROR_VALUE_IS_INVALID);
+}
+
 static int set_item_emit_error(void *const object,
                                uintmax_t *const item,
                                const uintmax_t value) {
@@ -465,6 +486,27 @@ static void check_set_item_error_on_memory_allocation_failed(void **state) {
                     (void *) 1,
                     0),
             BUTTERFLYFISH_FIXED_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED);
+}
+
+static void check_set_item_error_on_value_is_invalid(void **state) {
+    const struct butterflyfish_fixed_list_ni fixed_list_ni = {
+            .set_item = set_item_emit_error
+    };
+    struct object {
+        const struct butterflyfish_fixed_list_ni *fixed_list_ni;
+    };
+    struct object instance = {
+            .fixed_list_ni = &fixed_list_ni
+    };
+    expect_function_call(set_item_emit_error);
+    will_return(set_item_emit_error,
+                BUTTERFLYFISH_FIXED_LIST_NI_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(
+            butterflyfish_fixed_list_ni_set_item(
+                    (struct butterflyfish_fixed_list_ni *) &instance,
+                    (void *) 1,
+                    0),
+            BUTTERFLYFISH_FIXED_LIST_I_ERROR_VALUE_IS_INVALID);
 }
 
 static void check_at_error_on_object_is_null(void **state) {
@@ -546,10 +588,12 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_set_error_on_object_is_null),
             cmocka_unit_test(check_set_error_on_index_out_of_bounds),
             cmocka_unit_test(check_set_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_set_error_on_value_is_invalid),
             cmocka_unit_test(check_set_item_error_on_object_is_null),
             cmocka_unit_test(check_set_item_error_on_item_is_null),
             cmocka_unit_test(check_set_item_error_on_item_is_out_of_bounds),
             cmocka_unit_test(check_set_item_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_set_item_error_on_value_is_invalid),
             cmocka_unit_test(check_at_error_on_object_is_null),
             cmocka_unit_test(check_at_error_on_item_is_null),
             cmocka_unit_test(check_at_error_on_out_is_null),

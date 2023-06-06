@@ -21,6 +21,8 @@
     SEA_URCHIN_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_QUEUE_NI_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
+#define BUTTERFLYFISH_QUEUE_NI_ERROR_VALUE_IS_INVALID \
+    SEA_URCHIN_ERROR_VALUE_IS_INVALID
 
 struct butterflyfish_queue_ni {
     const struct butterflyfish_reducible_queue_ni reducible_queue_ni;
@@ -127,6 +129,7 @@ int butterflyfish_queue_ni_remove(
  * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to add value.
+ * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_VALUE_IS_INVALID if value is invalid.
  * @note <b>value</b> is copied and then appended to the queue.
  */
 int butterflyfish_queue_ni_add(
@@ -136,7 +139,8 @@ int butterflyfish_queue_ni_add(
 /**
  * @brief Add all the values to the end.
  * @param [in] object queue instance.
- * @param [in] other stream of values which are added.
+ * @param [in] other stream of values which are added, ignoring the invalid
+ * values.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_QUEUE_NI_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.

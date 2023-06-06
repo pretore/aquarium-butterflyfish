@@ -23,6 +23,8 @@
     BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS
 #define BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS \
     BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS
+#define BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_INVALID \
+    BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_VALUE_IS_INVALID
 #define BUTTERFLYFISH_LIST_P_ERROR_OTHER_IS_NULL \
     BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OTHER_IS_NULL
 
@@ -150,6 +152,7 @@ int butterflyfish_list_p_get(
  * refer to an item contained within the list.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * not enough memory to set the item to value.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_INVALID if value is invalid.
  * @note <b>value</b> is copied and then item at index is set to it.
  */
 int butterflyfish_list_p_set(
@@ -169,6 +172,7 @@ int butterflyfish_list_p_set(
  * contained within the list.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * not enough memory to set the item to value.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_INVALID if value is invalid.
  * @note <b>value</b> is copied and then item is set to it.
  */
 int butterflyfish_list_p_set_item(
@@ -241,6 +245,7 @@ int butterflyfish_list_p_remove_all_items(
  * @throws BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * not enough memory to add the value.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_INVALID if value is invalid.
  * @note <b>value</b> is copied and then added to the end.
  */
 int butterflyfish_list_p_add(
@@ -250,7 +255,8 @@ int butterflyfish_list_p_add(
 /**
  * @brief Add all the values to the end.
  * @param [in] object list instance.
- * @param [in] other stream of values which are appended.
+ * @param [in] other stream of values which are appended, ignoring the invalid
+ * values.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
@@ -273,6 +279,7 @@ int butterflyfish_list_p_add_all(
  * refer to an item contained within the list.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * not enough memory to insert value.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_INVALID if value is invalid.
  * @note <b>value</b> is copied and then inserted at index.
  */
 int butterflyfish_list_p_insert(
@@ -292,6 +299,7 @@ int butterflyfish_list_p_insert(
  * refer to an item contained within the list.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * not enough memory to insert value.
+ * @throws BUTTERFLYFISH_LIST_P_ERROR_VALUE_IS_INVALID if value is invalid.
  * @note <b>value</b> is copied and then inserted at item.
  */
 int butterflyfish_list_p_insert_item(
@@ -303,7 +311,8 @@ int butterflyfish_list_p_insert_item(
  * @brief Insert all the values at index.
  * @param [in] object list instance.
  * @param [in] at index of where values are to be inserted.
- * @param [in] other stream of values which are to be inserted.
+ * @param [in] other stream of values which are to be inserted, ignoring the
+ * invalid values.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
@@ -322,7 +331,8 @@ int butterflyfish_list_p_insert_all(
  * @brief Insert all the values at item.
  * @param [in] object list instance.
  * @param [in] item where values are to be inserted.
- * @param [in] other stream of values which are to be inserted.
+ * @param [in] other stream of values which are to be inserted, ignoring the
+ * invalid values.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_P_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.

@@ -27,6 +27,8 @@ struct sea_turtle_integer;
     SEA_URCHIN_ERROR_INDEX_IS_OUT_OF_BOUNDS
 #define BUTTERFLYFISH_FIXED_LIST_I_ERROR_ITEM_IS_OUT_OF_BOUNDS \
     SEA_URCHIN_ERROR_ITEM_IS_OUT_OF_BOUNDS
+#define BUTTERFLYFISH_FIXED_LIST_I_ERROR_VALUE_IS_INVALID \
+    SEA_URCHIN_ERROR_VALUE_IS_INVALID
 
 struct butterflyfish_fixed_list_i {
     const struct butterflyfish_collection_i collection_i;
@@ -158,6 +160,8 @@ int butterflyfish_fixed_list_i_get(
  * not refer to an item contained within the fixed list.
  * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED if there
  * is not enough memory to set the item to value.
+ * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_VALUE_IS_INVALID if value is
+ * invalid.
  * @note <b>value</b> is copied and then item at index is set to it.
  */
 int butterflyfish_fixed_list_i_set(
@@ -180,6 +184,8 @@ int butterflyfish_fixed_list_i_set(
  * not contained within the fixed list.
  * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED if there
  * is not enough memory to set the item to value.
+ * @throws BUTTERFLYFISH_FIXED_LIST_I_ERROR_VALUE_IS_INVALID if value is
+ * invalid.
  * @note <b>value</b> is copied and then item is set to it.
  */
 int butterflyfish_fixed_list_i_set_item(
