@@ -95,7 +95,7 @@ int butterflyfish_stack_s_prev(
 
 int butterflyfish_stack_s_pop(
         struct butterflyfish_stack_s *const object,
-        struct sea_turtle_string **const out) {
+        struct sea_turtle_string *const out) {
     if (!object) {
         return BUTTERFLYFISH_STACK_S_ERROR_OBJECT_IS_NULL;
     }

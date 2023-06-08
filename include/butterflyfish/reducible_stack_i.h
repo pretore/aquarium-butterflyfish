@@ -24,7 +24,7 @@ struct butterflyfish_reducible_stack_i {
     const struct butterflyfish_collection_i collection_i;
 
     int (*const pop)(void *object,
-                     struct sea_turtle_integer **out);
+                     struct sea_turtle_integer *out);
 };
 
 /**
@@ -124,9 +124,11 @@ int butterflyfish_reducible_stack_i_prev(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_STACK_I_ERROR_STACK_IS_EMPTY if stack is
  * empty.
+ * @note Please note that <b>out</b> will be overwritten and providing a
+ * non-invalidated instance will lead to memory leaks.
  */
 int butterflyfish_reducible_stack_i_pop(
         struct butterflyfish_reducible_stack_i *object,
-        struct sea_turtle_integer **out);
+        struct sea_turtle_integer *out);
 
 #endif /* _BUTTERFLYFISH_REDUCIBLE_STACK_I_H_ */

@@ -316,7 +316,7 @@ static void check_pop_error_on_out_is_null(void **state) {
 }
 
 static int pop_emit_error(void *const object,
-                          struct sea_turtle_integer **const out) {
+                          struct sea_turtle_integer *const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
