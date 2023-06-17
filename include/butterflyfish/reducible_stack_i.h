@@ -24,7 +24,7 @@ struct butterflyfish_reducible_stack_i {
     const struct butterflyfish_collection_i collection_i;
 
     int (*const pop)(void *object,
-                     struct sea_turtle_integer **out);
+                     struct sea_turtle_integer *out);
 };
 
 /**
@@ -128,6 +128,6 @@ int butterflyfish_reducible_stack_i_prev(
  */
 int butterflyfish_reducible_stack_i_pop(
         struct butterflyfish_reducible_stack_i *object,
-        struct sea_turtle_integer **out);
+        struct sea_turtle_integer *out);
 
 #endif /* _BUTTERFLYFISH_REDUCIBLE_STACK_I_H_ */

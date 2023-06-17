@@ -122,7 +122,7 @@ int butterflyfish_queue_i_prev(
  */
 int butterflyfish_queue_i_remove(
         struct butterflyfish_queue_i *object,
-        struct sea_turtle_integer **out);
+        struct sea_turtle_integer *out);
 
 /**
  * @brief Add value to the end.

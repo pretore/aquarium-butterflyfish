@@ -24,7 +24,7 @@ struct butterflyfish_reducible_queue_s {
     const struct butterflyfish_collection_s collection_s;
 
     int (*const remove)(void *object,
-                        struct sea_turtle_string **out);
+                        struct sea_turtle_string *out);
 };
 
 /**
@@ -128,6 +128,6 @@ int butterflyfish_reducible_queue_s_prev(
  */
 int butterflyfish_reducible_queue_s_remove(
         struct butterflyfish_reducible_queue_s *object,
-        struct sea_turtle_string **out);
+        struct sea_turtle_string *out);
 
 #endif /* _BUTTERFLYFISH_REDUCIBLE_QUEUE_S_H_ */

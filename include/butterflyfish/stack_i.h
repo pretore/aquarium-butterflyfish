@@ -121,7 +121,7 @@ int butterflyfish_stack_i_prev(
  */
 int butterflyfish_stack_i_pop(
         struct butterflyfish_stack_i *object,
-        struct sea_turtle_integer **out);
+        struct sea_turtle_integer *out);
 
 /**
  * @brief Add value to the top of the stack.

@@ -90,7 +90,7 @@ int butterflyfish_reducible_queue_s_prev(
 
 int butterflyfish_reducible_queue_s_remove(
         struct butterflyfish_reducible_queue_s *const object,
-        struct sea_turtle_string **const out) {
+        struct sea_turtle_string *const out) {
     if (!object) {
         return BUTTERFLYFISH_REDUCIBLE_QUEUE_S_ERROR_OBJECT_IS_NULL;
     }

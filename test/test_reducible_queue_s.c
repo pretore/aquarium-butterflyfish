@@ -318,7 +318,7 @@ static void check_remove_error_on_out_is_null(void **state) {
 
 static int
 remove_emit_error(void *const object,
-                  struct sea_turtle_string **const out) {
+                  struct sea_turtle_string *const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
