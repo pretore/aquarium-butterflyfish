@@ -24,7 +24,7 @@ struct butterflyfish_reducible_queue_s {
     const struct butterflyfish_collection_s collection_s;
 
     int (*const remove)(void *object,
-                        struct sea_turtle_string *out);
+                        struct sea_turtle_string **out);
 };
 
 /**
@@ -124,11 +124,10 @@ int butterflyfish_reducible_queue_s_prev(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_QUEUE_S_ERROR_QUEUE_IS_EMPTY if queue is
  * empty.
- * @note Please note that <b>out</b> will be overwritten and providing a
- * non-invalidated instance will lead to memory leaks.
+ * @note Invalidate received value once done using it.
  */
 int butterflyfish_reducible_queue_s_remove(
         struct butterflyfish_reducible_queue_s *object,
-        struct sea_turtle_string *out);
+        struct sea_turtle_string **out);
 
 #endif /* _BUTTERFLYFISH_REDUCIBLE_QUEUE_S_H_ */

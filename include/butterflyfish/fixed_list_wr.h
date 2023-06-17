@@ -181,8 +181,6 @@ int butterflyfish_fixed_list_wr_set(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_FIXED_LIST_WR_ERROR_VALUE_IS_NULL if value is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_FIXED_LIST_WR_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is
- * not contained within the fixed list.
  * @throws BUTTERFLYFISH_FIXED_LIST_WR_ERROR_MEMORY_ALLOCATION_FAILED if there
  * is not enough memory to set the item to value.
  * @throws BUTTERFLYFISH_FIXED_LIST_WR_ERROR_VALUE_IS_INVALID if value is

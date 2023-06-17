@@ -174,8 +174,8 @@ int butterflyfish_reducible_list_ni_set(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_ITEM_IS_OUT_OF_BOUNDS if item
- * is not contained within the reducible list.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_ITEM_IS_NULL if item is
+ * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_MEMORY_ALLOCATION_FAILED if
  * there is not enough memory to set the item to value.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_VALUE_IS_INVALID if value is
@@ -230,8 +230,6 @@ int butterflyfish_reducible_list_ni_remove(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_ITEM_IS_NULL if item is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_ITEM_IS_OUT_OF_BOUNDS if item
- * is not contained within the reducible list.
  */
 int butterflyfish_reducible_list_ni_remove_item(
         struct butterflyfish_reducible_list_ni *object,

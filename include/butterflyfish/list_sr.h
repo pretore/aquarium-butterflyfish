@@ -173,8 +173,6 @@ int butterflyfish_list_sr_set(
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
- * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
- * contained within the list.
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * not enough memory to set the item to value.
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_VALUE_IS_INVALID if value is invalid.
@@ -221,8 +219,6 @@ int butterflyfish_list_sr_remove(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
- * @throws BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is not
- * contained within the list.
  */
 int butterflyfish_list_sr_remove_item(
         struct butterflyfish_list_sr *object,

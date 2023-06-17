@@ -117,12 +117,11 @@ int butterflyfish_stack_s_prev(
  * @throws BUTTERFLYFISH_STACK_S_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_STACK_S_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_STACK_S_ERROR_STACK_IS_EMPTY if stack is empty.
- * @note Please note that <b>out</b> will be overwritten and providing a
- * non-invalidated instance will lead to memory leaks.
+ * @note Invalidate received value once done using it.
  */
 int butterflyfish_stack_s_pop(
         struct butterflyfish_stack_s *object,
-        struct sea_turtle_string *out);
+        struct sea_turtle_string **out);
 
 /**
  * @brief Add value to the top of the stack.

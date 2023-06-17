@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(aquarium-butterflyfish VERSION 3.1.1
+project(aquarium-butterflyfish VERSION 3.1.2
         LANGUAGES C
         DESCRIPTION "Collection interfaces in C")
 

@@ -447,27 +447,6 @@ static void check_set_item_error_on_item_is_null(void **state) {
             BUTTERFLYFISH_FIXED_LIST_P_ERROR_ITEM_IS_NULL);
 }
 
-static void check_set_item_error_on_item_is_out_of_bounds(void **state) {
-    const struct butterflyfish_fixed_list_p fixed_list_p = {
-            .set_item = set_item_emit_error
-    };
-    struct object {
-        const struct butterflyfish_fixed_list_p *fixed_list_p;
-    };
-    struct object instance = {
-            .fixed_list_p = &fixed_list_p
-    };
-    expect_function_call(set_item_emit_error);
-    will_return(set_item_emit_error,
-                BUTTERFLYFISH_FIXED_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_fixed_list_p_set_item(
-                    (struct butterflyfish_fixed_list_p *) &instance,
-                    (void *) 1,
-                    0),
-            BUTTERFLYFISH_FIXED_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-}
-
 static void check_set_item_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_fixed_list_p fixed_list_p = {
             .set_item = set_item_emit_error
@@ -592,7 +571,6 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_set_error_on_value_is_invalid),
             cmocka_unit_test(check_set_item_error_on_object_is_null),
             cmocka_unit_test(check_set_item_error_on_item_is_null),
-            cmocka_unit_test(check_set_item_error_on_item_is_out_of_bounds),
             cmocka_unit_test(check_set_item_error_on_memory_allocation_failed),
             cmocka_unit_test(check_set_item_error_on_value_is_invalid),
             cmocka_unit_test(check_at_error_on_object_is_null),

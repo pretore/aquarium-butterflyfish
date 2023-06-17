@@ -182,10 +182,10 @@ int butterflyfish_reducible_list_s_set(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_VALUE_IS_NULL if value is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_ITEM_IS_OUT_OF_BOUNDS if item
- * is not contained within the reducible list.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_MEMORY_ALLOCATION_FAILED if
  * there is not enough memory to set the item to value.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_VALUE_IS_INVALID if value is
+ * invalid.
  * @note <b>value</b> is copied and then item at index is set to it.
  */
 int butterflyfish_reducible_list_s_set_item(
@@ -236,8 +236,6 @@ int butterflyfish_reducible_list_s_remove(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_ITEM_IS_NULL if item is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_S_ERROR_ITEM_IS_OUT_OF_BOUNDS if item
- * is not contained within the reducible list.
  */
 int butterflyfish_reducible_list_s_remove_item(
         struct butterflyfish_reducible_list_s *object,

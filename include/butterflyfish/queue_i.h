@@ -118,12 +118,11 @@ int butterflyfish_queue_i_prev(
  * @throws BUTTERFLYFISH_QUEUE_I_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_QUEUE_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_QUEUE_I_ERROR_QUEUE_IS_EMPTY if queue is empty.
- * @note Please note that <b>out</b> will be overwritten and providing a
- * non-invalidated instance will lead to memory leaks.
+ * @note Invalidate received value once done using it.
  */
 int butterflyfish_queue_i_remove(
         struct butterflyfish_queue_i *object,
-        struct sea_turtle_integer *out);
+        struct sea_turtle_integer **out);
 
 /**
  * @brief Add value to the end.

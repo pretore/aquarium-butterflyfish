@@ -95,7 +95,7 @@ int butterflyfish_queue_i_prev(
 
 int butterflyfish_queue_i_remove(
         struct butterflyfish_queue_i *const object,
-        struct sea_turtle_integer *const out) {
+        struct sea_turtle_integer **const out) {
     if (!object) {
         return BUTTERFLYFISH_QUEUE_I_ERROR_OBJECT_IS_NULL;
     }

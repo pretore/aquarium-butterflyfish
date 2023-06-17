@@ -172,8 +172,6 @@ int butterflyfish_fixed_list_p_set(
  * @throws BUTTERFLYFISH_FIXED_LIST_P_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_FIXED_LIST_P_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
- * @throws BUTTERFLYFISH_FIXED_LIST_P_ERROR_ITEM_IS_OUT_OF_BOUNDS if item is
- * not contained within the list.
  * @throws BUTTERFLYFISH_FIXED_LIST_P_ERROR_MEMORY_ALLOCATION_FAILED if there
  * is not enough memory to set the item to value.
  * @throws BUTTERFLYFISH_FIXED_LIST_NI_ERROR_VALUE_IS_INVALID if value is

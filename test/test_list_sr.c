@@ -813,71 +813,6 @@ static int set_item_emit_error(void *const object,
     return mock();
 }
 
-static void check_set_item_error_on_item_is_out_of_bounds(void **state) {
-    const struct butterflyfish_list_sr list_sr = {
-            .reducible_list_sr.fixed_list_sr.set_item = set_item_emit_error
-    };
-    struct object {
-        const struct butterflyfish_list_sr *list_sr;
-    };
-    struct object instance = {
-            .list_sr = &list_sr
-    };
-    expect_function_call(set_item_emit_error);
-    will_return(set_item_emit_error,
-                BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_list_sr_set_item(
-                    (struct butterflyfish_list_sr *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-}
-
-static void
-check_as_reducible_list_set_item_error_on_item_is_out_of_bounds(void **state) {
-    const struct butterflyfish_list_sr list_sr = {
-            .reducible_list_sr.fixed_list_sr.set_item = set_item_emit_error
-    };
-    struct object {
-        const struct butterflyfish_list_sr *list_sr;
-    };
-    struct object instance = {
-            .list_sr = &list_sr
-    };
-    expect_function_call(set_item_emit_error);
-    will_return(set_item_emit_error,
-                BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_reducible_list_sr_set_item(
-                    (struct butterflyfish_reducible_list_sr *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-}
-
-static void
-check_as_fixed_list_set_item_error_on_item_is_out_of_bounds(void **state) {
-    const struct butterflyfish_list_sr list_sr = {
-            .reducible_list_sr.fixed_list_sr.set_item = set_item_emit_error
-    };
-    struct object {
-        const struct butterflyfish_list_sr *list_sr;
-    };
-    struct object instance = {
-            .list_sr = &list_sr
-    };
-    expect_function_call(set_item_emit_error);
-    will_return(set_item_emit_error,
-                BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_fixed_list_sr_set_item(
-                    (struct butterflyfish_fixed_list_sr *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_FIXED_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-}
-
 static void check_set_item_error_on_memory_allocation_failed(void **state) {
     const struct butterflyfish_list_sr list_sr = {
             .reducible_list_sr.fixed_list_sr.set_item = set_item_emit_error
@@ -1167,55 +1102,6 @@ static void check_remove_item_error_on_item_is_null(void **state) {
     assert_int_equal(
             butterflyfish_list_sr_remove_item((void *) 1, NULL),
             BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_NULL);
-}
-
-static int remove_item_emit_error(void *const object,
-                                  struct triggerfish_strong *const item) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(item);
-    return mock();
-}
-
-static void check_remove_item_error_on_item_out_of_bounds(void **state) {
-    const struct butterflyfish_list_sr list_sr = {
-            .reducible_list_sr.remove_item = remove_item_emit_error
-    };
-    struct object {
-        const struct butterflyfish_list_sr *list_sr;
-    };
-    struct object instance = {
-            .list_sr = &list_sr
-    };
-    expect_function_call(remove_item_emit_error);
-    will_return(remove_item_emit_error,
-                BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_list_sr_remove_item(
-                    (struct butterflyfish_list_sr *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-}
-
-static void
-check_as_reducible_list_remove_item_error_on_item_out_of_bounds(void **state) {
-    const struct butterflyfish_list_sr list_sr = {
-            .reducible_list_sr.remove_item = remove_item_emit_error
-    };
-    struct object {
-        const struct butterflyfish_list_sr *list_sr;
-    };
-    struct object instance = {
-            .list_sr = &list_sr
-    };
-    expect_function_call(remove_item_emit_error);
-    will_return(remove_item_emit_error,
-                BUTTERFLYFISH_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_reducible_list_sr_remove_item(
-                    (struct butterflyfish_reducible_list_sr *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_SR_ERROR_ITEM_IS_OUT_OF_BOUNDS);
 }
 
 static void check_remove_items_error_on_object_is_null(void **state) {
@@ -1696,9 +1582,6 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_set_item_error_on_object_is_null),
             cmocka_unit_test(check_set_item_error_on_item_is_null),
             cmocka_unit_test(check_set_item_error_on_value_is_null),
-            cmocka_unit_test(check_set_item_error_on_item_is_out_of_bounds),
-            cmocka_unit_test(check_as_reducible_list_set_item_error_on_item_is_out_of_bounds),
-            cmocka_unit_test(check_as_fixed_list_set_item_error_on_item_is_out_of_bounds),
             cmocka_unit_test(check_set_item_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_reducible_list_set_item_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_fixed_list_set_item_error_on_memory_allocation_failed),
@@ -1716,8 +1599,6 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_reducible_list_remove_error_on_index_out_of_bounds),
             cmocka_unit_test(check_remove_item_error_on_object_is_null),
             cmocka_unit_test(check_remove_item_error_on_item_is_null),
-            cmocka_unit_test(check_remove_item_error_on_item_out_of_bounds),
-            cmocka_unit_test(check_as_reducible_list_remove_item_error_on_item_out_of_bounds),
             cmocka_unit_test(check_remove_items_error_on_object_is_null),
             cmocka_unit_test(check_remove_items_error_on_other_is_null),
             cmocka_unit_test(check_add_error_on_object_is_null),
