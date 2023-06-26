@@ -668,6 +668,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_add_error_on_object_is_null),
             cmocka_unit_test(check_add_error_on_value_is_null),
             cmocka_unit_test(check_add_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_add_error_on_value_is_invalid),
             cmocka_unit_test(check_add_all_error_on_object_is_null),
             cmocka_unit_test(check_add_all_error_on_other_is_null),
             cmocka_unit_test(check_add_all_error_on_memory_allocation_failed),

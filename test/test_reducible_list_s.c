@@ -1041,7 +1041,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_fixed_list_set_error_on_index_out_of_bounds),
             cmocka_unit_test(check_set_error_on_memory_allocation_failed),
             cmocka_unit_test(check_as_fixed_list_set_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_set_error_on_value_is_null),
+            cmocka_unit_test(check_set_error_on_value_is_invalid),
             cmocka_unit_test(check_as_fixed_list_set_error_on_value_is_invalid),
             cmocka_unit_test(check_set_item_error_on_object_is_null),
             cmocka_unit_test(check_set_item_error_on_item_is_null),
