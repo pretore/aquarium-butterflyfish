@@ -1,6 +1,7 @@
 # aquarium-butterflyfish
 
 ![main](https://github.com/pretore/aquarium-butterflyfish/actions/workflows/cmake.yml/badge.svg?branch=main)
+[![codecov](https://codecov.io/gh/pretore/aquarium-butterflyfish/branch/main/graph/badge.svg?token=TMLCO47EMI)](https://codecov.io/gh/pretore/aquarium-butterflyfish)
 
 Collection interfaces in C.
 
