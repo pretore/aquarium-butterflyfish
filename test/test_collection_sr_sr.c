@@ -19,6 +19,37 @@ static void check_count_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_COLLECTION_SR_SR_ERROR_OUT_IS_NULL);
 }
 
+static int count(const void *const object, uintmax_t *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = mock();
+    return 0;
+}
+
+static void check_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_collection_sr_sr collection_sr_sr = {
+            .count = count
+    };
+    struct object {
+        const struct butterflyfish_collection_sr_sr *collection_sr_sr;
+    };
+    struct object instance = {
+            .collection_sr_sr = &collection_sr_sr
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_collection_sr_sr_count(
+                    (const struct butterflyfish_collection_sr_sr *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
 static int
 fl_emit_error(const void *const object,
               struct butterflyfish_map_entry_sr_sr **const out) {
@@ -226,6 +257,7 @@ int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
+            cmocka_unit_test(check_count),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_collection_is_empty),

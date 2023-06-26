@@ -19,6 +19,83 @@ static void check_count_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OUT_IS_NULL);
 }
 
+static int count(const void *const object, uintmax_t *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = mock();
+    return 0;
+}
+
+static void check_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .fixed_list_p.collection_p.count = count
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_reducible_list_p_count(
+                    (const struct butterflyfish_reducible_list_p *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
+static void check_count_as_fixed_list(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .fixed_list_p.collection_p.count = count
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_fixed_list_p_count(
+                    (const struct butterflyfish_fixed_list_p *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
+static void check_count_as_collection(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .fixed_list_p.collection_p.count = count
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_collection_p_count(
+                    (const struct butterflyfish_collection_p *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
 static int fl_emit_error(const void *const object,
                          const void **const out) {
     function_called();
@@ -809,6 +886,30 @@ static void check_remove_error_on_index_out_of_bounds(void **state) {
             BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_INDEX_IS_OUT_OF_BOUNDS);
 }
 
+static int remove(void *const object,
+                  const uintmax_t at) {
+    function_called();
+    assert_non_null(object);
+    return 0;
+}
+
+static void check_remove(void **state) {
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .remove = remove
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(remove);
+    assert_int_equal(
+            butterflyfish_reducible_list_p_remove(
+                    (struct butterflyfish_reducible_list_p *) &instance, 0),
+            0);
+}
+
 static void check_remove_item_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_reducible_list_p_remove_item(NULL, (void *) 1),
@@ -819,6 +920,32 @@ static void check_remove_item_error_on_item_is_null(void **state) {
     assert_int_equal(
             butterflyfish_reducible_list_p_remove_item((void *) 1, NULL),
             BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_ITEM_IS_NULL);
+}
+
+static int remove_item(void *const object,
+                       const void *const item) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(item);
+    return 0;
+}
+
+static void check_remove_item(void **state) {
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .remove_item = remove_item
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(remove_item);
+    assert_int_equal(
+            butterflyfish_reducible_list_p_remove_item(
+                    (struct butterflyfish_reducible_list_p *) &instance,
+                    (void *) 1),
+            0);
 }
 
 static void check_remove_items_error_on_object_is_null(void **state) {
@@ -833,10 +960,40 @@ static void check_remove_items_error_on_other_is_null(void **state) {
             BUTTERFLYFISH_REDUCIBLE_LIST_P_ERROR_OTHER_IS_NULL);
 }
 
+static int
+remove_all_items(void *const object,
+                 const struct butterflyfish_stream_p *const stream) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(stream);
+    return 0;
+}
+
+static void check_remove_items(void **state) {
+    const struct butterflyfish_reducible_list_p reducible_list_p = {
+            .remove_all_items = remove_all_items
+    };
+    struct object {
+        const struct butterflyfish_reducible_list_p *reducible_list_p;
+    };
+    struct object instance = {
+            .reducible_list_p = &reducible_list_p
+    };
+    expect_function_call(remove_all_items);
+    assert_int_equal(
+            butterflyfish_reducible_list_p_remove_all_items(
+                    (struct butterflyfish_reducible_list_p *) &instance,
+                    (void *) 1),
+            0);
+}
+
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
+            cmocka_unit_test(check_count),
+            cmocka_unit_test(check_count_as_fixed_list),
+            cmocka_unit_test(check_count_as_collection),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_reducible_list_is_empty),
@@ -885,10 +1042,13 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_fixed_list_at_error_on_item_is_out_of_bounds),
             cmocka_unit_test(check_remove_error_on_object_is_null),
             cmocka_unit_test(check_remove_error_on_index_out_of_bounds),
+            cmocka_unit_test(check_remove),
             cmocka_unit_test(check_remove_item_error_on_object_is_null),
             cmocka_unit_test(check_remove_item_error_on_item_is_null),
+            cmocka_unit_test(check_remove_item),
             cmocka_unit_test(check_remove_items_error_on_object_is_null),
             cmocka_unit_test(check_remove_items_error_on_other_is_null),
+            cmocka_unit_test(check_remove_items),
     };
     //cmocka_set_message_output(CM_OUTPUT_XML);
     return cmocka_run_group_tests(tests, NULL, NULL);

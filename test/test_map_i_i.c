@@ -19,6 +19,60 @@ static void check_count_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
+static int count(const void *const object, uintmax_t *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = mock();
+    return 0;
+}
+
+static void check_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_map_i_i map_i_i = {
+            .collection_i_i.count = count
+    };
+    struct object {
+        const struct butterflyfish_map_i_i *map_i_i;
+    };
+    struct object instance = {
+            .map_i_i = &map_i_i
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_map_i_i_count(
+                    (const struct butterflyfish_map_i_i *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
+static void check_as_collection_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_map_i_i map_i_i = {
+            .collection_i_i.count = count
+    };
+    struct object {
+        const struct butterflyfish_map_i_i *map_i_i;
+    };
+    struct object instance = {
+            .map_i_i = &map_i_i
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_collection_i_i_count(
+                    (const struct butterflyfish_collection_i_i *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
 static void check_first_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_map_i_i_first(NULL, (void *) 1),
@@ -318,6 +372,33 @@ static void check_remove_entry_error_on_entry_is_null(void **state) {
             BUTTERFLYFISH_MAP_I_I_ERROR_ENTRY_IS_NULL);
 }
 
+static int
+remove_entry(void *const object,
+             const struct butterflyfish_map_entry_i_i *const entry) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(entry);
+    return 0;
+}
+
+static void check_remove_entry(void **state) {
+    const struct butterflyfish_map_i_i map_i_i = {
+            .remove_entry = remove_entry
+    };
+    struct object {
+        const struct butterflyfish_map_i_i *map_i_i;
+    };
+    struct object instance = {
+            .map_i_i = &map_i_i
+    };
+    expect_function_call(remove_entry);
+    assert_int_equal(
+            butterflyfish_map_i_i_remove_entry(
+                    (struct butterflyfish_map_i_i *) &instance,
+                    (void *) 1),
+           0);
+}
+
 static void check_remove_all_entries_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_map_i_i_remove_all_entries(NULL, (void *) 1),
@@ -328,6 +409,33 @@ static void check_remove_all_entries_error_on_other_is_null(void **state) {
     assert_int_equal(
             butterflyfish_map_i_i_remove_all_entries((void *) 1, NULL),
             BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL);
+}
+
+static int
+remove_all_entries(void *const object,
+                   const struct butterflyfish_stream_i_i *const stream) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(stream);
+    return 0;
+}
+
+static void check_remove_all_entries(void **state) {
+    const struct butterflyfish_map_i_i map_i_i = {
+            .remove_all_entries = remove_all_entries
+    };
+    struct object {
+        const struct butterflyfish_map_i_i *map_i_i;
+    };
+    struct object instance = {
+            .map_i_i = &map_i_i
+    };
+    expect_function_call(remove_all_entries);
+    assert_int_equal(
+            butterflyfish_map_i_i_remove_all_entries(
+                    (struct butterflyfish_map_i_i *) &instance,
+                    (void *) 1),
+            0);
 }
 
 static void check_add_error_on_object_is_null(void **state) {
@@ -1048,6 +1156,32 @@ static void check_keys_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
+static int keys(void *const object,
+                struct butterflyfish_set_i **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return 0;
+}
+
+static void check_keys(void **state) {
+    const struct butterflyfish_map_i_i map_i_i = {
+            .keys = keys
+    };
+    struct object {
+        const struct butterflyfish_map_i_i *map_i_i;
+    };
+    struct object instance = {
+            .map_i_i = &map_i_i
+    };
+    expect_function_call(keys);
+    assert_int_equal(
+            butterflyfish_map_i_i_keys(
+                    (struct butterflyfish_map_i_i *) &instance,
+                    (void *) 1),
+            0);
+}
+
 static void check_values_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_map_i_i_values(NULL, (void *) 1),
@@ -1060,10 +1194,38 @@ static void check_values_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
+static int values(void *const object,
+                  struct butterflyfish_reducible_list_i **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return 0;
+}
+
+static void check_values(void **state) {
+    const struct butterflyfish_map_i_i map_i_i = {
+            .values = values
+    };
+    struct object {
+        const struct butterflyfish_map_i_i *map_i_i;
+    };
+    struct object instance = {
+            .map_i_i = &map_i_i
+    };
+    expect_function_call(values);
+    assert_int_equal(
+            butterflyfish_map_i_i_values(
+                    (struct butterflyfish_map_i_i *) &instance,
+                    (void *) 1),
+            0);
+}
+
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
+            cmocka_unit_test(check_count),
+            cmocka_unit_test(check_as_collection_count),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_map_is_empty),
@@ -1086,8 +1248,10 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_collection_prev_error_on_end_of_sequence),
             cmocka_unit_test(check_remove_entry_error_on_object_is_null),
             cmocka_unit_test(check_remove_entry_error_on_entry_is_null),
+            cmocka_unit_test(check_remove_entry),
             cmocka_unit_test(check_remove_all_entries_error_on_object_is_null),
             cmocka_unit_test(check_remove_all_entries_error_on_other_is_null),
+            cmocka_unit_test(check_remove_all_entries),
             cmocka_unit_test(check_add_error_on_object_is_null),
             cmocka_unit_test(check_add_error_on_key_is_null),
             cmocka_unit_test(check_add_error_on_value_is_null),
@@ -1145,8 +1309,10 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_get_entry_error_on_memory_allocation_failed),
             cmocka_unit_test(check_keys_error_on_object_is_null),
             cmocka_unit_test(check_keys_error_on_out_is_null),
+            cmocka_unit_test(check_keys),
             cmocka_unit_test(check_values_error_on_object_is_null),
             cmocka_unit_test(check_values_error_on_out_is_null),
+            cmocka_unit_test(check_values),
     };
     //cmocka_set_message_output(CM_OUTPUT_XML);
     return cmocka_run_group_tests(tests, NULL, NULL);

@@ -19,6 +19,83 @@ static void check_count_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_STACK_WR_ERROR_OUT_IS_NULL);
 }
 
+static int count(const void *const object, uintmax_t *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = mock();
+    return 0;
+}
+
+static void check_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_stack_wr stack_wr = {
+            .reducible_stack_wr.collection_wr.count = count
+    };
+    struct object {
+        const struct butterflyfish_stack_wr *stack_wr;
+    };
+    struct object instance = {
+            .stack_wr = &stack_wr
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_stack_wr_count(
+                    (const struct butterflyfish_stack_wr *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
+static void check_as_reducible_stack_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_stack_wr stack_wr = {
+            .reducible_stack_wr.collection_wr.count = count
+    };
+    struct object {
+        const struct butterflyfish_stack_wr *stack_wr;
+    };
+    struct object instance = {
+            .stack_wr = &stack_wr
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_stack_wr_count(
+                    (const struct butterflyfish_stack_wr *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
+static void check_as_collection_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_stack_wr stack_wr = {
+            .reducible_stack_wr.collection_wr.count = count
+    };
+    struct object {
+        const struct butterflyfish_stack_wr *stack_wr;
+    };
+    struct object instance = {
+            .stack_wr = &stack_wr
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_collection_wr_count(
+                    (const struct butterflyfish_collection_wr *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
 static int fl_emit_error(const void *const object,
                          const struct triggerfish_weak **const out) {
     function_called();
@@ -535,6 +612,9 @@ int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
+            cmocka_unit_test(check_count),
+            cmocka_unit_test(check_as_reducible_stack_count),
+            cmocka_unit_test(check_as_collection_count),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_stack_is_empty),

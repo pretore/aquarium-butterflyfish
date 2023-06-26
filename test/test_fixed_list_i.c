@@ -19,6 +19,60 @@ static void check_count_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_FIXED_LIST_I_ERROR_OUT_IS_NULL);
 }
 
+static int count(const void *const object, uintmax_t *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = mock();
+    return 0;
+}
+
+static void check_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_fixed_list_i fixed_list_i = {
+            .collection_i.count = count
+    };
+    struct object {
+        const struct butterflyfish_fixed_list_i *fixed_list_i;
+    };
+    struct object instance = {
+            .fixed_list_i = &fixed_list_i
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_fixed_list_i_count(
+                    (const struct butterflyfish_fixed_list_i *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
+static void check_as_collection_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_fixed_list_i fixed_list_i = {
+            .collection_i.count = count
+    };
+    struct object {
+        const struct butterflyfish_fixed_list_i *fixed_list_i;
+    };
+    struct object instance = {
+            .fixed_list_i = &fixed_list_i
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_collection_i_count(
+                    (const struct butterflyfish_collection_i *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
 static int fl_emit_error(const void *const object,
                          const struct sea_turtle_integer **const out) {
     function_called();
@@ -555,6 +609,8 @@ int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
+            cmocka_unit_test(check_count),
+            cmocka_unit_test(check_as_collection_count),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_fixed_list_is_empty),

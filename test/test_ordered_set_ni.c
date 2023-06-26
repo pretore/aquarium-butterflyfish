@@ -19,6 +19,83 @@ static void check_count_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_SET_NI_ERROR_OUT_IS_NULL);
 }
 
+static int count(const void *const object, uintmax_t *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = mock();
+    return 0;
+}
+
+static void check_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_ordered_set_ni ordered_set_ni = {
+            .set_ni.collection_ni.count = count
+    };
+    struct object {
+        const struct butterflyfish_ordered_set_ni *ordered_set_ni;
+    };
+    struct object instance = {
+            .ordered_set_ni = &ordered_set_ni
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_ordered_set_ni_count(
+                    (const struct butterflyfish_ordered_set_ni *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
+static void check_as_set(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_ordered_set_ni ordered_set_ni = {
+            .set_ni.collection_ni.count = count
+    };
+    struct object {
+        const struct butterflyfish_ordered_set_ni *ordered_set_ni;
+    };
+    struct object instance = {
+            .ordered_set_ni = &ordered_set_ni
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_set_ni_count(
+                    (const struct butterflyfish_set_ni *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
+static void check_as_collection_count(void **state) {
+    srand(time(NULL));
+    const struct butterflyfish_ordered_set_ni ordered_set_ni = {
+            .set_ni.collection_ni.count = count
+    };
+    struct object {
+        const struct butterflyfish_ordered_set_ni *ordered_set_ni;
+    };
+    struct object instance = {
+            .ordered_set_ni = &ordered_set_ni
+    };
+    expect_function_call(count);
+    const uintmax_t check = abs(rand());
+    will_return(count, check);
+    uintmax_t out;
+    assert_int_equal(
+            butterflyfish_collection_ni_count(
+                    (const struct butterflyfish_collection_ni *) &instance,
+                    &out),
+            0);
+    assert_int_equal(out, check);
+}
+
 static void check_first_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_set_ni_first(NULL, (void *) 1),
@@ -206,6 +283,50 @@ static void check_remove_item_error_on_item_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_SET_NI_ERROR_ITEM_IS_NULL);
 }
 
+static int remove_item(void *const object,
+                       const uintmax_t *const item) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(item);
+    return 0;
+}
+
+static void check_remove_item(void **state) {
+    const struct butterflyfish_ordered_set_ni ordered_set_ni = {
+            .set_ni.remove_item = remove_item
+    };
+    struct object {
+        const struct butterflyfish_ordered_set_ni *ordered_set_ni;
+    };
+    struct object instance = {
+            .ordered_set_ni = &ordered_set_ni
+    };
+    expect_function_call(remove_item);
+    assert_int_equal(
+            butterflyfish_ordered_set_ni_remove_item(
+                    (struct butterflyfish_ordered_set_ni *) &instance,
+                    (void *) 1),
+            0);
+}
+
+static void check_as_set_remove_item(void **state) {
+    const struct butterflyfish_ordered_set_ni ordered_set_ni = {
+            .set_ni.remove_item = remove_item
+    };
+    struct object {
+        const struct butterflyfish_ordered_set_ni *ordered_set_ni;
+    };
+    struct object instance = {
+            .ordered_set_ni = &ordered_set_ni
+    };
+    expect_function_call(remove_item);
+    assert_int_equal(
+            butterflyfish_set_ni_remove_item(
+                    (struct butterflyfish_set_ni *) &instance,
+                    (void *) 1),
+            0);
+}
+
 static void check_remove_all_items_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_set_ni_remove_all_items(NULL, (void *) 1),
@@ -216,6 +337,51 @@ static void check_remove_all_items_error_on_item_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_set_ni_remove_all_items((void *) 1, NULL),
             BUTTERFLYFISH_ORDERED_SET_NI_ERROR_OTHER_IS_NULL);
+}
+
+static int
+remove_all_items(void *const object,
+                 const struct butterflyfish_stream_ni *const items) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(items);
+    return 0;
+}
+
+static void check_remove_all_items(void **state) {
+    const struct butterflyfish_ordered_set_ni ordered_set_ni = {
+            .set_ni.remove_all_items = remove_all_items
+    };
+    struct object {
+        const struct butterflyfish_ordered_set_ni *ordered_set_ni;
+    };
+    struct object instance = {
+            .ordered_set_ni = &ordered_set_ni
+    };
+    expect_function_call(remove_all_items);
+    assert_int_equal(
+            butterflyfish_ordered_set_ni_remove_all_items(
+                    (struct butterflyfish_ordered_set_ni *) &instance,
+                    (void *) 1),
+            0);
+}
+
+static void check_as_set_remove_all_items(void **state) {
+    const struct butterflyfish_ordered_set_ni ordered_set_ni = {
+            .set_ni.remove_all_items = remove_all_items
+    };
+    struct object {
+        const struct butterflyfish_ordered_set_ni *ordered_set_ni;
+    };
+    struct object instance = {
+            .ordered_set_ni = &ordered_set_ni
+    };
+    expect_function_call(remove_all_items);
+    assert_int_equal(
+            butterflyfish_set_ni_remove_all_items(
+                    (struct butterflyfish_set_ni *) &instance,
+                    (void *) 1),
+            0);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
@@ -741,8 +907,8 @@ static void check_contains_error_on_memory_allocation_failed(void **state) {
     will_return(contains_emit_error,
                 BUTTERFLYFISH_ORDERED_SET_NI_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
-            butterflyfish_set_ni_contains(
-                    (struct butterflyfish_set_ni *) &instance,
+            butterflyfish_ordered_set_ni_contains(
+                    (struct butterflyfish_ordered_set_ni *) &instance,
                     0,
                     (void *) 1),
             BUTTERFLYFISH_ORDERED_SET_NI_ERROR_MEMORY_ALLOCATION_FAILED);
@@ -1018,6 +1184,9 @@ int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
+            cmocka_unit_test(check_count),
+            cmocka_unit_test(check_as_set),
+            cmocka_unit_test(check_as_collection_count),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_set_is_empty),
@@ -1031,8 +1200,12 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_collection_last_error_on_collection_is_empty),
             cmocka_unit_test(check_remove_item_error_on_object_is_null),
             cmocka_unit_test(check_remove_item_error_on_item_is_null),
+            cmocka_unit_test(check_remove_item),
+            cmocka_unit_test(check_as_set_remove_item),
             cmocka_unit_test(check_remove_all_items_error_on_object_is_null),
             cmocka_unit_test(check_remove_all_items_error_on_item_is_null),
+            cmocka_unit_test(check_remove_all_items),
+            cmocka_unit_test(check_as_set_remove_all_items),
             cmocka_unit_test(check_next_error_on_object_is_null),
             cmocka_unit_test(check_next_error_on_item_is_null),
             cmocka_unit_test(check_next_error_on_out_is_null),
