@@ -102,7 +102,7 @@ static void check_as_collection_count(void **state) {
             .ordered_set_ni.set_ni.collection_ni.count = count
     };
     struct object {
-        const struct butterflyfish_sorted_set_i *sorted_set_ni;
+        const struct butterflyfish_sorted_set_ni *sorted_set_ni;
     };
     struct object instance = {
             .sorted_set_ni = &sorted_set_ni

@@ -33,7 +33,7 @@ static void check_count(void **state) {
             .count = count
     };
     struct object {
-        const struct butterflyfish_collection_i *collection_ni;
+        const struct butterflyfish_collection_ni *collection_ni;
     };
     struct object instance = {
             .collection_ni = &collection_ni

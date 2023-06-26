@@ -1255,7 +1255,7 @@ static void check_remove_item(void **state) {
             .reducible_list_wr.remove_item = remove_item
     };
     struct object {
-        const struct butterflyfish_list_sr *list_wr;
+        const struct butterflyfish_list_wr *list_wr;
     };
     struct object instance = {
             .list_wr = &list_wr
@@ -1312,7 +1312,7 @@ static void check_remove_items(void **state) {
             .reducible_list_wr.remove_all_items = remove_all_items
     };
     struct object {
-        const struct butterflyfish_list_sr *list_wr;
+        const struct butterflyfish_list_wr *list_wr;
     };
     struct object instance = {
             .list_wr = &list_wr

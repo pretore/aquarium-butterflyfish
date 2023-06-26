@@ -233,7 +233,7 @@ static void check_remove_item(void **state) {
             .remove_item = remove_item
     };
     struct object {
-        const struct butterflyfish_set_p *set_s;
+        const struct butterflyfish_set_s *set_s;
     };
     struct object instance = {
             .set_s = &set_s

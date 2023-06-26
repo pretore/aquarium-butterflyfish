@@ -949,7 +949,7 @@ static void check_remove_item(void **state) {
             .remove_item = remove_item
     };
     struct object {
-        const struct butterflyfish_reducible_list_w *reducible_list_wr;
+        const struct butterflyfish_reducible_list_wr *reducible_list_wr;
     };
     struct object instance = {
             .reducible_list_wr = &reducible_list_wr
