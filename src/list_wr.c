@@ -204,6 +204,62 @@ int butterflyfish_list_wr_remove_all_items(
 
 #pragma mark list_wr -
 
+int butterflyfish_list_wr_as_stream(
+        const struct butterflyfish_list_wr *const object,
+        const struct butterflyfish_stream_wr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_WR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_WR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_wr *)
+            &object->reducible_list_wr.fixed_list_wr.collection_wr.stream_wr;
+    return 0;
+}
+
+int butterflyfish_list_wr_as_collection(
+        const struct butterflyfish_list_wr *const object,
+        const struct butterflyfish_collection_wr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_WR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_WR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_wr *)
+            &object->reducible_list_wr.fixed_list_wr.collection_wr;
+    return 0;
+}
+
+int butterflyfish_list_wr_as_fixed_list(
+        struct butterflyfish_list_wr *const object,
+        struct butterflyfish_fixed_list_wr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_WR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_WR_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_fixed_list_wr *)
+            &object->reducible_list_wr.fixed_list_wr;
+    return 0;
+}
+
+int butterflyfish_list_wr_as_reducible_list(
+        struct butterflyfish_list_wr *const object,
+        struct butterflyfish_reducible_list_wr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_WR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_WR_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_reducible_list_wr *)
+            &object->reducible_list_wr;
+    return 0;
+}
+
 int butterflyfish_list_wr_add(
         struct butterflyfish_list_wr *const object,
         const struct triggerfish_weak *const value) {

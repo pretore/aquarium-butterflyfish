@@ -67,6 +67,58 @@ struct butterflyfish_sorted_set_i {
 };
 
 /**
+ * @brief Return sorted set as a stream.
+ * @param [in] object set instance.
+ * @param [out] out receive stream.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_sorted_set_i_as_stream(
+        const struct butterflyfish_sorted_set_i *object,
+        const struct butterflyfish_stream_i **out);
+
+/**
+ * @brief Return sorted set as a collection.
+ * @param [in] object sorted set instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_sorted_set_i_as_collection(
+        const struct butterflyfish_sorted_set_i *object,
+        const struct butterflyfish_collection_i **out);
+
+/**
+ * @brief Return sorted set as a set.
+ * @param [in] object sorted set instance.
+ * @param [out] out receive set.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_sorted_set_i_as_set(
+        struct butterflyfish_sorted_set_i *object,
+        struct butterflyfish_set_i **out);
+
+/**
+ * @brief Return sorted set as a ordered set.
+ * @param [in] object sorted set instance.
+ * @param [out] out receive ordered set.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_sorted_set_i_as_ordered_set(
+        struct butterflyfish_sorted_set_i *object,
+        struct butterflyfish_ordered_set_i **out);
+
+/**
  * @brief Retrieve the count of items.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

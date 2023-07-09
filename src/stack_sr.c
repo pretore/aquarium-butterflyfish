@@ -108,6 +108,48 @@ int butterflyfish_stack_sr_pop(
 
 #pragma mark stack_sr -
 
+int butterflyfish_stack_sr_as_stream(
+        const struct butterflyfish_stack_sr *const object,
+        const struct butterflyfish_stream_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_sr *)
+            &object->reducible_stack_sr.collection_sr.stream_sr;
+    return 0;
+}
+
+int butterflyfish_stack_sr_as_collection(
+        const struct butterflyfish_stack_sr *object,
+        const struct butterflyfish_collection_sr **out) {
+    if (!object) {
+        return BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_sr *)
+            &object->reducible_stack_sr.collection_sr;
+    return 0;
+}
+
+int butterflyfish_stack_sr_as_reducible_stack(
+        struct butterflyfish_stack_sr *object,
+        struct butterflyfish_reducible_stack_sr **out) {
+    if (!object) {
+        return BUTTERFLYFISH_STACK_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STACK_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_reducible_stack_sr *)
+            &object->reducible_stack_sr;
+    return 0;
+}
+
 int butterflyfish_stack_sr_push(
         struct butterflyfish_stack_sr *const object,
         struct triggerfish_strong *const value) {

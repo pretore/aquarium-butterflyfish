@@ -88,6 +88,33 @@ int butterflyfish_set_s_prev(
 
 #pragma mark set_s -
 
+int butterflyfish_set_s_as_stream(
+        const struct butterflyfish_set_s *const object,
+        const struct butterflyfish_stream_s **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SET_S_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SET_S_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_s *)
+            &object->collection_s.stream_s;
+    return 0;
+}
+
+int butterflyfish_set_s_as_collection(
+        const struct butterflyfish_set_s *const object,
+        const struct butterflyfish_collection_s **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SET_S_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SET_S_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_s *) &object->collection_s;
+    return 0;
+}
+
 int butterflyfish_set_s_add(
         struct butterflyfish_set_s *const object,
         const struct sea_turtle_string *const value) {

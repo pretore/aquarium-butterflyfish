@@ -88,6 +88,34 @@ int butterflyfish_map_i_i_prev(
 
 #pragma mark map_i_i -
 
+int butterflyfish_map_i_i_as_stream(
+        const struct butterflyfish_map_i_i *const object,
+        const struct butterflyfish_stream_i_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_i_i *)
+            &object->collection_i_i.stream_i_i;
+    return 0;
+}
+
+int butterflyfish_map_i_i_as_collection(
+        const struct butterflyfish_map_i_i *const object,
+        const struct butterflyfish_collection_i_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_i_i *)
+            &object->collection_i_i;
+    return 0;
+}
+
 int butterflyfish_map_i_i_remove_entry(
         struct butterflyfish_map_i_i *const object,
         const struct butterflyfish_map_entry_i_i *const entry) {

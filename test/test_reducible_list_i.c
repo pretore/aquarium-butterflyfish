@@ -7,6 +7,66 @@
 
 #include <test/cmocka.h>
 
+static void check_as_stream_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_list_i_as_stream(NULL, (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_stream_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_list_i_as_stream((void *) 1, NULL),
+            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_stream(void **state) {
+    struct butterflyfish_reducible_list_i reducible_list = {};
+    const struct butterflyfish_stream_i *stream;
+    assert_int_equal(butterflyfish_reducible_list_i_as_stream(
+            &reducible_list, &stream), 0);
+    assert_ptr_equal(&reducible_list, stream);
+}
+
+static void check_as_collection_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_list_i_as_collection(NULL, (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_collection_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_list_i_as_collection((void *) 1, NULL),
+            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_collection(void **state) {
+    struct butterflyfish_reducible_list_i reducible_list = {};
+    const struct butterflyfish_collection_i *collection;
+    assert_int_equal(butterflyfish_reducible_list_i_as_collection(
+            &reducible_list, &collection), 0);
+    assert_ptr_equal(&reducible_list, collection);
+}
+
+static void check_as_fixed_list_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_list_i_as_fixed_list(NULL, (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_fixed_list_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_list_i_as_fixed_list((void *) 1, NULL),
+            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_fixed_list(void **state) {
+    struct butterflyfish_reducible_list_i reducible_list = {};
+    struct butterflyfish_fixed_list_i *fixed_list;
+    assert_int_equal(butterflyfish_reducible_list_i_as_fixed_list(
+            &reducible_list, &fixed_list), 0);
+    assert_ptr_equal(&reducible_list, fixed_list);
+}
+
 static void check_count_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_reducible_list_i_count(NULL, (void *) 1),
@@ -1002,6 +1062,15 @@ static void check_remove_items(void **state) {
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
+            cmocka_unit_test(check_as_stream_error_on_object_is_null),
+            cmocka_unit_test(check_as_stream_error_on_out_is_null),
+            cmocka_unit_test(check_as_stream),
+            cmocka_unit_test(check_as_collection_error_on_object_is_null),
+            cmocka_unit_test(check_as_collection_error_on_out_is_null),
+            cmocka_unit_test(check_as_collection),
+            cmocka_unit_test(check_as_fixed_list_error_on_object_is_null),
+            cmocka_unit_test(check_as_fixed_list_error_on_out_is_null),
+            cmocka_unit_test(check_as_fixed_list),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),

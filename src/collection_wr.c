@@ -41,6 +41,19 @@ int butterflyfish_collection_wr_next(
 
 #pragma mark collection_wr -
 
+int butterflyfish_collection_wr_as_stream(
+        const struct butterflyfish_collection_wr *const object,
+        const struct butterflyfish_stream_wr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_COLLECTION_WR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_COLLECTION_WR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_wr *) &object->stream_wr;
+    return 0;
+}
+
 int butterflyfish_collection_wr_count(
         const struct butterflyfish_collection_wr *const object,
         uintmax_t *const out) {

@@ -224,3 +224,44 @@ int butterflyfish_ordered_set_p_get(
 }
 
 #pragma mark ordered_set_p -
+
+int butterflyfish_ordered_set_p_as_stream(
+        const struct butterflyfish_ordered_set_p *const object,
+        const struct butterflyfish_stream_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_p *)
+            &object->set_p.collection_p.stream_p;
+    return 0;
+}
+
+int butterflyfish_ordered_set_p_as_collection(
+        const struct butterflyfish_ordered_set_p *const object,
+        const struct butterflyfish_collection_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_p *)
+            &object->set_p.collection_p;
+    return 0;
+}
+
+int butterflyfish_ordered_set_p_as_set(
+        struct butterflyfish_ordered_set_p *const object,
+        struct butterflyfish_set_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_SET_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_set_p *) &object->set_p;
+    return 0;
+}

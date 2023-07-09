@@ -198,6 +198,62 @@ int butterflyfish_list_ni_remove_all_items(
 
 #pragma mark list_ni -
 
+int butterflyfish_list_ni_as_stream(
+        const struct butterflyfish_list_ni *const object,
+        const struct butterflyfish_stream_ni **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_ni *)
+            &object->reducible_list_ni.fixed_list_ni.collection_ni.stream_ni;
+    return 0;
+}
+
+int butterflyfish_list_ni_as_collection(
+        const struct butterflyfish_list_ni *const object,
+        const struct butterflyfish_collection_ni **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_ni *)
+            &object->reducible_list_ni.fixed_list_ni.collection_ni;
+    return 0;
+}
+
+int butterflyfish_list_ni_as_fixed_list(
+        struct butterflyfish_list_ni *const object,
+        struct butterflyfish_fixed_list_ni **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_fixed_list_ni *)
+            &object->reducible_list_ni.fixed_list_ni;
+    return 0;
+}
+
+int butterflyfish_list_ni_as_reducible_list(
+        struct butterflyfish_list_ni *const object,
+        struct butterflyfish_reducible_list_ni **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_NI_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_reducible_list_ni *)
+            &object->reducible_list_ni;
+    return 0;
+}
+
 int butterflyfish_list_ni_add(
         struct butterflyfish_list_ni *const object,
         const uintmax_t value) {

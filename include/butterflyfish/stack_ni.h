@@ -35,6 +35,42 @@ struct butterflyfish_stack_ni {
 };
 
 /**
+ * @brief Return stack as a collection.
+ * @param [in] object stack instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_STACK_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STACK_NI_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_stack_ni_as_stream(
+        const struct butterflyfish_stack_ni *object,
+        const struct butterflyfish_stream_ni **out);
+
+/**
+ * @brief Return stack as a collection.
+ * @param [in] object stack instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_STACK_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STACK_NI_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_stack_ni_as_collection(
+        const struct butterflyfish_stack_ni *object,
+        const struct butterflyfish_collection_ni **out);
+
+/**
+ * @brief Return stack as a reducible stack.
+ * @param [in] object stack instance.
+ * @param [out] out receive reducible stack.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_STACK_NI_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STACK_NI_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_stack_ni_as_reducible_stack(
+        struct butterflyfish_stack_ni *object,
+        struct butterflyfish_reducible_stack_ni **out);
+
+/**
  * @brief Retrieve the count of items.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

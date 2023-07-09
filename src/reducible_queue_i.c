@@ -88,6 +88,33 @@ int butterflyfish_reducible_queue_i_prev(
 
 #pragma mark reducible_queue_i -
 
+int butterflyfish_reducible_queue_i_as_stream(
+        const struct butterflyfish_reducible_queue_i *const object,
+        const struct butterflyfish_stream_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_QUEUE_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_REDUCIBLE_QUEUE_I_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_i *)
+            &object->collection_i.stream_i;
+    return 0;
+}
+
+int butterflyfish_reducible_queue_i_as_collection(
+        const struct butterflyfish_reducible_queue_i *const object,
+        const struct butterflyfish_collection_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_QUEUE_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_REDUCIBLE_QUEUE_I_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_i *) &object->collection_i;
+    return 0;
+}
+
 int butterflyfish_reducible_queue_i_remove(
         struct butterflyfish_reducible_queue_i *const object,
         struct sea_turtle_integer *const out) {

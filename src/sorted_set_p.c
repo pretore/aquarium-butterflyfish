@@ -249,6 +249,60 @@ int butterflyfish_sorted_set_p_get(
 #pragma mark ordered_set_p -
 #pragma mark sorted_set_p -
 
+int butterflyfish_sorted_set_p_as_stream(
+        const struct butterflyfish_sorted_set_p *const object,
+        const struct butterflyfish_stream_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_p *)
+            &object->ordered_set_p.set_p.collection_p.stream_p;
+    return 0;
+}
+
+int butterflyfish_sorted_set_p_as_collection(
+        const struct butterflyfish_sorted_set_p *const object,
+        const struct butterflyfish_collection_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_p *)
+            &object->ordered_set_p.set_p.collection_p;
+    return 0;
+}
+
+int butterflyfish_sorted_set_p_as_set(
+        struct butterflyfish_sorted_set_p *const object,
+        struct butterflyfish_set_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_set_p *) &object->ordered_set_p.set_p;
+    return 0;
+}
+
+int butterflyfish_sorted_set_p_as_ordered_set(
+        struct butterflyfish_sorted_set_p *const object,
+        struct butterflyfish_ordered_set_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_ordered_set_p *) &object->ordered_set_p;
+    return 0;
+}
+
 int butterflyfish_sorted_set_p_ceiling(
         const struct butterflyfish_sorted_set_p *const object,
         const void *const value,

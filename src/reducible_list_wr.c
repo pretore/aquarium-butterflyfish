@@ -157,6 +157,47 @@ int butterflyfish_reducible_list_wr_at(
 
 #pragma mark reducible_list_wr -
 
+int butterflyfish_reducible_list_wr_as_stream(
+        const struct butterflyfish_reducible_list_wr *const object,
+        const struct butterflyfish_stream_wr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_wr *)
+            &object->fixed_list_wr.collection_wr.stream_wr;
+    return 0;
+}
+
+int butterflyfish_reducible_list_wr_as_collection(
+        const struct butterflyfish_reducible_list_wr *const object,
+        const struct butterflyfish_collection_wr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_wr *)
+            &object->fixed_list_wr.collection_wr;
+    return 0;
+}
+
+int butterflyfish_reducible_list_wr_as_fixed_list(
+        struct butterflyfish_reducible_list_wr *const object,
+        struct butterflyfish_fixed_list_wr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_WR_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_fixed_list_wr *) &object->fixed_list_wr;
+    return 0;
+}
+
 int butterflyfish_reducible_list_wr_remove(
         struct butterflyfish_reducible_list_wr *const object,
         const uintmax_t at) {

@@ -7,6 +7,46 @@
 
 #include <test/cmocka.h>
 
+static void check_as_stream_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_stack_ni_as_stream(NULL, (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_STACK_NI_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_stream_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_stack_ni_as_stream((void *) 1, NULL),
+            BUTTERFLYFISH_REDUCIBLE_STACK_NI_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_stream(void **state) {
+    struct butterflyfish_reducible_stack_ni reducible_stack = {};
+    const struct butterflyfish_stream_ni *stream;
+    assert_int_equal(butterflyfish_reducible_stack_ni_as_stream(
+            &reducible_stack, &stream), 0);
+    assert_ptr_equal(&reducible_stack, stream);
+}
+
+static void check_as_collection_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_stack_ni_as_collection(NULL, (void *) 1),
+            BUTTERFLYFISH_REDUCIBLE_STACK_NI_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_collection_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_reducible_stack_ni_as_collection((void *) 1, NULL),
+            BUTTERFLYFISH_REDUCIBLE_STACK_NI_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_collection(void **state) {
+    struct butterflyfish_reducible_stack_ni reducible_stack = {};
+    const struct butterflyfish_collection_ni *collection;
+    assert_int_equal(butterflyfish_reducible_stack_ni_as_collection(
+            &reducible_stack, &collection), 0);
+    assert_ptr_equal(&reducible_stack, collection);
+}
+
 static void check_count_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_reducible_stack_ni_count(NULL, (void *) 1),
@@ -399,6 +439,12 @@ static void check_pop_error_on_stack_is_empty(void **state) {
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
+            cmocka_unit_test(check_as_stream_error_on_object_is_null),
+            cmocka_unit_test(check_as_stream_error_on_out_is_null),
+            cmocka_unit_test(check_as_stream),
+            cmocka_unit_test(check_as_collection_error_on_object_is_null),
+            cmocka_unit_test(check_as_collection_error_on_out_is_null),
+            cmocka_unit_test(check_as_collection),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),

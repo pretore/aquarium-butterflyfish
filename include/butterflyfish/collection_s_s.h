@@ -33,6 +33,20 @@ struct butterflyfish_collection_s_s {
 };
 
 /**
+ * @brief Return collection as a stream.
+ * @param [in] object collection instance.
+ * @param [out] out receive stream.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_COLLECTION_S_S_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_COLLECTION_S_S_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_collection_s_s_as_stream(
+        const struct butterflyfish_collection_s_s *object,
+        const struct butterflyfish_stream_s_s **out);
+
+/**
  * @brief Retrieve the count of entries.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

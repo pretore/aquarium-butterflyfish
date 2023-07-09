@@ -42,6 +42,48 @@ struct butterflyfish_reducible_list_ni {
 };
 
 /**
+ * @brief Return reducible list as a stream.
+ * @param [in] object reducible list instance.
+ * @param [out] out receive stream.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_reducible_list_ni_as_stream(
+        const struct butterflyfish_reducible_list_ni *object,
+        const struct butterflyfish_stream_ni **out);
+
+/**
+ * @brief Return reducible list as a collection.
+ * @param [in] object reducible list instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_reducible_list_ni_as_collection(
+        const struct butterflyfish_reducible_list_ni *object,
+        const struct butterflyfish_collection_ni **out);
+
+/**
+ * @brief Return reducible list as a fixed list.
+ * @param [in] object reducible list instance.
+ * @param [out] out receive fixed list.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_NI_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_reducible_list_ni_as_fixed_list(
+        struct butterflyfish_reducible_list_ni *object,
+        struct butterflyfish_fixed_list_ni **out);
+
+/**
  * @brief Retrieve the count of items.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

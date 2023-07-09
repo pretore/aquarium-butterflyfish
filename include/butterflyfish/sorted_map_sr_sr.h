@@ -91,6 +91,62 @@ struct butterflyfish_sorted_map_sr_sr {
 };
 
 /**
+ * @brief Return sorted map as a stream.
+ * @param [in] object sorted map instance.
+ * @param [out] out receive stream.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_sorted_map_sr_sr_as_stream(
+        const struct butterflyfish_sorted_map_sr_sr *object,
+        const struct butterflyfish_stream_sr_sr **out);
+
+/**
+ * @brief Return sorted map as a collection.
+ * @param [in] object sorted map instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_sorted_map_sr_sr_as_collection(
+        const struct butterflyfish_sorted_map_sr_sr *object,
+        const struct butterflyfish_collection_sr_sr **out);
+
+/**
+ * @brief Return sorted map as a map.
+ * @param [in] object sorted map instance.
+ * @param [out] out receive map.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_sorted_map_sr_sr_as_map(
+        struct butterflyfish_sorted_map_sr_sr *object,
+        struct butterflyfish_map_sr_sr **out);
+
+/**
+ * @brief Return sorted map as a map.
+ * @param [in] object sorted map instance.
+ * @param [out] out receive ordered map.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_sorted_map_sr_sr_as_ordered_map(
+        struct butterflyfish_sorted_map_sr_sr *object,
+        struct butterflyfish_ordered_map_sr_sr **out);
+
+/**
  * @brief Retrieve the count of items.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

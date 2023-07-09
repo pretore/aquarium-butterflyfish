@@ -382,6 +382,62 @@ int butterflyfish_sorted_map_sr_sr_values(
 #pragma mark ordered_map_sr_sr -
 #pragma mark sorted_map_sr_sr -
 
+int butterflyfish_sorted_map_sr_sr_as_stream(
+        const struct butterflyfish_sorted_map_sr_sr *const object,
+        const struct butterflyfish_stream_sr_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_sr_sr *)
+            &object->ordered_map_sr_sr.map_sr_sr.collection_sr_sr.stream_sr_sr;
+    return 0;
+}
+
+int butterflyfish_sorted_map_sr_sr_as_collection(
+        const struct butterflyfish_sorted_map_sr_sr *const object,
+        const struct butterflyfish_collection_sr_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_sr_sr *)
+            &object->ordered_map_sr_sr.map_sr_sr.collection_sr_sr;
+    return 0;
+}
+
+int butterflyfish_sorted_map_sr_sr_as_map(
+        struct butterflyfish_sorted_map_sr_sr *const object,
+        struct butterflyfish_map_sr_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_map_sr_sr *)
+            &object->ordered_map_sr_sr.map_sr_sr;
+    return 0;
+}
+
+int butterflyfish_sorted_map_sr_sr_as_ordered_map(
+        struct butterflyfish_sorted_map_sr_sr *const object,
+        struct butterflyfish_ordered_map_sr_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_MAP_SR_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_ordered_map_sr_sr *)
+            &object->ordered_map_sr_sr;
+    return 0;
+}
+
 int butterflyfish_sorted_map_sr_sr_keys(
         struct butterflyfish_sorted_map_sr_sr *const object,
         struct butterflyfish_sorted_set_sr **const out) {

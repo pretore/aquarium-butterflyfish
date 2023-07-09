@@ -45,6 +45,48 @@ struct butterflyfish_ordered_map_i_i {
 };
 
 /**
+ * @brief Return ordered map as a stream.
+ * @param [in] object ordered map instance.
+ * @param [out] out receive stream.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_ordered_map_i_i_as_stream(
+        const struct butterflyfish_ordered_map_i_i *object,
+        const struct butterflyfish_stream_i_i **out);
+
+/**
+ * @brief Return ordered map as a collection.
+ * @param [in] object ordered map instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_ordered_map_i_i_as_collection(
+        const struct butterflyfish_ordered_map_i_i *object,
+        const struct butterflyfish_collection_i_i **out);
+
+/**
+ * @brief Return ordered map as a map.
+ * @param [in] object ordered map instance.
+ * @param [out] out receive map.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_ordered_map_i_i_as_map(
+        struct butterflyfish_ordered_map_i_i *object,
+        struct butterflyfish_map_i_i **out);
+
+/**
  * @brief Retrieve the count of items.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

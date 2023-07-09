@@ -88,6 +88,33 @@ int butterflyfish_fixed_list_p_prev(
 
 #pragma mark fixed_list_p -
 
+int butterflyfish_fixed_list_p_as_stream(
+        const struct butterflyfish_fixed_list_p *const object,
+        const struct butterflyfish_stream_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_FIXED_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_FIXED_LIST_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_p *)
+            &object->collection_p.stream_p;
+    return 0;
+}
+
+int butterflyfish_fixed_list_p_as_collection(
+        const struct butterflyfish_fixed_list_p *const object,
+        const struct butterflyfish_collection_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_FIXED_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_FIXED_LIST_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_p *) &object->collection_p;
+    return 0;
+}
+
 int butterflyfish_fixed_list_p_get(
         const struct butterflyfish_fixed_list_p *const object,
         const uintmax_t at,

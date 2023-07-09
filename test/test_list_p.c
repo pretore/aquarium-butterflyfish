@@ -7,6 +7,85 @@
 
 #include <test/cmocka.h>
 
+static void check_as_stream_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_list_p_as_stream(NULL, (void *) 1),
+            BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_stream_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_list_p_as_stream((void *) 1, NULL),
+            BUTTERFLYFISH_LIST_P_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_stream(void **state) {
+    struct butterflyfish_list_p list = {};
+    const struct butterflyfish_stream_p *stream;
+    assert_int_equal(butterflyfish_list_p_as_stream(&list, &stream), 0);
+    assert_ptr_equal(&list, stream);
+}
+
+static void check_as_collection_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_list_p_as_collection(NULL, (void *) 1),
+            BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_collection_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_list_p_as_collection((void *) 1, NULL),
+            BUTTERFLYFISH_LIST_P_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_collection(void **state) {
+    struct butterflyfish_list_p list = {};
+    const struct butterflyfish_collection_p *collection;
+    assert_int_equal(butterflyfish_list_p_as_collection(
+            &list, &collection), 0);
+    assert_ptr_equal(&list, collection);
+}
+
+static void check_as_fixed_list_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_list_p_as_fixed_list(NULL, (void *) 1),
+            BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_fixed_list_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_list_p_as_fixed_list((void *) 1, NULL),
+            BUTTERFLYFISH_LIST_P_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_fixed_list(void **state) {
+    struct butterflyfish_list_p list = {};
+    struct butterflyfish_fixed_list_p *fixed_list;
+    assert_int_equal(butterflyfish_list_p_as_fixed_list(
+            &list, &fixed_list), 0);
+    assert_ptr_equal(&list, fixed_list);
+}
+
+static void check_as_reducible_list_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_list_p_as_reducible_list(NULL, (void *) 1),
+            BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_reducible_list_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_list_p_as_reducible_list((void *) 1, NULL),
+            BUTTERFLYFISH_LIST_P_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_reducible_list(void **state) {
+    struct butterflyfish_list_p list = {};
+    struct butterflyfish_reducible_list_p *reducible_list;
+    assert_int_equal(butterflyfish_list_p_as_reducible_list(
+            &list, &reducible_list), 0);
+    assert_ptr_equal(&list, reducible_list);
+}
+
 static void check_count_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_list_p_count(NULL, (void *) 1),
@@ -1726,6 +1805,18 @@ check_insert_all_item_error_on_memory_allocation_failed(void **state) {
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
+            cmocka_unit_test(check_as_stream_error_on_object_is_null),
+            cmocka_unit_test(check_as_stream_error_on_out_is_null),
+            cmocka_unit_test(check_as_stream),
+            cmocka_unit_test(check_as_collection_error_on_object_is_null),
+            cmocka_unit_test(check_as_collection_error_on_out_is_null),
+            cmocka_unit_test(check_as_collection),
+            cmocka_unit_test(check_as_fixed_list_error_on_object_is_null),
+            cmocka_unit_test(check_as_fixed_list_error_on_out_is_null),
+            cmocka_unit_test(check_as_fixed_list),
+            cmocka_unit_test(check_as_reducible_list_error_on_object_is_null),
+            cmocka_unit_test(check_as_reducible_list_error_on_out_is_null),
+            cmocka_unit_test(check_as_reducible_list),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),

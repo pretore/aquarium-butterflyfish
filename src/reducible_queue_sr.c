@@ -88,6 +88,33 @@ int butterflyfish_reducible_queue_sr_prev(
 
 #pragma mark reducible_queue_sr -
 
+int butterflyfish_reducible_queue_sr_as_stream(
+        const struct butterflyfish_reducible_queue_sr *const object,
+        const struct butterflyfish_stream_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_QUEUE_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_REDUCIBLE_QUEUE_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_sr *)
+            &object->collection_sr.stream_sr;
+    return 0;
+}
+
+int butterflyfish_reducible_queue_sr_as_collection(
+        const struct butterflyfish_reducible_queue_sr *const object,
+        const struct butterflyfish_collection_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_QUEUE_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_REDUCIBLE_QUEUE_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_sr *) &object->collection_sr;
+    return 0;
+}
+
 int butterflyfish_reducible_queue_sr_remove(
         struct butterflyfish_reducible_queue_sr *const object,
         struct triggerfish_strong **const out) {

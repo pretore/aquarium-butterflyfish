@@ -108,6 +108,48 @@ int butterflyfish_queue_s_remove(
 
 #pragma mark queue_s -
 
+int butterflyfish_queue_s_as_stream(
+        const struct butterflyfish_queue_s *const object,
+        const struct butterflyfish_stream_s **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_QUEUE_S_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_QUEUE_S_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_s *)
+            &object->reducible_queue_s.collection_s.stream_s;
+    return 0;
+}
+
+int butterflyfish_queue_s_as_collection(
+        const struct butterflyfish_queue_s *const object,
+        const struct butterflyfish_collection_s **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_QUEUE_S_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_QUEUE_S_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_s *)
+            &object->reducible_queue_s.collection_s;
+    return 0;
+}
+
+int butterflyfish_queue_s_as_reducible_queue(
+        struct butterflyfish_queue_s *const object,
+        struct butterflyfish_reducible_queue_s **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_QUEUE_S_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_QUEUE_S_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_reducible_queue_s *)
+            &object->reducible_queue_s;
+    return 0;
+}
+
 int butterflyfish_queue_s_add(
         struct butterflyfish_queue_s *const object,
         const struct sea_turtle_string *const value) {

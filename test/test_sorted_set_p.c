@@ -7,6 +7,85 @@
 
 #include <test/cmocka.h>
 
+static void check_as_stream_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_sorted_set_p_as_stream(NULL, (void *) 1),
+            BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_stream_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_sorted_set_p_as_stream((void *) 1, NULL),
+            BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_stream(void **state) {
+    struct butterflyfish_sorted_set_p sorted_set = {};
+    const struct butterflyfish_stream_p *stream;
+    assert_int_equal(butterflyfish_sorted_set_p_as_stream(
+            &sorted_set, &stream), 0);
+    assert_ptr_equal(&sorted_set, stream);
+}
+
+static void check_as_collection_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_sorted_set_p_as_collection(NULL, (void *) 1),
+            BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_collection_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_sorted_set_p_as_collection((void *) 1, NULL),
+            BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_collection(void **state) {
+    struct butterflyfish_sorted_set_p sorted_set = {};
+    const struct butterflyfish_collection_p *collection;
+    assert_int_equal(butterflyfish_sorted_set_p_as_collection(
+            &sorted_set, &collection), 0);
+    assert_ptr_equal(&sorted_set, collection);
+}
+
+static void check_as_set_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_sorted_set_p_as_set(NULL, (void *) 1),
+            BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_set_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_sorted_set_p_as_set((void *) 1, NULL),
+            BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_set(void **state) {
+    struct butterflyfish_sorted_set_p sorted_set = {};
+    struct butterflyfish_set_p *set;
+    assert_int_equal(butterflyfish_sorted_set_p_as_set(&sorted_set, &set), 0);
+    assert_ptr_equal(&sorted_set, set);
+}
+
+static void check_as_ordered_set_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_sorted_set_p_as_ordered_set(NULL, (void *) 1),
+            BUTTERFLYFISH_SORTED_SET_P_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_ordered_set_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_sorted_set_p_as_ordered_set((void *) 1, NULL),
+            BUTTERFLYFISH_SORTED_SET_P_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_ordered_set(void **state) {
+    struct butterflyfish_sorted_set_p sorted_set = {};
+    struct butterflyfish_ordered_set_p *ordered_set;
+    assert_int_equal(butterflyfish_sorted_set_p_as_ordered_set(
+            &sorted_set, &ordered_set), 0);
+    assert_ptr_equal(&sorted_set, ordered_set);
+}
+
 static void check_count_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_set_p_count(NULL, (void *) 1),
@@ -73,7 +152,7 @@ static void check_as_ordered_set_count(void **state) {
     assert_int_equal(out, check);
 }
 
-static void check_as_set(void **state) {
+static void check_as_set_count(void **state) {
     srand(time(NULL));
     const struct butterflyfish_sorted_set_p sorted_set_p = {
             .ordered_set_p.set_p.collection_p.count = count
@@ -1861,11 +1940,23 @@ static void check_lower_error_on_memory_allocation_failed(void **state) {
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
+            cmocka_unit_test(check_as_stream_error_on_object_is_null),
+            cmocka_unit_test(check_as_stream_error_on_out_is_null),
+            cmocka_unit_test(check_as_stream),
+            cmocka_unit_test(check_as_collection_error_on_object_is_null),
+            cmocka_unit_test(check_as_collection_error_on_out_is_null),
+            cmocka_unit_test(check_as_collection),
+            cmocka_unit_test(check_as_set_error_on_object_is_null),
+            cmocka_unit_test(check_as_set_error_on_out_is_null),
+            cmocka_unit_test(check_as_set),
+            cmocka_unit_test(check_as_ordered_set_error_on_object_is_null),
+            cmocka_unit_test(check_as_ordered_set_error_on_out_is_null),
+            cmocka_unit_test(check_as_ordered_set),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),
             cmocka_unit_test(check_as_ordered_set_count),
-            cmocka_unit_test(check_as_set),
+            cmocka_unit_test(check_as_set_count),
             cmocka_unit_test(check_as_collection_count),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),

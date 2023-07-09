@@ -321,6 +321,47 @@ int butterflyfish_ordered_map_p_p_values(
 
 #pragma mark ordered_map_p_p -
 
+int butterflyfish_ordered_map_p_p_as_stream(
+        const struct butterflyfish_ordered_map_p_p *const object,
+        const struct butterflyfish_stream_p_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_p_p *)
+            &object->map_p_p.collection_p_p.stream_p_p;
+    return 0;
+}
+
+int butterflyfish_ordered_map_p_p_as_collection(
+        const struct butterflyfish_ordered_map_p_p *const object,
+        const struct butterflyfish_collection_p_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_p_p *)
+            &object->map_p_p.collection_p_p;
+    return 0;
+}
+
+int butterflyfish_ordered_map_p_p_as_map(
+        struct butterflyfish_ordered_map_p_p *const object,
+        struct butterflyfish_map_p_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_MAP_P_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_map_p_p *) &object->map_p_p;
+    return 0;
+}
+
 int butterflyfish_ordered_map_p_p_keys(
         struct butterflyfish_ordered_map_p_p *const object,
         struct butterflyfish_ordered_set_p **const out) {

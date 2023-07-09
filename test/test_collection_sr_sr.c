@@ -7,6 +7,26 @@
 
 #include <test/cmocka.h>
 
+static void check_as_stream_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_collection_sr_sr_as_stream(NULL, (void *) 1),
+            BUTTERFLYFISH_COLLECTION_SR_SR_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_stream_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_collection_sr_sr_as_stream((void *) 1, NULL),
+            BUTTERFLYFISH_COLLECTION_SR_SR_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_stream(void **state) {
+    struct butterflyfish_collection_sr_sr collection = {};
+    const struct butterflyfish_stream_sr_sr *stream;
+    assert_int_equal(butterflyfish_collection_sr_sr_as_stream(
+            &collection, &stream), 0);
+    assert_ptr_equal(&collection, stream);
+}
+
 static void check_count_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_collection_sr_sr_count(NULL, (void *) 1),
@@ -255,6 +275,9 @@ static void check_prev_error_on_end_of_sequence(void **state) {
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
+            cmocka_unit_test(check_as_stream_error_on_object_is_null),
+            cmocka_unit_test(check_as_stream_error_on_out_is_null),
+            cmocka_unit_test(check_as_stream),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),

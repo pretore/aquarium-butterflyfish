@@ -198,6 +198,62 @@ int butterflyfish_list_p_remove_all_items(
 
 #pragma mark list_p -
 
+int butterflyfish_list_p_as_stream(
+        const struct butterflyfish_list_p *const object,
+        const struct butterflyfish_stream_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_p *)
+            &object->reducible_list_p.fixed_list_p.collection_p.stream_p;
+    return 0;
+}
+
+int butterflyfish_list_p_as_collection(
+        const struct butterflyfish_list_p *const object,
+        const struct butterflyfish_collection_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_p *)
+            &object->reducible_list_p.fixed_list_p.collection_p;
+    return 0;
+}
+
+int butterflyfish_list_p_as_fixed_list(
+        struct butterflyfish_list_p *const object,
+        struct butterflyfish_fixed_list_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_fixed_list_p *)
+            &object->reducible_list_p.fixed_list_p;
+    return 0;
+}
+
+int butterflyfish_list_p_as_reducible_list(
+        struct butterflyfish_list_p *const object,
+        struct butterflyfish_reducible_list_p **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_P_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_reducible_list_p *)
+            &object->reducible_list_p;
+    return 0;
+}
+
 int butterflyfish_list_p_add(
         struct butterflyfish_list_p *const object,
         const void *const value) {

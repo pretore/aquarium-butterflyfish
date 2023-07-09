@@ -88,6 +88,33 @@ int butterflyfish_fixed_list_sr_prev(
 
 #pragma mark fixed_list_sr -
 
+int butterflyfish_fixed_list_sr_as_stream(
+        const struct butterflyfish_fixed_list_sr *const object,
+        const struct butterflyfish_stream_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_sr *)
+            &object->collection_sr.stream_sr;
+    return 0;
+}
+
+int butterflyfish_fixed_list_sr_as_collection(
+        const struct butterflyfish_fixed_list_sr *const object,
+        const struct butterflyfish_collection_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_sr *) &object->collection_sr;
+    return 0;
+}
+
 int butterflyfish_fixed_list_sr_get(
         const struct butterflyfish_fixed_list_sr *const object,
         const uintmax_t at,

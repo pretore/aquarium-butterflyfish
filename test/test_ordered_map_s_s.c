@@ -7,6 +7,66 @@
 
 #include <test/cmocka.h>
 
+static void check_as_stream_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_s_s_as_stream(NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_stream_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_s_s_as_stream((void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_stream(void **state) {
+    struct butterflyfish_ordered_map_s_s ordered_map = {};
+    const struct butterflyfish_stream_s_s *stream;
+    assert_int_equal(butterflyfish_ordered_map_s_s_as_stream(
+            &ordered_map, &stream), 0);
+    assert_ptr_equal(&ordered_map, stream);
+}
+
+static void check_as_collection_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_s_s_as_collection(NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_collection_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_s_s_as_collection((void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_collection(void **state) {
+    struct butterflyfish_ordered_map_s_s ordered_map = {};
+    const struct butterflyfish_collection_s_s *collection;
+    assert_int_equal(butterflyfish_ordered_map_s_s_as_collection(
+            &ordered_map, &collection), 0);
+    assert_ptr_equal(&ordered_map, collection);
+}
+
+static void check_as_map_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_s_s_as_map(NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_map_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_s_s_as_map((void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_S_S_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_map(void **state) {
+    struct butterflyfish_ordered_map_s_s ordered_map = {};
+    struct butterflyfish_map_s_s *map;
+    assert_int_equal(butterflyfish_ordered_map_s_s_as_map(
+            &ordered_map, &map), 0);
+    assert_ptr_equal(&ordered_map, map);
+}
+
 static void check_count_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_s_s_count(NULL, (void *) 1),
@@ -89,8 +149,8 @@ static void check_as_collection_count(void **state) {
     will_return(count, check);
     uintmax_t out;
     assert_int_equal(
-            butterflyfish_collection_p_p_count(
-                    (const struct butterflyfish_collection_p_p *) &instance,
+            butterflyfish_collection_s_s_count(
+                    (const struct butterflyfish_collection_s_s *) &instance,
                     &out),
             0);
     assert_int_equal(out, check);
@@ -1785,6 +1845,15 @@ static void check_as_map_values(void **state) {
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
+            cmocka_unit_test(check_as_stream_error_on_object_is_null),
+            cmocka_unit_test(check_as_stream_error_on_out_is_null),
+            cmocka_unit_test(check_as_stream),
+            cmocka_unit_test(check_as_collection_error_on_object_is_null),
+            cmocka_unit_test(check_as_collection_error_on_out_is_null),
+            cmocka_unit_test(check_as_collection),
+            cmocka_unit_test(check_as_map_error_on_object_is_null),
+            cmocka_unit_test(check_as_map_error_on_out_is_null),
+            cmocka_unit_test(check_as_map),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),

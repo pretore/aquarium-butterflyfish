@@ -59,6 +59,54 @@ struct butterflyfish_list_sr {
 };
 
 /**
+ * @brief Return list as a stream.
+ * @param [in] object list instance.
+ * @param [out] out receive stream.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_list_sr_as_stream(
+        const struct butterflyfish_list_sr *object,
+        const struct butterflyfish_stream_sr **out);
+
+/**
+ * @brief Return list as a collection.
+ * @param [in] object list instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_list_sr_as_collection(
+        const struct butterflyfish_list_sr *object,
+        const struct butterflyfish_collection_sr **out);
+
+/**
+ * @brief Return list as a fixed list.
+ * @param [in] object list instance.
+ * @param [out] out receive fixed list.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_list_sr_as_fixed_list(
+        struct butterflyfish_list_sr *object,
+        struct butterflyfish_fixed_list_sr **out);
+
+/**
+ * @brief Return list as a reducible list.
+ * @param [in] object list instance.
+ * @param [out] out receive reducible list.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_LIST_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_list_sr_as_reducible_list(
+        struct butterflyfish_list_sr *object,
+        struct butterflyfish_reducible_list_sr **out);
+
+/**
  * @brief Retrieve the count of items.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

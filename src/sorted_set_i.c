@@ -261,6 +261,60 @@ int butterflyfish_sorted_set_i_get(
 #pragma mark ordered_set_i -
 #pragma mark sorted_set_i -
 
+int butterflyfish_sorted_set_i_as_stream(
+        const struct butterflyfish_sorted_set_i *const object,
+        const struct butterflyfish_stream_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_i *)
+            &object->ordered_set_i.set_i.collection_i.stream_i;
+    return 0;
+}
+
+int butterflyfish_sorted_set_i_as_collection(
+        const struct butterflyfish_sorted_set_i *const object,
+        const struct butterflyfish_collection_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_i *)
+            &object->ordered_set_i.set_i.collection_i;
+    return 0;
+}
+
+int butterflyfish_sorted_set_i_as_set(
+        struct butterflyfish_sorted_set_i *const object,
+        struct butterflyfish_set_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_set_i *) &object->ordered_set_i.set_i;
+    return 0;
+}
+
+int butterflyfish_sorted_set_i_as_ordered_set(
+        struct butterflyfish_sorted_set_i *const object,
+        struct butterflyfish_ordered_set_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_ordered_set_i *) &object->ordered_set_i;
+    return 0;
+}
+
 int butterflyfish_sorted_set_i_ceiling(
         const struct butterflyfish_sorted_set_i *const object,
         const struct sea_turtle_integer *const value,

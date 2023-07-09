@@ -102,6 +102,32 @@ struct butterflyfish_map_ni_ni {
 };
 
 /**
+ * @brief Return map as a stream.
+ * @param [in] object map instance.
+ * @param [out] out receive stream.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_MAP_NI_NI_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_MAP_NI_NI_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_map_ni_ni_as_stream(
+        const struct butterflyfish_map_ni_ni *object,
+        const struct butterflyfish_stream_ni_ni **out);
+
+/**
+ * @brief Return map as a collection.
+ * @param [in] object map instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_MAP_NI_NI_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_MAP_NI_NI_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_map_ni_ni_as_collection(
+        const struct butterflyfish_map_ni_ni *object,
+        const struct butterflyfish_collection_ni_ni **out);
+
+/**
  * @brief Retrieve the count of items.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

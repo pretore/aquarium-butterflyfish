@@ -236,3 +236,44 @@ int butterflyfish_ordered_set_sr_get(
 }
 
 #pragma mark ordered_set_sr -
+
+int butterflyfish_ordered_set_sr_as_stream(
+        const struct butterflyfish_ordered_set_sr *const object,
+        const struct butterflyfish_stream_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_SET_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_SET_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_sr *)
+            &object->set_sr.collection_sr.stream_sr;
+    return 0;
+}
+
+int butterflyfish_ordered_set_sr_as_collection(
+        const struct butterflyfish_ordered_set_sr *const object,
+        const struct butterflyfish_collection_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_SET_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_SET_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_sr *)
+            &object->set_sr.collection_sr;
+    return 0;
+}
+
+int butterflyfish_ordered_set_sr_as_set(
+        struct butterflyfish_ordered_set_sr *const object,
+        struct butterflyfish_set_sr **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_SET_SR_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_SET_SR_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_set_sr *) &object->set_sr;
+    return 0;
+}

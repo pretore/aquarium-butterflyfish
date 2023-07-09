@@ -39,6 +39,42 @@ struct butterflyfish_queue_sr {
 };
 
 /**
+ * @brief Return queue as a collection.
+ * @param [in] object queue instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_queue_sr_as_stream(
+        const struct butterflyfish_queue_sr *object,
+        const struct butterflyfish_stream_sr **out);
+
+/**
+ * @brief Return queue as a collection.
+ * @param [in] object queue instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_queue_sr_as_collection(
+        const struct butterflyfish_queue_sr *object,
+        const struct butterflyfish_collection_sr **out);
+
+/**
+ * @brief Return queue as a reducible queue.
+ * @param [in] object queue instance.
+ * @param [out] out receive reducible queue.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_QUEUE_SR_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_queue_sr_as_reducible_queue(
+        struct butterflyfish_queue_sr *object,
+        struct butterflyfish_reducible_queue_sr **out);
+
+/**
  * @brief Retrieve the count of items.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

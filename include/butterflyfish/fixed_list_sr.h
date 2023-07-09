@@ -51,6 +51,34 @@ struct butterflyfish_fixed_list_sr {
 };
 
 /**
+ * @brief Return fixed list as a stream.
+ * @param [in] object fixed list instance.
+ * @param [out] out receive stream.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_fixed_list_sr_as_stream(
+        const struct butterflyfish_fixed_list_sr *object,
+        const struct butterflyfish_stream_sr **out);
+
+/**
+ * @brief Return fixed list as a collection.
+ * @param [in] object fixed list instance.
+ * @param [out] out receive collection.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_FIXED_LIST_SR_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_fixed_list_sr_as_collection(
+        const struct butterflyfish_fixed_list_sr *object,
+        const struct butterflyfish_collection_sr **out);
+
+/**
  * @brief Retrieve the count of items.
  * @param [in] object instance whose count we are to retrieve.
  * @param [out] out receive the count.

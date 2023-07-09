@@ -224,3 +224,44 @@ int butterflyfish_ordered_set_ni_get(
 }
 
 #pragma mark ordered_set_ni -
+
+int butterflyfish_ordered_set_ni_as_stream(
+        const struct butterflyfish_ordered_set_ni *const object,
+        const struct butterflyfish_stream_ni **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_SET_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_SET_NI_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_stream_ni *)
+            &object->set_ni.collection_ni.stream_ni;
+    return 0;
+}
+
+int butterflyfish_ordered_set_ni_as_collection(
+        const struct butterflyfish_ordered_set_ni *const object,
+        const struct butterflyfish_collection_ni **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_SET_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_SET_NI_ERROR_OUT_IS_NULL;
+    }
+    *out = (const struct butterflyfish_collection_ni *)
+            &object->set_ni.collection_ni;
+    return 0;
+}
+
+int butterflyfish_ordered_set_ni_as_set(
+        struct butterflyfish_ordered_set_ni *const object,
+        struct butterflyfish_set_ni **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_SET_NI_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_SET_NI_ERROR_OUT_IS_NULL;
+    }
+    *out = (struct butterflyfish_set_ni *) &object->set_ni;
+    return 0;
+}

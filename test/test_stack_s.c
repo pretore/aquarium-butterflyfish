@@ -7,6 +7,65 @@
 
 #include <test/cmocka.h>
 
+static void check_as_stream_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_s_as_stream(NULL, (void *) 1),
+            BUTTERFLYFISH_STACK_S_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_stream_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_s_as_stream((void *) 1, NULL),
+            BUTTERFLYFISH_STACK_S_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_stream(void **state) {
+    struct butterflyfish_stack_s stack = {};
+    const struct butterflyfish_stream_s *stream;
+    assert_int_equal(butterflyfish_stack_s_as_stream(&stack, &stream), 0);
+    assert_ptr_equal(&stack, stream);
+}
+
+static void check_as_collection_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_s_as_collection(NULL, (void *) 1),
+            BUTTERFLYFISH_STACK_S_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_collection_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_s_as_collection((void *) 1, NULL),
+            BUTTERFLYFISH_STACK_S_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_collection(void **state) {
+    struct butterflyfish_stack_s stack = {};
+    const struct butterflyfish_collection_s *collection;
+    assert_int_equal(butterflyfish_stack_s_as_collection(
+            &stack, &collection), 0);
+    assert_ptr_equal(&stack, collection);
+}
+
+static void check_as_reducible_stack_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_s_as_reducible_stack(NULL, (void *) 1),
+            BUTTERFLYFISH_STACK_S_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_reducible_stack_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_stack_s_as_reducible_stack((void *) 1, NULL),
+            BUTTERFLYFISH_STACK_S_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_reducible_stack(void **state) {
+    struct butterflyfish_stack_s stack = {};
+    struct butterflyfish_reducible_stack_s *reducible_stack;
+    assert_int_equal(butterflyfish_stack_s_as_reducible_stack(
+            &stack, &reducible_stack), 0);
+    assert_ptr_equal(&stack, reducible_stack);
+}
+
 static void check_count_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_stack_s_count(NULL, (void *) 1),
@@ -610,6 +669,15 @@ static void check_push_all_error_on_memory_allocation_failed(void **state) {
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
+            cmocka_unit_test(check_as_stream_error_on_object_is_null),
+            cmocka_unit_test(check_as_stream_error_on_out_is_null),
+            cmocka_unit_test(check_as_stream),
+            cmocka_unit_test(check_as_collection_error_on_object_is_null),
+            cmocka_unit_test(check_as_collection_error_on_out_is_null),
+            cmocka_unit_test(check_as_collection),
+            cmocka_unit_test(check_as_reducible_stack_error_on_object_is_null),
+            cmocka_unit_test(check_as_reducible_stack_error_on_out_is_null),
+            cmocka_unit_test(check_as_reducible_stack),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),
