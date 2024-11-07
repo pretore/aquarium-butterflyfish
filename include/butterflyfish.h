@@ -5,104 +5,112 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include <butterflyfish/collection_i.h>
-#include <butterflyfish/collection_ni.h>
-#include <butterflyfish/collection_p.h>
-#include <butterflyfish/collection_s.h>
-#include <butterflyfish/collection_sr.h>
-#include <butterflyfish/collection_wr.h>
-#include <butterflyfish/collection_i_i.h>
-#include <butterflyfish/collection_ni_ni.h>
-#include <butterflyfish/collection_p_p.h>
-#include <butterflyfish/collection_s_s.h>
-#include <butterflyfish/collection_sr_sr.h>
-#include <butterflyfish/fixed_list_i.h>
-#include <butterflyfish/fixed_list_ni.h>
-#include <butterflyfish/fixed_list_p.h>
-#include <butterflyfish/fixed_list_s.h>
-#include <butterflyfish/fixed_list_sr.h>
-#include <butterflyfish/fixed_list_wr.h>
-#include <butterflyfish/list_i.h>
-#include <butterflyfish/list_ni.h>
-#include <butterflyfish/list_p.h>
-#include <butterflyfish/list_s.h>
-#include <butterflyfish/list_sr.h>
-#include <butterflyfish/list_wr.h>
-#include <butterflyfish/map_entry_i_i.h>
-#include <butterflyfish/map_entry_ni_ni.h>
-#include <butterflyfish/map_entry_p_p.h>
-#include <butterflyfish/map_entry_s_s.h>
-#include <butterflyfish/map_entry_sr_sr.h>
-#include <butterflyfish/map_i_i.h>
-#include <butterflyfish/map_ni_ni.h>
-#include <butterflyfish/map_p_p.h>
-#include <butterflyfish/map_s_s.h>
-#include <butterflyfish/map_sr_sr.h>
-#include <butterflyfish/ordered_map_i_i.h>
-#include <butterflyfish/ordered_map_ni_ni.h>
-#include <butterflyfish/ordered_map_p_p.h>
-#include <butterflyfish/ordered_map_s_s.h>
-#include <butterflyfish/ordered_map_sr_sr.h>
-#include <butterflyfish/ordered_set_i.h>
-#include <butterflyfish/ordered_set_ni.h>
-#include <butterflyfish/ordered_set_p.h>
-#include <butterflyfish/ordered_set_s.h>
-#include <butterflyfish/ordered_set_sr.h>
-#include <butterflyfish/queue_i.h>
-#include <butterflyfish/queue_ni.h>
-#include <butterflyfish/queue_p.h>
-#include <butterflyfish/queue_s.h>
-#include <butterflyfish/queue_sr.h>
-#include <butterflyfish/queue_wr.h>
-#include <butterflyfish/reducible_list_i.h>
-#include <butterflyfish/reducible_list_ni.h>
-#include <butterflyfish/reducible_list_p.h>
-#include <butterflyfish/reducible_list_s.h>
-#include <butterflyfish/reducible_list_sr.h>
-#include <butterflyfish/reducible_list_wr.h>
-#include <butterflyfish/reducible_queue_i.h>
-#include <butterflyfish/reducible_queue_ni.h>
-#include <butterflyfish/reducible_queue_p.h>
-#include <butterflyfish/reducible_queue_s.h>
-#include <butterflyfish/reducible_queue_sr.h>
-#include <butterflyfish/reducible_queue_wr.h>
-#include <butterflyfish/reducible_stack_i.h>
-#include <butterflyfish/reducible_stack_ni.h>
-#include <butterflyfish/reducible_stack_p.h>
-#include <butterflyfish/reducible_stack_s.h>
-#include <butterflyfish/reducible_stack_sr.h>
-#include <butterflyfish/reducible_stack_wr.h>
-#include <butterflyfish/set_i.h>
-#include <butterflyfish/set_ni.h>
-#include <butterflyfish/set_p.h>
-#include <butterflyfish/set_s.h>
-#include <butterflyfish/set_sr.h>
-#include <butterflyfish/sorted_map_i_i.h>
-#include <butterflyfish/sorted_map_ni_ni.h>
-#include <butterflyfish/sorted_map_p_p.h>
-#include <butterflyfish/sorted_map_s_s.h>
-#include <butterflyfish/sorted_map_sr_sr.h>
-#include <butterflyfish/sorted_set_i.h>
-#include <butterflyfish/sorted_set_ni.h>
-#include <butterflyfish/sorted_set_p.h>
-#include <butterflyfish/sorted_set_s.h>
-#include <butterflyfish/sorted_set_sr.h>
-#include <butterflyfish/stack_i.h>
-#include <butterflyfish/stack_ni.h>
-#include <butterflyfish/stack_p.h>
-#include <butterflyfish/stack_s.h>
-#include <butterflyfish/stack_sr.h>
-#include <butterflyfish/stack_wr.h>
-#include <butterflyfish/stream_i.h>
+/* native integer (ni) */
 #include <butterflyfish/stream_ni.h>
-#include <butterflyfish/stream_p.h>
-#include <butterflyfish/stream_s.h>
-#include <butterflyfish/stream_sr.h>
-#include <butterflyfish/stream_wr.h>
+
+/* pointer (p) */
+
+/* integer (i) */
+#include <butterflyfish/addable_i.h>
+#include <butterflyfish/addable_i_i.h>
+#include <butterflyfish/collection_i.h>
+#include <butterflyfish/collection_i_i.h>
+#include <butterflyfish/incremental_list_i.h>
+#include <butterflyfish/incremental_map_i_i.h>
+#include <butterflyfish/incremental_set_i.h>
+#include <butterflyfish/insertable_i.h>
+#include <butterflyfish/list_i.h>
+#include <butterflyfish/map_i_i.h>
+#include <butterflyfish/map_i_i_entry.h>
+#include <butterflyfish/mutable_list_i.h>
+#include <butterflyfish/mutable_map_i_i.h>
+#include <butterflyfish/mutable_set_i.h>
+#include <butterflyfish/ordered_i.h>
+#include <butterflyfish/ordered_i_i.h>
+#include <butterflyfish/ordered_incremental_list_i.h>
+#include <butterflyfish/ordered_incremental_map_i_i.h>
+#include <butterflyfish/ordered_incremental_set_i.h>
+#include <butterflyfish/ordered_list_i.h>
+#include <butterflyfish/ordered_map_i_i.h>
+#include <butterflyfish/ordered_mutable_list_i.h>
+#include <butterflyfish/ordered_mutable_set_i.h>
+#include <butterflyfish/ordered_reducible_list_i.h>
+#include <butterflyfish/ordered_reducible_map_i_i.h>
+#include <butterflyfish/ordered_reducible_set_i.h>
+#include <butterflyfish/ordered_set_i.h>
+#include <butterflyfish/ordered_settable_incremental_list_i.h>
+#include <butterflyfish/ordered_settable_incremental_map_i_i.h>
+#include <butterflyfish/ordered_settable_incremental_set_i.h>
+#include <butterflyfish/ordered_settable_list_i.h>
+#include <butterflyfish/ordered_settable_map_i_i.h>
+#include <butterflyfish/ordered_settable_reducible_list_i.h>
+#include <butterflyfish/ordered_settable_reducible_set_i.h>
+#include <butterflyfish/ordered_settable_set_i.h>
+#include <butterflyfish/reducible_list_i.h>
+#include <butterflyfish/reducible_map_i_i.h>
+#include <butterflyfish/reducible_set_i.h>
+#include <butterflyfish/removable_i.h>
+#include <butterflyfish/removable_i_i.h>
+#include <butterflyfish/set_i.h>
+#include <butterflyfish/set_i_i.h>
+#include <butterflyfish/settable_i.h>
+#include <butterflyfish/settable_i_i.h>
+#include <butterflyfish/settable_incremental_list_i.h>
+#include <butterflyfish/settable_incremental_map_i_i.h>
+#include <butterflyfish/settable_incremental_set_i.h>
+#include <butterflyfish/settable_list_i.h>
+#include <butterflyfish/settable_map_i_i.h>
+#include <butterflyfish/settable_reducible_list_i.h>
+#include <butterflyfish/settable_reducible_map_i_i.h>
+#include <butterflyfish/settable_reducible_set_i.h>
+#include <butterflyfish/settable_set_i.h>
+#include <butterflyfish/sorted_i.h>
+#include <butterflyfish/sorted_incremental_list_i.h>
+#include <butterflyfish/sorted_incremental_set_i.h>
+#include <butterflyfish/sorted_list_i.h>
+#include <butterflyfish/sorted_mutable_list_i.h>
+#include <butterflyfish/sorted_mutable_set_i.h>
+#include <butterflyfish/sorted_reducible_list_i.h>
+#include <butterflyfish/sorted_reducible_set_i.h>
+#include <butterflyfish/sorted_set_i.h>
+#include <butterflyfish/sorted_settable_incremental_list_i.h>
+#include <butterflyfish/sorted_settable_incremental_set_i.h>
+#include <butterflyfish/sorted_settable_list_i.h>
+#include <butterflyfish/sorted_settable_reducible_list_i.h>
+#include <butterflyfish/sorted_settable_reducible_set_i.h>
+#include <butterflyfish/sorted_settable_set_i.h>
+#include <butterflyfish/stream_i.h>
 #include <butterflyfish/stream_i_i.h>
-#include <butterflyfish/stream_ni_ni.h>
-#include <butterflyfish/stream_p_p.h>
-#include <butterflyfish/stream_s_s.h>
-#include <butterflyfish/stream_sr_sr.h>
+#include <butterflyfish/swappable_i.h>
+#include <butterflyfish/swappable_incremental_list_i.h>
+#include <butterflyfish/swappable_incremental_set_i.h>
+#include <butterflyfish/swappable_list_i.h>
+#include <butterflyfish/swappable_mutable_list_i.h>
+#include <butterflyfish/swappable_mutable_set_i.h>
+#include <butterflyfish/swappable_reducible_list_i.h>
+#include <butterflyfish/swappable_reducible_set_i.h>
+#include <butterflyfish/swappable_set_i.h>
+#include <butterflyfish/swappable_settable_incremental_list_i.h>
+#include <butterflyfish/swappable_settable_incremental_set_i.h>
+#include <butterflyfish/swappable_settable_list_i.h>
+#include <butterflyfish/swappable_settable_reducible_list_i.h>
+#include <butterflyfish/swappable_settable_reducible_set_i.h>
+#include <butterflyfish/swappable_settable_set_i.h>
+
+/* string (s) */
+
+/* strong reference (r) */
+
+/* weak reference (w) */
+
+/**
+ * @brief Cast between types within object.
+ * @param [in] ptr to the embedded member.
+ * @param [in] type of the object.
+ * @param [in] from member of the object that ptr refers to.
+ * @param [in] to member of the object that we want to cast to.
+ */
+#define butterflyfish_cast(ptr, type, from, to) (\
+            (void *)((char *)ptr - offsetof(type, from) + offsetof(type, to)))
 
 #endif /* _BUTTERFLYFISH_BUTTERFLYFISH_H_ */

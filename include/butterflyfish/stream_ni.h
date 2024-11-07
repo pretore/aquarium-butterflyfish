@@ -18,10 +18,10 @@
     SEA_URCHIN_ERROR_END_OF_SEQUENCE
 
 struct butterflyfish_stream_ni {
-    int (*const first)(const void *object,
+    int (*const first)(const struct butterflyfish_stream_ni *object,
                        const uintmax_t **out);
 
-    int (*const next)(const void *object,
+    int (*const next)(const struct butterflyfish_stream_ni *object,
                       const uintmax_t *item,
                       const uintmax_t **out);
 };

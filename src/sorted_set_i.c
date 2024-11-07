@@ -1,11 +1,53 @@
 #include <stdlib.h>
+#include <assert.h>
+#include <seagrass.h>
 #include <butterflyfish.h>
 
 #ifdef TEST
 #include <test/cmocka.h>
 #endif
 
-#define INVOKABLE   (*(struct butterflyfish_sorted_set_i **) object)
+#define INVOKE(x)               (*(struct butterflyfish_sorted_set_i **) x)
+#define INVOKE_SORTED(x)        (*(struct butterflyfish_sorted_i **) x)
+#define INVOKE_SET(x)           (*(struct butterflyfish_set_i **) x)
+#define INVOKE_COLLECTION(x)    (*(struct butterflyfish_collection_i **) x)
+#define INVOKE_STREAM(x)        (*(struct butterflyfish_stream_i **) x)
+
+static inline int
+as_sorted(const struct butterflyfish_sorted_set_i *const object,
+          const struct butterflyfish_sorted_i **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_sorted(object, out);
+}
+
+static inline int
+as_set(const struct butterflyfish_sorted_set_i *const object,
+       const struct butterflyfish_set_i **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_set(object, out);
+}
+
+static inline int
+as_collection(const struct butterflyfish_sorted_set_i *const object,
+              const struct butterflyfish_collection_i **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_set_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->as_collection(set, out);
+}
+
+static inline int
+as_stream(const struct butterflyfish_sorted_set_i *const object,
+          const struct butterflyfish_stream_i **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_collection_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->as_stream(collection, out);
+}
 
 #pragma mark stream_i -
 
@@ -18,13 +60,9 @@ int butterflyfish_sorted_set_i_first(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
     }
-    return (INVOKABLE->first
-            ? INVOKABLE->first
-            : INVOKABLE->ordered_set_i
-                    .set_i
-                    .collection_i
-                    .stream_i
-                    .first)(object, out);
+    const struct butterflyfish_stream_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->first(stream, out);
 }
 
 int butterflyfish_sorted_set_i_next(
@@ -40,13 +78,9 @@ int butterflyfish_sorted_set_i_next(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
     }
-    return (INVOKABLE->next
-            ? INVOKABLE->next
-            : INVOKABLE->ordered_set_i
-                    .set_i
-                    .collection_i
-                    .stream_i
-                    .next)(object, item, out);
+    const struct butterflyfish_stream_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->next(stream, item, out);
 }
 
 #pragma mark collection_i -
@@ -60,10 +94,9 @@ int butterflyfish_sorted_set_i_count(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .collection_i
-            .count(object, out);
+    const struct butterflyfish_collection_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->count(collection, out);
 }
 
 int butterflyfish_sorted_set_i_last(
@@ -75,12 +108,9 @@ int butterflyfish_sorted_set_i_last(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
     }
-    return (INVOKABLE->last
-            ? INVOKABLE->last
-            : INVOKABLE->ordered_set_i
-                    .set_i
-                    .collection_i
-                    .last)(object, out);
+    const struct butterflyfish_collection_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->last(collection, out);
 }
 
 int butterflyfish_sorted_set_i_prev(
@@ -96,224 +126,12 @@ int butterflyfish_sorted_set_i_prev(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
     }
-    return (INVOKABLE->prev
-            ? INVOKABLE->prev
-            : INVOKABLE->ordered_set_i
-                    .set_i
-                    .collection_i
-                    .prev)(object, item, out);
+    const struct butterflyfish_collection_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->prev(collection, item, out);
 }
 
-#pragma mark set_i -
-
-int butterflyfish_sorted_set_i_add(
-        struct butterflyfish_sorted_set_i *const object,
-        const struct sea_turtle_integer *const value) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_VALUE_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .add(object, value);
-}
-
-int butterflyfish_sorted_set_i_add_all(
-        struct butterflyfish_sorted_set_i *const object,
-        const struct butterflyfish_stream_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .add_all(object, other);
-}
-
-int butterflyfish_sorted_set_i_remove(
-        struct butterflyfish_sorted_set_i *const object,
-        const struct sea_turtle_integer *const value) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_VALUE_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .remove(object, value);
-}
-
-int butterflyfish_sorted_set_i_remove_all(
-        struct butterflyfish_sorted_set_i *const object,
-        const struct butterflyfish_stream_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .remove_all(object, other);
-}
-
-int butterflyfish_sorted_set_i_remove_item(
-        struct butterflyfish_sorted_set_i *const object,
-        const struct sea_turtle_integer *const item) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!item) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_ITEM_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .remove_item(object, item);
-}
-
-int butterflyfish_sorted_set_i_remove_all_items(
-        struct butterflyfish_sorted_set_i *const object,
-        const struct butterflyfish_stream_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .remove_all_items(object, other);
-}
-
-int butterflyfish_sorted_set_i_contains(
-        const struct butterflyfish_sorted_set_i *const object,
-        const struct sea_turtle_integer *const value,
-        bool *const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_VALUE_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .contains(object, value, out);
-}
-
-int butterflyfish_sorted_set_i_contains_all(
-        const struct butterflyfish_sorted_set_i *const object,
-        const struct butterflyfish_stream_i *const other,
-        bool *const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OTHER_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .contains_all(object, other, out);
-}
-
-int butterflyfish_sorted_set_i_retain_all(
-        struct butterflyfish_sorted_set_i *const object,
-        const struct butterflyfish_stream_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .retain_all(object, other);
-}
-
-int butterflyfish_sorted_set_i_get(
-        const struct butterflyfish_sorted_set_i *const object,
-        const struct sea_turtle_integer *const value,
-        const struct sea_turtle_integer **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_VALUE_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
-    }
-    return INVOKABLE->ordered_set_i
-            .set_i
-            .get(object, value, out);
-}
-
-#pragma mark ordered_set_i -
-#pragma mark sorted_set_i -
-
-int butterflyfish_sorted_set_i_as_stream(
-        const struct butterflyfish_sorted_set_i *const object,
-        const struct butterflyfish_stream_i **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
-    }
-    *out = (const struct butterflyfish_stream_i *)
-            &object->ordered_set_i.set_i.collection_i.stream_i;
-    return 0;
-}
-
-int butterflyfish_sorted_set_i_as_collection(
-        const struct butterflyfish_sorted_set_i *const object,
-        const struct butterflyfish_collection_i **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
-    }
-    *out = (const struct butterflyfish_collection_i *)
-            &object->ordered_set_i.set_i.collection_i;
-    return 0;
-}
-
-int butterflyfish_sorted_set_i_as_set(
-        struct butterflyfish_sorted_set_i *const object,
-        struct butterflyfish_set_i **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
-    }
-    *out = (struct butterflyfish_set_i *) &object->ordered_set_i.set_i;
-    return 0;
-}
-
-int butterflyfish_sorted_set_i_as_ordered_set(
-        struct butterflyfish_sorted_set_i *const object,
-        struct butterflyfish_ordered_set_i **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
-    }
-    *out = (struct butterflyfish_ordered_set_i *) &object->ordered_set_i;
-    return 0;
-}
+#pragma mark sorted_i -
 
 int butterflyfish_sorted_set_i_ceiling(
         const struct butterflyfish_sorted_set_i *const object,
@@ -328,7 +146,9 @@ int butterflyfish_sorted_set_i_ceiling(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->ceiling(object, value, out);
+    const struct butterflyfish_sorted_i *sorted;
+    seagrass_required_true(!as_sorted(object, &sorted));
+    return INVOKE_SORTED(sorted)->ceiling(sorted, value, out);
 }
 
 int butterflyfish_sorted_set_i_floor(
@@ -344,7 +164,9 @@ int butterflyfish_sorted_set_i_floor(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->floor(object, value, out);
+    const struct butterflyfish_sorted_i *sorted;
+    seagrass_required_true(!as_sorted(object, &sorted));
+    return INVOKE_SORTED(sorted)->floor(sorted, value, out);
 }
 
 int butterflyfish_sorted_set_i_higher(
@@ -360,7 +182,9 @@ int butterflyfish_sorted_set_i_higher(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->higher(object, value, out);
+    const struct butterflyfish_sorted_i *sorted;
+    seagrass_required_true(!as_sorted(object, &sorted));
+    return INVOKE_SORTED(sorted)->higher(sorted, value, out);
 }
 
 int butterflyfish_sorted_set_i_lower(
@@ -376,6 +200,114 @@ int butterflyfish_sorted_set_i_lower(
     if (!out) {
         return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->lower(object, value, out);
+    const struct butterflyfish_sorted_i *sorted;
+    seagrass_required_true(!as_sorted(object, &sorted));
+    return INVOKE_SORTED(sorted)->lower(sorted, value, out);
+}
+
+#pragma mark set_i -
+
+int butterflyfish_sorted_set_i_contains(
+        const struct butterflyfish_sorted_set_i *const object,
+        const struct sea_turtle_integer *const value,
+        bool *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_SET_I_ERROR_VALUE_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->contains(set, value, out);
+}
+
+int butterflyfish_sorted_set_i_contains_all(
+        const struct butterflyfish_sorted_set_i *const object,
+        const struct butterflyfish_stream_i *const other,
+        bool *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_SET_I_ERROR_OTHER_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->contains_all(set, other, out);
+}
+
+int butterflyfish_sorted_set_i_get(
+        const struct butterflyfish_sorted_set_i *const object,
+        const struct sea_turtle_integer *const value,
+        const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_SET_I_ERROR_VALUE_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->get(set, value, out);
+}
+
+#pragma mark sorted_set_i -
+
+int butterflyfish_sorted_set_i_as_stream(
+        const struct butterflyfish_sorted_set_i *const object,
+        const struct butterflyfish_stream_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_stream(object, out);
+}
+
+int butterflyfish_sorted_set_i_as_collection(
+        const struct butterflyfish_sorted_set_i *const object,
+        const struct butterflyfish_collection_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_collection(object, out);
+}
+
+int butterflyfish_sorted_set_i_as_sorted(
+        const struct butterflyfish_sorted_set_i *const object,
+        const struct butterflyfish_sorted_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_sorted(object, out);
+}
+
+int butterflyfish_sorted_set_i_as_set(
+        const struct butterflyfish_sorted_set_i *const object,
+        const struct butterflyfish_set_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_set(object, out);
 }
 

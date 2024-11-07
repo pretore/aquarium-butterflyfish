@@ -21,15 +21,16 @@ struct sea_turtle_integer;
     BUTTERFLYFISH_STREAM_I_ERROR_END_OF_SEQUENCE
 
 struct butterflyfish_collection_i {
-    const struct butterflyfish_stream_i stream_i;
+    int (*const as_stream)(const struct butterflyfish_collection_i *object,
+                           const struct butterflyfish_stream_i **out);
 
-    int (*const count)(const void *object,
+    int (*const count)(const struct butterflyfish_collection_i *object,
                        uintmax_t *out);
 
-    int (*const last)(const void *object,
+    int (*const last)(const struct butterflyfish_collection_i *object,
                       const struct sea_turtle_integer **out);
 
-    int (*const prev)(const void *object,
+    int (*const prev)(const struct butterflyfish_collection_i *object,
                       const struct sea_turtle_integer *item,
                       const struct sea_turtle_integer **out);
 };
@@ -98,7 +99,8 @@ int butterflyfish_collection_i_last(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_ITEM_IS_NULL if item is
+ * <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_END_OF_SEQUENCE if there is no
  * next item.
@@ -116,7 +118,8 @@ int butterflyfish_collection_i_next(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_ITEM_IS_NULL if item is
+ * <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_ERROR_END_OF_SEQUENCE if there is no
  * previous item.

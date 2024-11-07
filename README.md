@@ -5,32 +5,41 @@
 
 Collection interfaces in C.
 
-- butterflyfish\_[stream](doc/Streams.md)\__x_
-  - butterflyfish\_[collection](doc/Collections.md)\__x_
-    - butterflyfish\_[reducible_queue](doc/ReducibleQueues.md)\__x_
-      - butterflyfish\_[queue](doc/Queues.md)\__x_
-    - butterflyfish\_[reducible_stack](doc/ReducibleStacks.md)\__x_ 
-      - butterflyfish\_[stack](doc/Stacks.md)\__x_
-    - butterflyfish\_[fixed_list](doc/FixedLists.md)\__x_
-      - butterflyfish\_[reducible_list](doc/ReducibleLists.md)\__x_
-        - butterflyfish\_[list](doc/Lists.md)\__x_
-    - butterflyfish\_[set](doc/Sets.md)\__x_
-      - butterflyfish\_[ordered_set](doc/OrderedSets.md)\__x_
-        - butterflyfish\_[sorted_set](doc/SortedSets.md)\__x_
+// set, list, deque, queue, stack, map
 
-- butterflyfish\_[stream](doc/Streams.md)\__x\_y_
-  - butterflyfish\_[collection](doc/Collections.md)\__x\_y_
-    - butterflyfish\_[map](doc/Maps.md)\__x\_y_
-      - butterflyfish\_[ordered_map](doc/OrderedMaps.md)\__x\_y_
-        - butterflyfish\_[sorted_map](doc/SortedMaps.md)\__x\_y_
+// _, sorted, ordered, swappable
 
-Where _x_ and _y_ is one of:
+```mermaid
+flowchart LR
+    A["_"] --> B[/"is item order significant?"/]
+    B -->|yes| C[/"are items sorted?"/]
+    B -->|no| D["_"]
+    C -->|yes| E["sorted"]
+    C -->|no| F[/"may you swap items?"/]
+    F -->|yes| G["swappable"]
+    F -->|no| H["ordered"]
+```
 
-| short code | description       |          data type          |
-|:----------:|:------------------|:---------------------------:|
-|     ni     | native integer    |        ``uintmax_t``        |
-|     p      | pointer           |          ``void*``          |
-|     i      | integer           |   ``sea_turtle_integer``    |
-|     s      | string            |    ``sea_turtle_string``    |
-|     sr     | strong reference  |   ``triggerfish_strong``    |
-|     wr     | weak reference    |    ``triggerfish_weak``     |
+// _, mutable, settable, incremental, reducible, settable_incremental, 
+settable_reducible
+
+
+```mermaid
+flowchart LR
+    A["_"] --> B[/"require mutable collection?"/]
+    B -->|yes| C[/"mutable in a specific way?"/]
+    C -->|count is constant| E["fixed"]
+    C -->|count may increase| F["incremental"]
+    C -->|count may reduce| G["reducible"]
+    C -->|no| D["mutable"]
+    B -->|no| H["_"]
+```
+
+| short code | description      |       data type        |
+|:----------:|:-----------------|:----------------------:|
+|     ni     | native integer   |     ``uintmax_t``      |
+|     p      | pointer          |       ``void *``       |
+|     i      | integer          | ``sea_turtle_integer`` |
+|     s      | string           | ``sea_turtle_string``  |
+|     r      | strong reference | ``triggerfish_strong`` |
+|     w      | weak reference   |  ``triggerfish_weak``  |

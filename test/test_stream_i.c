@@ -7,6 +7,33 @@
 
 #include <test/cmocka.h>
 
+struct object {
+    const struct butterflyfish_stream_i *const stream_i;
+};
+
+static int stream_first(const struct butterflyfish_stream_i *const object,
+                        const struct sea_turtle_integer **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
+static int stream_next(const struct butterflyfish_stream_i *const object,
+                       const struct sea_turtle_integer *const item,
+                       const struct sea_turtle_integer **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(item);
+    assert_non_null(out);
+    return mock();
+}
+
+const struct butterflyfish_stream_i stream_i = {
+        .first = stream_first,
+        .next = stream_next
+};
+
 static void check_first_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_stream_i_first(NULL, (void *) 1),
@@ -19,26 +46,12 @@ static void check_first_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL);
 }
 
-static int first_emit_error(const void *const object,
-                            const struct sea_turtle_integer **const out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(out);
-    return mock();
-}
-
 static void check_first_error_on_stream_is_empty(void **state) {
-    const struct butterflyfish_stream_i stream_i = {
-            .first = first_emit_error
-    };
-    struct object {
-        const struct butterflyfish_stream_i *stream_i;
-    };
-    struct object instance = {
+    const struct object instance = {
             .stream_i = &stream_i
     };
-    expect_function_call(first_emit_error);
-    will_return(first_emit_error,
+    expect_function_call(stream_first);
+    will_return(stream_first,
                 BUTTERFLYFISH_STREAM_I_ERROR_STREAM_IS_EMPTY);
     assert_int_equal(
             butterflyfish_stream_i_first(
@@ -65,28 +78,12 @@ static void check_next_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL);
 }
 
-static int next_emit_error(const void *const object,
-                           const struct sea_turtle_integer *const item,
-                           const struct sea_turtle_integer **const out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(item);
-    assert_non_null(out);
-    return mock();
-}
-
 static void check_next_error_on_end_of_sequence(void **state) {
-    const struct butterflyfish_stream_i stream_i = {
-            .next = next_emit_error
-    };
-    struct object {
-        const struct butterflyfish_stream_i *stream_i;
-    };
-    struct object instance = {
+    const struct object instance = {
             .stream_i = &stream_i
     };
-    expect_function_call(next_emit_error);
-    will_return(next_emit_error,
+    expect_function_call(stream_next);
+    will_return(stream_next,
                 BUTTERFLYFISH_STREAM_I_ERROR_END_OF_SEQUENCE);
     assert_int_equal(
             butterflyfish_stream_i_next(

@@ -1,11 +1,22 @@
 #include <stdlib.h>
+#include <assert.h>
+#include <seagrass.h>
 #include <butterflyfish.h>
 
 #ifdef TEST
 #include <test/cmocka.h>
 #endif
 
-#define INVOKABLE   (*(struct butterflyfish_collection_i **) object)
+#define INVOKE(x)           (*(struct butterflyfish_collection_i **) x)
+#define INVOKE_STREAM(x)    (*(struct butterflyfish_stream_i **) x)
+
+static inline int
+as_stream(const struct butterflyfish_collection_i *const object,
+          const struct butterflyfish_stream_i **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_stream(object, out);
+}
 
 #pragma mark stream_i -
 
@@ -18,8 +29,9 @@ int butterflyfish_collection_i_first(
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->stream_i
-            .first(object, out);
+    const struct butterflyfish_stream_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->first(stream, out);
 }
 
 int butterflyfish_collection_i_next(
@@ -35,8 +47,9 @@ int butterflyfish_collection_i_next(
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->stream_i
-            .next(object, item, out);
+    const struct butterflyfish_stream_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->next(stream, item, out);
 }
 
 #pragma mark collection_i -
@@ -50,8 +63,7 @@ int butterflyfish_collection_i_as_stream(
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
     }
-    *out = (const struct butterflyfish_stream_i *) &object->stream_i;
-    return 0;
+    return as_stream(object, out);
 }
 
 int butterflyfish_collection_i_count(
@@ -63,7 +75,7 @@ int butterflyfish_collection_i_count(
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->count(object, out);
+    return INVOKE(object)->count(object, out);
 }
 
 int butterflyfish_collection_i_last(
@@ -75,7 +87,7 @@ int butterflyfish_collection_i_last(
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->last(object, out);
+    return INVOKE(object)->last(object, out);
 }
 
 int butterflyfish_collection_i_prev(
@@ -91,6 +103,6 @@ int butterflyfish_collection_i_prev(
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->prev(object, item, out);
+    return INVOKE(object)->prev(object, item, out);
 }
 

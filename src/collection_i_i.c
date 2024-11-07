@@ -1,42 +1,55 @@
 #include <stdlib.h>
+#include <assert.h>
+#include <seagrass.h>
 #include <butterflyfish.h>
 
 #ifdef TEST
 #include <test/cmocka.h>
 #endif
 
-#define INVOKABLE   (*(struct butterflyfish_collection_i_i **) object)
+#define INVOKE(x)           (*(struct butterflyfish_collection_i_i **) x)
+#define INVOKE_STREAM(x)    (*(struct butterflyfish_stream_i_i **) x)
+
+static inline int
+as_stream(const struct butterflyfish_collection_i_i *const object,
+          const struct butterflyfish_stream_i_i **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_stream(object, out);
+}
 
 #pragma mark stream_i_i -
 
 int butterflyfish_collection_i_i_first(
         const struct butterflyfish_collection_i_i *const object,
-        const struct butterflyfish_map_entry_i_i **const out) {
+        const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->stream_i_i
-            .first(object, out);
+    const struct butterflyfish_stream_i_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->first(stream, out);
 }
 
 int butterflyfish_collection_i_i_next(
         const struct butterflyfish_collection_i_i *const object,
-        const struct butterflyfish_map_entry_i_i *const entry,
-        const struct butterflyfish_map_entry_i_i **const out) {
+        const struct butterflyfish_map_i_i_entry *const item,
+        const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL;
     }
-    if (!entry) {
-        return BUTTERFLYFISH_COLLECTION_I_I_ERROR_ENTRY_IS_NULL;
+    if (!item) {
+        return BUTTERFLYFISH_COLLECTION_I_I_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->stream_i_i
-            .next(object, entry, out);
+    const struct butterflyfish_stream_i_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->next(stream, item, out);
 }
 
 #pragma mark collection_i_i -
@@ -50,8 +63,7 @@ int butterflyfish_collection_i_i_as_stream(
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL;
     }
-    *out = (const struct butterflyfish_stream_i_i *) &object->stream_i_i;
-    return 0;
+    return as_stream(object, out);
 }
 
 int butterflyfish_collection_i_i_count(
@@ -63,34 +75,34 @@ int butterflyfish_collection_i_i_count(
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->count(object, out);
+    return INVOKE(object)->count(object, out);
 }
 
 int butterflyfish_collection_i_i_last(
         const struct butterflyfish_collection_i_i *const object,
-        const struct butterflyfish_map_entry_i_i **const out) {
+        const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->last(object, out);
+    return INVOKE(object)->last(object, out);
 }
 
 int butterflyfish_collection_i_i_prev(
         const struct butterflyfish_collection_i_i *const object,
-        const struct butterflyfish_map_entry_i_i *const entry,
-        const struct butterflyfish_map_entry_i_i **const out) {
+        const struct butterflyfish_map_i_i_entry *const item,
+        const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL;
     }
-    if (!entry) {
-        return BUTTERFLYFISH_COLLECTION_I_I_ERROR_ENTRY_IS_NULL;
+    if (!item) {
+        return BUTTERFLYFISH_COLLECTION_I_I_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->prev(object, entry, out);
+    return INVOKE(object)->prev(object, item, out);
 }
 

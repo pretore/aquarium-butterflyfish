@@ -1,13 +1,14 @@
 #include <stdlib.h>
+#include <sea-turtle.h>
 #include <butterflyfish.h>
 
 #ifdef TEST
 #include <test/cmocka.h>
 #endif
 
-#define INVOKABLE   (*(struct butterflyfish_stream_ni **) object)
+#define INVOKE(x)   (*(struct butterflyfish_stream_ni **) x)
 
-#pragma mark stream_ni -
+#pragma mark stream_i -
 
 int butterflyfish_stream_ni_first(
         const struct butterflyfish_stream_ni *const object,
@@ -18,7 +19,7 @@ int butterflyfish_stream_ni_first(
     if (!out) {
         return BUTTERFLYFISH_STREAM_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->first(object, out);
+    return INVOKE(object)->first(object, out);
 }
 
 int butterflyfish_stream_ni_next(
@@ -34,5 +35,5 @@ int butterflyfish_stream_ni_next(
     if (!out) {
         return BUTTERFLYFISH_STREAM_NI_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->next(object, item, out);
+    return INVOKE(object)->next(object, item, out);
 }

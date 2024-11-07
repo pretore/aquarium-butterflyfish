@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "ordered_i.h"
 #include "set_i.h"
 
 struct sea_turtle_integer;
@@ -22,18 +23,20 @@ struct sea_turtle_integer;
 #define BUTTERFLYFISH_ORDERED_SET_I_ERROR_OTHER_IS_NULL \
     BUTTERFLYFISH_SET_I_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_IS_NULL \
-    SEA_URCHIN_ERROR_VALUE_IS_NULL
-#define BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_ALREADY_EXISTS \
-    SEA_URCHIN_ERROR_VALUE_ALREADY_EXISTS
+    BUTTERFLYFISH_SET_I_ERROR_VALUE_IS_NULL
 #define BUTTERFLYFISH_ORDERED_SET_I_ERROR_MEMORY_ALLOCATION_FAILED \
-    SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
+    BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED
 #define BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_NOT_FOUND \
-    SEA_URCHIN_ERROR_VALUE_NOT_FOUND
-#define BUTTERFLYFISH_ORDERED_SET_I_ERROR_ITEM_NOT_FOUND \
-    SEA_URCHIN_ERROR_ITEM_NOT_FOUND
+    BUTTERFLYFISH_SET_I_ERROR_VALUE_NOT_FOUND
 
 struct butterflyfish_ordered_set_i {
-    const struct butterflyfish_set_i set_i;
+    int (*const as_ordered)(
+            const struct butterflyfish_ordered_set_i *object,
+            const struct butterflyfish_ordered_i **out);
+
+    int (*const as_set)(
+            const struct butterflyfish_ordered_set_i *object,
+            const struct butterflyfish_set_i **out);
 };
 
 /**
@@ -63,6 +66,19 @@ int butterflyfish_ordered_set_i_as_collection(
         const struct butterflyfish_collection_i **out);
 
 /**
+ * @brief Return ordered set as an ordered.
+ * @param [in] object ordered set instance.
+ * @param [out] out receive ordered.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
+ */
+int butterflyfish_ordered_set_i_as_ordered(
+        const struct butterflyfish_ordered_set_i *object,
+        const struct butterflyfish_ordered_i **out);
+
+/**
  * @brief Return ordered set as a set.
  * @param [in] object ordered set instance.
  * @param [out] out receive set.
@@ -72,8 +88,8 @@ int butterflyfish_ordered_set_i_as_collection(
  * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  */
 int butterflyfish_ordered_set_i_as_set(
-        struct butterflyfish_ordered_set_i *object,
-        struct butterflyfish_set_i **out);
+        const struct butterflyfish_ordered_set_i *object,
+        const struct butterflyfish_set_i **out);
 
 /**
  * @brief Retrieve the count of items.
@@ -119,34 +135,6 @@ int butterflyfish_ordered_set_i_last(
         const struct sea_turtle_integer **out);
 
 /**
- * @brief Remove item.
- * @param [in] object ordered set instance.
- * @param [in] item to be removed.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_ITEM_IS_NULL if item is
- * <i>NULL</i>.
- */
-int butterflyfish_ordered_set_i_remove_item(
-        struct butterflyfish_ordered_set_i *object,
-        const struct sea_turtle_integer *item);
-
-/**
- * @brief Remove all items.
- * @param [in] object ordered set instance.
- * @param [in] other stream of items which are to be removed.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OTHER_IS_NULL if other is
- * <i>NULL</i>.
- */
-int butterflyfish_ordered_set_i_remove_all_items(
-        struct butterflyfish_ordered_set_i *object,
-        const struct butterflyfish_stream_i *other);
-
-/**
  * @brief Retrieve next item.
  * @param [in] object ordered set instance.
  * @param [in] item current item.
@@ -183,77 +171,6 @@ int butterflyfish_ordered_set_i_prev(
         const struct butterflyfish_ordered_set_i *object,
         const struct sea_turtle_integer *item,
         const struct sea_turtle_integer **out);
-
-/**
- * @brief Add value to the ordered set.
- * @param [in] object ordered set instance.
- * @param [in] value to be added.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_ALREADY_EXISTS if value is
- * already present in the ordered set.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if
- * there is insufficient memory to add value to the ordered set.
- * @note <b>value</b> is copied and then placed into the ordered set.
- */
-int butterflyfish_ordered_set_i_add(
-        struct butterflyfish_ordered_set_i *object,
-        const struct sea_turtle_integer *value);
-
-/**
- * @brief Add values to the ordered set.
- * @param [in] object ordered set instance.
- * @param [in] other stream whose values will be added, ignoring duplicates.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OTHER_IS_NULL if other is
- * <i>NULL</i>
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if
- * there is insufficient memory to add streamed values to the ordered set.
- * @note streamed <b>values</b> are copied and then placed into the ordered set.
- */
-int butterflyfish_ordered_set_i_add_all(
-        struct butterflyfish_ordered_set_i *object,
-        const struct butterflyfish_stream_i *other);
-
-/**
- * @brief Remove value from the ordered set.
- * @param [in] object ordered set instance.
- * @param [in] value to be removed.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_NOT_FOUND if value is not
- * in the ordered set instance.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if
- * there is insufficient memory to find the value.
- */
-int butterflyfish_ordered_set_i_remove(
-        struct butterflyfish_ordered_set_i *object,
-        const struct sea_turtle_integer *value);
-
-/**
- * @brief Remove values from the ordered set.
- * @param [in] object ordered set instance.
- * @param [in] other stream whose values will be removed, ignoring value not
- * found.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OTHER_IS_NULL if other is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if
- * there is insufficient memory to find the streamed values in the ordered set.
- */
-int butterflyfish_ordered_set_i_remove_all(
-        struct butterflyfish_ordered_set_i *object,
-        const struct butterflyfish_stream_i *other);
 
 /**
  * @brief Check if ordered set contains the given value.
@@ -295,23 +212,6 @@ int butterflyfish_ordered_set_i_contains_all(
         bool *out);
 
 /**
- * @brief Retain all the values present in both.
- * @param [in] object ordered set instance.
- * @param [in] other stream whose values, if present in ordered set too, will
- * be retained.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OTHER_IS_NULL if other is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if
- * there is insufficient memory to find the item.
- */
-int butterflyfish_ordered_set_i_retain_all(
-        struct butterflyfish_ordered_set_i *object,
-        const struct butterflyfish_stream_i *other);
-
-/**
  * @brief Retrieve item for value.
  * @param [in] object ordered set instance.
  * @param [in] value to find.
@@ -322,8 +222,8 @@ int butterflyfish_ordered_set_i_retain_all(
  * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_IS_NULL if value is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_ITEM_NOT_FOUND if there is no
- * item that matched value.
+ * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_NOT_FOUND if value is not
+ * in the ordered instance.
  * @throws BUTTERFLYFISH_ORDERED_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if
  * there is insufficient memory to find the item.
  */

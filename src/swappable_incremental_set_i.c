@@ -1,0 +1,507 @@
+#include <stdlib.h>
+#include <assert.h>
+#include <seagrass.h>
+#include <butterflyfish.h>
+
+#ifdef TEST
+#include <test/cmocka.h>
+#endif
+
+#define INVOKE(x) \
+    (*(struct butterflyfish_swappable_incremental_set_i **) x)
+#define INVOKE_SWAPPABLE_SET(x) \
+    (*(struct butterflyfish_swappable_set_i **) x)
+#define INVOKE_SWAPPABLE(x) \
+    (*(struct butterflyfish_swappable_i **) x)
+#define INVOKE_ORDERED_INCREMENTAL_SET(x) \
+    (*(struct butterflyfish_ordered_incremental_set_i **) x)
+#define INVOKE_ORDERED_SET(x) \
+    (*(struct butterflyfish_ordered_set_i **) x)
+#define INVOKE_INCREMENTAL_SET(x) \
+    (*(struct butterflyfish_incremental_set_i **) x)
+#define INVOKE_SET(x)           (*(struct butterflyfish_set_i **) x)
+#define INVOKE_INSERTABLE(x)    (*(struct butterflyfish_insertable_i **) x)
+#define INVOKE_ORDERED(x)       (*(struct butterflyfish_ordered_i **) x)
+#define INVOKE_ADDABLE(x)       (*(struct butterflyfish_addable_i **) x)
+#define INVOKE_COLLECTION(x)    (*(struct butterflyfish_collection_i **) x)
+#define INVOKE_STREAM(x)        (*(struct butterflyfish_stream_i **) x)
+
+static inline int
+as_swappable_set(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_swappable_set_i **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_swappable_set(object, out);
+}
+
+static inline int
+as_ordered_incremental_set(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_ordered_incremental_set_i **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_ordered_incremental_set(object, out);
+}
+
+static inline int
+as_swappable(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_swappable_i **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_swappable_set_i *swappable_set;
+    seagrass_required_true(!as_swappable_set(object, &swappable_set));
+    return INVOKE_SWAPPABLE_SET(swappable_set)
+            ->as_swappable(swappable_set, out);
+}
+
+static inline int
+as_ordered_set(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct butterflyfish_ordered_set_i **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_ordered_incremental_set_i *ordered_incremental_set;
+    seagrass_required_true(!as_ordered_incremental_set(
+            (void *) object, &ordered_incremental_set));
+    return INVOKE_ORDERED_INCREMENTAL_SET(ordered_incremental_set)
+            ->as_ordered_set(ordered_incremental_set, out);
+}
+
+static inline int
+as_incremental_set(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_incremental_set_i **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_ordered_incremental_set_i *ordered_incremental_set;
+    seagrass_required_true(!as_ordered_incremental_set(
+            object, &ordered_incremental_set));
+    return INVOKE_ORDERED_INCREMENTAL_SET(ordered_incremental_set)
+            ->as_incremental_set(ordered_incremental_set, out);
+}
+
+static inline int
+as_set(const struct butterflyfish_swappable_incremental_set_i *const object,
+       const struct butterflyfish_set_i **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_ordered_set_i *ordered_set;
+    seagrass_required_true(!as_ordered_set(object, &ordered_set));
+    return INVOKE_ORDERED_SET(ordered_set)->as_set(ordered_set, out);
+}
+
+static inline int
+as_insertable(struct butterflyfish_swappable_incremental_set_i *const object,
+              struct butterflyfish_insertable_i **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_ordered_incremental_set_i *ordered_incremental_set;
+    seagrass_required_true(!as_ordered_incremental_set(
+            object, &ordered_incremental_set));
+    return INVOKE_ORDERED_INCREMENTAL_SET(ordered_incremental_set)
+            ->as_insertable(ordered_incremental_set, out);
+}
+
+static inline int
+as_ordered(const struct butterflyfish_swappable_incremental_set_i *const object,
+           const struct butterflyfish_ordered_i **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_ordered_set_i *ordered_set;
+    seagrass_required_true(!as_ordered_set(object, &ordered_set));
+    return INVOKE_ORDERED_SET(ordered_set)->as_ordered(ordered_set, out);
+}
+
+static inline int
+as_addable(struct butterflyfish_swappable_incremental_set_i *const object,
+           struct butterflyfish_addable_i **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_incremental_set_i *incremental_set;
+    seagrass_required_true(!as_incremental_set(object, &incremental_set));
+    return INVOKE_INCREMENTAL_SET(incremental_set)
+            ->as_addable(incremental_set, out);
+}
+
+static inline int
+as_collection(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct butterflyfish_collection_i **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_set_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->as_collection(set, out);
+}
+
+static inline int
+as_stream(const struct butterflyfish_swappable_incremental_set_i *const object,
+          const struct butterflyfish_stream_i **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_collection_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->as_stream(collection, out);
+}
+
+#pragma mark stream_i -
+
+int butterflyfish_swappable_incremental_set_i_first(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_stream_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->first(stream, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_next(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer *const item,
+        const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_stream_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->next(stream, item, out);
+}
+
+#pragma mark collection_i -
+
+int butterflyfish_swappable_incremental_set_i_count(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        uintmax_t *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_collection_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->count(collection, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_last(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_collection_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->last(collection, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_prev(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer *const item,
+        const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_collection_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->prev(collection, item, out);
+}
+
+#pragma mark swappable_i -
+
+int butterflyfish_swappable_incremental_set_i_swap(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer *const item,
+        const struct sea_turtle_integer *const other) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OTHER_IS_NULL;
+    }
+    struct butterflyfish_swappable_i *swappable;
+    seagrass_required_true(!as_swappable(object, &swappable));
+    return INVOKE_SWAPPABLE(swappable)->swap(swappable, item, other);
+}
+
+#pragma mark set_i -
+
+int butterflyfish_swappable_incremental_set_i_contains(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer *const value,
+        bool *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_VALUE_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->contains(set, value, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_contains_all(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct butterflyfish_stream_i *const other,
+        bool *out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OTHER_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->contains_all(set, other, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_get(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer *const value,
+        const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_VALUE_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->get(set, value, out);
+}
+
+#pragma mark addable_i -
+
+int butterflyfish_swappable_incremental_set_i_add(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_VALUE_IS_NULL;
+    }
+    struct butterflyfish_addable_i *addable;
+    seagrass_required_true(!as_addable(object, &addable));
+    return INVOKE_ADDABLE(addable)->add(addable, value);
+}
+
+int butterflyfish_swappable_incremental_set_i_add_all(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct butterflyfish_stream_i *const other) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OTHER_IS_NULL;
+    }
+    struct butterflyfish_addable_i *addable;
+    seagrass_required_true(!as_addable(object, &addable));
+    return INVOKE_ADDABLE(addable)->add_all(addable, other);
+}
+
+#pragma mark insertable_i -
+
+int butterflyfish_swappable_incremental_set_i_insert(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer *const item,
+        const struct sea_turtle_integer *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_VALUE_IS_NULL;
+    }
+    struct butterflyfish_insertable_i *insertable;
+    seagrass_required_true(!as_insertable(object, &insertable));
+    return INVOKE_INSERTABLE(insertable)->insert(insertable, item, value);
+}
+
+int butterflyfish_swappable_incremental_set_i_insert_all(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct sea_turtle_integer *const item,
+        const struct butterflyfish_stream_i *const other) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OTHER_IS_NULL;
+    }
+    struct butterflyfish_insertable_i *insertable;
+    seagrass_required_true(!as_insertable(object, &insertable));
+    return INVOKE_INSERTABLE(insertable)->insert_all(insertable, item, other);
+}
+
+#pragma mark swappable_incremental_set_i -
+
+int butterflyfish_swappable_incremental_set_i_as_stream(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct butterflyfish_stream_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_stream(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_collection(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct butterflyfish_collection_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_collection(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_addable(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_addable_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_addable(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_ordered(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct butterflyfish_ordered_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_ordered(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_set(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct butterflyfish_set_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_set(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_incremental_set(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_incremental_set_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_incremental_set(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_insertable(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_insertable_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_insertable(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_ordered_set(
+        const struct butterflyfish_swappable_incremental_set_i *const object,
+        const struct butterflyfish_ordered_set_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_ordered_set(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_swappable(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_swappable_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_swappable(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_ordered_incremental_set(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_ordered_incremental_set_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_ordered_incremental_set(object, out);
+}
+
+int butterflyfish_swappable_incremental_set_i_as_swappable_set(
+        struct butterflyfish_swappable_incremental_set_i *const object,
+        struct butterflyfish_swappable_set_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SWAPPABLE_INCREMENTAL_SET_I_ERROR_OUT_IS_NULL;
+    }
+    return as_swappable_set(object, out);
+}

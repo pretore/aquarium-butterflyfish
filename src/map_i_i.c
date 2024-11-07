@@ -1,44 +1,77 @@
 #include <stdlib.h>
+#include <assert.h>
+#include <seagrass.h>
 #include <butterflyfish.h>
 
 #ifdef TEST
 #include <test/cmocka.h>
 #endif
 
-#define INVOKABLE   (*(struct butterflyfish_map_i_i **) object)
+#define INVOKE(x)               (*(struct butterflyfish_map_i_i **) x)
+#define INVOKE_SET(x)           (*(struct butterflyfish_set_i_i **) x)
+#define INVOKE_COLLECTION(x)    (*(struct butterflyfish_collection_i_i **) x)
+#define INVOKE_STREAM(x)        (*(struct butterflyfish_stream_i_i **) x)
+
+static inline int
+as_set(const struct butterflyfish_map_i_i *const object,
+       const struct butterflyfish_set_i_i **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_set(object, out);
+}
+
+static inline int
+as_collection(const struct butterflyfish_map_i_i *const object,
+              const struct butterflyfish_collection_i_i **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_set_i_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->as_collection(set, out);
+}
+
+static inline int
+as_stream(const struct butterflyfish_map_i_i *const object,
+          const struct butterflyfish_stream_i_i **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_collection_i_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->as_stream(collection, out);
+}
 
 #pragma mark stream_i_i -
 
 int butterflyfish_map_i_i_first(
         const struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_map_entry_i_i **const out) {
+        const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i_i
-            .stream_i_i
-            .first(object, out);
+    const struct butterflyfish_stream_i_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->first(stream, out);
 }
 
 int butterflyfish_map_i_i_next(
         const struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_map_entry_i_i *const entry,
-        const struct butterflyfish_map_entry_i_i **const out) {
+        const struct butterflyfish_map_i_i_entry *const item,
+        const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }
-    if (!entry) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_ENTRY_IS_NULL;
+    if (!item) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i_i
-            .stream_i_i
-            .next(object, entry, out);
+    const struct butterflyfish_stream_i_i *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->next(stream, item, out);
 }
 
 #pragma mark collection_i_i -
@@ -52,27 +85,49 @@ int butterflyfish_map_i_i_count(
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i_i
-            .count(object, out);
+    const struct butterflyfish_collection_i_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->count(collection, out);
 }
 
 int butterflyfish_map_i_i_last(
         const struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_map_entry_i_i **const out) {
+        const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i_i
-            .last(object, out);
+    const struct butterflyfish_collection_i_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->last(collection, out);
 }
 
 int butterflyfish_map_i_i_prev(
         const struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_map_entry_i_i *const entry,
-        const struct butterflyfish_map_entry_i_i **const out) {
+        const struct butterflyfish_map_i_i_entry *const item,
+        const struct butterflyfish_map_i_i_entry **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_collection_i_i *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->prev(collection, item, out);
+}
+
+#pragma mark set_i_i -
+
+int butterflyfish_map_i_i_contains(
+        const struct butterflyfish_map_i_i *const object,
+        const struct butterflyfish_map_i_i_entry *const entry,
+        bool *const out) {
     if (!object) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }
@@ -82,8 +137,45 @@ int butterflyfish_map_i_i_prev(
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->collection_i_i
-            .prev(object, entry, out);
+    const struct butterflyfish_set_i_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->contains(set, entry, out);
+}
+
+int butterflyfish_map_i_i_contains_all(
+        const struct butterflyfish_map_i_i *const object,
+        const struct butterflyfish_stream_i_i *const other,
+        bool *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_i_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->contains_all(set, other, out);
+}
+
+int butterflyfish_map_i_i_get(
+        const struct butterflyfish_map_i_i *const object,
+        const struct butterflyfish_map_i_i_entry *const entry,
+        const struct butterflyfish_map_i_i_entry **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!entry) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_ENTRY_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_i_i *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->get(set, entry, out);
 }
 
 #pragma mark map_i_i -
@@ -97,9 +189,7 @@ int butterflyfish_map_i_i_as_stream(
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    *out = (const struct butterflyfish_stream_i_i *)
-            &object->collection_i_i.stream_i_i;
-    return 0;
+    return as_stream(object, out);
 }
 
 int butterflyfish_map_i_i_as_collection(
@@ -111,172 +201,19 @@ int butterflyfish_map_i_i_as_collection(
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    *out = (const struct butterflyfish_collection_i_i *)
-            &object->collection_i_i;
-    return 0;
+    return as_collection(object, out);
 }
 
-int butterflyfish_map_i_i_remove_entry(
-        struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_map_entry_i_i *const entry) {
+int butterflyfish_map_i_i_as_set(
+        const struct butterflyfish_map_i_i *const object,
+        const struct butterflyfish_set_i_i **const out) {
     if (!object) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }
-    if (!entry) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_ENTRY_IS_NULL;
+    if (!out) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->remove_entry(object, entry);
-}
-
-int butterflyfish_map_i_i_remove_all_entries(
-        struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_stream_i_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->remove_all_entries(object, other);
-}
-
-int butterflyfish_map_i_i_add(
-        struct butterflyfish_map_i_i *const object,
-        const struct sea_turtle_integer *const key,
-        const struct sea_turtle_integer *const value) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!key) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_KEY_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_VALUE_IS_NULL;
-    }
-    return INVOKABLE->add(object, key, value);
-}
-
-int butterflyfish_map_i_i_put(
-        struct butterflyfish_map_i_i *const object,
-        const struct sea_turtle_integer *const key,
-        const struct sea_turtle_integer *const value) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!key) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_KEY_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_VALUE_IS_NULL;
-    }
-    return INVOKABLE->put(object, key, value);
-}
-
-int butterflyfish_map_i_i_replace(
-        struct butterflyfish_map_i_i *const object,
-        const struct sea_turtle_integer *const key,
-        const struct sea_turtle_integer *const value) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!key) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_KEY_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_VALUE_IS_NULL;
-    }
-    return INVOKABLE->replace(object, key, value);
-}
-
-int butterflyfish_map_i_i_remove(
-        struct butterflyfish_map_i_i *const object,
-        const struct sea_turtle_integer *const key) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!key) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_KEY_IS_NULL;
-    }
-    return INVOKABLE->remove(object, key);
-}
-
-int butterflyfish_map_i_i_add_all(
-        struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_stream_i_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->add_all(object, other);
-}
-
-int butterflyfish_map_i_i_put_all(
-        struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_stream_i_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->put_all(object, other);
-}
-
-int butterflyfish_map_i_i_replace_all(
-        struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_stream_i_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->replace_all(object, other);
-}
-
-int butterflyfish_map_i_i_remove_all(
-        struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_stream_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->remove_all(object, other);
-}
-
-int butterflyfish_map_i_i_retain_all(
-        struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_stream_i *const other) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL;
-    }
-    return INVOKABLE->retain_all(object, other);
-}
-
-int butterflyfish_map_i_i_merge(
-        struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_stream_i_i *const other,
-        int (*const function)(
-                const struct sea_turtle_integer *,
-                const struct sea_turtle_integer *,
-                struct sea_turtle_integer **)) {
-    if (!object) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!other) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL;
-    }
-    if (!function) {
-        return BUTTERFLYFISH_MAP_I_I_ERROR_FUNCTION_IS_NULL;
-    }
-    return INVOKABLE->merge(object, other, function);
+    return as_set(object, out);
 }
 
 int butterflyfish_map_i_i_contains_key(
@@ -292,7 +229,23 @@ int butterflyfish_map_i_i_contains_key(
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->contains_key(object, key, out);
+    return INVOKE(object)->contains_key(object, key, out);
+}
+
+int butterflyfish_map_i_i_contains_value(
+        const struct butterflyfish_map_i_i *const object,
+        const struct sea_turtle_integer *const value,
+        bool *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_VALUE_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    return INVOKE(object)->contains_value(object, value, out);
 }
 
 int butterflyfish_map_i_i_contains_all_keys(
@@ -308,10 +261,26 @@ int butterflyfish_map_i_i_contains_all_keys(
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->contains_all_keys(object, other, out);
+    return INVOKE(object)->contains_all_keys(object, other, out);
 }
 
-int butterflyfish_map_i_i_get(
+int butterflyfish_map_i_i_contains_all_values(
+        const struct butterflyfish_map_i_i *const object,
+        const struct butterflyfish_stream_i *const other,
+        bool *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OTHER_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    return INVOKE(object)->contains_all_values(object, other, out);
+}
+
+int butterflyfish_map_i_i_get_value(
         const struct butterflyfish_map_i_i *const object,
         const struct sea_turtle_integer *const key,
         const struct sea_turtle_integer **const out) {
@@ -324,13 +293,13 @@ int butterflyfish_map_i_i_get(
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->get(object, key, out);
+    return INVOKE(object)->get_value(object, key, out);
 }
 
 int butterflyfish_map_i_i_get_entry(
         const struct butterflyfish_map_i_i *const object,
         const struct sea_turtle_integer *const key,
-        const struct butterflyfish_map_entry_i_i **const out) {
+        const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }
@@ -340,29 +309,29 @@ int butterflyfish_map_i_i_get_entry(
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->get_entry(object, key, out);
+    return INVOKE(object)->get_entry(object, key, out);
 }
 
 int butterflyfish_map_i_i_keys(
-        struct butterflyfish_map_i_i *const object,
-        struct butterflyfish_set_i **const out) {
+        const struct butterflyfish_map_i_i *const object,
+        const struct butterflyfish_set_i **const out) {
     if (!object) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->keys(object, out);
+    return INVOKE(object)->keys(object, out);
 }
 
 int butterflyfish_map_i_i_values(
-        struct butterflyfish_map_i_i *const object,
-        struct butterflyfish_reducible_list_i **const out) {
+        const struct butterflyfish_map_i_i *const object,
+        const struct butterflyfish_list_i **const out) {
     if (!object) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->values(object, out);
+    return INVOKE(object)->values(object, out);
 }

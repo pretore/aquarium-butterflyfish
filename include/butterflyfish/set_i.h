@@ -23,48 +23,24 @@ struct sea_turtle_integer;
     SEA_URCHIN_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_SET_I_ERROR_VALUE_IS_NULL \
     SEA_URCHIN_ERROR_VALUE_IS_NULL
-#define BUTTERFLYFISH_SET_I_ERROR_VALUE_ALREADY_EXISTS \
-    SEA_URCHIN_ERROR_VALUE_ALREADY_EXISTS
 #define BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 #define BUTTERFLYFISH_SET_I_ERROR_VALUE_NOT_FOUND \
     SEA_URCHIN_ERROR_VALUE_NOT_FOUND
-#define BUTTERFLYFISH_SET_I_ERROR_ITEM_NOT_FOUND \
-    SEA_URCHIN_ERROR_ITEM_NOT_FOUND
 
 struct butterflyfish_set_i {
-    const struct butterflyfish_collection_i collection_i;
+    int (*const as_collection)(const struct butterflyfish_set_i *object,
+                               const struct butterflyfish_collection_i **out);
 
-    int (*const add)(void *object,
-                     const struct sea_turtle_integer *value);
-
-    int (*const remove)(void *object,
-                        const struct sea_turtle_integer *value);
-
-    int (*const add_all)(void *object,
-                         const struct butterflyfish_stream_i *other);
-
-    int (*const remove_all)(void *object,
-                            const struct butterflyfish_stream_i *other);
-
-    int (*const remove_item)(void *object,
-                             const struct sea_turtle_integer *item);
-
-    int (*const remove_all_items)(void *object,
-                                  const struct butterflyfish_stream_i *other);
-
-    int (*const contains)(const void *object,
+    int (*const contains)(const struct butterflyfish_set_i *object,
                           const struct sea_turtle_integer *value,
                           bool *out);
 
-    int (*const contains_all)(const void *object,
+    int (*const contains_all)(const struct butterflyfish_set_i *object,
                               const struct butterflyfish_stream_i *other,
                               bool *out);
 
-    int (*const retain_all)(void *object,
-                            const struct butterflyfish_stream_i *other);
-
-    int (*const get)(const void *object,
+    int (*const get)(const struct butterflyfish_set_i *object,
                      const struct sea_turtle_integer *value,
                      const struct sea_turtle_integer **out);
 };
@@ -132,30 +108,6 @@ int butterflyfish_set_i_last(
         const struct sea_turtle_integer **out);
 
 /**
- * @brief Remove item.
- * @param [in] object set instance.
- * @param [in] item to be removed.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
- */
-int butterflyfish_set_i_remove_item(
-        struct butterflyfish_set_i *object,
-        const struct sea_turtle_integer *item);
-
-/**
- * @brief Remove all items.
- * @param [in] object set instance.
- * @param [in] other stream of items which are to be removed.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
- */
-int butterflyfish_set_i_remove_all_items(
-        struct butterflyfish_set_i *object,
-        const struct butterflyfish_stream_i *other);
-
-/**
  * @brief Retrieve next item.
  * @param [in] object set instance.
  * @param [in] item current item.
@@ -187,69 +139,6 @@ int butterflyfish_set_i_prev(
         const struct butterflyfish_set_i *object,
         const struct sea_turtle_integer *item,
         const struct sea_turtle_integer **out);
-
-/**
- * @brief Add value to the set.
- * @param [in] object set instance.
- * @param [in] value to be added.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_VALUE_ALREADY_EXISTS if value is already
- * present in the set.
- * @throws BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if there is
- * insufficient memory to add value to the set.
- * @note <b>value</b> is copied and then placed into the set.
- */
-int butterflyfish_set_i_add(
-        struct butterflyfish_set_i *object,
-        const struct sea_turtle_integer *value);
-
-/**
- * @brief Add all the values to the set.
- * @param [in] object set instance.
- * @param [in] other stream whose values will be added, ignoring duplicates.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if there is
- * insufficient memory to add streamed values to the set.
- * @note streamed <b>values</b> are copied and then placed into the set.
- */
-int butterflyfish_set_i_add_all(
-        struct butterflyfish_set_i *object,
-        const struct butterflyfish_stream_i *other);
-
-/**
- * @brief Remove value from the set.
- * @param [in] object set instance.
- * @param [in] value to be removed.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_VALUE_NOT_FOUND if value is not in the set
- * instance.
- * @throws BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if there is
- * insufficient memory to find the value.
- */
-int butterflyfish_set_i_remove(
-        struct butterflyfish_set_i *object,
-        const struct sea_turtle_integer *value);
-
-/**
- * @brief Remove values from the set.
- * @param [in] object set instance.
- * @param [in] other stream whose values will be removed, ignoring value not
- * found.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if there is
- * insufficient memory to find the streamed values in the set.
- */
-int butterflyfish_set_i_remove_all(
-        struct butterflyfish_set_i *object,
-        const struct butterflyfish_stream_i *other);
 
 /**
  * @brief Check if set contains the given value.
@@ -286,21 +175,6 @@ int butterflyfish_set_i_contains_all(
         bool *out);
 
 /**
- * @brief Retain all the values present in both.
- * @param [in] object set instance.
- * @param [in] other stream whose values, if present in set too, will be
- * retained.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if there is
- * insufficient memory to find the item.
- */
-int butterflyfish_set_i_retain_all(
-        struct butterflyfish_set_i *object,
-        const struct butterflyfish_stream_i *other);
-
-/**
  * @brief Retrieve item for value.
  * @param [in] object set instance.
  * @param [in] value to find.
@@ -309,8 +183,8 @@ int butterflyfish_set_i_retain_all(
  * @throws BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL if object is <i>NULL</i>.
  * @throws BUTTERFLYFISH_SET_I_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_SET_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SET_I_ERROR_ITEM_NOT_FOUND if there is no item that
- * matched value.
+ * @throws BUTTERFLYFISH_SET_I_ERROR_VALUE_NOT_FOUND if value is not in the
+ * set instance.
  * @throws BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to find the item.
  */

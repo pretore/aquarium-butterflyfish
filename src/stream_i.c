@@ -6,7 +6,7 @@
 #include <test/cmocka.h>
 #endif
 
-#define INVOKABLE   (*(struct butterflyfish_stream_i **) object)
+#define INVOKE(x)   (*(struct butterflyfish_stream_i **) x)
 
 #pragma mark stream_i -
 
@@ -19,7 +19,7 @@ int butterflyfish_stream_i_first(
     if (!out) {
         return BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->first(object, out);
+    return INVOKE(object)->first(object, out);
 }
 
 int butterflyfish_stream_i_next(
@@ -35,5 +35,5 @@ int butterflyfish_stream_i_next(
     if (!out) {
         return BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL;
     }
-    return INVOKABLE->next(object, item, out);
+    return INVOKE(object)->next(object, item, out);
 }

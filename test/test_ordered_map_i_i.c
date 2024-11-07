@@ -7,6 +7,291 @@
 
 #include <test/cmocka.h>
 
+struct object {
+    const struct butterflyfish_ordered_map_i_i *const ordered_map_i_i;
+    const struct butterflyfish_ordered_i_i *const ordered_i_i;
+    const struct butterflyfish_map_i_i *const map_i_i;
+    const struct butterflyfish_set_i_i *const set_i_i;
+    const struct butterflyfish_collection_i_i *const collection_i_i;
+    const struct butterflyfish_stream_i_i *const stream_i_i;
+};
+
+static int stream_first(const struct butterflyfish_stream_i_i *const object,
+                        const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
+static int stream_next(const struct butterflyfish_stream_i_i *const object,
+                       const struct butterflyfish_map_i_i_entry *const item,
+                       const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(item);
+    assert_non_null(out);
+    return mock();
+}
+
+const struct butterflyfish_stream_i_i stream_i_i = {
+        .first = stream_first,
+        .next = stream_next
+};
+
+static int
+collection_as_stream(const struct butterflyfish_collection_i_i *const object,
+                     const struct butterflyfish_stream_i_i **const out) {
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = butterflyfish_cast(object, struct object, collection_i_i,
+            stream_i_i);
+    return 0;
+}
+
+static int
+collection_last(const struct butterflyfish_collection_i_i *const object,
+                const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+collection_prev(const struct butterflyfish_collection_i_i *const object,
+                const struct butterflyfish_map_i_i_entry *const item,
+                const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(item);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+collection_count(const struct butterflyfish_collection_i_i *const object,
+                 uintmax_t *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = mock();
+    return 0;
+}
+
+const struct butterflyfish_collection_i_i collection_i_i = {
+        .as_stream = collection_as_stream,
+        .last = collection_last,
+        .prev = collection_prev,
+        .count = collection_count,
+};
+
+static int
+set_as_collection(const struct butterflyfish_set_i_i *const object,
+                  const struct butterflyfish_collection_i_i **const out) {
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = butterflyfish_cast(object, struct object, set_i_i, collection_i_i);
+    return 0;
+}
+
+static int set_contains(const struct butterflyfish_set_i_i *const object,
+                        const struct butterflyfish_map_i_i_entry *const value,
+                        bool *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(value);
+    assert_non_null(out);
+    return mock();
+}
+
+static int set_contains_all(const struct butterflyfish_set_i_i *const object,
+                            const struct butterflyfish_stream_i_i *const other,
+                            bool *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(other);
+    assert_non_null(out);
+    return mock();
+}
+
+static int set_get(const struct butterflyfish_set_i_i *const object,
+                   const struct butterflyfish_map_i_i_entry *const value,
+                   const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(value);
+    assert_non_null(out);
+    return mock();
+}
+
+const struct butterflyfish_set_i_i set_i_i = {
+        .as_collection = set_as_collection,
+        .contains = set_contains,
+        .contains_all = set_contains_all,
+        .get = set_get,
+};
+
+static int map_as_set(const struct butterflyfish_map_i_i *const object,
+                      const struct butterflyfish_set_i_i **const out) {
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = butterflyfish_cast(object, struct object, map_i_i, set_i_i);
+    return 0;
+}
+
+static int
+map_contains_key(const struct butterflyfish_map_i_i *const object,
+                 const struct sea_turtle_integer *const key,
+                 bool *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(key);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+map_contains_value(const struct butterflyfish_map_i_i *const object,
+                   const struct sea_turtle_integer *const value,
+                   bool *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(value);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+map_contains_all_keys(const struct butterflyfish_map_i_i *const object,
+                      const struct butterflyfish_stream_i *const other,
+                      bool *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(other);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+map_contains_all_values(const struct butterflyfish_map_i_i *const object,
+                        const struct butterflyfish_stream_i *const other,
+                        bool *const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(other);
+    assert_non_null(out);
+    return mock();
+}
+
+static int map_get_value(const struct butterflyfish_map_i_i *const object,
+                         const struct sea_turtle_integer *const key,
+                         const struct sea_turtle_integer **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(key);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+map_get_entry(const struct butterflyfish_map_i_i *const object,
+              const struct sea_turtle_integer *const key,
+              const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(key);
+    assert_non_null(out);
+    return mock();
+}
+
+static int map_keys(const struct butterflyfish_map_i_i *const object,
+                    const struct butterflyfish_set_i **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
+static int map_values(const struct butterflyfish_map_i_i *const object,
+                      const struct butterflyfish_list_i **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
+const struct butterflyfish_map_i_i map_i_i = {
+        .as_set = map_as_set,
+        .contains_key = map_contains_key,
+        .contains_value = map_contains_value,
+        .contains_all_keys = map_contains_all_keys,
+        .contains_all_values = map_contains_all_values,
+        .get_value = map_get_value,
+        .get_entry = map_get_entry,
+        .keys = map_keys,
+        .values = map_values,
+};
+
+static int
+ordered_as_collection(const struct butterflyfish_ordered_i_i *const object,
+                      const struct butterflyfish_collection_i_i **const out) {
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = butterflyfish_cast(object, struct object, ordered_i_i,
+                              collection_i_i);
+    return 0;
+}
+
+const struct butterflyfish_ordered_i_i ordered_i_i = {
+        .as_collection = ordered_as_collection,
+};
+
+static int
+ordered_map_as_map(const struct butterflyfish_ordered_map_i_i *const object,
+                   const struct butterflyfish_map_i_i **const out) {
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = butterflyfish_cast(object, struct object, ordered_map_i_i,
+                              map_i_i);
+    return 0;
+}
+
+static int
+ordered_map_as_ordered(const struct butterflyfish_ordered_map_i_i *const object,
+                       const struct butterflyfish_ordered_i_i **const out) {
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = butterflyfish_cast(object, struct object, ordered_map_i_i,
+                              ordered_i_i);
+    return 0;
+}
+
+static int
+ordered_map_keys(const struct butterflyfish_ordered_map_i_i *const object,
+                 const struct butterflyfish_ordered_set_i **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+ordered_map_values(const struct butterflyfish_ordered_map_i_i *const object,
+                   const struct butterflyfish_ordered_list_i **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
+const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
+        .as_map = ordered_map_as_map,
+        .as_ordered = ordered_map_as_ordered,
+        .keys = ordered_map_keys,
+        .values = ordered_map_values,
+};
+
 static void check_as_stream_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_i_i_as_stream(NULL, (void *) 1),
@@ -20,11 +305,21 @@ static void check_as_stream_error_on_out_is_null(void **state) {
 }
 
 static void check_as_stream(void **state) {
-    struct butterflyfish_ordered_map_i_i ordered_map = {};
-    const struct butterflyfish_stream_i_i *stream;
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    const void *check = (char *) &instance
+                        + offsetof(struct object, stream_i_i);
+    const struct butterflyfish_stream_i_i *out;
     assert_int_equal(butterflyfish_ordered_map_i_i_as_stream(
-            &ordered_map, &stream), 0);
-    assert_ptr_equal(&ordered_map, stream);
+            (const struct butterflyfish_ordered_map_i_i *) &instance,
+                    &out), 0);
+    assert_ptr_equal(out, check);
 }
 
 static void check_as_collection_error_on_object_is_null(void **state) {
@@ -40,11 +335,80 @@ static void check_as_collection_error_on_out_is_null(void **state) {
 }
 
 static void check_as_collection(void **state) {
-    struct butterflyfish_ordered_map_i_i ordered_map = {};
-    const struct butterflyfish_collection_i_i *collection;
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    const void *check = (char *) &instance
+                        + offsetof(struct object, collection_i_i);
+    const struct butterflyfish_collection_i_i *out;
     assert_int_equal(butterflyfish_ordered_map_i_i_as_collection(
-            &ordered_map, &collection), 0);
-    assert_ptr_equal(&ordered_map, collection);
+            (const struct butterflyfish_ordered_map_i_i *) &instance, &out),
+                    0);
+    assert_ptr_equal(out, check);
+}
+
+static void check_as_set_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_as_set(NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_set_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_as_set((void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_set(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    const void *check = (char *) &instance + offsetof(struct object, set_i_i);
+    const struct butterflyfish_set_i_i *out;
+    assert_int_equal(butterflyfish_ordered_map_i_i_as_set(
+            (const struct butterflyfish_ordered_map_i_i *) &instance, &out),
+                    0);
+    assert_ptr_equal(out, check);
+}
+
+static void check_as_ordered_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_as_ordered(NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_ordered_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_as_ordered((void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_ordered(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    const void *check = (char *) &instance
+                        + offsetof(struct object, ordered_i_i);
+    const struct butterflyfish_ordered_i_i *out;
+    assert_int_equal(butterflyfish_ordered_map_i_i_as_ordered(
+            (const struct butterflyfish_ordered_map_i_i *) &instance, &out),
+                     0);
+    assert_ptr_equal(out, check);
 }
 
 static void check_as_map_error_on_object_is_null(void **state) {
@@ -60,11 +424,40 @@ static void check_as_map_error_on_out_is_null(void **state) {
 }
 
 static void check_as_map(void **state) {
-    struct butterflyfish_ordered_map_i_i ordered_map = {};
-    struct butterflyfish_map_i_i *map;
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    const void *check = (char *) &instance + offsetof(struct object, map_i_i);
+    const struct butterflyfish_map_i_i *out;
     assert_int_equal(butterflyfish_ordered_map_i_i_as_map(
-            &ordered_map, &map), 0);
-    assert_ptr_equal(&ordered_map, map);
+            (const struct butterflyfish_ordered_map_i_i *) &instance, &out),
+                     0);
+    assert_ptr_equal(out, check);
+}
+
+static void check_ordered_as_collection(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    const void *check = (char *) &instance
+            + offsetof(struct object, collection_i_i);
+    const struct butterflyfish_ordered_i_i *as;
+    assert_int_equal(butterflyfish_ordered_map_i_i_as_ordered(
+            (const struct butterflyfish_ordered_map_i_i *) &instance,
+                    &as), 0);
+    const struct butterflyfish_collection_i_i *out;
+    assert_int_equal(butterflyfish_ordered_i_i_as_collection(as, &out), 0);
+    assert_ptr_equal(out, check);
 }
 
 static void check_count_error_on_object_is_null(void **state) {
@@ -79,80 +472,23 @@ static void check_count_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static int count(const void *const object, uintmax_t *const out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = mock();
-    return 0;
-}
-
 static void check_count(void **state) {
     srand(time(NULL));
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.count = count
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(count);
+    expect_function_call(collection_count);
     const uintmax_t check = abs(rand());
-    will_return(count, check);
+    will_return(collection_count, check);
     uintmax_t out;
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_count(
-                    (const struct butterflyfish_ordered_map_i_i *) &instance,
-                    &out),
-            0);
-    assert_int_equal(out, check);
-}
-
-static void check_as_map_count(void **state) {
-    srand(time(NULL));
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.count = count
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(count);
-    const uintmax_t check = abs(rand());
-    will_return(count, check);
-    uintmax_t out;
-    assert_int_equal(
-            butterflyfish_map_i_i_count(
-                    (const struct butterflyfish_map_i_i *) &instance,
-                    &out),
-            0);
-    assert_int_equal(out, check);
-}
-
-static void check_as_collection_count(void **state) {
-    srand(time(NULL));
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.count = count
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(count);
-    const uintmax_t check = abs(rand());
-    will_return(count, check);
-    uintmax_t out;
-    assert_int_equal(
-            butterflyfish_collection_i_i_count(
-                    (const struct butterflyfish_collection_i_i *) &instance,
-                    &out),
-            0);
+    assert_int_equal(butterflyfish_ordered_map_i_i_count(
+            (const struct butterflyfish_ordered_map_i_i *) &instance, &out),
+                    0);
     assert_int_equal(out, check);
 }
 
@@ -168,94 +504,23 @@ static void check_first_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static int
-fl_emit_error(const void *const object,
-              const struct butterflyfish_map_entry_i_i **const out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(out);
-    return mock();
-}
-
 static void check_first_error_on_map_is_empty(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.stream_i_i.first = fl_emit_error
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(fl_emit_error);
-    will_return(fl_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MAP_IS_EMPTY);
+    expect_function_call(stream_first);
+    will_return(stream_first,
+                BUTTERFLYFISH_STREAM_I_I_ERROR_STREAM_IS_EMPTY);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_first(
                     (const struct butterflyfish_ordered_map_i_i *) &instance,
                     (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MAP_IS_EMPTY);
-}
-
-static void check_as_map_first_error_on_map_is_empty(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.stream_i_i.first = fl_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(fl_emit_error);
-    will_return(fl_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MAP_IS_EMPTY);
-    assert_int_equal(
-            butterflyfish_map_i_i_first(
-                    (const struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MAP_IS_EMPTY);
-}
-
-static void
-check_as_collection_first_error_on_collection_is_empty(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.stream_i_i.first = fl_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(fl_emit_error);
-    will_return(fl_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MAP_IS_EMPTY);
-    assert_int_equal(
-            butterflyfish_collection_i_i_first(
-                    (const struct butterflyfish_collection_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_COLLECTION_I_I_ERROR_COLLECTION_IS_EMPTY);
-}
-
-static void check_as_stream_first_error_on_stream_is_empty(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.stream_i_i.first = fl_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(fl_emit_error);
-    will_return(fl_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MAP_IS_EMPTY);
-    assert_int_equal(
-            butterflyfish_stream_i_i_first(
-                    (const struct butterflyfish_stream_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_STREAM_I_I_ERROR_STREAM_IS_EMPTY);
 }
 
 static void check_last_error_on_object_is_null(void **state) {
@@ -271,64 +536,22 @@ static void check_last_error_on_out_is_null(void **state) {
 }
 
 static void check_last_error_on_map_is_empty(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.last = fl_emit_error
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(fl_emit_error);
-    will_return(fl_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MAP_IS_EMPTY);
+    expect_function_call(collection_last);
+    will_return(collection_last,
+                BUTTERFLYFISH_COLLECTION_I_I_ERROR_COLLECTION_IS_EMPTY);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_last(
                     (const struct butterflyfish_ordered_map_i_i *) &instance,
                     (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MAP_IS_EMPTY);
-}
-
-static void check_as_map_last_error_on_map_is_empty(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.last = fl_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(fl_emit_error);
-    will_return(fl_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MAP_IS_EMPTY);
-    assert_int_equal(
-            butterflyfish_map_i_i_last(
-                    (const struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MAP_IS_EMPTY);
-}
-
-static void
-check_as_collection_last_error_on_collection_is_empty(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.last = fl_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(fl_emit_error);
-    will_return(fl_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MAP_IS_EMPTY);
-    assert_int_equal(
-            butterflyfish_collection_i_i_last(
-                    (const struct butterflyfish_collection_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_COLLECTION_I_I_ERROR_COLLECTION_IS_EMPTY);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
@@ -337,10 +560,10 @@ static void check_next_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_next_error_on_entry_is_null(void **state) {
+static void check_next_error_on_item_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_i_i_next((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_ENTRY_IS_NULL);
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_ITEM_IS_NULL);
 }
 
 static void check_next_error_on_out_is_null(void **state) {
@@ -349,30 +572,18 @@ static void check_next_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static int
-np_emit_error(const void *const object,
-              const struct butterflyfish_map_entry_i_i *const entry,
-              const struct butterflyfish_map_entry_i_i **const out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(entry);
-    assert_non_null(out);
-    return mock();
-}
-
 static void check_next_error_on_end_of_sequence(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.stream_i_i.next = np_emit_error
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(np_emit_error);
-    will_return(np_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_END_OF_SEQUENCE);
+    expect_function_call(stream_next);
+    will_return(stream_next,
+                BUTTERFLYFISH_STREAM_I_I_ERROR_END_OF_SEQUENCE);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_next(
                     (const struct butterflyfish_ordered_map_i_i *) &instance,
@@ -381,79 +592,16 @@ static void check_next_error_on_end_of_sequence(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_END_OF_SEQUENCE);
 }
 
-static void check_as_map_next_error_on_end_of_sequence(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.stream_i_i.next = np_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(np_emit_error);
-    will_return(np_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_END_OF_SEQUENCE);
-    assert_int_equal(
-            butterflyfish_map_i_i_next(
-                    (const struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_END_OF_SEQUENCE);
-}
-
-static void check_as_collection_next_error_on_end_of_sequence(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.stream_i_i.next = np_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(np_emit_error);
-    will_return(np_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_END_OF_SEQUENCE);
-    assert_int_equal(
-            butterflyfish_collection_i_i_next(
-                    (const struct butterflyfish_collection_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_COLLECTION_I_I_ERROR_END_OF_SEQUENCE);
-}
-
-static void check_as_stream_next_error_on_end_of_sequence(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.stream_i_i.next = np_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(np_emit_error);
-    will_return(np_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_END_OF_SEQUENCE);
-    assert_int_equal(
-            butterflyfish_stream_i_i_next(
-                    (const struct butterflyfish_stream_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_STREAM_I_I_ERROR_END_OF_SEQUENCE);
-}
-
 static void check_prev_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_i_i_prev(NULL, (void *) 1, (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_prev_error_on_entry_is_null(void **state) {
+static void check_prev_error_on_item_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_i_i_prev((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_ENTRY_IS_NULL);
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_ITEM_IS_NULL);
 }
 
 static void check_prev_error_on_out_is_null(void **state) {
@@ -463,18 +611,17 @@ static void check_prev_error_on_out_is_null(void **state) {
 }
 
 static void check_prev_error_on_end_of_sequence(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.prev = np_emit_error
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(np_emit_error);
-    will_return(np_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_END_OF_SEQUENCE);
+    expect_function_call(collection_prev);
+    will_return(collection_prev,
+                BUTTERFLYFISH_COLLECTION_I_I_ERROR_END_OF_SEQUENCE);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_prev(
                     (const struct butterflyfish_ordered_map_i_i *) &instance,
@@ -483,939 +630,80 @@ static void check_prev_error_on_end_of_sequence(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_END_OF_SEQUENCE);
 }
 
-static void check_as_map_prev_error_on_end_of_sequence(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.prev = np_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(np_emit_error);
-    will_return(np_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_END_OF_SEQUENCE);
+static void check_contains_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_map_i_i_prev(
-                    (const struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_END_OF_SEQUENCE);
-}
-
-static void check_as_collection_prev_error_on_end_of_sequence(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.collection_i_i.prev = np_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(np_emit_error);
-    will_return(np_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_END_OF_SEQUENCE);
-    assert_int_equal(
-            butterflyfish_collection_i_i_prev(
-                    (const struct butterflyfish_collection_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_COLLECTION_I_I_ERROR_END_OF_SEQUENCE);
-}
-
-static void check_remove_entry_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove_entry(NULL, (void *) 1),
+            butterflyfish_ordered_map_i_i_contains(
+                    NULL, (void *) 1, (void*) 1),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_remove_entry_error_on_entry_is_null(void **state) {
+static void check_contains_error_on_entry_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove_entry((void *) 1, NULL),
+            butterflyfish_ordered_map_i_i_contains(
+                    (void *) 1, NULL, (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_ENTRY_IS_NULL);
 }
 
-static int
-remove_entry(void *const object,
-             const struct butterflyfish_map_entry_i_i *const entry) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(entry);
-    return 0;
-}
-
-static void check_remove_entry(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove_entry = remove_entry
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(remove_entry);
+static void check_contains_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove_entry(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            0);
+            butterflyfish_ordered_map_i_i_contains(
+                    (void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static void check_as_map_remove_entry(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove_entry = remove_entry
+static void check_contains_error_on_memory_allocation_failed(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(remove_entry);
+    expect_function_call(set_contains);
+    will_return(set_contains,
+                BUTTERFLYFISH_SET_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
-            butterflyfish_map_i_i_remove_entry(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            0);
-}
-
-static void check_remove_all_entries_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove_all_entries(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_remove_all_entries_error_on_other_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove_all_entries((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OTHER_IS_NULL);
-}
-
-static int
-remove_all_entries(void *const object,
-                   const struct butterflyfish_stream_i_i *const stream) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(stream);
-    return 0;
-}
-
-static void check_remove_all_entries(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove_all_entries = remove_all_entries
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(remove_all_entries);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove_all_entries(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            0);
-}
-
-static void check_as_map_remove_all_entries(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove_all_entries = remove_all_entries
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(remove_all_entries);
-    assert_int_equal(
-            butterflyfish_map_i_i_remove_all_entries(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            0);
-}
-
-static void check_add_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_add(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_add_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_add((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_IS_NULL);
-}
-
-static void check_add_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_add((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_VALUE_IS_NULL);
-}
-
-static int apr_emit_error(void *const object,
-                          const struct sea_turtle_integer *const key,
-                          const struct sea_turtle_integer *const value) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(key);
-    assert_non_null(value);
-    return mock();
-}
-
-static void check_add_error_on_key_already_exists(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.add = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_ALREADY_EXISTS);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_add(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_ALREADY_EXISTS);
-}
-
-static void check_as_map_add_error_on_key_already_exists(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.add = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_ALREADY_EXISTS);
-    assert_int_equal(
-            butterflyfish_map_i_i_add(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_KEY_ALREADY_EXISTS);
-}
-
-static void check_add_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.add = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_add(
+            butterflyfish_ordered_map_i_i_contains(
                     (struct butterflyfish_ordered_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_as_map_add_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.add = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_add(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_put_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_put(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_put_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_put((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_IS_NULL);
-}
-
-static void check_put_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_put((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_VALUE_IS_NULL);
-}
-
-static void check_put_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.put = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_put(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_as_map_put_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.put = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_put(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_replace_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_replace(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_replace_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_replace((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_IS_NULL);
-}
-
-static void check_replace_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_replace((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_VALUE_IS_NULL);
-}
-
-static void check_replace_error_on_key_not_found(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.replace = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_replace(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-}
-
-static void check_as_map_replace_error_on_key_not_found(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.replace = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-    assert_int_equal(
-            butterflyfish_map_i_i_replace(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_KEY_NOT_FOUND);
-}
-
-static void check_replace_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.replace = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_replace(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void
-check_as_map_replace_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.replace = apr_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(apr_emit_error);
-    will_return(apr_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_replace(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_remove_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_remove_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_IS_NULL);
-}
-
-static int remove_emit_error(void *const object,
-                             const struct sea_turtle_integer *const key) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(key);
-    return mock();
-}
-
-static void check_remove_error_on_key_not_found(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove = remove_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(remove_emit_error);
-    will_return(remove_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-}
-
-static void check_as_map_remove_error_on_key_not_found(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove = remove_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(remove_emit_error);
-    will_return(remove_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-    assert_int_equal(
-            butterflyfish_map_i_i_remove(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_KEY_NOT_FOUND);
-}
-
-static void check_remove_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove = remove_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(remove_emit_error);
-    will_return(remove_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void
-check_as_map_remove_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove = remove_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(remove_emit_error);
-    will_return(remove_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_remove(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_add_all_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_add_all(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_add_all_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_add_all((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OTHER_IS_NULL);
-}
-
-static int
-all_emit_error(void *const object,
-               const struct butterflyfish_stream_i_i *const other) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(other);
-    return mock();
-}
-
-static void check_add_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.add_all = all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(all_emit_error);
-    will_return(all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_add_all(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void
-check_as_map_add_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.add_all = all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(all_emit_error);
-    will_return(all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_add_all(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_put_all_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_put_all(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_put_all_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_put_all((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OTHER_IS_NULL);
-}
-
-static void check_put_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.put_all = all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(all_emit_error);
-    will_return(all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_put_all(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void
-check_as_map_put_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.put_all = all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(all_emit_error);
-    will_return(all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_put_all(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_replace_all_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_replace_all(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_replace_all_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_replace_all((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OTHER_IS_NULL);
-}
-
-static void check_replace_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.replace_all = all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(all_emit_error);
-    will_return(all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_replace_all(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void
-check_as_map_replace_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.replace_all = all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(all_emit_error);
-    will_return(all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_replace_all(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_remove_all_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove_all(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_remove_all_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove_all((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OTHER_IS_NULL);
-}
-
-static int
-rr_all_emit_error(void *const object,
-                  const struct butterflyfish_stream_i *const other) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(other);
-    return mock();
-}
-
-static void check_remove_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove_all = rr_all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(rr_all_emit_error);
-    will_return(rr_all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_remove_all(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void
-check_as_map_remove_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.remove_all = rr_all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(rr_all_emit_error);
-    will_return(rr_all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_remove_all(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_retain_all_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_retain_all(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_retain_all_error_on_key_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_retain_all((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OTHER_IS_NULL);
-}
-
-static void check_retain_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.retain_all = rr_all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(rr_all_emit_error);
-    will_return(rr_all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_retain_all(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void
-check_as_map_retain_all_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.retain_all = rr_all_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(rr_all_emit_error);
-    will_return(rr_all_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_retain_all(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void check_merge_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_merge(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_merge_error_on_other_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_merge((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OTHER_IS_NULL);
-}
-
-static void check_merge_error_on_function_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_merge((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_FUNCTION_IS_NULL);
-}
-
-static int
-merge_emit_error(void *const object,
-                 const struct butterflyfish_stream_i_i *const other,
-                 int (*const function)(
-                         const struct sea_turtle_integer *,
-                         const struct sea_turtle_integer *,
-                         struct sea_turtle_integer **)) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(other);
-    assert_non_null(function);
-    return mock();
-}
-
-static void check_merge_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.merge = merge_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(merge_emit_error);
-    will_return(merge_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_merge(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
-static void
-check_as_map_merge_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.merge = merge_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(merge_emit_error);
-    will_return(merge_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_merge(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 static void check_contains_key_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_map_i_i_contains_key(NULL, (void *) 1, (void *) 1),
+            butterflyfish_ordered_map_i_i_contains_key(
+                    NULL, (void *) 1, (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_contains_key_error_on_other_is_null(void **state) {
+static void check_contains_key_error_on_value_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_map_i_i_contains_key((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_IS_NULL);
+            butterflyfish_ordered_map_i_i_contains_key(
+                    (void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_VALUE_IS_NULL);
 }
 
 static void check_contains_key_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_map_i_i_contains_key((void *) 1, (void *) 1, NULL),
+            butterflyfish_ordered_map_i_i_contains_key(
+                    (void *) 1, (void *) 1, NULL),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static int
-contains_key_emit_error(const void *const object,
-                        const struct sea_turtle_integer *const key,
-                        bool *out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(key);
-    assert_non_null(out);
-    return mock();
-}
-
-static void
-check_contains_key_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.contains_key = contains_key_emit_error
+static void check_contains_key_error_on_memory_allocation_failed(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(contains_key_emit_error);
-    will_return(contains_key_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    expect_function_call(map_contains_key);
+    will_return(map_contains_key,
+                BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_contains_key(
                     (struct butterflyfish_ordered_map_i_i *) &instance,
@@ -1424,26 +712,87 @@ check_contains_key_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
-static void
-check_as_map_contains_key_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.contains_key = contains_key_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(contains_key_emit_error);
-    will_return(contains_key_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+static void check_contains_value_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_map_i_i_contains_key(
-                    (struct butterflyfish_map_i_i *) &instance,
+            butterflyfish_ordered_map_i_i_contains_value(
+                    NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_contains_value_error_on_value_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_value(
+                    (void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_VALUE_IS_NULL);
+}
+
+static void check_contains_value_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_value(
+                    (void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
+}
+
+static void check_contains_value_error_on_memory_allocation_failed(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(map_contains_value);
+    will_return(map_contains_value,
+                BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_value(
+                    (struct butterflyfish_ordered_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+}
+
+static void check_contains_all_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_all(
+                    NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_contains_all_error_on_other_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_all(
+                    (void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OTHER_IS_NULL);
+}
+
+static void check_contains_all_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_all(
+                    (void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
+}
+
+static void
+check_contains_all_error_on_memory_allocation_failed(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(set_contains_all);
+    will_return(set_contains_all,
+                BUTTERFLYFISH_SET_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_all(
+                    (struct butterflyfish_ordered_map_i_i *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 static void check_contains_all_keys_error_on_object_is_null(void **state) {
@@ -1467,31 +816,19 @@ static void check_contains_all_keys_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static int
-contains_all_keys_emit_error(const void *const object,
-                             const struct butterflyfish_stream_i *const other,
-                             bool *out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(other);
-    assert_non_null(out);
-    return mock();
-}
-
 static void
 check_contains_all_keys_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.contains_all_keys = contains_all_keys_emit_error
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(contains_all_keys_emit_error);
-    will_return(contains_all_keys_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    expect_function_call(map_contains_all_keys);
+    will_return(map_contains_all_keys,
+                BUTTERFLYFISH_SET_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_contains_all_keys(
                     (struct butterflyfish_ordered_map_i_i *) &instance,
@@ -1500,26 +837,46 @@ check_contains_all_keys_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
-static void
-check_as_map_contains_all_keys_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.contains_all_keys = contains_all_keys_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(contains_all_keys_emit_error);
-    will_return(contains_all_keys_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+static void check_contains_all_values_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_map_i_i_contains_all_keys(
-                    (struct butterflyfish_map_i_i *) &instance,
+            butterflyfish_ordered_map_i_i_contains_all_values(
+                    NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_contains_all_values_error_on_other_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_all_values(
+                    (void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OTHER_IS_NULL);
+}
+
+static void check_contains_all_values_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_all_values(
+                    (void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
+}
+
+static void
+check_contains_all_values_error_on_memory_allocation_failed(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(map_contains_all_values);
+    will_return(map_contains_all_values,
+                BUTTERFLYFISH_SET_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_contains_all_values(
+                    (struct butterflyfish_ordered_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 static void check_get_error_on_object_is_null(void **state) {
@@ -1528,10 +885,10 @@ static void check_get_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_get_error_on_key_is_null(void **state) {
+static void check_get_error_on_entry_is_null(void **state) {
     assert_int_equal(
             butterflyfish_ordered_map_i_i_get((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_IS_NULL);
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_ENTRY_IS_NULL);
 }
 
 static void check_get_error_on_out_is_null(void **state) {
@@ -1540,71 +897,38 @@ static void check_get_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static int get_emit_error(const void *const object,
-                          const struct sea_turtle_integer *const key,
-                          const struct sea_turtle_integer **const out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(key);
-    assert_non_null(out);
-    return mock();
-}
-
-static void check_get_error_on_key_not_found(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.get = get_emit_error
+static void check_get_error_on_entry_not_found(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(get_emit_error);
-    will_return(get_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
+    expect_function_call(set_get);
+    will_return(set_get,
+                BUTTERFLYFISH_SET_I_I_ERROR_VALUE_NOT_FOUND);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_get(
                     (struct butterflyfish_ordered_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-}
-
-static void check_as_map_get_error_on_key_not_found(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.get = get_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(get_emit_error);
-    will_return(get_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-    assert_int_equal(
-            butterflyfish_map_i_i_get(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_KEY_NOT_FOUND);
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_ENTRY_NOT_FOUND);
 }
 
 static void check_get_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.get = get_emit_error
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(get_emit_error);
-    will_return(get_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    expect_function_call(set_get);
+    will_return(set_get,
+                BUTTERFLYFISH_SET_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_get(
                     (struct butterflyfish_ordered_map_i_i *) &instance,
@@ -1613,112 +937,120 @@ static void check_get_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
-static void
-check_as_map_get_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.get = get_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(get_emit_error);
-    will_return(get_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+static void check_get_value_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_map_i_i_get(
-                    (struct butterflyfish_map_i_i *) &instance,
+            butterflyfish_ordered_map_i_i_get_value(
+                    NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_get_value_error_on_value_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_get_value(
+                    (void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_VALUE_IS_NULL);
+}
+
+static void check_get_value_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_get_value(
+                    (void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
+}
+
+static void check_get_value_error_on_value_not_found(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(map_get_value);
+    will_return(map_get_value,
+                BUTTERFLYFISH_MAP_I_I_ERROR_VALUE_NOT_FOUND);
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_get_value(
+                    (struct butterflyfish_ordered_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
+}
+
+static void check_get_value_error_on_memory_allocation_failed(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(map_get_value);
+    will_return(map_get_value,
+                BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(
+            butterflyfish_ordered_map_i_i_get_value(
+                    (struct butterflyfish_ordered_map_i_i *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 static void check_get_entry_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_map_i_i_get_entry(NULL, (void *) 1, (void *) 1),
+            butterflyfish_ordered_map_i_i_get_entry(
+                    NULL, (void *) 1, (void *) 1),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_get_entry_error_on_key_is_null(void **state) {
+static void check_get_entry_error_on_value_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_map_i_i_get_entry((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_IS_NULL);
+            butterflyfish_ordered_map_i_i_get_entry(
+                    (void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_VALUE_IS_NULL);
 }
 
 static void check_get_entry_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_map_i_i_get_entry((void *) 1, (void *) 1, NULL),
+            butterflyfish_ordered_map_i_i_get_entry(
+                    (void *) 1, (void *) 1, NULL),
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static int
-get_entry_emit_error(const void *const object,
-                     const struct sea_turtle_integer *const key,
-                     const struct butterflyfish_map_entry_i_i **const out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(key);
-    assert_non_null(out);
-    return mock();
-}
-
-static void check_get_entry_error_on_key_not_found(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.get_entry = get_entry_emit_error
+static void check_get_entry_error_on_value_not_found(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(get_entry_emit_error);
-    will_return(get_entry_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
+    expect_function_call(map_get_entry);
+    will_return(map_get_entry,
+                BUTTERFLYFISH_MAP_I_I_ERROR_VALUE_NOT_FOUND);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_get_entry(
                     (struct butterflyfish_ordered_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-}
-
-static void check_as_map_get_entry_error_on_key_not_found(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.get_entry = get_entry_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(get_entry_emit_error);
-    will_return(get_entry_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_KEY_NOT_FOUND);
-    assert_int_equal(
-            butterflyfish_map_i_i_get_entry(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_KEY_NOT_FOUND);
+            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
 }
 
 static void check_get_entry_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.get_entry = get_entry_emit_error
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(get_entry_emit_error);
-    will_return(get_entry_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    expect_function_call(map_get_entry);
+    will_return(map_get_entry,
+                BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
             butterflyfish_ordered_map_i_i_get_entry(
                     (struct butterflyfish_ordered_map_i_i *) &instance,
@@ -1727,120 +1059,93 @@ static void check_get_entry_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
-static void
-check_as_map_get_entry_error_on_memory_allocation_failed(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.get_entry = get_entry_emit_error
-    };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(get_entry_emit_error);
-    will_return(get_entry_emit_error,
-                BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_map_i_i_get_entry(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
-}
-
 static void check_keys_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_keys(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(butterflyfish_ordered_map_i_i_keys(NULL, (void *) 1),
+                     BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_keys_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_keys((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
-}
-
-static int keys(void *const object,
-                struct butterflyfish_ordered_set_i **const out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(out);
-    return 0;
+    assert_int_equal(butterflyfish_ordered_map_i_i_keys((void *) 1, NULL),
+                     BUTTERFLYFISH_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_keys(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .keys = keys
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
+    expect_function_call(ordered_map_keys);
+    will_return(ordered_map_keys, 0);
+    const struct butterflyfish_ordered_set_i *out;
+    assert_int_equal(butterflyfish_ordered_map_i_i_keys(
+            (struct butterflyfish_ordered_map_i_i *) &instance, &out), 0);
+}
+
+static void check_as_map_keys(void **state) {
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(keys);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_keys(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            0);
+    expect_function_call(map_keys);
+    will_return(map_keys, 0);
+    const struct butterflyfish_map_i_i *as;
+    assert_int_equal(butterflyfish_ordered_map_i_i_as_map(
+            (const struct butterflyfish_ordered_map_i_i *)
+                    &instance, &as), 0);
+    const struct butterflyfish_set_i *out;
+    assert_int_equal(butterflyfish_map_i_i_keys(as, &out), 0);
 }
 
 static void check_values_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_values(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(butterflyfish_ordered_map_i_i_values(NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_values_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_values((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
-}
-
-static int values(void *const object,
-                  struct butterflyfish_reducible_list_i **const out) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(out);
-    return 0;
+    assert_int_equal(butterflyfish_ordered_map_i_i_values((void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_values(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.values = values
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(values);
-    assert_int_equal(
-            butterflyfish_ordered_map_i_i_values(
-                    (struct butterflyfish_ordered_map_i_i *) &instance,
-                    (void *) 1),
-            0);
+    expect_function_call(ordered_map_values);
+    will_return(ordered_map_values, 0);
+    const struct butterflyfish_ordered_list_i *out;
+    assert_int_equal(butterflyfish_ordered_map_i_i_values(
+            (struct butterflyfish_ordered_map_i_i *) &instance, &out), 0);
 }
 
 static void check_as_map_values(void **state) {
-    const struct butterflyfish_ordered_map_i_i ordered_map_i_i = {
-            .map_i_i.values = values
+    const struct object instance = {
+            .ordered_map_i_i = &ordered_map_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
     };
-    struct object {
-        const struct butterflyfish_ordered_map_i_i *ordered_map_i_i;
-    };
-    struct object instance = {
-            .ordered_map_i_i = &ordered_map_i_i
-    };
-    expect_function_call(values);
-    assert_int_equal(
-            butterflyfish_map_i_i_values(
-                    (struct butterflyfish_map_i_i *) &instance,
-                    (void *) 1),
-            0);
+    expect_function_call(map_values);
+    will_return(map_values, 0);
+    const struct butterflyfish_map_i_i *as;
+    assert_int_equal(butterflyfish_ordered_map_i_i_as_map(
+            (struct butterflyfish_ordered_map_i_i *) &instance, &as), 0);
+    const struct butterflyfish_list_i *out;
+    assert_int_equal(butterflyfish_map_i_i_values(as, &out), 0);
 }
 
 int main(int argc, char *argv[]) {
@@ -1851,123 +1156,76 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_collection_error_on_object_is_null),
             cmocka_unit_test(check_as_collection_error_on_out_is_null),
             cmocka_unit_test(check_as_collection),
+            cmocka_unit_test(check_as_set_error_on_object_is_null),
+            cmocka_unit_test(check_as_set_error_on_out_is_null),
+            cmocka_unit_test(check_as_set),
+            cmocka_unit_test(check_as_ordered_error_on_object_is_null),
+            cmocka_unit_test(check_as_ordered_error_on_out_is_null),
+            cmocka_unit_test(check_as_ordered),
             cmocka_unit_test(check_as_map_error_on_object_is_null),
             cmocka_unit_test(check_as_map_error_on_out_is_null),
             cmocka_unit_test(check_as_map),
+            cmocka_unit_test(check_ordered_as_collection),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),
-            cmocka_unit_test(check_as_map_count),
-            cmocka_unit_test(check_as_collection_count),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
             cmocka_unit_test(check_first_error_on_map_is_empty),
-            cmocka_unit_test(check_as_map_first_error_on_map_is_empty),
-            cmocka_unit_test(check_as_collection_first_error_on_collection_is_empty),
-            cmocka_unit_test(check_as_stream_first_error_on_stream_is_empty),
             cmocka_unit_test(check_last_error_on_object_is_null),
             cmocka_unit_test(check_last_error_on_out_is_null),
             cmocka_unit_test(check_last_error_on_map_is_empty),
-            cmocka_unit_test(check_as_map_last_error_on_map_is_empty),
-            cmocka_unit_test(check_as_collection_last_error_on_collection_is_empty),
             cmocka_unit_test(check_next_error_on_object_is_null),
-            cmocka_unit_test(check_next_error_on_entry_is_null),
+            cmocka_unit_test(check_next_error_on_item_is_null),
             cmocka_unit_test(check_next_error_on_out_is_null),
             cmocka_unit_test(check_next_error_on_end_of_sequence),
-            cmocka_unit_test(check_as_map_next_error_on_end_of_sequence),
-            cmocka_unit_test(check_as_collection_next_error_on_end_of_sequence),
-            cmocka_unit_test(check_as_stream_next_error_on_end_of_sequence),
             cmocka_unit_test(check_prev_error_on_object_is_null),
-            cmocka_unit_test(check_prev_error_on_entry_is_null),
+            cmocka_unit_test(check_prev_error_on_item_is_null),
             cmocka_unit_test(check_prev_error_on_out_is_null),
             cmocka_unit_test(check_prev_error_on_end_of_sequence),
-            cmocka_unit_test(check_as_map_prev_error_on_end_of_sequence),
-            cmocka_unit_test(check_as_collection_prev_error_on_end_of_sequence),
-            cmocka_unit_test(check_remove_entry_error_on_object_is_null),
-            cmocka_unit_test(check_remove_entry_error_on_entry_is_null),
-            cmocka_unit_test(check_remove_entry),
-            cmocka_unit_test(check_as_map_remove_entry),
-            cmocka_unit_test(check_remove_all_entries_error_on_object_is_null),
-            cmocka_unit_test(check_remove_all_entries_error_on_other_is_null),
-            cmocka_unit_test(check_remove_all_entries),
-            cmocka_unit_test(check_as_map_remove_all_entries),
-            cmocka_unit_test(check_add_error_on_object_is_null),
-            cmocka_unit_test(check_add_error_on_key_is_null),
-            cmocka_unit_test(check_add_error_on_value_is_null),
-            cmocka_unit_test(check_add_error_on_key_already_exists),
-            cmocka_unit_test(check_as_map_add_error_on_key_already_exists),
-            cmocka_unit_test(check_add_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_add_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_put_error_on_object_is_null),
-            cmocka_unit_test(check_put_error_on_key_is_null),
-            cmocka_unit_test(check_put_error_on_value_is_null),
-            cmocka_unit_test(check_put_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_put_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_replace_error_on_object_is_null),
-            cmocka_unit_test(check_replace_error_on_key_is_null),
-            cmocka_unit_test(check_replace_error_on_value_is_null),
-            cmocka_unit_test(check_replace_error_on_key_not_found),
-            cmocka_unit_test(check_as_map_replace_error_on_key_not_found),
-            cmocka_unit_test(check_replace_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_replace_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_remove_error_on_object_is_null),
-            cmocka_unit_test(check_remove_error_on_key_is_null),
-            cmocka_unit_test(check_remove_error_on_key_not_found),
-            cmocka_unit_test(check_as_map_remove_error_on_key_not_found),
-            cmocka_unit_test(check_remove_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_remove_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_add_all_error_on_object_is_null),
-            cmocka_unit_test(check_add_all_error_on_key_is_null),
-            cmocka_unit_test(check_add_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_add_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_put_all_error_on_object_is_null),
-            cmocka_unit_test(check_put_all_error_on_key_is_null),
-            cmocka_unit_test(check_put_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_put_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_replace_all_error_on_object_is_null),
-            cmocka_unit_test(check_replace_all_error_on_key_is_null),
-            cmocka_unit_test(check_replace_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_replace_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_remove_all_error_on_object_is_null),
-            cmocka_unit_test(check_remove_all_error_on_key_is_null),
-            cmocka_unit_test(check_remove_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_remove_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_retain_all_error_on_object_is_null),
-            cmocka_unit_test(check_retain_all_error_on_key_is_null),
-            cmocka_unit_test(check_retain_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_retain_all_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_merge_error_on_object_is_null),
-            cmocka_unit_test(check_merge_error_on_other_is_null),
-            cmocka_unit_test(check_merge_error_on_function_is_null),
-            cmocka_unit_test(check_merge_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_merge_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_contains_error_on_object_is_null),
+            cmocka_unit_test(check_contains_error_on_entry_is_null),
+            cmocka_unit_test(check_contains_error_on_out_is_null),
+            cmocka_unit_test(check_contains_error_on_memory_allocation_failed),
             cmocka_unit_test(check_contains_key_error_on_object_is_null),
-            cmocka_unit_test(check_contains_key_error_on_other_is_null),
+            cmocka_unit_test(check_contains_key_error_on_value_is_null),
             cmocka_unit_test(check_contains_key_error_on_out_is_null),
             cmocka_unit_test(check_contains_key_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_contains_key_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_contains_value_error_on_object_is_null),
+            cmocka_unit_test(check_contains_value_error_on_value_is_null),
+            cmocka_unit_test(check_contains_value_error_on_out_is_null),
+            cmocka_unit_test(check_contains_value_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_contains_all_error_on_object_is_null),
+            cmocka_unit_test(check_contains_all_error_on_other_is_null),
+            cmocka_unit_test(check_contains_all_error_on_out_is_null),
+            cmocka_unit_test(check_contains_all_error_on_memory_allocation_failed),
             cmocka_unit_test(check_contains_all_keys_error_on_object_is_null),
             cmocka_unit_test(check_contains_all_keys_error_on_other_is_null),
             cmocka_unit_test(check_contains_all_keys_error_on_out_is_null),
             cmocka_unit_test(check_contains_all_keys_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_contains_all_keys_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_contains_all_values_error_on_object_is_null),
+            cmocka_unit_test(check_contains_all_values_error_on_other_is_null),
+            cmocka_unit_test(check_contains_all_values_error_on_out_is_null),
+            cmocka_unit_test(check_contains_all_values_error_on_memory_allocation_failed),
             cmocka_unit_test(check_get_error_on_object_is_null),
-            cmocka_unit_test(check_get_error_on_key_is_null),
+            cmocka_unit_test(check_get_error_on_entry_is_null),
             cmocka_unit_test(check_get_error_on_out_is_null),
-            cmocka_unit_test(check_get_error_on_key_not_found),
-            cmocka_unit_test(check_as_map_get_error_on_key_not_found),
+            cmocka_unit_test(check_get_error_on_entry_not_found),
             cmocka_unit_test(check_get_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_get_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_get_value_error_on_object_is_null),
+            cmocka_unit_test(check_get_value_error_on_value_is_null),
+            cmocka_unit_test(check_get_value_error_on_out_is_null),
+            cmocka_unit_test(check_get_value_error_on_value_not_found),
+            cmocka_unit_test(check_get_value_error_on_memory_allocation_failed),
             cmocka_unit_test(check_get_entry_error_on_object_is_null),
-            cmocka_unit_test(check_get_entry_error_on_key_is_null),
+            cmocka_unit_test(check_get_entry_error_on_value_is_null),
             cmocka_unit_test(check_get_entry_error_on_out_is_null),
-            cmocka_unit_test(check_get_entry_error_on_key_not_found),
-            cmocka_unit_test(check_as_map_get_entry_error_on_key_not_found),
+            cmocka_unit_test(check_get_entry_error_on_value_not_found),
             cmocka_unit_test(check_get_entry_error_on_memory_allocation_failed),
-            cmocka_unit_test(check_as_map_get_entry_error_on_memory_allocation_failed),
             cmocka_unit_test(check_keys_error_on_object_is_null),
             cmocka_unit_test(check_keys_error_on_out_is_null),
             cmocka_unit_test(check_keys),
+            cmocka_unit_test(check_as_map_keys),
             cmocka_unit_test(check_values_error_on_object_is_null),
             cmocka_unit_test(check_values_error_on_out_is_null),
             cmocka_unit_test(check_values),

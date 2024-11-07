@@ -6,9 +6,11 @@
 #include <stdint.h>
 #include <sea-urchin.h>
 
+struct butterflyfish_map_i_i_entry;
+
 #define BUTTERFLYFISH_STREAM_I_I_ERROR_OBJECT_IS_NULL \
     SEA_URCHIN_ERROR_OBJECT_IS_NULL
-#define BUTTERFLYFISH_STREAM_I_I_ERROR_ENTRY_IS_NULL \
+#define BUTTERFLYFISH_STREAM_I_I_ERROR_ITEM_IS_NULL \
     SEA_URCHIN_ERROR_ITEM_IS_NULL
 #define BUTTERFLYFISH_STREAM_I_I_ERROR_OUT_IS_NULL \
     SEA_URCHIN_ERROR_OUT_IS_NULL
@@ -17,21 +19,19 @@
 #define BUTTERFLYFISH_STREAM_I_I_ERROR_END_OF_SEQUENCE \
     SEA_URCHIN_ERROR_END_OF_SEQUENCE
 
-struct butterflyfish_map_entry_i_i;
-
 struct butterflyfish_stream_i_i {
-    int (*const first)(const void *object,
-                       const struct butterflyfish_map_entry_i_i **out);
+    int (*const first)(const struct butterflyfish_stream_i_i *object,
+                       const struct butterflyfish_map_i_i_entry **out);
 
-    int (*const next)(const void *object,
-                      const struct butterflyfish_map_entry_i_i *entry,
-                      const struct butterflyfish_map_entry_i_i **out);
+    int (*const next)(const struct butterflyfish_stream_i_i *object,
+                      const struct butterflyfish_map_i_i_entry *item,
+                      const struct butterflyfish_map_i_i_entry **out);
 };
 
 /**
- * @brief First entry of the stream.
+ * @brief First item of the stream.
  * @param [in] object stream instance.
- * @param [out] out receive the entry.
+ * @param [out] out receive the item.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_STREAM_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
@@ -40,24 +40,24 @@ struct butterflyfish_stream_i_i {
  */
 int butterflyfish_stream_i_i_first(
         const struct butterflyfish_stream_i_i *object,
-        const struct butterflyfish_map_entry_i_i **out);
+        const struct butterflyfish_map_i_i_entry **out);
 
 /**
- * @brief Retrieve next entry.
+ * @brief Retrieve next item.
  * @param [in] object stream instance.
- * @param [in] entry current entry.
- * @param [out] out receive the next entry.
+ * @param [in] item current item.
+ * @param [out] out receive the next item.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_STREAM_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_STREAM_I_I_ERROR_ENTRY_IS_NULL if entry is <i>NULL</i>.
+ * @throws BUTTERFLYFISH_STREAM_I_I_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
  * @throws BUTTERFLYFISH_STREAM_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_STREAM_I_I_ERROR_END_OF_SEQUENCE if there is no next
- * entry.
+ * item.
  */
 int butterflyfish_stream_i_i_next(
         const struct butterflyfish_stream_i_i *object,
-        const struct butterflyfish_map_entry_i_i *entry,
-        const struct butterflyfish_map_entry_i_i **out);
+        const struct butterflyfish_map_i_i_entry *item,
+        const struct butterflyfish_map_i_i_entry **out);
 
 #endif /* _BUTTERFLYFISH_STREAM_I_I_H_ */

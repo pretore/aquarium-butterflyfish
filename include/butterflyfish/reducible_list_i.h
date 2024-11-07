@@ -5,44 +5,47 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "fixed_list_i.h"
+#include "list_i.h"
+#include "removable_i.h"
+#include "stream_ni.h"
 
 struct sea_turtle_integer;
 
 #define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_OBJECT_IS_NULL
+    BUTTERFLYFISH_LIST_I_ERROR_OBJECT_IS_NULL
 #define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_OUT_IS_NULL
+    BUTTERFLYFISH_LIST_I_ERROR_OUT_IS_NULL
 #define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_LIST_IS_EMPTY \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_LIST_IS_EMPTY
+    BUTTERFLYFISH_LIST_I_ERROR_LIST_IS_EMPTY
 #define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_ITEM_IS_NULL
+    BUTTERFLYFISH_LIST_I_ERROR_ITEM_IS_NULL
 #define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_END_OF_SEQUENCE \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_END_OF_SEQUENCE
-#define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_VALUE_IS_NULL \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_VALUE_IS_NULL
-#define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED
+    BUTTERFLYFISH_LIST_I_ERROR_END_OF_SEQUENCE
 #define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS
-#define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_OUT_OF_BOUNDS \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_ITEM_IS_OUT_OF_BOUNDS
-#define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_VALUE_IS_INVALID \
-    BUTTERFLYFISH_FIXED_LIST_I_ERROR_VALUE_IS_INVALID
+    BUTTERFLYFISH_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS
+#define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_NOT_FOUND \
+    BUTTERFLYFISH_LIST_I_ERROR_ITEM_NOT_FOUND
 #define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OTHER_IS_NULL \
-    SEA_URCHIN_ERROR_OBJECT_IS_NULL
+    SEA_URCHIN_ERROR_OTHER_IS_NULL
+#define BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED \
+    SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 
 struct butterflyfish_reducible_list_i {
-    const struct butterflyfish_fixed_list_i fixed_list_i;
+    int (*const as_removable)(
+            struct butterflyfish_reducible_list_i *object,
+            struct butterflyfish_removable_i **out);
 
-    int (*const remove)(void *object,
-                        uintmax_t at);
+    int (*const as_list)(
+            const struct butterflyfish_reducible_list_i *object,
+            const struct butterflyfish_list_i **out);
 
-    int (*const remove_item)(void *object,
-                             const struct sea_turtle_integer *item);
+    int (*const remove)(
+            struct butterflyfish_reducible_list_i *object,
+            uintmax_t at);
 
-    int (*const remove_all_items)(void *object,
-                                  const struct butterflyfish_stream_i *other);
+    int (*const remove_all)(
+            struct butterflyfish_reducible_list_i *object,
+            const struct butterflyfish_stream_ni *other);
 };
 
 /**
@@ -74,18 +77,32 @@ int butterflyfish_reducible_list_i_as_collection(
         const struct butterflyfish_collection_i **out);
 
 /**
- * @brief Return reducible list as a fixed list.
+ * @brief Return reducible list as a list.
  * @param [in] object reducible list instance.
- * @param [out] out receive fixed list.
+ * @param [out] out receive list.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  */
-int butterflyfish_reducible_list_i_as_fixed_list(
+int butterflyfish_reducible_list_i_as_list(
+        const struct butterflyfish_reducible_list_i *object,
+        const struct butterflyfish_list_i **out);
+
+/**
+ * @brief Return reducible list as a removable.
+ * @param [in] object reducible list instance.
+ * @param [out] out receive removable.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is
+ * <i>NULL</i>.
+ */
+int butterflyfish_reducible_list_i_as_removable(
         struct butterflyfish_reducible_list_i *object,
-        struct butterflyfish_fixed_list_i **out);
+        struct butterflyfish_removable_i **out);
 
 /**
  * @brief Retrieve the count of items.
@@ -110,8 +127,7 @@ int butterflyfish_reducible_list_i_count(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is 
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_LIST_IS_EMPTY if reducible
- * list is empty.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_LIST_IS_EMPTY if list is empty.
  */
 int butterflyfish_reducible_list_i_first(
         const struct butterflyfish_reducible_list_i *object,
@@ -126,8 +142,7 @@ int butterflyfish_reducible_list_i_first(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_LIST_IS_EMPTY if reducible
- * list is empty.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_LIST_IS_EMPTY if list is empty.
  */
 int butterflyfish_reducible_list_i_last(
         const struct butterflyfish_reducible_list_i *object,
@@ -175,7 +190,7 @@ int butterflyfish_reducible_list_i_prev(
 
 /**
  * @brief Retrieve item at index.
- * @param [in] object reducible list instance.
+ * @param [in] object incremental list instance.
  * @param [in] at index of item to retrieve.
  * @param [out] out receive the item.
  * @return On success <i>0</i>, otherwise an error code.
@@ -183,8 +198,8 @@ int butterflyfish_reducible_list_i_prev(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS if at
- * does not refer to an item contained within the reducible list.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS if
+ * at does not refer to an item contained within the list.
  */
 int butterflyfish_reducible_list_i_get(
         const struct butterflyfish_reducible_list_i *object,
@@ -192,54 +207,8 @@ int butterflyfish_reducible_list_i_get(
         const struct sea_turtle_integer **out);
 
 /**
- * @brief Set value of item at index.
- * @param [in] object reducible list instance.
- * @param [in] at index of item to set.
- * @param [in] value to which item is to be set to.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS if at
- * does not refer to an item contained within the reducible list.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED if
- * there is not enough memory to set the item to value.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_VALUE_IS_INVALID if value is
- * invalid.
- * @note <b>value</b> is copied and then item at index is set to it.
- */
-int butterflyfish_reducible_list_i_set(
-        struct butterflyfish_reducible_list_i *object,
-        uintmax_t at,
-        const struct sea_turtle_integer *value);
-
-/**
- * @brief Set value of item.
- * @param [in] object reducible list instance.
- * @param [in] item to set.
- * @param [in] value to which item is to be set to.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL if item is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED if
- * there is not enough memory to set the item to value.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_VALUE_IS_INVALID if value is
- * invalid.
- * @note <b>value</b> is copied and then item is set to it.
- */
-int butterflyfish_reducible_list_i_set_item(
-        struct butterflyfish_reducible_list_i *object,
-        struct sea_turtle_integer *item,
-        const struct sea_turtle_integer *value);
-
-/**
  * @brief Get index of item.
- * @param [in] object reducible list instance.
+ * @param [in] object incremental list instance.
  * @param [in] item whose index we are to determine.
  * @param [out] out receive index of item.
  * @return On success <i>0</i>, otherwise an error code.
@@ -249,27 +218,13 @@ int butterflyfish_reducible_list_i_set_item(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_OUT_OF_BOUNDS if item
- * is not contained within the reducible list.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_NOT_FOUND if item is
+ * not contained within the list.
  */
 int butterflyfish_reducible_list_i_at(
         const struct butterflyfish_reducible_list_i *object,
         const struct sea_turtle_integer *item,
         uintmax_t *out);
-
-/**
- * @brief Remove item at index.
- * @param [in] object reducible list instance.
- * @param [in] at index of item to remove.
- * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL if object is
- * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS if at
- * does not refer to an item contained within the reducible list.
- */
-int butterflyfish_reducible_list_i_remove(
-        struct butterflyfish_reducible_list_i *object,
-        uintmax_t at);
 
 /**
  * @brief Remove item.
@@ -280,6 +235,7 @@ int butterflyfish_reducible_list_i_remove(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL if item is
  * <i>NULL</i>.
+ * @note <b>item</b> is invalidated when removed.
  */
 int butterflyfish_reducible_list_i_remove_item(
         struct butterflyfish_reducible_list_i *object,
@@ -294,9 +250,40 @@ int butterflyfish_reducible_list_i_remove_item(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OTHER_IS_NULL if other is
  * <i>NULL</i>.
+ * @note streamed items within <b>other</b> is invalidated when removed.
  */
 int butterflyfish_reducible_list_i_remove_all_items(
         struct butterflyfish_reducible_list_i *object,
         const struct butterflyfish_stream_i *other);
+
+/**
+ * @brief Remove item at index.
+ * @param [in] object reducible list instance.
+ * @param [in] at index of item to remove.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS if at
+ * does not refer to an item contained within the list.
+ */
+int butterflyfish_reducible_list_i_remove(
+        struct butterflyfish_reducible_list_i *object,
+        uintmax_t at);
+
+/**
+ * @brief Remove items at indexes.
+ * @param [in] object reducible list instance.
+ * @param [in] other stream whose indexes will be removed.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL if object is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OTHER_IS_NULL if other is
+ * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED if
+ * there is insufficient memory to gather indexes for removing items.
+ */
+int butterflyfish_reducible_list_i_remove_all(
+        struct butterflyfish_reducible_list_i *object,
+        const struct butterflyfish_stream_ni *other);
 
 #endif /* _BUTTERFLYFISH_REDUCIBLE_LIST_I_H_ */
