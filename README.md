@@ -7,13 +7,14 @@ Collection interfaces in C.
 
 // set, list, deque, queue, stack, map
 
-// _, sorted, ordered, swappable
+// _, unordered, ordered, swappable, sorted
 
 ```mermaid
 flowchart LR
     A["_"] --> B[/"is item order significant?"/]
     B -->|yes| C[/"are items sorted?"/]
-    B -->|no| D["_"]
+    B -->|no| D["unordered"]
+    B -->|?| Z["_"]
     C -->|yes| E["sorted"]
     C -->|no| F[/"may you swap items?"/]
     F -->|yes| G["swappable"]

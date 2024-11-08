@@ -41,6 +41,8 @@ struct butterflyfish_ordered_settable_list_i;
     BUTTERFLYFISH_ORDERED_SETTABLE_MAP_I_I_ERROR_KEY_NOT_FOUND
 #define BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_VALUE_IS_INVALID \
     BUTTERFLYFISH_ORDERED_SETTABLE_MAP_I_I_ERROR_VALUE_IS_INVALID
+#define BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_ENTRY_IS_INVALID \
+    BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_ENTRY_IS_INVALID
 #define BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_KEY_ALREADY_EXISTS \
     BUTTERFLYFISH_ORDERED_SETTABLE_MAP_I_I_ERROR_KEY_ALREADY_EXISTS
 
@@ -381,7 +383,7 @@ int butterflyfish_ordered_settable_incremental_map_i_i_prev(
 /**
  * @brief Check if ordered settable incremental map contains the given entry.
  * @param [in] object ordered settable incremental map instance.
- * @param [in] value to check if value is present.
+ * @param [in] entry to check if entry is present.
  * @param [out] out receive true if value is present, otherwise false.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws
@@ -773,5 +775,37 @@ int butterflyfish_ordered_settable_incremental_map_i_i_add_value(
         struct butterflyfish_ordered_settable_incremental_map_i_i *object,
         const struct sea_turtle_integer *key,
         const struct sea_turtle_integer *value);
+
+/**
+ * @brief Retrieve set view of keys.
+ * @param [in] object settable incremental map instance.
+ * @param [out] out receive set view of keys.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL if
+ * object is <i>NULL</i>.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL if
+ * out is <i>NULL</i>.
+ */
+int butterflyfish_ordered_settable_incremental_map_i_i_keys(
+        struct butterflyfish_ordered_settable_incremental_map_i_i *object,
+        struct butterflyfish_ordered_settable_incremental_set_i **out);
+
+/**
+ * @brief Retrieve list view of values.
+ * @param [in] object settable incremental map instance.
+ * @param [out] out receive list view of values.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL if
+ * object is <i>NULL</i>.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL if
+ * out is <i>NULL</i>.
+ */
+int butterflyfish_ordered_settable_incremental_map_i_i_values(
+        struct butterflyfish_ordered_settable_incremental_map_i_i *object,
+        struct butterflyfish_ordered_settable_list_i **out);
 
 #endif /* _BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_H_ */

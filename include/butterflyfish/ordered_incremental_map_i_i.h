@@ -264,7 +264,7 @@ int butterflyfish_ordered_incremental_map_i_i_prev(
 /**
  * @brief Check if ordered incremental map contains the given entry.
  * @param [in] object ordered incremental map instance.
- * @param [in] value to check if value is present.
+ * @param [in] entry to check if entry is present.
  * @param [out] out receive true if value is present, otherwise false.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL if

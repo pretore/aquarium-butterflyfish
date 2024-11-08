@@ -1717,9 +1717,6 @@ static void check_set_entry_error_on_memory_allocation_failed(void **state) {
                      BUTTERFLYFISH_ORDERED_SETTABLE_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
-
-
-
 static void check_keys_error_on_object_is_null(void **state) {
     assert_int_equal(butterflyfish_ordered_settable_map_i_i_keys(NULL, (void *) 1),
                      BUTTERFLYFISH_ORDERED_SETTABLE_MAP_I_I_ERROR_OBJECT_IS_NULL);

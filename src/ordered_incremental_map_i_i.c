@@ -296,7 +296,7 @@ int butterflyfish_ordered_incremental_map_i_i_contains_all_keys(
 }
 
 int butterflyfish_ordered_incremental_map_i_i_contains_all_values(
-        const struct butterflyfish_ordered_incremental_map_i_i *object,
+        const struct butterflyfish_ordered_incremental_map_i_i *const object,
         const struct butterflyfish_stream_i *other,
         bool *out) {
     if (!object) {
