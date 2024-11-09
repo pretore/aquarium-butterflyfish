@@ -54,7 +54,7 @@ as_settable_map(struct butterflyfish_mutable_map_i_i *const object,
     seagrass_required_true(!as_settable_reducible_map(
             object, &settable_reducible_map));
     return INVOKE_SETTABLE_REDUCIBLE_MAP(settable_reducible_map)
-        ->settable_map(settable_reducible_map, out);
+        ->as_settable_map(settable_reducible_map, out);
 }
 
 static inline int
@@ -79,7 +79,7 @@ as_reducible_map(struct butterflyfish_mutable_map_i_i *const object,
     seagrass_required_true(!as_settable_reducible_map(
             object, &settable_reducible_map));
     return INVOKE_SETTABLE_REDUCIBLE_MAP(settable_reducible_map)
-        ->reducible_map(settable_reducible_map, out);
+        ->as_reducible_map(settable_reducible_map, out);
 }
 
 static inline int

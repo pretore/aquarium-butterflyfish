@@ -441,7 +441,7 @@ int butterflyfish_mutable_map_i_i_contains_all_values(
 /**
  * @brief Retrieve matching entry.
  * @param [in] object mutable map instance.
- * @param [in] value to find.
+ * @param [in] entry to find.
  * @param [out] out receive the matching entry.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_MUTABLE_MAP_I_I_ERROR_OBJECT_IS_NULL if object is

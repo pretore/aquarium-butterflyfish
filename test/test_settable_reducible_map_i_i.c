@@ -499,8 +499,8 @@ settable_reducible_map_values(
 
 const struct
 butterflyfish_settable_reducible_map_i_i settable_reducible_map_i_i = {
-        .settable_map = settable_reducible_map_as_settable_map,
-        .reducible_map = settable_reducible_map_as_reducible_map,
+        .as_settable_map = settable_reducible_map_as_settable_map,
+        .as_reducible_map = settable_reducible_map_as_reducible_map,
         .keys = settable_reducible_map_keys,
         .values = settable_reducible_map_values,
 };

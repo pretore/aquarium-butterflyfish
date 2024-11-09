@@ -1619,15 +1619,6 @@ static void check_remove_all_entries(void **state) {
                     (void *) 1), 0);
 }
 
-
-
-
-
-
-
-
-
-
 static void check_keys_error_on_object_is_null(void **state) {
     assert_int_equal(butterflyfish_ordered_reducible_map_i_i_keys(NULL, (void *) 1),
                      BUTTERFLYFISH_ORDERED_REDUCIBLE_MAP_I_I_ERROR_OBJECT_IS_NULL);
@@ -1814,7 +1805,6 @@ static void check_as_reducible_map_values(void **state) {
     struct butterflyfish_reducible_list_i *out;
     assert_int_equal(butterflyfish_reducible_map_i_i_values(as, &out), 0);
 }
-
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {

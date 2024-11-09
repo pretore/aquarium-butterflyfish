@@ -25,7 +25,7 @@ as_settable_map(struct butterflyfish_settable_reducible_map_i_i *const object,
                 struct butterflyfish_settable_map_i_i **const out) {
     assert(object);
     assert(out);
-    return INVOKE(object)->settable_map(object, out);
+    return INVOKE(object)->as_settable_map(object, out);
 }
 
 static inline int
@@ -33,7 +33,7 @@ as_reducible_map(struct butterflyfish_settable_reducible_map_i_i *const object,
                  struct butterflyfish_reducible_map_i_i **const out) {
     assert(object);
     assert(out);
-    return INVOKE(object)->reducible_map(object, out);
+    return INVOKE(object)->as_reducible_map(object, out);
 }
 
 static inline int
