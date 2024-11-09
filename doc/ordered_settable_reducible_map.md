@@ -111,4 +111,4 @@ classDiagram
 [ordered_settable_reducible_map](ordered_settable_reducible_map.md) _is an_ 
 [settable_reducible_map](settable_reducible_map.md) where the entry order is significant.
 - [ordered_settable_reducible_set](ordered_settable_reducible_set.md) view of keys
-- [ordered_settable_list](ordered_settable_list.md) view of values
+- [ordered_settable_reducible_list](ordered_settable_reducible_list.md) view of values
