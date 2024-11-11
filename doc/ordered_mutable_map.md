@@ -161,4 +161,4 @@ classDiagram
 [ordered_mutable_map](ordered_mutable_map.md) _is an_
 [ordered_map](ordered_map.md) whose contents may change.
 - [ordered_mutable_set](ordered_mutable_set.md) view of keys
-- [ordered_mutable_list](ordered_mutable_list.md) view of values
+- [ordered_settable_reducible_list](ordered_settable_reducible_list.md) view of values
