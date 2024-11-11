@@ -1,4 +1,4 @@
-## mutable_map
+## ordered_mutable_map
 
 ```mermaid
 classDiagram
@@ -22,6 +22,9 @@ classDiagram
     }
     <<interface>> set
     collection *-- set
+    class ordered
+    <<interface>> ordered
+    collection *-- ordered
     class addable {
         add()
         add_all()
@@ -71,6 +74,13 @@ classDiagram
     <<interface>> reducible_map
     map *-- reducible_map
     removable *-- reducible_map
+    class ordered_map {
+        keys()
+        values()
+    }
+    <<interface>> ordered_map
+    ordered *-- ordered_map
+    map *-- ordered_map
     class settable_map {
         set_entry()
         set_key()
@@ -81,6 +91,13 @@ classDiagram
     <<interface>> settable_map
     map *-- settable_map
     settable *-- settable_map
+    class ordered_settable_map {
+        keys()
+        values()
+    }
+    <<interface>> ordered_settable_map
+    ordered_map *-- ordered_settable_map
+    settable_map *-- ordered_settable_map
     class settable_incremental_map {
         keys()
         values()
@@ -101,8 +118,47 @@ classDiagram
     }
     settable_incremental_map *-- mutable_map
     settable_reducible_map *-- mutable_map
+    class ordered_incremental_map {
+        keys()
+        values()
+    }
+    <<interface>> ordered_incremental_map
+    incremental_map *-- ordered_incremental_map
+    ordered_map *-- ordered_incremental_map
+    class ordered_reducible_map {
+        keys()
+        values()
+    }
+    <<interface>> ordered_reducible_map
+    ordered_map *-- ordered_reducible_map
+    reducible_map *-- ordered_reducible_map
+    class ordered_settable_incremental_map {
+        keys()
+        values()
+    }
+    <<interface>> ordered_settable_incremental_map
+    ordered_incremental_map *-- ordered_settable_incremental_map
+    ordered_settable_map *-- ordered_settable_incremental_map
+    settable_incremental_map *-- ordered_settable_incremental_map
+    class ordered_settable_reducible_map {
+        keys()
+        values()
+    }
+    <<interface>> ordered_settable_reducible_map
+    ordered_settable_map *-- ordered_settable_reducible_map
+    ordered_reducible_map *-- ordered_settable_reducible_map
+    settable_reducible_map *-- ordered_settable_reducible_map
+    class ordered_mutable_map {
+        keys()
+        values()
+    }
+    <<interface>> ordered_mutable_map
+    ordered_settable_incremental_map *-- ordered_mutable_map
+    ordered_settable_reducible_map *-- ordered_mutable_map
+    mutable_map *-- ordered_mutable_map
 ```
 
-[mutable_map](mutable_map.md) _is a_ [map](map.md) whose contents may change.
-- [mutable_set](settable_incremental_set.md) view of keys
-- [settable_reducible_list](settable_list.md) view of values
+[ordered_mutable_map](ordered_mutable_map.md) _is an_
+[ordered_map](ordered_map.md) whose contents may change.
+- [ordered_mutable_set](ordered_mutable_set.md) view of keys
+- [ordered_mutable_list](ordered_mutable_list.md) view of values

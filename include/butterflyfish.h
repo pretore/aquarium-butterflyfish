@@ -33,6 +33,7 @@
 #include <butterflyfish/ordered_list_i.h>
 #include <butterflyfish/ordered_map_i_i.h>
 #include <butterflyfish/ordered_mutable_list_i.h>
+#include <butterflyfish/ordered_mutable_map_i_i.h>
 #include <butterflyfish/ordered_mutable_set_i.h>
 #include <butterflyfish/ordered_reducible_list_i.h>
 #include <butterflyfish/ordered_reducible_map_i_i.h>

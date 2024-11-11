@@ -329,11 +329,22 @@ incremental_map_keys(
     return mock();
 }
 
+static int
+incremental_map_values(
+        const struct butterflyfish_incremental_map_i_i *const object,
+        const struct butterflyfish_list_i **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(out);
+    return mock();
+}
+
 const struct butterflyfish_incremental_map_i_i incremental_map_i_i = {
         .as_map = incremental_map_as_map,
         .as_addable = incremental_map_as_addable,
         .add_value = incremental_map_add_value,
         .keys = incremental_map_keys,
+        .values = incremental_map_values,
 };
 
 static int
@@ -755,6 +766,29 @@ static void check_ordered_as_collection(void **state) {
                     &instance, &as), 0);
     const struct butterflyfish_collection_i_i *out;
     assert_int_equal(butterflyfish_ordered_i_i_as_collection(as, &out), 0);
+    assert_ptr_equal(out, check);
+}
+
+static void check_incremental_map_as_map(void **state) {
+    const struct object instance = {
+            .ordered_incremental_map_i_i = &ordered_incremental_map_i_i,
+            .incremental_map_i_i = &incremental_map_i_i,
+            .ordered_map_i_i = &ordered_map_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .addable_i_i = &addable_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    const void *check = (char *) &instance
+                        + offsetof(struct object, map_i_i);
+    struct butterflyfish_incremental_map_i_i *as;
+    assert_int_equal(butterflyfish_ordered_incremental_map_i_i_as_incremental_map(
+            (struct butterflyfish_ordered_incremental_map_i_i *)
+                    &instance, &as), 0);
+    const struct butterflyfish_map_i_i *out;
+    assert_int_equal(butterflyfish_incremental_map_i_i_as_map(as, &out), 0);
     assert_ptr_equal(out, check);
 }
 
@@ -1517,7 +1551,6 @@ static void check_add_value_error_on_object_is_null(void **state) {
             butterflyfish_ordered_incremental_map_i_i_add_value(
                     NULL, (void *) 1, (void *) 1),
             BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL);
-
 }
 
 static void check_add_value_error_on_key_is_null(void **state) {
@@ -1741,13 +1774,12 @@ static void check_as_incremental_map_values(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    expect_function_call(map_values);
-    will_return(map_values, 0);
+    expect_function_call(incremental_map_values);
+    will_return(incremental_map_values, 0);
     struct butterflyfish_incremental_map_i_i *as;
-    assert_int_equal(
-            butterflyfish_ordered_incremental_map_i_i_as_incremental_map(
-                    (struct butterflyfish_ordered_incremental_map_i_i *)
-                            &instance, &as), 0);
+    assert_int_equal(butterflyfish_ordered_incremental_map_i_i_as_incremental_map(
+            (struct butterflyfish_ordered_incremental_map_i_i *) &instance,
+                    &as), 0);
     const struct butterflyfish_list_i *out;
     assert_int_equal(butterflyfish_incremental_map_i_i_values(as, &out), 0);
 }
@@ -1825,6 +1857,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_incremental_map),
             cmocka_unit_test(check_addable_as_collection),
             cmocka_unit_test(check_ordered_as_collection),
+            cmocka_unit_test(check_incremental_map_as_map),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),

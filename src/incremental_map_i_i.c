@@ -309,20 +309,6 @@ int butterflyfish_incremental_map_i_i_get_entry(
     return INVOKE_MAP(map)->get_entry(map, key, out);
 }
 
-int butterflyfish_incremental_map_i_i_values(
-        const struct butterflyfish_incremental_map_i_i *const object,
-        const struct butterflyfish_list_i **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL;
-    }
-    const struct butterflyfish_map_i_i *map;
-    seagrass_required_true(!as_map(object, &map));
-    return INVOKE_MAP(map)->values(map, out);
-}
-
 #pragma mark addable_i_i -
 
 int butterflyfish_incremental_map_i_i_add(
@@ -441,6 +427,18 @@ int butterflyfish_incremental_map_i_i_keys(
         return BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL;
     }
     return INVOKE(object)->keys(object, out);
+}
+
+int butterflyfish_incremental_map_i_i_values(
+        const struct butterflyfish_incremental_map_i_i *const object,
+        const struct butterflyfish_list_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    return INVOKE(object)->values(object, out);
 }
 
 

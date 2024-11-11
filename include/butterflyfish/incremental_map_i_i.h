@@ -61,6 +61,10 @@ struct butterflyfish_incremental_map_i_i {
     int (*const keys)(
             struct butterflyfish_incremental_map_i_i *object,
             struct butterflyfish_incremental_set_i **out);
+
+    int (*const values)(
+            const struct butterflyfish_incremental_map_i_i *object,
+            const struct butterflyfish_list_i **out);
 };
 
 /**

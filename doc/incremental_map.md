@@ -43,6 +43,7 @@ classDiagram
     class incremental_map {
         add_value()
         keys()
+        values()
     }
     <<interface>> incremental_map
     map *-- incremental_map
@@ -52,3 +53,4 @@ classDiagram
 [incremental_map](incremental_set.md) _is a_ [map](map.md) where the entry count may be increased.
 - add value for key
 - [incremental_set](incremental_set.md) view of keys
+- [list](list.md) view of values

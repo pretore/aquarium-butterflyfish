@@ -48,6 +48,7 @@ classDiagram
     class incremental_map {
         add_value()
         keys()
+        values()
     }
     <<interface>> incremental_map
     addable *-- incremental_map

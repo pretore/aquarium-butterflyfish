@@ -1202,13 +1202,13 @@ static void check_as_settable_reducible_map(void **state) {
 
 static void check_as_ordered_reducible_map_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_settable_reducible_map_i_i_as_settable_reducible_map(NULL, (void*) 1),
+            butterflyfish_ordered_settable_reducible_map_i_i_as_ordered_reducible_map(NULL, (void*) 1),
             BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_as_ordered_reducible_map_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_settable_reducible_map_i_i_as_settable_reducible_map((void *) 1,NULL),
+            butterflyfish_ordered_settable_reducible_map_i_i_as_ordered_reducible_map((void *) 1,NULL),
             BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
@@ -1231,9 +1231,9 @@ static void check_as_ordered_reducible_map(void **state) {
             .stream_i_i = &stream_i_i
     };
     const void *check = (char *) &instance
-                        + offsetof(struct object, settable_reducible_map_i_i);
-    struct butterflyfish_settable_reducible_map_i_i *out;
-    assert_int_equal(butterflyfish_ordered_settable_reducible_map_i_i_as_settable_reducible_map(
+                        + offsetof(struct object, ordered_reducible_map_i_i);
+    struct butterflyfish_ordered_reducible_map_i_i *out;
+    assert_int_equal(butterflyfish_ordered_settable_reducible_map_i_i_as_ordered_reducible_map(
             (struct butterflyfish_ordered_settable_reducible_map_i_i *) &instance, &out), 0);
     assert_ptr_equal(out, check);
 }
@@ -2786,17 +2786,6 @@ static void check_remove_all_entries(void **state) {
             (struct butterflyfish_ordered_settable_reducible_map_i_i *) &instance,
             (void *) 1), 0);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 static void check_keys_error_on_object_is_null(void **state) {
     assert_int_equal(butterflyfish_ordered_settable_reducible_map_i_i_keys(NULL, (void *) 1),
