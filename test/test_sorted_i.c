@@ -246,7 +246,7 @@ static void check_first_error_on_set_is_empty(void **state) {
             butterflyfish_sorted_i_first(
                     (const struct butterflyfish_sorted_i *) &instance,
                     (void *) 1),
-            BUTTERFLYFISH_SORTED_I_ERROR_SWAPPABLE_IS_EMPTY);
+            BUTTERFLYFISH_SORTED_I_ERROR_SORTED_IS_EMPTY);
 }
 
 static void check_last_error_on_object_is_null(void **state) {
@@ -274,7 +274,7 @@ static void check_last_error_on_set_is_empty(void **state) {
             butterflyfish_sorted_i_last(
                     (const struct butterflyfish_sorted_i *) &instance,
                     (void *) 1),
-            BUTTERFLYFISH_SORTED_I_ERROR_SWAPPABLE_IS_EMPTY);
+            BUTTERFLYFISH_SORTED_I_ERROR_SORTED_IS_EMPTY);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
