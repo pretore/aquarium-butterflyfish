@@ -334,9 +334,57 @@ sorted_map_values(const struct butterflyfish_sorted_map_i_i *const object,
     return mock();
 }
 
+static int
+sorted_map_ceiling(const struct butterflyfish_sorted_map_i_i *const object,
+                   const struct sea_turtle_integer *const value,
+                   const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(value);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+sorted_map_floor(const struct butterflyfish_sorted_map_i_i *const object,
+                 const struct sea_turtle_integer *const value,
+                 const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(value);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+sorted_map_higher(const struct butterflyfish_sorted_map_i_i *const object,
+                  const struct sea_turtle_integer *const value,
+                  const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(value);
+    assert_non_null(out);
+    return mock();
+}
+
+static int
+sorted_map_lower(const struct butterflyfish_sorted_map_i_i *const object,
+                 const struct sea_turtle_integer *const value,
+                 const struct butterflyfish_map_i_i_entry **const out) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(value);
+    assert_non_null(out);
+    return mock();
+}
+
 const struct butterflyfish_sorted_map_i_i sorted_map_i_i = {
         .as_map = sorted_map_as_map,
         .as_sorted = sorted_map_as_sorted,
+        .ceiling = sorted_map_ceiling,
+        .floor = sorted_map_floor,
+        .higher = sorted_map_higher,
+        .lower = sorted_map_lower,
         .keys = sorted_map_keys,
         .values = sorted_map_values
 };
@@ -1103,10 +1151,10 @@ static void check_ceiling_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_ceiling_error_on_value_is_null(void **state) {
+static void check_ceiling_error_on_key_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_map_i_i_ceiling((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL);
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL);
 }
 
 static void check_ceiling_error_on_out_is_null(void **state) {
@@ -1115,7 +1163,7 @@ static void check_ceiling_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static void check_ceiling_error_on_value_not_found(void **state) {
+static void check_ceiling_error_on_key_not_found(void **state) {
     const struct object instance = {
             .sorted_map_i_i = &sorted_map_i_i,
             .sorted_i_i = &sorted_i_i,
@@ -1124,15 +1172,15 @@ static void check_ceiling_error_on_value_not_found(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    expect_function_call(sorted_ceiling);
-    will_return(sorted_ceiling,
+    expect_function_call(sorted_map_ceiling);
+    will_return(sorted_map_ceiling,
                 BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
     assert_int_equal(
             butterflyfish_sorted_map_i_i_ceiling(
                     (const struct butterflyfish_sorted_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
 static void check_ceiling_error_on_memory_allocation_failed(void **state) {
@@ -1144,8 +1192,8 @@ static void check_ceiling_error_on_memory_allocation_failed(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    expect_function_call(sorted_ceiling);
-    will_return(sorted_ceiling,
+    expect_function_call(sorted_map_ceiling);
+    will_return(sorted_map_ceiling,
                 BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
             butterflyfish_sorted_map_i_i_ceiling(
@@ -1161,10 +1209,10 @@ static void check_floor_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_floor_error_on_value_is_null(void **state) {
+static void check_floor_error_on_key_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_map_i_i_floor((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL);
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL);
 }
 
 static void check_floor_error_on_out_is_null(void **state) {
@@ -1173,7 +1221,7 @@ static void check_floor_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static void check_floor_error_on_value_not_found(void **state) {
+static void check_floor_error_on_key_not_found(void **state) {
     const struct object instance = {
             .sorted_map_i_i = &sorted_map_i_i,
             .sorted_i_i = &sorted_i_i,
@@ -1182,15 +1230,15 @@ static void check_floor_error_on_value_not_found(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    expect_function_call(sorted_floor);
-    will_return(sorted_floor,
+    expect_function_call(sorted_map_floor);
+    will_return(sorted_map_floor,
                 BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
     assert_int_equal(
             butterflyfish_sorted_map_i_i_floor(
                     (const struct butterflyfish_sorted_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
 static void check_floor_error_on_memory_allocation_failed(void **state) {
@@ -1202,8 +1250,8 @@ static void check_floor_error_on_memory_allocation_failed(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    expect_function_call(sorted_floor);
-    will_return(sorted_floor,
+    expect_function_call(sorted_map_floor);
+    will_return(sorted_map_floor,
                 BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
             butterflyfish_sorted_map_i_i_floor(
@@ -1219,10 +1267,10 @@ static void check_higher_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_higher_error_on_value_is_null(void **state) {
+static void check_higher_error_on_key_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_map_i_i_higher((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL);
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL);
 }
 
 static void check_higher_error_on_out_is_null(void **state) {
@@ -1231,7 +1279,7 @@ static void check_higher_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static void check_higher_error_on_value_not_found(void **state) {
+static void check_higher_error_on_key_not_found(void **state) {
     const struct object instance = {
             .sorted_map_i_i = &sorted_map_i_i,
             .sorted_i_i = &sorted_i_i,
@@ -1240,15 +1288,15 @@ static void check_higher_error_on_value_not_found(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    expect_function_call(sorted_higher);
-    will_return(sorted_higher,
+    expect_function_call(sorted_map_higher);
+    will_return(sorted_map_higher,
                 BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
     assert_int_equal(
             butterflyfish_sorted_map_i_i_higher(
                     (const struct butterflyfish_sorted_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
 static void check_higher_error_on_memory_allocation_failed(void **state) {
@@ -1260,8 +1308,8 @@ static void check_higher_error_on_memory_allocation_failed(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    expect_function_call(sorted_higher);
-    will_return(sorted_higher,
+    expect_function_call(sorted_map_higher);
+    will_return(sorted_map_higher,
                 BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
             butterflyfish_sorted_map_i_i_higher(
@@ -1277,10 +1325,10 @@ static void check_lower_error_on_object_is_null(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL);
 }
 
-static void check_lower_error_on_value_is_null(void **state) {
+static void check_lower_error_on_key_is_null(void **state) {
     assert_int_equal(
             butterflyfish_sorted_map_i_i_lower((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL);
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL);
 }
 
 static void check_lower_error_on_out_is_null(void **state) {
@@ -1289,7 +1337,7 @@ static void check_lower_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static void check_lower_error_on_value_not_found(void **state) {
+static void check_lower_error_on_key_not_found(void **state) {
     const struct object instance = {
             .sorted_map_i_i = &sorted_map_i_i,
             .sorted_i_i = &sorted_i_i,
@@ -1298,15 +1346,15 @@ static void check_lower_error_on_value_not_found(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    expect_function_call(sorted_lower);
-    will_return(sorted_lower,
+    expect_function_call(sorted_map_lower);
+    will_return(sorted_map_lower,
                 BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
     assert_int_equal(
             butterflyfish_sorted_map_i_i_lower(
                     (const struct butterflyfish_sorted_map_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND);
+            BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND);
 }
 
 static void check_lower_error_on_memory_allocation_failed(void **state) {
@@ -1318,8 +1366,8 @@ static void check_lower_error_on_memory_allocation_failed(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    expect_function_call(sorted_lower);
-    will_return(sorted_lower,
+    expect_function_call(sorted_map_lower);
+    will_return(sorted_map_lower,
                 BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(
             butterflyfish_sorted_map_i_i_lower(
@@ -1329,11 +1377,77 @@ static void check_lower_error_on_memory_allocation_failed(void **state) {
             BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
+static void check_sorted_ceiling(void **state) {
+        const struct object instance = {
+            .sorted_map_i_i = &sorted_map_i_i,
+            .sorted_i_i = &sorted_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(sorted_ceiling);
+    will_return(sorted_ceiling, 0);
+    const struct butterflyfish_sorted_i_i *as;
+    assert_int_equal(butterflyfish_sorted_map_i_i_as_sorted(
+            (struct butterflyfish_sorted_map_i_i *) &instance, &as), 0);
+    assert_int_equal(butterflyfish_sorted_i_i_ceiling(
+            as, (void *) 1, (void *) 1), 0);
+}
 
+static void check_sorted_floor(void **state) {
+        const struct object instance = {
+            .sorted_map_i_i = &sorted_map_i_i,
+            .sorted_i_i = &sorted_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(sorted_floor);
+    will_return(sorted_floor, 0);
+    const struct butterflyfish_sorted_i_i *as;
+    assert_int_equal(butterflyfish_sorted_map_i_i_as_sorted(
+            (struct butterflyfish_sorted_map_i_i *) &instance, &as), 0);
+    assert_int_equal(butterflyfish_sorted_i_i_floor(
+            as, (void *) 1, (void *) 1), 0);
+}
 
+static void check_sorted_higher(void **state) {
+        const struct object instance = {
+            .sorted_map_i_i = &sorted_map_i_i,
+            .sorted_i_i = &sorted_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(sorted_higher);
+    will_return(sorted_higher, 0);
+    const struct butterflyfish_sorted_i_i *as;
+    assert_int_equal(butterflyfish_sorted_map_i_i_as_sorted(
+            (struct butterflyfish_sorted_map_i_i *) &instance, &as), 0);
+    assert_int_equal(butterflyfish_sorted_i_i_higher(
+            as, (void *) 1, (void *) 1), 0);
+}
 
-
-
+static void check_sorted_lower(void **state) {
+        const struct object instance = {
+            .sorted_map_i_i = &sorted_map_i_i,
+            .sorted_i_i = &sorted_i_i,
+            .map_i_i = &map_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(sorted_lower);
+    will_return(sorted_lower, 0);
+    const struct butterflyfish_sorted_i_i *as;
+    assert_int_equal(butterflyfish_sorted_map_i_i_as_sorted(
+            (struct butterflyfish_sorted_map_i_i *) &instance, &as), 0);
+    assert_int_equal(butterflyfish_sorted_i_i_lower(
+            as, (void *) 1, (void *) 1), 0);
+}
 
 static void check_keys_error_on_object_is_null(void **state) {
     assert_int_equal(butterflyfish_sorted_map_i_i_keys(NULL, (void *) 1),
@@ -1502,25 +1616,29 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_get_entry_error_on_value_not_found),
             cmocka_unit_test(check_get_entry_error_on_memory_allocation_failed),
             cmocka_unit_test(check_ceiling_error_on_object_is_null),
-            cmocka_unit_test(check_ceiling_error_on_value_is_null),
+            cmocka_unit_test(check_ceiling_error_on_key_is_null),
             cmocka_unit_test(check_ceiling_error_on_out_is_null),
-            cmocka_unit_test(check_ceiling_error_on_value_not_found),
+            cmocka_unit_test(check_ceiling_error_on_key_not_found),
             cmocka_unit_test(check_ceiling_error_on_memory_allocation_failed),
             cmocka_unit_test(check_floor_error_on_object_is_null),
-            cmocka_unit_test(check_floor_error_on_value_is_null),
+            cmocka_unit_test(check_floor_error_on_key_is_null),
             cmocka_unit_test(check_floor_error_on_out_is_null),
-            cmocka_unit_test(check_floor_error_on_value_not_found),
+            cmocka_unit_test(check_floor_error_on_key_not_found),
             cmocka_unit_test(check_floor_error_on_memory_allocation_failed),
             cmocka_unit_test(check_higher_error_on_object_is_null),
-            cmocka_unit_test(check_higher_error_on_value_is_null),
+            cmocka_unit_test(check_higher_error_on_key_is_null),
             cmocka_unit_test(check_higher_error_on_out_is_null),
-            cmocka_unit_test(check_higher_error_on_value_not_found),
+            cmocka_unit_test(check_higher_error_on_key_not_found),
             cmocka_unit_test(check_higher_error_on_memory_allocation_failed),
             cmocka_unit_test(check_lower_error_on_object_is_null),
-            cmocka_unit_test(check_lower_error_on_value_is_null),
+            cmocka_unit_test(check_lower_error_on_key_is_null),
             cmocka_unit_test(check_lower_error_on_out_is_null),
-            cmocka_unit_test(check_lower_error_on_value_not_found),
+            cmocka_unit_test(check_lower_error_on_key_not_found),
             cmocka_unit_test(check_lower_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_sorted_ceiling),
+            cmocka_unit_test(check_sorted_floor),
+            cmocka_unit_test(check_sorted_higher),
+            cmocka_unit_test(check_sorted_lower),
             cmocka_unit_test(check_keys_error_on_object_is_null),
             cmocka_unit_test(check_keys_error_on_out_is_null),
             cmocka_unit_test(check_keys),

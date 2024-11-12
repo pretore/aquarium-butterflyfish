@@ -308,80 +308,6 @@ int butterflyfish_sorted_map_i_i_get_entry(
     return INVOKE_MAP(map)->get_entry(map, key, out);
 }
 
-#pragma mark sorted_i_i -
-
-int butterflyfish_sorted_map_i_i_ceiling(
-        const struct butterflyfish_sorted_map_i_i *const object,
-        const struct butterflyfish_map_i_i_entry *const value,
-        const struct butterflyfish_map_i_i_entry **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL;
-    }
-    const struct butterflyfish_sorted_i_i *sorted;
-    seagrass_required_true(!as_sorted(object, &sorted));
-    return INVOKE_SORTED(sorted)->ceiling(sorted, value, out);
-}
-
-int butterflyfish_sorted_map_i_i_floor(
-        const struct butterflyfish_sorted_map_i_i *const object,
-        const struct butterflyfish_map_i_i_entry *const value,
-        const struct butterflyfish_map_i_i_entry **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL;
-    }
-    const struct butterflyfish_sorted_i_i *sorted;
-    seagrass_required_true(!as_sorted(object, &sorted));
-    return INVOKE_SORTED(sorted)->floor(sorted, value, out);
-}
-
-int butterflyfish_sorted_map_i_i_higher(
-        const struct butterflyfish_sorted_map_i_i *const object,
-        const struct butterflyfish_map_i_i_entry *const value,
-        const struct butterflyfish_map_i_i_entry **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL;
-    }
-    const struct butterflyfish_sorted_i_i *sorted;
-    seagrass_required_true(!as_sorted(object, &sorted));
-    return INVOKE_SORTED(sorted)->higher(sorted, value, out);
-}
-
-int butterflyfish_sorted_map_i_i_lower(
-        const struct butterflyfish_sorted_map_i_i *const object,
-        const struct butterflyfish_map_i_i_entry *const value,
-        const struct butterflyfish_map_i_i_entry **const out) {
-    if (!object) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL;
-    }
-    if (!value) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL;
-    }
-    if (!out) {
-        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL;
-    }
-    const struct butterflyfish_sorted_i_i *sorted;
-    seagrass_required_true(!as_sorted(object, &sorted));
-    return INVOKE_SORTED(sorted)->lower(sorted, value, out);
-}
-
 #pragma mark sorted_map_i_i -
 
 int butterflyfish_sorted_map_i_i_as_stream(
@@ -442,6 +368,70 @@ int butterflyfish_sorted_map_i_i_as_sorted(
         return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL;
     }
     return as_sorted(object, out);
+}
+
+int butterflyfish_sorted_map_i_i_ceiling(
+        const struct butterflyfish_sorted_map_i_i *const object,
+        const struct sea_turtle_integer *const key,
+        const struct butterflyfish_map_i_i_entry **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    return INVOKE(object)->ceiling(object, key, out);
+}
+
+int butterflyfish_sorted_map_i_i_floor(
+        const struct butterflyfish_sorted_map_i_i *const object,
+        const struct sea_turtle_integer *const key,
+        const struct butterflyfish_map_i_i_entry **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    return INVOKE(object)->floor(object, key, out);
+}
+
+int butterflyfish_sorted_map_i_i_higher(
+        const struct butterflyfish_sorted_map_i_i *const object,
+        const struct sea_turtle_integer *const key,
+        const struct butterflyfish_map_i_i_entry **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    return INVOKE(object)->higher(object, key, out);
+}
+
+int butterflyfish_sorted_map_i_i_lower(
+        const struct butterflyfish_sorted_map_i_i *const object,
+        const struct sea_turtle_integer *const key,
+        const struct butterflyfish_map_i_i_entry **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    return INVOKE(object)->lower(object, key, out);
 }
 
 int butterflyfish_sorted_map_i_i_keys(

@@ -49,6 +49,26 @@ struct butterflyfish_sorted_map_i_i {
             const struct butterflyfish_sorted_map_i_i *object,
             const struct butterflyfish_map_i_i **out);
 
+    int (*const ceiling)(
+            const struct butterflyfish_sorted_map_i_i *object,
+            const struct sea_turtle_integer *key,
+            const struct butterflyfish_map_i_i_entry **out);
+
+    int (*const floor)(
+            const struct butterflyfish_sorted_map_i_i *object,
+            const struct sea_turtle_integer *key,
+            const struct butterflyfish_map_i_i_entry **out);
+
+    int (*const higher)(
+            const struct butterflyfish_sorted_map_i_i *object,
+            const struct sea_turtle_integer *key,
+            const struct butterflyfish_map_i_i_entry **out);
+
+    int (*const lower)(
+            const struct butterflyfish_sorted_map_i_i *object,
+            const struct sea_turtle_integer *key,
+            const struct butterflyfish_map_i_i_entry **out);
+
     int (*const keys)(
             const struct butterflyfish_sorted_map_i_i *object,
             const struct butterflyfish_sorted_set_i **out);
@@ -399,90 +419,90 @@ int butterflyfish_sorted_map_i_i_get_entry(
         const struct butterflyfish_map_i_i_entry **out);
 
 /**
- * @brief Retrieve item for value or the next higher value.
+ * @brief Retrieve entry for key or the next higher key.
  * @param [in] object sorted map instance.
- * @param [in] value to find or its next higher.
- * @param [out] out receive the item.
+ * @param [in] key to find or its next higher.
+ * @param [out] out receive the entry.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL if value is
+ * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND if no value in
- * sorted was equal to or higher than value.
+ * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND if no key in
+ * sorted was equal to or higher than given key.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED if there
- * is insufficient memory to find the item.
+ * is insufficient memory to find the entry.
  */
 int butterflyfish_sorted_map_i_i_ceiling(
         const struct butterflyfish_sorted_map_i_i *object,
-        const struct butterflyfish_map_i_i_entry *value,
+        const struct sea_turtle_integer *key,
         const struct butterflyfish_map_i_i_entry **out);
 
 /**
- * @brief Retrieve item for value or the next lower value.
+ * @brief Retrieve entry for key or the next lower key.
  * @param [in] object sorted map instance.
- * @param [in] value to find or its next lower.
- * @param [out] out receive the item.
+ * @param [in] key to find or its next lower.
+ * @param [out] out receive the entry.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL if value is
+ * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND if no value in
- * sorted was equal to or lower than value.
+ * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND if no key in
+ * sorted was equal to or lower than given key.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED if there
- * is insufficient memory to find the item.
+ * is insufficient memory to find the entry.
  */
 int butterflyfish_sorted_map_i_i_floor(
         const struct butterflyfish_sorted_map_i_i *object,
-        const struct butterflyfish_map_i_i_entry *value,
+        const struct sea_turtle_integer *key,
         const struct butterflyfish_map_i_i_entry **out);
 
 /**
- * @brief Retrieve item for next higher value.
+ * @brief Retrieve entry for next higher key.
  * @param [in] object sorted map instance.
- * @param [in] value whose next higher value we are trying to find.
- * @param [out] out receive the item.
+ * @param [in] key whose next higher key we are trying to find.
+ * @param [out] out receive the entry.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL if value is
+ * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND if no value in
+ * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND if no key in
  * sorted is greater.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED if there
- * is insufficient memory to find the item.
+ * is insufficient memory to find the entry.
  */
 int butterflyfish_sorted_map_i_i_higher(
         const struct butterflyfish_sorted_map_i_i *object,
-        const struct butterflyfish_map_i_i_entry *value,
+        const struct sea_turtle_integer *key,
         const struct butterflyfish_map_i_i_entry **out);
 
 /**
- * @brief Retrieve item for the next lower value.
+ * @brief Retrieve entry for the next lower key.
  * @param [in] object sorted map instance.
- * @param [in] value whose next lower value we are trying to find.
- * @param [out] out receive the item.
+ * @param [in] key whose next lower key we are trying to find.
+ * @param [out] out receive the entry.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_IS_NULL if value is
+ * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_IS_NULL if key is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_VALUE_NOT_FOUND if no value in
+ * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_KEY_NOT_FOUND if no key in
  * sorted is lower.
  * @throws BUTTERFLYFISH_SORTED_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED if there
- * is insufficient memory to find the item.
+ * is insufficient memory to find the entry.
  */
 int butterflyfish_sorted_map_i_i_lower(
         const struct butterflyfish_sorted_map_i_i *object,
-        const struct butterflyfish_map_i_i_entry *value,
+        const struct sea_turtle_integer *key,
         const struct butterflyfish_map_i_i_entry **out);
 
 /**
