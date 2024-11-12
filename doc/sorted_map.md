@@ -43,6 +43,10 @@ classDiagram
     <<interface>> map
     set *-- map
     class sorted_map {
+        ceiling()
+        floor()
+        higher()
+        lower()
         keys()
         values()
     }
@@ -52,5 +56,9 @@ classDiagram
 ```
 
 [sorted_map](sorted_map.md) _is a_ [map](map.md) where the items are in sorted order.
+- ceiling entry for key
+- floor entry for key
+- higher entry for key
+- lower entry for key
 - [sorted_set](sorted_set.md) view of keys
 - [sorted_list](sorted_list.md) view of values
