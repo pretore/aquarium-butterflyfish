@@ -1,4 +1,4 @@
-## sorted_map
+## sorted_incremental_map
 
 ```mermaid
 classDiagram
@@ -23,6 +23,12 @@ classDiagram
     }
     <<interface>> sorted
     collection *-- sorted
+    class addable {
+        add()
+        add_all()
+    }
+    <<interface>> addable
+    collection *-- addable
     class set {
         contains()
         contains_all()
@@ -51,15 +57,25 @@ classDiagram
         values()
     }
     <<interface>> sorted_map
-    map *-- sorted_map
     sorted *-- sorted_map
+    map *-- sorted_map
+    class incremental_map {
+        add_value()
+        keys()
+        values()
+    }
+    <<interface>> incremental_map
+    map *-- incremental_map
+    addable *-- incremental_map
+    class sorted_incremental_map {
+        keys()
+        values()
+    }
+    <<interface>> sorted_incremental_map
+    sorted_map *-- sorted_incremental_map
+    incremental_map *-- sorted_incremental_map
 ```
 
-[sorted_map](sorted_map.md) _is a_ [map](map.md) where the keys are in sorted 
-order.
-- ceiling entry for key
-- floor entry for key
-- higher entry for key
-- lower entry for key
-- [sorted_set](sorted_set.md) view of keys
+[sorted_incremental_map](sorted_incremental_map.md) _is an_ [incremental_map](incremental_map.md) where the keys are sorted.
+- [sorted_incremental_set](sorted_incremental_set.md) view of keys
 - [sorted_list](sorted_list.md) view of values

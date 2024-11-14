@@ -69,6 +69,7 @@
 #include <butterflyfish/sorted_i.h>
 #include <butterflyfish/sorted_i_i.h>
 #include <butterflyfish/sorted_incremental_list_i.h>
+#include <butterflyfish/sorted_incremental_map_i_i.h>
 #include <butterflyfish/sorted_incremental_set_i.h>
 #include <butterflyfish/sorted_list_i.h>
 #include <butterflyfish/sorted_map_i_i.h>

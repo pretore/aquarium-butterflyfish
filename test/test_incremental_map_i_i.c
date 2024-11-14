@@ -1043,7 +1043,7 @@ static void check_get_entry_error_on_key_not_found(void **state) {
     };
     expect_function_call(map_get_entry);
     will_return(map_get_entry,
-                BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_VALUE_NOT_FOUND);
+                BUTTERFLYFISH_MAP_I_I_ERROR_VALUE_NOT_FOUND);
     assert_int_equal(
             butterflyfish_incremental_map_i_i_get_entry(
                     (struct butterflyfish_incremental_map_i_i *) &instance,

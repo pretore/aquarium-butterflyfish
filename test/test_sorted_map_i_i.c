@@ -1378,7 +1378,7 @@ static void check_lower_error_on_memory_allocation_failed(void **state) {
 }
 
 static void check_sorted_ceiling(void **state) {
-        const struct object instance = {
+    const struct object instance = {
             .sorted_map_i_i = &sorted_map_i_i,
             .sorted_i_i = &sorted_i_i,
             .map_i_i = &map_i_i,
@@ -1396,7 +1396,7 @@ static void check_sorted_ceiling(void **state) {
 }
 
 static void check_sorted_floor(void **state) {
-        const struct object instance = {
+    const struct object instance = {
             .sorted_map_i_i = &sorted_map_i_i,
             .sorted_i_i = &sorted_i_i,
             .map_i_i = &map_i_i,
@@ -1414,7 +1414,7 @@ static void check_sorted_floor(void **state) {
 }
 
 static void check_sorted_higher(void **state) {
-        const struct object instance = {
+    const struct object instance = {
             .sorted_map_i_i = &sorted_map_i_i,
             .sorted_i_i = &sorted_i_i,
             .map_i_i = &map_i_i,
@@ -1432,7 +1432,7 @@ static void check_sorted_higher(void **state) {
 }
 
 static void check_sorted_lower(void **state) {
-        const struct object instance = {
+    const struct object instance = {
             .sorted_map_i_i = &sorted_map_i_i,
             .sorted_i_i = &sorted_i_i,
             .map_i_i = &map_i_i,
