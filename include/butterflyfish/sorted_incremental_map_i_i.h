@@ -10,7 +10,7 @@
 
 struct sea_turtle_integer;
 struct butterflyfish_sorted_incremental_set_i;
-struct butterflyfish_sorted_list_i;
+struct butterflyfish_ordered_list_i;
 
 #define BUTTERFLYFISH_SORTED_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL \
     BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL
@@ -60,7 +60,7 @@ struct butterflyfish_sorted_incremental_map_i_i {
 
     int (*const values)(
             const struct butterflyfish_sorted_incremental_map_i_i *object,
-            const struct butterflyfish_sorted_list_i **out);
+            const struct butterflyfish_ordered_list_i **out);
 };
 
 /**
@@ -640,6 +640,6 @@ int butterflyfish_sorted_incremental_map_i_i_keys(
  */
 int butterflyfish_sorted_incremental_map_i_i_values(
         const struct butterflyfish_sorted_incremental_map_i_i *object,
-        const struct butterflyfish_sorted_list_i **out);
+        const struct butterflyfish_ordered_list_i **out);
 
 #endif /* _BUTTERFLYFISH_SORTED_INCREMENTAL_MAP_I_I_H_ */

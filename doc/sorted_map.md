@@ -62,4 +62,4 @@ order.
 - higher entry for key
 - lower entry for key
 - [sorted_set](sorted_set.md) view of keys
-- [sorted_list](sorted_list.md) view of values
+- [ordered_list](ordered_list.md) view of values

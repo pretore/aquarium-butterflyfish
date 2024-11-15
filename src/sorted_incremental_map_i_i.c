@@ -585,7 +585,7 @@ int butterflyfish_sorted_incremental_map_i_i_keys(
 
 int butterflyfish_sorted_incremental_map_i_i_values(
         const struct butterflyfish_sorted_incremental_map_i_i *const object,
-        const struct butterflyfish_sorted_list_i **const out) {
+        const struct butterflyfish_ordered_list_i **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }

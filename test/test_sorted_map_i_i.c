@@ -327,7 +327,7 @@ sorted_map_keys(const struct butterflyfish_sorted_map_i_i *const object,
 
 static int
 sorted_map_values(const struct butterflyfish_sorted_map_i_i *const object,
-                  const struct butterflyfish_sorted_list_i **const out) {
+                  const struct butterflyfish_ordered_list_i **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -1516,7 +1516,7 @@ static void check_values(void **state) {
     };
     expect_function_call(sorted_map_values);
     will_return(sorted_map_values, 0);
-    const struct butterflyfish_sorted_list_i *out;
+    const struct butterflyfish_ordered_list_i *out;
     assert_int_equal(butterflyfish_sorted_map_i_i_values(
                     (struct butterflyfish_sorted_map_i_i *) &instance,
                     &out), 0);
