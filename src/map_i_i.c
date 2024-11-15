@@ -326,7 +326,7 @@ int butterflyfish_map_i_i_keys(
 
 int butterflyfish_map_i_i_values(
         const struct butterflyfish_map_i_i *const object,
-        const struct butterflyfish_list_i **const out) {
+        const struct butterflyfish_ordered_list_i **const out) {
     if (!object) {
         return BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }

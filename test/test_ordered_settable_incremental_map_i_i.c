@@ -286,7 +286,7 @@ static int map_keys(const struct butterflyfish_map_i_i *const object,
 }
 
 static int map_values(const struct butterflyfish_map_i_i *const object,
-                      const struct butterflyfish_list_i **const out) {
+                      const struct butterflyfish_ordered_list_i **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -429,7 +429,7 @@ settable_map_keys(struct butterflyfish_settable_map_i_i *const object,
 
 static int
 settable_map_values(struct butterflyfish_settable_map_i_i *const object,
-                    struct butterflyfish_settable_list_i **const out) {
+                    struct butterflyfish_ordered_settable_list_i **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -593,7 +593,7 @@ settable_incremental_map_keys(
 static int
 settable_incremental_map_values(
         struct butterflyfish_settable_incremental_map_i_i *const object,
-        struct butterflyfish_settable_list_i **const out) {
+        struct butterflyfish_ordered_settable_list_i **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -3159,7 +3159,7 @@ static void check_as_settable_incremental_map_values(void **state) {
     assert_int_equal(butterflyfish_ordered_settable_incremental_map_i_i_as_settable_incremental_map(
             (struct butterflyfish_ordered_settable_incremental_map_i_i *) &instance,
                     &as), 0);
-    struct butterflyfish_settable_list_i *out;
+    struct butterflyfish_ordered_settable_list_i *out;
     assert_int_equal(butterflyfish_settable_incremental_map_i_i_values(as, &out),
                      0);
 }
@@ -3246,7 +3246,7 @@ static void check_as_settable_map_values(void **state) {
     assert_int_equal(butterflyfish_ordered_settable_incremental_map_i_i_as_settable_map(
             (struct butterflyfish_ordered_settable_incremental_map_i_i *) &instance,
                     &as), 0);
-    struct butterflyfish_settable_list_i *out;
+    struct butterflyfish_ordered_settable_list_i *out;
     assert_int_equal(butterflyfish_settable_map_i_i_values(as, &out), 0);
 }
 
@@ -3302,7 +3302,7 @@ static void check_as_map_values(void **state) {
     assert_int_equal(butterflyfish_ordered_settable_incremental_map_i_i_as_map(
             (struct butterflyfish_ordered_settable_incremental_map_i_i *) &instance, &as),
                     0);
-    const struct butterflyfish_list_i *out;
+    const struct butterflyfish_ordered_list_i *out;
     assert_int_equal(butterflyfish_map_i_i_values(as, &out), 0);
 }
 

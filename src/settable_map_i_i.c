@@ -432,7 +432,7 @@ int butterflyfish_settable_map_i_i_keys(
 
 int butterflyfish_settable_map_i_i_values(
         struct butterflyfish_settable_map_i_i *const object,
-        struct butterflyfish_settable_list_i **const out) {
+        struct butterflyfish_ordered_settable_list_i **const out) {
     if (!object) {
         return BUTTERFLYFISH_SETTABLE_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }

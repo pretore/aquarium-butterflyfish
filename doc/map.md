@@ -41,4 +41,4 @@ classDiagram
 - contains value
 - get value for key
 - [set](set.md) view of keys
-- [list](list.md) view of values
+- [ordered_list](ordered_list.md) view of values

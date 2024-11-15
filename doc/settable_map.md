@@ -57,4 +57,4 @@ are settable.
 - set key for key
 - set entry
 - [settable_set](settable_set.md) view of keys
-- [settable_list](settable_list.md) view of values
+- [ordered_settable_list](ordered_settable_list.md) view of values

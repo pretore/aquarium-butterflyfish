@@ -61,4 +61,4 @@ classDiagram
 - remove entry
 - remove all entries
 - [reducible_set](reducible_set.md) view of keys
-- [reducible_list](reducible_list.md) view of values
+- [ordered_reducible_list](ordered_reducible_list.md) view of values

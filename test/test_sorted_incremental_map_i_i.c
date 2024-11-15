@@ -316,7 +316,7 @@ static int map_keys(const struct butterflyfish_map_i_i *const object,
 }
 
 static int map_values(const struct butterflyfish_map_i_i *const object,
-                      const struct butterflyfish_list_i **const out) {
+                      const struct butterflyfish_ordered_list_i **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -2199,7 +2199,7 @@ static void check_as_map_values(void **state) {
     assert_int_equal(butterflyfish_sorted_incremental_map_i_i_as_map(
             (const struct butterflyfish_sorted_incremental_map_i_i *)
                     &instance, &as), 0);
-    const struct butterflyfish_list_i *out;
+    const struct butterflyfish_ordered_list_i *out;
     assert_int_equal(butterflyfish_map_i_i_values(as, &out), 0);
 }
 

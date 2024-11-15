@@ -10,7 +10,7 @@
 
 struct sea_turtle_integer;
 struct butterflyfish_settable_reducible_set_i;
-struct butterflyfish_settable_reducible_list_i;
+struct butterflyfish_ordered_settable_reducible_list_i;
 
 #define BUTTERFLYFISH_SETTABLE_REDUCIBLE_MAP_I_I_ERROR_OBJECT_IS_NULL \
     BUTTERFLYFISH_SETTABLE_MAP_I_I_ERROR_OBJECT_IS_NULL
@@ -58,7 +58,7 @@ struct butterflyfish_settable_reducible_map_i_i {
 
     int (*const values)(
             struct butterflyfish_settable_reducible_map_i_i *object,
-            struct butterflyfish_settable_reducible_list_i **out);
+            struct butterflyfish_ordered_settable_reducible_list_i **out);
 };
 
 /**
@@ -645,6 +645,6 @@ int butterflyfish_settable_reducible_map_i_i_keys(
  */
 int butterflyfish_settable_reducible_map_i_i_values(
         struct butterflyfish_settable_reducible_map_i_i *object,
-        struct butterflyfish_settable_reducible_list_i **out);
+        struct butterflyfish_ordered_settable_reducible_list_i **out);
 
 #endif /* _BUTTERFLYFISH_SETTABLE_REDUCIBLE_MAP_I_I_H_ */
