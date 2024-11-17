@@ -2305,10 +2305,6 @@ static void check_as_sorted_map_values(void **state) {
     assert_int_equal(butterflyfish_sorted_map_i_i_values(as, &out), 0);
 }
 
-
-
-
-
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(check_as_stream_error_on_object_is_null),

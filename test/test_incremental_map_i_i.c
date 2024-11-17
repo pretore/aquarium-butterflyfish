@@ -314,7 +314,7 @@ incremental_map_keys(
 static int
 incremental_map_values(
         const struct butterflyfish_incremental_map_i_i *const object,
-        const struct butterflyfish_list_i **const out) {
+        const struct butterflyfish_ordered_list_i **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -541,7 +541,7 @@ static void check_first_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static void check_first_error_on_set_is_empty(void **state) {
+static void check_first_error_on_map_is_empty(void **state) {
     const struct object instance = {
             .incremental_map_i_i = &incremental_map_i_i,
             .addable_i_i = &addable_i_i,
@@ -572,7 +572,7 @@ static void check_last_error_on_out_is_null(void **state) {
             BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL);
 }
 
-static void check_last_error_on_set_is_empty(void **state) {
+static void check_last_error_on_map_is_empty(void **state) {
     const struct object instance = {
             .incremental_map_i_i = &incremental_map_i_i,
             .addable_i_i = &addable_i_i,
@@ -1327,7 +1327,7 @@ static void check_values(void **state) {
     };
     expect_function_call(incremental_map_values);
     will_return(incremental_map_values, 0);
-    const struct butterflyfish_list_i *out;
+    const struct butterflyfish_ordered_list_i *out;
     assert_int_equal(butterflyfish_incremental_map_i_i_values(
             (struct butterflyfish_incremental_map_i_i *) &instance, &out), 0);
 }
@@ -1374,10 +1374,10 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_count),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
-            cmocka_unit_test(check_first_error_on_set_is_empty),
+            cmocka_unit_test(check_first_error_on_map_is_empty),
             cmocka_unit_test(check_last_error_on_object_is_null),
             cmocka_unit_test(check_last_error_on_out_is_null),
-            cmocka_unit_test(check_last_error_on_set_is_empty),
+            cmocka_unit_test(check_last_error_on_map_is_empty),
             cmocka_unit_test(check_next_error_on_object_is_null),
             cmocka_unit_test(check_next_error_on_item_is_null),
             cmocka_unit_test(check_next_error_on_out_is_null),

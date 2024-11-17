@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include <sea-urchin.h>
 
-#include "sorted_i.h"
+#include "sorted_i_i.h"
 #include "map_i_i.h"
 
 struct sea_turtle_integer;
