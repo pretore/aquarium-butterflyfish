@@ -1,4 +1,4 @@
-## sorted_reducible_map
+## sorted_settable_reducible_map
 
 ```mermaid
 classDiagram
@@ -36,6 +36,11 @@ classDiagram
     }
     <<interface>> removable
     collection *-- removable
+    class settable {
+        set_item()
+    }
+    <<interface>> settable
+    collection *-- settable
     class map {
         contains_key()
         contains_all_keys()
@@ -71,6 +76,30 @@ classDiagram
     <<interface>> reducible_map
     map *-- reducible_map
     removable *-- reducible_map
+    class settable_map {
+        set_entry()
+        set_key()
+        set_value()
+        keys()
+        values()
+    }
+    <<interface>> settable_map
+    settable *-- settable_map
+    map *-- settable_map
+    class sorted_settable_map {
+        keys()
+        values()
+    }
+    <<interface>> sorted_settable_map
+    settable_map *-- sorted_settable_map
+    sorted_map *-- sorted_settable_map
+    class settable_reducible_map {
+        keys()
+        values()
+    }
+    <<interface>> settable_reducible_map
+    settable_map *-- settable_reducible_map
+    reducible_map *-- settable_reducible_map
     class sorted_reducible_map {
         keys()
         values()
@@ -78,9 +107,17 @@ classDiagram
     <<interface>> sorted_reducible_map
     sorted_map *-- sorted_reducible_map
     reducible_map *-- sorted_reducible_map
+    class sorted_settable_reducible_map {
+        keys()
+        values()
+    }
+    <<interface>> sorted_settable_reducible_map
+    sorted_settable_map *-- sorted_settable_reducible_map
+    settable_reducible_map *-- sorted_settable_reducible_map
+    sorted_reducible_map *-- sorted_settable_reducible_map
 ```
 
-[sorted_reducible_map](sorted_reducible_map.md) _is a_ [reducible_map](reducible_map.md) 
-where the keys are sorted.
-- [sorted_reducible_set](sorted_reducible_set.md) view of keys
-- [ordered_reducible_list](ordered_reducible_list.md) view of values
+[sorted_settable_reducible_map](sorted_settable_reducible_map.md) _is a_ 
+[settable_reducible_map](settable_reducible_map.md) where the keys are sorted.
+- [sorted_settable_reducible_set](sorted_settable_reducible_set.md) view of keys
+- [ordered_settable_reducible_list](ordered_settable_reducible_list.md) view of values

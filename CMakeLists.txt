@@ -94,6 +94,7 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/sorted_settable_list_i.h
         include/butterflyfish/sorted_settable_map_i_i.h
         include/butterflyfish/sorted_settable_reducible_list_i.h
+        include/butterflyfish/sorted_settable_reducible_map_i_i.h
         include/butterflyfish/sorted_settable_reducible_set_i.h
         include/butterflyfish/sorted_settable_set_i.h
         include/butterflyfish/stream_i.h
@@ -191,6 +192,7 @@ set(SOURCES
         src/sorted_settable_list_i.c
         src/sorted_settable_map_i_i.c
         src/sorted_settable_reducible_list_i.c
+        src/sorted_settable_reducible_map_i_i.c
         src/sorted_settable_reducible_set_i.c
         src/sorted_settable_set_i.c
         src/stream_i.c
@@ -218,6 +220,8 @@ if (DOXYGEN_FOUND)
             ${EXPORTED_HEADER_FILES})
 endif ()
 
+set(COMPILE_OPTIONS -Wall -Wpedantic -Werror)
+
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     include(CTest)
     add_library(${PROJECT_NAME} STATIC "")
@@ -236,7 +240,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
             PUBLIC
                 "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                 "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
-    set(COMPILE_OPTIONS -Wall -Wpedantic -Werror)
     # Unit Tests
     enable_testing()
     # aquarium-butterflyfish-unit-test
@@ -1628,6 +1631,24 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-sorted-settable-incremental-map-i-i-unit-test
             ${PROJECT_NAME}-sorted-settable-incremental-map-i-i-unit-test)
+    # aquarium-butterflyfish-sorted-settable-reducible-map-i-i-unit-test
+    add_executable(
+            ${PROJECT_NAME}-sorted-settable-reducible-map-i-i-unit-test
+            test/test_sorted_settable_reducible_map_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-sorted-settable-reducible-map-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-sorted-settable-reducible-map-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-sorted-settable-reducible-map-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-sorted-settable-reducible-map-i-i-unit-test
+            ${PROJECT_NAME}-sorted-settable-reducible-map-i-i-unit-test)
 
     # TODO: add 'map' type
 
@@ -1650,6 +1671,9 @@ else ()
                 aquarium-sea-urchin
                 aquarium-sea-turtle
                 aquarium-triggerfish)
+    target_compile_options(${PROJECT_NAME}
+            PRIVATE
+                ${COMPILE_OPTIONS})
     set_target_properties(${PROJECT_NAME}
             PROPERTIES
                 VERSION ${PROJECT_VERSION}

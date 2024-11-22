@@ -518,7 +518,7 @@ sorted_reducible_map_as_reducible_map(
 }
 
 static int
-sorted_reducible_map_sorted_map(
+sorted_reducible_map_as_sorted_map(
         const struct butterflyfish_sorted_reducible_map_i_i *const object,
         const struct butterflyfish_sorted_map_i_i **const out) {
     assert_non_null(object);
@@ -552,7 +552,7 @@ sorted_reducible_map_values(
 const struct
 butterflyfish_sorted_reducible_map_i_i sorted_reducible_map_i_i = {
         .as_reducible_map = sorted_reducible_map_as_reducible_map,
-        .as_sorted_map = sorted_reducible_map_sorted_map,
+        .as_sorted_map = sorted_reducible_map_as_sorted_map,
         .keys = sorted_reducible_map_keys,
         .values = sorted_reducible_map_values,
 };
