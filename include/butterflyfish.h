@@ -74,6 +74,7 @@
 #include <butterflyfish/sorted_list_i.h>
 #include <butterflyfish/sorted_map_i_i.h>
 #include <butterflyfish/sorted_mutable_list_i.h>
+#include <butterflyfish/sorted_mutable_map_i_i.h>
 #include <butterflyfish/sorted_mutable_set_i.h>
 #include <butterflyfish/sorted_reducible_list_i.h>
 #include <butterflyfish/sorted_reducible_map_i_i.h>

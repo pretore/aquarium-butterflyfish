@@ -32,7 +32,7 @@
 static inline int
 as_sorted_incremental_map(
         struct butterflyfish_sorted_settable_incremental_map_i_i *const object,
-        struct butterflyfish_sorted_incremental_map_i_i **out) {
+        struct butterflyfish_sorted_incremental_map_i_i **const out) {
     assert(object);
     assert(out);
     return INVOKE(object)->as_sorted_incremental_map(object, out);
@@ -41,7 +41,7 @@ as_sorted_incremental_map(
 static inline int
 as_settable_incremental_map(
         struct butterflyfish_sorted_settable_incremental_map_i_i *const object,
-        struct butterflyfish_settable_incremental_map_i_i **out) {
+        struct butterflyfish_settable_incremental_map_i_i **const out) {
     assert(object);
     assert(out);
     return INVOKE(object)->as_settable_incremental_map(object, out);
@@ -50,7 +50,7 @@ as_settable_incremental_map(
 static inline int
 as_sorted_settable_map(
         struct butterflyfish_sorted_settable_incremental_map_i_i *const object,
-        struct butterflyfish_sorted_settable_map_i_i **out) {
+        struct butterflyfish_sorted_settable_map_i_i **const out) {
     assert(object);
     assert(out);
     return INVOKE(object)->as_sorted_settable_map(object, out);

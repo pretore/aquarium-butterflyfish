@@ -129,7 +129,7 @@ int butterflyfish_sorted_settable_reducible_map_i_i_as_sorted(
 /**
  * @brief Return sorted settable reducible map as a settable.
  * @param [in] object sorted settable reducible map instance.
- * @param [out] out receive sorted.
+ * @param [out] out receive settable.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws
  * BUTTERFLYFISH_SORTED_SETTABLE_REDUCIBLE_MAP_I_I_ERROR_OBJECT_IS_NULL if

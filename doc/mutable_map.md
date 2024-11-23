@@ -99,6 +99,7 @@ classDiagram
         keys()
         values()
     }
+    <<interface>> mutable_map
     settable_incremental_map *-- mutable_map
     settable_reducible_map *-- mutable_map
 ```
