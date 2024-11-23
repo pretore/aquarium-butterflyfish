@@ -30,6 +30,7 @@ struct object {
     const struct butterflyfish_incremental_map_i_i *const incremental_map_i_i;
     const struct butterflyfish_reducible_map_i_i *const reducible_map_i_i;
     const struct butterflyfish_map_i_i *const map_i_i;
+    const struct butterflyfish_insertable_i_i *const insertable_i_i;
     const struct butterflyfish_ordered_i_i *const ordered_i_i;
     const struct butterflyfish_addable_i_i *const addable_i_i;
     const struct butterflyfish_removable_i_i *const removable_i_i;
@@ -155,6 +156,43 @@ ordered_as_collection(const struct butterflyfish_ordered_i_i *const object,
 
 const struct butterflyfish_ordered_i_i ordered_i_i = {
         .as_collection = ordered_as_collection,
+};
+
+static int
+insertable_as_ordered(const struct butterflyfish_insertable_i_i *const object,
+                      const struct butterflyfish_ordered_i_i **const out) {
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = butterflyfish_cast(object, struct object, insertable_i_i, ordered_i_i);
+    return 0;
+}
+
+static int
+insertable_insert(struct butterflyfish_insertable_i_i *const object,
+                  const struct butterflyfish_map_i_i_entry *const item,
+                  const struct butterflyfish_map_i_i_entry *const value) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(item);
+    assert_non_null(value);
+    return mock();
+}
+
+static int
+insertable_insert_all(struct butterflyfish_insertable_i_i *const object,
+                      const struct butterflyfish_map_i_i_entry *const item,
+                      const struct butterflyfish_stream_i_i *const other) {
+    function_called();
+    assert_non_null(object);
+    assert_non_null(item);
+    assert_non_null(other);
+    return mock();
+}
+
+const struct butterflyfish_insertable_i_i insertable_i_i = {
+        .as_ordered = insertable_as_ordered,
+        .insert = insertable_insert,
+        .insert_all = insertable_insert_all,
 };
 
 static int
@@ -708,6 +746,18 @@ ordered_incremental_map_as_incremental_map(
 }
 
 static int
+ordered_incremental_map_as_insertable(
+        struct butterflyfish_ordered_incremental_map_i_i *const object,
+        struct butterflyfish_insertable_i_i **const out) {
+    assert_non_null(object);
+    assert_non_null(out);
+    *out = butterflyfish_cast(object, struct object,
+                              ordered_incremental_map_i_i,
+                              insertable_i_i);
+    return 0;
+}
+
+static int
 ordered_incremental_map_keys(
         struct butterflyfish_ordered_incremental_map_i_i *const object,
         struct butterflyfish_ordered_incremental_set_i **const out) {
@@ -731,6 +781,7 @@ const struct
 butterflyfish_ordered_incremental_map_i_i ordered_incremental_map_i_i = {
         .as_ordered_map = ordered_incremental_map_as_ordered_map,
         .as_incremental_map = ordered_incremental_map_as_incremental_map,
+        .as_insertable = ordered_incremental_map_as_insertable,
         .keys = ordered_incremental_map_keys,
         .values = ordered_incremental_map_values,
 };
@@ -1172,6 +1223,7 @@ static void check_as_stream(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1218,6 +1270,7 @@ static void check_as_collection(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1264,6 +1317,7 @@ static void check_as_set(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1310,6 +1364,7 @@ static void check_as_settable(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1356,6 +1411,7 @@ static void check_as_removable(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1402,6 +1458,7 @@ static void check_as_addable(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1448,6 +1505,7 @@ static void check_as_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1494,6 +1552,7 @@ static void check_as_ordered(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1506,6 +1565,53 @@ static void check_as_ordered(void **state) {
                         + offsetof(struct object, ordered_i_i);
     const struct butterflyfish_ordered_i_i *out;
     assert_int_equal(butterflyfish_ordered_mutable_map_i_i_as_ordered(
+            (struct butterflyfish_ordered_mutable_map_i_i *) &instance, &out), 0);
+    assert_ptr_equal(out, check);
+}
+
+static void check_as_insertable_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_as_insertable(NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_as_insertable_error_on_out_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_as_insertable((void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_OUT_IS_NULL);
+}
+
+static void check_as_insertable(void **state) {
+    const struct object instance = {
+            .ordered_mutable_map_i_i = &ordered_mutable_map_i_i,
+            .ordered_settable_incremental_map_i_i =
+                    &ordered_settable_incremental_map_i_i,
+            .ordered_settable_reducible_map_i_i =
+                    &ordered_settable_reducible_map_i_i,
+            .mutable_map_i_i = &mutable_map_i_i,
+            .settable_incremental_map_i_i = &settable_incremental_map_i_i,
+            .settable_reducible_map_i_i = &settable_reducible_map_i_i,
+            .ordered_settable_map_i_i = &ordered_settable_map_i_i,
+            .ordered_incremental_map_i_i = &ordered_incremental_map_i_i,
+            .ordered_reducible_map_i_i = &ordered_reducible_map_i_i,
+            .ordered_map_i_i = &ordered_map_i_i,
+            .settable_map_i_i = &settable_map_i_i,
+            .incremental_map_i_i = &incremental_map_i_i,
+            .reducible_map_i_i = &reducible_map_i_i,
+            .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .addable_i_i = &addable_i_i,
+            .removable_i_i = &removable_i_i,
+            .settable_i_i = &settable_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    const void *check = (char *) &instance
+                        + offsetof(struct object, insertable_i_i);
+    struct butterflyfish_insertable_i_i *out;
+    assert_int_equal(butterflyfish_ordered_mutable_map_i_i_as_insertable(
             (struct butterflyfish_ordered_mutable_map_i_i *) &instance, &out), 0);
     assert_ptr_equal(out, check);
 }
@@ -1540,6 +1646,7 @@ static void check_as_reducible_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1586,6 +1693,7 @@ static void check_as_incremental_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1632,6 +1740,7 @@ static void check_as_settable_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1678,6 +1787,7 @@ static void check_as_ordered_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1724,6 +1834,7 @@ static void check_as_ordered_reducible_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1770,6 +1881,7 @@ static void check_as_ordered_incremental_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1816,6 +1928,7 @@ static void check_as_ordered_settable_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1862,6 +1975,7 @@ static void check_as_settable_reducible_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1908,6 +2022,7 @@ static void check_as_settable_incremental_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -1954,6 +2069,7 @@ static void check_as_mutable_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2000,6 +2116,7 @@ static void check_as_ordered_settable_reducible_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2046,6 +2163,7 @@ static void check_as_ordered_settable_incremental_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2080,6 +2198,7 @@ static void check_addable_as_collection(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2117,6 +2236,7 @@ static void check_ordered_as_collection(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2154,6 +2274,7 @@ static void check_removable_as_collection(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2191,6 +2312,7 @@ static void check_settable_as_collection(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2207,6 +2329,44 @@ static void check_settable_as_collection(void **state) {
                     &as), 0);
     const struct butterflyfish_collection_i_i *out;
     assert_int_equal(butterflyfish_settable_i_i_as_collection(as, &out), 0);
+    assert_ptr_equal(out, check);
+}
+
+static void check_insertable_as_collection(void **state) {
+    const struct object instance = {
+            .ordered_mutable_map_i_i = &ordered_mutable_map_i_i,
+            .ordered_settable_incremental_map_i_i =
+                    &ordered_settable_incremental_map_i_i,
+            .ordered_settable_reducible_map_i_i =
+                    &ordered_settable_reducible_map_i_i,
+            .mutable_map_i_i = &mutable_map_i_i,
+            .settable_incremental_map_i_i = &settable_incremental_map_i_i,
+            .settable_reducible_map_i_i = &settable_reducible_map_i_i,
+            .ordered_settable_map_i_i = &ordered_settable_map_i_i,
+            .ordered_incremental_map_i_i = &ordered_incremental_map_i_i,
+            .ordered_reducible_map_i_i = &ordered_reducible_map_i_i,
+            .ordered_map_i_i = &ordered_map_i_i,
+            .settable_map_i_i = &settable_map_i_i,
+            .incremental_map_i_i = &incremental_map_i_i,
+            .reducible_map_i_i = &reducible_map_i_i,
+            .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .addable_i_i = &addable_i_i,
+            .removable_i_i = &removable_i_i,
+            .settable_i_i = &settable_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    const void *check = (char *) &instance
+                        + offsetof(struct object, collection_i_i);
+    struct butterflyfish_insertable_i_i *as;
+    assert_int_equal(butterflyfish_ordered_mutable_map_i_i_as_insertable(
+            (struct butterflyfish_ordered_mutable_map_i_i *) &instance,
+                    &as), 0);
+    const struct butterflyfish_collection_i_i *out;
+    assert_int_equal(butterflyfish_insertable_i_i_as_collection(as, &out), 0);
     assert_ptr_equal(out, check);
 }
 
@@ -2228,6 +2388,7 @@ static void check_ordered_map_as_ordered(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2265,6 +2426,7 @@ static void check_incremental_map_as_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2302,6 +2464,7 @@ static void check_reducible_map_as_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2339,6 +2502,7 @@ static void check_settable_map_as_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2376,6 +2540,7 @@ static void check_ordered_incremental_map_as_ordered_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2414,6 +2579,7 @@ static void check_ordered_reducible_map_as_ordered_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2452,6 +2618,7 @@ static void check_settable_incremental_map_as_settable_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2490,6 +2657,7 @@ static void check_settable_incremental_map_as_incremental_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2528,6 +2696,7 @@ static void check_settable_reducible_map_as_settable_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2566,6 +2735,7 @@ static void check_settable_reducible_map_as_reducible_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2604,6 +2774,7 @@ static void check_mutable_map_as_settable_reducible_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2642,6 +2813,7 @@ static void check_mutable_map_as_settable_incremental_map(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2680,6 +2852,7 @@ static void check_ordered_settable_reducible_map_as_ordered_settable_map(void **
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2718,6 +2891,7 @@ static void check_as_settable_set_item(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2767,6 +2941,7 @@ static void check_count(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2815,6 +2990,7 @@ static void check_first_error_on_map_is_empty(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2863,6 +3039,7 @@ static void check_last_error_on_map_is_empty(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2917,6 +3094,7 @@ static void check_next_error_on_end_of_sequence(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -2972,6 +3150,7 @@ static void check_prev_error_on_end_of_sequence(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3030,6 +3209,7 @@ static void check_contains_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3088,6 +3268,7 @@ static void check_contains_key_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3146,6 +3327,7 @@ static void check_contains_value_error_on_memory_allocation_failed(void **state)
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3205,6 +3387,7 @@ check_contains_all_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3264,6 +3447,7 @@ check_contains_all_keys_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3323,6 +3507,7 @@ check_contains_all_values_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3378,6 +3563,7 @@ static void check_get_error_on_entry_not_found(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3415,6 +3601,7 @@ static void check_get_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3473,6 +3660,7 @@ static void check_get_value_error_on_value_not_found(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3510,6 +3698,7 @@ static void check_get_value_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3568,6 +3757,7 @@ static void check_get_entry_error_on_value_not_found(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3605,6 +3795,7 @@ static void check_get_entry_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3660,6 +3851,7 @@ static void check_set_value_error_on_key_not_found(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3695,6 +3887,7 @@ static void check_set_value_error_on_value_is_invalid(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3730,6 +3923,7 @@ static void check_set_value_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3783,6 +3977,7 @@ static void check_set_key_error_on_key_not_found(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3818,6 +4013,7 @@ static void check_set_key_error_on_key_already_exists(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3853,6 +4049,7 @@ static void check_set_key_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3906,6 +4103,7 @@ static void check_set_entry_error_on_key_already_exists(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3941,6 +4139,7 @@ static void check_set_entry_error_on_value_is_invalid(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -3976,6 +4175,7 @@ static void check_set_entry_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4023,6 +4223,7 @@ static void check_add_error_on_entry_is_invalid(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4059,6 +4260,7 @@ static void check_add_error_on_key_already_exists(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4095,6 +4297,7 @@ static void check_add_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4143,6 +4346,7 @@ static void check_add_all_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4200,6 +4404,7 @@ static void check_add_value_error_value_is_invalid(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4236,6 +4441,7 @@ static void check_add_value_error_key_already_exists(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4272,6 +4478,7 @@ static void check_add_value_error_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4287,6 +4494,162 @@ static void check_add_value_error_memory_allocation_failed(void **state) {
             butterflyfish_ordered_mutable_map_i_i_add_value(
                     (struct butterflyfish_ordered_mutable_map_i_i *)
                             &instance, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+}
+
+static void check_insert_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_insert(
+                    NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_insert_error_on_item_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_insert(
+                    (void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_ITEM_IS_NULL);
+}
+
+static void check_insert_error_on_value_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_insert(
+                    (void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_VALUE_IS_NULL);
+}
+
+static void check_insert_error_on_value_is_invalid(void **state) {
+    const struct object instance = {
+            .ordered_mutable_map_i_i = &ordered_mutable_map_i_i,
+            .ordered_settable_incremental_map_i_i =
+                    &ordered_settable_incremental_map_i_i,
+            .ordered_settable_reducible_map_i_i =
+                    &ordered_settable_reducible_map_i_i,
+            .mutable_map_i_i = &mutable_map_i_i,
+            .settable_incremental_map_i_i = &settable_incremental_map_i_i,
+            .settable_reducible_map_i_i = &settable_reducible_map_i_i,
+            .ordered_settable_map_i_i = &ordered_settable_map_i_i,
+            .ordered_incremental_map_i_i = &ordered_incremental_map_i_i,
+            .ordered_reducible_map_i_i = &ordered_reducible_map_i_i,
+            .ordered_map_i_i = &ordered_map_i_i,
+            .settable_map_i_i = &settable_map_i_i,
+            .incremental_map_i_i = &incremental_map_i_i,
+            .reducible_map_i_i = &reducible_map_i_i,
+            .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .addable_i_i = &addable_i_i,
+            .removable_i_i = &removable_i_i,
+            .settable_i_i = &settable_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(insertable_insert);
+    will_return(insertable_insert,
+                BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_insert(
+                    (struct butterflyfish_ordered_mutable_map_i_i *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_VALUE_IS_INVALID);
+}
+
+static void check_insert_error_on_memory_allocation_failed(void **state) {
+    const struct object instance = {
+            .ordered_mutable_map_i_i = &ordered_mutable_map_i_i,
+            .ordered_settable_incremental_map_i_i =
+                    &ordered_settable_incremental_map_i_i,
+            .ordered_settable_reducible_map_i_i =
+                    &ordered_settable_reducible_map_i_i,
+            .mutable_map_i_i = &mutable_map_i_i,
+            .settable_incremental_map_i_i = &settable_incremental_map_i_i,
+            .settable_reducible_map_i_i = &settable_reducible_map_i_i,
+            .ordered_settable_map_i_i = &ordered_settable_map_i_i,
+            .ordered_incremental_map_i_i = &ordered_incremental_map_i_i,
+            .ordered_reducible_map_i_i = &ordered_reducible_map_i_i,
+            .ordered_map_i_i = &ordered_map_i_i,
+            .settable_map_i_i = &settable_map_i_i,
+            .incremental_map_i_i = &incremental_map_i_i,
+            .reducible_map_i_i = &reducible_map_i_i,
+            .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .addable_i_i = &addable_i_i,
+            .removable_i_i = &removable_i_i,
+            .settable_i_i = &settable_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(insertable_insert);
+    will_return(insertable_insert,
+                BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_insert(
+                    (struct butterflyfish_ordered_mutable_map_i_i *) &instance,
+                    (void *) 1,
+                    (void *) 1),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+}
+
+static void check_insert_all_error_on_object_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_insert_all(
+                    NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_OBJECT_IS_NULL);
+}
+
+static void check_insert_all_error_on_item_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_insert_all(
+                    (void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_ITEM_IS_NULL);
+}
+
+static void check_insert_all_error_on_other_is_null(void **state) {
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_insert_all(
+                    (void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_OTHER_IS_NULL);
+}
+
+static void check_insert_all_error_on_memory_allocation_failed(void **state) {
+    const struct object instance = {
+            .ordered_mutable_map_i_i = &ordered_mutable_map_i_i,
+            .ordered_settable_incremental_map_i_i =
+                    &ordered_settable_incremental_map_i_i,
+            .ordered_settable_reducible_map_i_i =
+                    &ordered_settable_reducible_map_i_i,
+            .mutable_map_i_i = &mutable_map_i_i,
+            .settable_incremental_map_i_i = &settable_incremental_map_i_i,
+            .settable_reducible_map_i_i = &settable_reducible_map_i_i,
+            .ordered_settable_map_i_i = &ordered_settable_map_i_i,
+            .ordered_incremental_map_i_i = &ordered_incremental_map_i_i,
+            .ordered_reducible_map_i_i = &ordered_reducible_map_i_i,
+            .ordered_map_i_i = &ordered_map_i_i,
+            .settable_map_i_i = &settable_map_i_i,
+            .incremental_map_i_i = &incremental_map_i_i,
+            .reducible_map_i_i = &reducible_map_i_i,
+            .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
+            .ordered_i_i = &ordered_i_i,
+            .addable_i_i = &addable_i_i,
+            .removable_i_i = &removable_i_i,
+            .settable_i_i = &settable_i_i,
+            .set_i_i = &set_i_i,
+            .collection_i_i = &collection_i_i,
+            .stream_i_i = &stream_i_i
+    };
+    expect_function_call(insertable_insert_all);
+    will_return(insertable_insert_all,
+                BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(
+            butterflyfish_ordered_mutable_map_i_i_insert_all(
+                    (struct butterflyfish_ordered_mutable_map_i_i *) &instance,
+                    (void *) 1,
+                    (void *) 1),
             BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
@@ -4320,6 +4683,7 @@ static void check_remove_error_on_key_not_found(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4356,6 +4720,7 @@ static void check_remove_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4404,6 +4769,7 @@ static void check_remove_all_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4452,6 +4818,7 @@ static void check_retain_all_error_on_memory_allocation_failed(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4500,6 +4867,7 @@ static void check_remove_entry(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4545,6 +4913,7 @@ static void check_remove_all_entries(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4559,17 +4928,6 @@ static void check_remove_all_entries(void **state) {
             (struct butterflyfish_ordered_mutable_map_i_i *) &instance,
             (void *) 1), 0);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 static void check_keys_error_on_object_is_null(void **state) {
     assert_int_equal(butterflyfish_ordered_mutable_map_i_i_keys(NULL, (void *) 1),
@@ -4599,6 +4957,7 @@ static void check_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4633,6 +4992,7 @@ static void check_as_ordered_settable_incremental_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4669,6 +5029,7 @@ static void check_as_ordered_settable_reducible_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4707,6 +5068,7 @@ static void check_as_ordered_settable_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4743,6 +5105,7 @@ static void check_as_settable_incremental_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4780,6 +5143,7 @@ static void check_as_settable_reducible_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4817,6 +5181,7 @@ static void check_as_ordered_incremental_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4854,6 +5219,7 @@ static void check_as_ordered_reducible_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4891,6 +5257,7 @@ static void check_as_incremental_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4927,6 +5294,7 @@ static void check_as_reducible_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4963,6 +5331,7 @@ static void check_as_ordered_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -4999,6 +5368,7 @@ static void check_as_settable_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5035,6 +5405,7 @@ static void check_as_mutable_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5071,6 +5442,7 @@ static void check_as_map_keys(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5117,6 +5489,7 @@ static void check_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5151,6 +5524,7 @@ static void check_as_ordered_settable_incremental_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5188,6 +5562,7 @@ static void check_as_ordered_settable_reducible_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5225,6 +5600,7 @@ static void check_as_ordered_settable_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5262,6 +5638,7 @@ static void check_as_settable_incremental_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5299,6 +5676,7 @@ static void check_as_settable_reducible_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5336,6 +5714,7 @@ static void check_as_ordered_incremental_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5373,6 +5752,7 @@ static void check_as_ordered_reducible_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5410,6 +5790,7 @@ static void check_as_incremental_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5447,6 +5828,7 @@ static void check_as_reducible_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5484,6 +5866,7 @@ static void check_as_settable_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5520,6 +5903,7 @@ static void check_as_ordered_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5556,6 +5940,7 @@ static void check_as_mutable_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5592,6 +5977,7 @@ static void check_as_map_values(void **state) {
             .incremental_map_i_i = &incremental_map_i_i,
             .reducible_map_i_i = &reducible_map_i_i,
             .map_i_i = &map_i_i,
+            .insertable_i_i = &insertable_i_i,
             .ordered_i_i = &ordered_i_i,
             .addable_i_i = &addable_i_i,
             .removable_i_i = &removable_i_i,
@@ -5636,6 +6022,9 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_as_ordered_error_on_object_is_null),
             cmocka_unit_test(check_as_ordered_error_on_out_is_null),
             cmocka_unit_test(check_as_ordered),
+            cmocka_unit_test(check_as_insertable_error_on_object_is_null),
+            cmocka_unit_test(check_as_insertable_error_on_out_is_null),
+            cmocka_unit_test(check_as_insertable),
             cmocka_unit_test(check_as_reducible_map_error_on_object_is_null),
             cmocka_unit_test(check_as_reducible_map_error_on_out_is_null),
             cmocka_unit_test(check_as_reducible_map),
@@ -5676,6 +6065,7 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_ordered_as_collection),
             cmocka_unit_test(check_removable_as_collection),
             cmocka_unit_test(check_settable_as_collection),
+            cmocka_unit_test(check_insertable_as_collection),
             cmocka_unit_test(check_ordered_map_as_ordered),
             cmocka_unit_test(check_incremental_map_as_map),
             cmocka_unit_test(check_reducible_map_as_map),
@@ -5781,6 +6171,15 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_add_value_error_value_is_invalid),
             cmocka_unit_test(check_add_value_error_key_already_exists),
             cmocka_unit_test(check_add_value_error_memory_allocation_failed),
+            cmocka_unit_test(check_insert_error_on_object_is_null),
+            cmocka_unit_test(check_insert_error_on_item_is_null),
+            cmocka_unit_test(check_insert_error_on_value_is_null),
+            cmocka_unit_test(check_insert_error_on_value_is_invalid),
+            cmocka_unit_test(check_insert_error_on_memory_allocation_failed),
+            cmocka_unit_test(check_insert_all_error_on_object_is_null),
+            cmocka_unit_test(check_insert_all_error_on_item_is_null),
+            cmocka_unit_test(check_insert_all_error_on_other_is_null),
+            cmocka_unit_test(check_insert_all_error_on_memory_allocation_failed),
             cmocka_unit_test(check_remove_error_on_object_is_null),
             cmocka_unit_test(check_remove_error_on_key_is_null),
             cmocka_unit_test(check_remove_error_on_key_not_found),

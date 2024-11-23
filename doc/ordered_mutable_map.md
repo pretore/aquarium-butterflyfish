@@ -15,6 +15,12 @@ classDiagram
     }
     <<interface>> collection
     stream *-- collection
+    class insertable {
+        insert()
+        insert_all()
+    }
+    <<interface>> insertable
+    ordered *-- insertable
     class set {
         contains()
         contains_all()
@@ -123,6 +129,7 @@ classDiagram
         values()
     }
     <<interface>> ordered_incremental_map
+    insertable *-- ordered_incremental_map
     incremental_map *-- ordered_incremental_map
     ordered_map *-- ordered_incremental_map
     class ordered_reducible_map {

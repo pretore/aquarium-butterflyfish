@@ -117,7 +117,7 @@ int butterflyfish_ordered_settable_incremental_map_i_i_as_set(
         const struct butterflyfish_set_i_i **out);
 
 /**
- * @brief Return ordered settable incremental map as a ordered.
+ * @brief Return ordered settable incremental map as an ordered.
  * @param [in] object ordered settable incremental map instance.
  * @param [out] out receive ordered.
  * @return On success <i>0</i>, otherwise an error code.
@@ -131,6 +131,22 @@ int butterflyfish_ordered_settable_incremental_map_i_i_as_set(
 int butterflyfish_ordered_settable_incremental_map_i_i_as_ordered(
         const struct butterflyfish_ordered_settable_incremental_map_i_i *object,
         const struct butterflyfish_ordered_i_i **out);
+
+/**
+ * @brief Return ordered settable incremental map as an insertable.
+ * @param [in] object ordered settable incremental map instance.
+ * @param [out] out receive insertable.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL if
+ * object is <i>NULL</i>.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL if
+ * out is <i>NULL</i>.
+ */
+int butterflyfish_ordered_settable_incremental_map_i_i_as_insertable(
+        struct butterflyfish_ordered_settable_incremental_map_i_i *object,
+        struct butterflyfish_insertable_i_i **out);
 
 /**
  * @brief Return ordered settable incremental map as an addable.
@@ -775,6 +791,62 @@ int butterflyfish_ordered_settable_incremental_map_i_i_add_value(
         struct butterflyfish_ordered_settable_incremental_map_i_i *object,
         const struct sea_turtle_integer *key,
         const struct sea_turtle_integer *value);
+
+/**
+ * @brief Insert value into the ordered settable incremental map.
+ * @param [in] object ordered settable incremental map instance.
+ * @param [in] item where value is to be inserted.
+ * @param [in] value to be added.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL if
+ * object is <i>NULL</i>.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_ITEM_IS_NULL if
+ * item is <i>NULL</i>.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_VALUE_IS_NULL if
+ * value is <i>NULL</i>.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_VALUE_ALREADY_EXISTS
+ * if value is already present.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_VALUE_IS_INVALID
+ * if value is invalid.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED
+ * if there is insufficient memory to add value to the insertable.
+ * @note <b>value</b> is copied and then placed into the insertable.
+ */
+int butterflyfish_ordered_settable_incremental_map_i_i_insert(
+        struct butterflyfish_ordered_settable_incremental_map_i_i *object,
+        const struct butterflyfish_map_i_i_entry *item,
+        const struct butterflyfish_map_i_i_entry *value);
+
+/**
+ * @brief Insert all the values into to the ordered settable incremental map.
+ * @param [in] object ordered settable incremental map instance.
+ * @param [in] item where all the values are inserted.
+ * @param [in] other stream whose values will be added.
+ * @return On success <i>0</i>, otherwise an error code.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL if
+ * object is <i>NULL</i>.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_ITEM_IS_NULL if
+ * item is <i>NULL</i>.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_OTHER_IS_NULL if
+ * other is <i>NULL</i>.
+ * @throws
+ * BUTTERFLYFISH_ORDERED_SETTABLE_INCREMENTAL_MAP_I_I_ERROR_MEMORY_ALLOCATION_FAILED
+ * if there is insufficient memory to add streamed values to the insertable.
+ * @note streamed <b>values</b> are copied and then placed into the insertable.
+ */
+int butterflyfish_ordered_settable_incremental_map_i_i_insert_all(
+        struct butterflyfish_ordered_settable_incremental_map_i_i *object,
+        const struct butterflyfish_map_i_i_entry *item,
+        const struct butterflyfish_stream_i_i *other);
 
 /**
  * @brief Retrieve set view of keys.

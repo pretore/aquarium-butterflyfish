@@ -15,6 +15,7 @@
     (*(struct butterflyfish_ordered_map_i_i **) x)
 #define INVOKE_MAP(x)           (*(struct butterflyfish_map_i_i **) x)
 #define INVOKE_ADDABLE(x)       (*(struct butterflyfish_addable_i_i **) x)
+#define INVOKE_INSERTABLE(x)    (*(struct butterflyfish_insertable_i_i **) x)
 #define INVOKE_ORDERED(x)       (*(struct butterflyfish_ordered_i_i **) x)
 #define INVOKE_SET(x)           (*(struct butterflyfish_set_i_i **) x)
 #define INVOKE_COLLECTION(x)    (*(struct butterflyfish_collection_i_i **) x)
@@ -36,6 +37,15 @@ as_incremental_map(
     assert(object);
     assert(out);
     return INVOKE(object)->as_incremental_map(object, out);
+}
+
+static inline int
+as_insertable(
+        struct butterflyfish_ordered_incremental_map_i_i *const object,
+        struct butterflyfish_insertable_i_i **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_insertable(object, out);
 }
 
 static inline int
@@ -379,6 +389,44 @@ int butterflyfish_ordered_incremental_map_i_i_add_all(
     return INVOKE_ADDABLE(addable)->add_all(addable, other);
 }
 
+#pragma mark insertable_i_i -
+
+int butterflyfish_ordered_incremental_map_i_i_insert(
+        struct butterflyfish_ordered_incremental_map_i_i *const object,
+        const struct butterflyfish_map_i_i_entry *const item,
+        const struct butterflyfish_map_i_i_entry *const value) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_VALUE_IS_NULL;
+    }
+    struct butterflyfish_insertable_i_i *insertable;
+    seagrass_required_true(!as_insertable(object, &insertable));
+    return INVOKE_INSERTABLE(insertable)->insert(insertable, item, value);
+}
+
+int butterflyfish_ordered_incremental_map_i_i_insert_all(
+        struct butterflyfish_ordered_incremental_map_i_i *const object,
+        const struct butterflyfish_map_i_i_entry *const item,
+        const struct butterflyfish_stream_i_i *const other) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!other) {
+        return BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_OTHER_IS_NULL;
+    }
+    struct butterflyfish_insertable_i_i *insertable;
+    seagrass_required_true(!as_insertable(object, &insertable));
+    return INVOKE_INSERTABLE(insertable)->insert_all(insertable, item, other);
+}
+
 #pragma mark incremental_map_i_i -
 
 int butterflyfish_ordered_incremental_map_i_i_add_value(
@@ -448,6 +496,18 @@ int butterflyfish_ordered_incremental_map_i_i_as_ordered(
         return BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL;
     }
     return as_ordered(object, out);
+}
+
+int butterflyfish_ordered_incremental_map_i_i_as_insertable(
+        struct butterflyfish_ordered_incremental_map_i_i *const object,
+        struct butterflyfish_insertable_i_i **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_ORDERED_INCREMENTAL_MAP_I_I_ERROR_OUT_IS_NULL;
+    }
+    return as_insertable(object, out);
 }
 
 int butterflyfish_ordered_incremental_map_i_i_as_addable(

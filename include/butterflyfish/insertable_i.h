@@ -46,7 +46,7 @@ struct butterflyfish_insertable_i {
 
 /**
  * @brief Return insertable as a stream.
- * @param [in] object set instance.
+ * @param [in] object insertable instance.
  * @param [out] out receive stream.
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL if object is

@@ -28,6 +28,7 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/incremental_map_i_i.h
         include/butterflyfish/incremental_set_i.h
         include/butterflyfish/insertable_i.h
+        include/butterflyfish/insertable_i_i.h
         include/butterflyfish/list_i.h
         include/butterflyfish/map_i_i.h
         include/butterflyfish/map_i_i_entry.h
@@ -128,6 +129,7 @@ set(SOURCES
         src/incremental_map_i_i.c
         src/incremental_set_i.c
         src/insertable_i.c
+        src/insertable_i_i.c
         src/list_i.c
         src/map_i_i.c
         src/mutable_list_i.c
@@ -1424,6 +1426,20 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-ordered-i-i-unit-test
             ${PROJECT_NAME}-ordered-i-i-unit-test)
+    # aquarium-butterflyfish-insertable-i-i-unit-test
+    add_executable(${PROJECT_NAME}-insertable-i-i-unit-test
+            test/test_insertable_i_i.c)
+    target_include_directories(${PROJECT_NAME}-insertable-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(${PROJECT_NAME}-insertable-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(${PROJECT_NAME}-insertable-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-insertable-i-i-unit-test
+            ${PROJECT_NAME}-insertable-i-i-unit-test)
     # aquarium-butterflyfish-ordered-map-i-i-unit-test
     add_executable(${PROJECT_NAME}-ordered-map-i-i-unit-test
             test/test_ordered_map_i_i.c)

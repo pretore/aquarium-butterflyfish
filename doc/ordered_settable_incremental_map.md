@@ -18,6 +18,12 @@ classDiagram
     class ordered
     <<interface>> ordered
     collection *-- ordered
+    class insertable {
+        insert()
+        insert_all()
+    }
+    <<interface>> insertable
+    ordered *-- insertable
     class set {
         contains()
         contains_all()
@@ -94,6 +100,7 @@ classDiagram
     <<interface>> ordered_incremental_map
     ordered_map *-- ordered_incremental_map
     incremental_map *-- ordered_incremental_map
+    insertable *-- ordered_incremental_map
     class ordered_settable_incremental_map {
         keys()
         values()
