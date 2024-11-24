@@ -102,21 +102,6 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/stream_i.h
         include/butterflyfish/stream_i_i.h
         include/butterflyfish/stream_ni.h
-        include/butterflyfish/swappable_i.h
-        include/butterflyfish/swappable_incremental_list_i.h
-        include/butterflyfish/swappable_incremental_set_i.h
-        include/butterflyfish/swappable_list_i.h
-        include/butterflyfish/swappable_mutable_list_i.h
-        include/butterflyfish/swappable_mutable_set_i.h
-        include/butterflyfish/swappable_reducible_list_i.h
-        include/butterflyfish/swappable_reducible_set_i.h
-        include/butterflyfish/swappable_set_i.h
-        include/butterflyfish/swappable_settable_incremental_list_i.h
-        include/butterflyfish/swappable_settable_incremental_set_i.h
-        include/butterflyfish/swappable_settable_list_i.h
-        include/butterflyfish/swappable_settable_reducible_list_i.h
-        include/butterflyfish/swappable_settable_reducible_set_i.h
-        include/butterflyfish/swappable_settable_set_i.h
         include/butterflyfish.h)
 set(SOURCES
         ${EXPORTED_HEADER_FILES}
@@ -201,22 +186,7 @@ set(SOURCES
         src/sorted_settable_set_i.c
         src/stream_i.c
         src/stream_i_i.c
-        src/stream_ni.c
-        src/swappable_i.c
-        src/swappable_incremental_list_i.c
-        src/swappable_incremental_set_i.c
-        src/swappable_list_i.c
-        src/swappable_mutable_list_i.c
-        src/swappable_mutable_set_i.c
-        src/swappable_reducible_list_i.c
-        src/swappable_reducible_set_i.c
-        src/swappable_set_i.c
-        src/swappable_settable_incremental_list_i.c
-        src/swappable_settable_incremental_set_i.c
-        src/swappable_settable_list_i.c
-        src/swappable_settable_reducible_list_i.c
-        src/swappable_settable_reducible_set_i.c
-        src/swappable_settable_set_i.c)
+        src/stream_ni.c)
 
 if (DOXYGEN_FOUND)
     set(DOXYGEN_EXTRACT_ALL YES)
@@ -355,20 +325,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-insertable-i-unit-test
             ${PROJECT_NAME}-insertable-i-unit-test)
-    # aquarium-butterflyfish-swappable-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-i-unit-test
-            test/test_swappable_i.c)
-    target_include_directories(${PROJECT_NAME}-swappable-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(${PROJECT_NAME}-swappable-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(${PROJECT_NAME}-swappable-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-i-unit-test
-            ${PROJECT_NAME}-swappable-i-unit-test)
     # aquarium-butterflyfish-sorted-i-unit-test
     add_executable(${PROJECT_NAME}-sorted-i-unit-test
             test/test_sorted_i.c)
@@ -690,116 +646,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-sorted-mutable-set-i-unit-test
             ${PROJECT_NAME}-sorted-mutable-set-i-unit-test)
-    # aquarium-butterflyfish-swappable-set-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-set-i-unit-test
-            test/test_swappable_set_i.c)
-    target_include_directories(${PROJECT_NAME}-swappable-set-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(${PROJECT_NAME}-swappable-set-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(${PROJECT_NAME}-swappable-set-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-set-i-unit-test
-            ${PROJECT_NAME}-swappable-set-i-unit-test)
-    # aquarium-butterflyfish-swappable-settable-set-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-settable-set-i-unit-test
-            test/test_swappable_settable_set_i.c)
-    target_include_directories(${PROJECT_NAME}-swappable-settable-set-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(${PROJECT_NAME}-swappable-settable-set-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(${PROJECT_NAME}-swappable-settable-set-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-settable-set-i-unit-test
-            ${PROJECT_NAME}-swappable-settable-set-i-unit-test)
-    # aquarium-butterflyfish-swappable-incremental-set-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-incremental-set-i-unit-test
-            test/test_swappable_incremental_set_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-incremental-set-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(${PROJECT_NAME}-swappable-incremental-set-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(
-            ${PROJECT_NAME}-swappable-incremental-set-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-incremental-set-i-unit-test
-            ${PROJECT_NAME}-swappable-incremental-set-i-unit-test)
-    # aquarium-butterflyfish-swappable-reducible-set-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-reducible-set-i-unit-test
-            test/test_swappable_reducible_set_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-reducible-set-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(${PROJECT_NAME}-swappable-reducible-set-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(${PROJECT_NAME}-swappable-reducible-set-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-reducible-set-i-unit-test
-            ${PROJECT_NAME}-swappable-reducible-set-i-unit-test)
-    # aquarium-butterflyfish-swappable-settable-incremental-set-i-unit-test
-    add_executable(
-            ${PROJECT_NAME}-swappable-settable-incremental-set-i-unit-test
-            test/test_swappable_settable_incremental_set_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-settable-incremental-set-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(
-            ${PROJECT_NAME}-swappable-settable-incremental-set-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(
-            ${PROJECT_NAME}-swappable-settable-incremental-set-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-settable-incremental-set-i-unit-test
-            ${PROJECT_NAME}-swappable-settable-incremental-set-i-unit-test)
-    # aquarium-butterflyfish-swappable-settable-reducible-set-i-unit-test
-    add_executable(
-            ${PROJECT_NAME}-swappable-settable-reducible-set-i-unit-test
-            test/test_swappable_settable_reducible_set_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-settable-reducible-set-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(
-            ${PROJECT_NAME}-swappable-settable-reducible-set-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(
-            ${PROJECT_NAME}-swappable-settable-reducible-set-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-settable-reducible-set-i-unit-test
-            ${PROJECT_NAME}-swappable-settable-reducible-set-i-unit-test)
-    # aquarium-butterflyfish-swappable-mutable-set-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-mutable-set-i-unit-test
-            test/test_swappable_mutable_set_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-mutable-set-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(${PROJECT_NAME}-swappable-mutable-set-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(${PROJECT_NAME}-swappable-mutable-set-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-mutable-set-i-unit-test
-            ${PROJECT_NAME}-swappable-mutable-set-i-unit-test)
     # aquarium-butterflyfish-list-i-unit-test
     add_executable(${PROJECT_NAME}-list-i-unit-test test/test_list_i.c)
     target_include_directories(${PROJECT_NAME}-list-i-unit-test
@@ -1111,122 +957,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-sorted-mutable-list-i-unit-test
             ${PROJECT_NAME}-sorted-mutable-list-i-unit-test)
-    # aquarium-butterflyfish-swappable-list-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-list-i-unit-test
-            test/test_swappable_list_i.c)
-    target_include_directories(${PROJECT_NAME}-swappable-list-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(${PROJECT_NAME}-swappable-list-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(${PROJECT_NAME}-swappable-list-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-list-i-unit-test
-            ${PROJECT_NAME}-swappable-list-i-unit-test)
-    # aquarium-butterflyfish-swappable-settable-list-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-settable-list-i-unit-test
-            test/test_swappable_settable_list_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-settable-list-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(${PROJECT_NAME}-swappable-settable-list-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(${PROJECT_NAME}-swappable-settable-list-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-settable-list-i-unit-test
-            ${PROJECT_NAME}-swappable-settable-list-i-unit-test)
-    # aquarium-butterflyfish-swappable-incremental-list-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-incremental-list-i-unit-test
-            test/test_swappable_incremental_list_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-incremental-list-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(
-            ${PROJECT_NAME}-swappable-incremental-list-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(
-            ${PROJECT_NAME}-swappable-incremental-list-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-incremental-list-i-unit-test
-            ${PROJECT_NAME}-swappable-incremental-list-i-unit-test)
-    # aquarium-butterflyfish-swappable-reducible-list-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-reducible-list-i-unit-test
-            test/test_swappable_reducible_list_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-reducible-list-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(
-            ${PROJECT_NAME}-swappable-reducible-list-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(
-            ${PROJECT_NAME}-swappable-reducible-list-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-reducible-list-i-unit-test
-            ${PROJECT_NAME}-swappable-reducible-list-i-unit-test)
-    # aquarium-butterflyfish-swappable-settable-incremental-list-i-unit-test
-    add_executable(
-            ${PROJECT_NAME}-swappable-settable-incremental-list-i-unit-test
-            test/test_swappable_settable_incremental_list_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-settable-incremental-list-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(
-            ${PROJECT_NAME}-swappable-settable-incremental-list-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(
-            ${PROJECT_NAME}-swappable-settable-incremental-list-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-settable-incremental-list-i-unit-test
-            ${PROJECT_NAME}-swappable-settable-incremental-list-i-unit-test)
-    # aquarium-butterflyfish-swappable-settable-reducible-list-i-unit-test
-    add_executable(
-            ${PROJECT_NAME}-swappable-settable-reducible-list-i-unit-test
-            test/test_swappable_settable_reducible_list_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-settable-reducible-list-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(
-            ${PROJECT_NAME}-swappable-settable-reducible-list-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(
-            ${PROJECT_NAME}-swappable-settable-reducible-list-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-settable-reducible-list-i-unit-test
-            ${PROJECT_NAME}-swappable-settable-reducible-list-i-unit-test)
-    # aquarium-butterflyfish-swappable-mutable-list-i-unit-test
-    add_executable(${PROJECT_NAME}-swappable-mutable-list-i-unit-test
-            test/test_swappable_mutable_list_i.c)
-    target_include_directories(
-            ${PROJECT_NAME}-swappable-mutable-list-i-unit-test
-            PRIVATE
-                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
-    target_link_libraries(
-            ${PROJECT_NAME}-swappable-mutable-list-i-unit-test
-            PRIVATE
-                ${PROJECT_NAME})
-    target_compile_options(
-            ${PROJECT_NAME}-swappable-mutable-list-i-unit-test
-            PRIVATE
-                ${COMPILE_OPTIONS})
-    add_test(${PROJECT_NAME}-swappable-mutable-list-i-unit-test
-            ${PROJECT_NAME}-swappable-mutable-list-i-unit-test)
     # aquarium-butterflyfish-stream-i-i-unit-test
     add_executable(${PROJECT_NAME}-stream-i-i-unit-test test/test_stream_i_i.c)
     target_include_directories(${PROJECT_NAME}-stream-i-i-unit-test
@@ -1684,11 +1414,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-sorted-mutable-map-i-i-unit-test
             ${PROJECT_NAME}-sorted-mutable-map-i-i-unit-test)
-
-    # TODO: add 'map' type
-
-    # TODO: add 'queue' type    (pollable)
-    # TODO: add 'stack' type
 
 else ()
     add_library(${PROJECT_NAME} "")

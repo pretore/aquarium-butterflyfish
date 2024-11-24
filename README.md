@@ -5,7 +5,7 @@
 
 Collection interfaces in C.
 
-// _, unordered, ordered, swappable, sorted
+// _, unordered, ordered, sorted
 
 ```mermaid
 flowchart LR
@@ -14,9 +14,7 @@ flowchart LR
     B -->|no| D["unordered"]
     B -->|?| Z["_"]
     C -->|yes| E["sorted"]
-    C -->|no| F[/"can you swap them?"/]
-    F -->|yes| G["swappable"]
-    F -->|no| H["ordered"]
+    C -->|no| F["ordered"]
 ```
 
 // _, mutable, settable, incremental, reducible, settable_incremental, 

@@ -92,21 +92,6 @@
 #include <butterflyfish/sorted_settable_set_i.h>
 #include <butterflyfish/stream_i.h>
 #include <butterflyfish/stream_i_i.h>
-#include <butterflyfish/swappable_i.h>
-#include <butterflyfish/swappable_incremental_list_i.h>
-#include <butterflyfish/swappable_incremental_set_i.h>
-#include <butterflyfish/swappable_list_i.h>
-#include <butterflyfish/swappable_mutable_list_i.h>
-#include <butterflyfish/swappable_mutable_set_i.h>
-#include <butterflyfish/swappable_reducible_list_i.h>
-#include <butterflyfish/swappable_reducible_set_i.h>
-#include <butterflyfish/swappable_set_i.h>
-#include <butterflyfish/swappable_settable_incremental_list_i.h>
-#include <butterflyfish/swappable_settable_incremental_set_i.h>
-#include <butterflyfish/swappable_settable_list_i.h>
-#include <butterflyfish/swappable_settable_reducible_list_i.h>
-#include <butterflyfish/swappable_settable_reducible_set_i.h>
-#include <butterflyfish/swappable_settable_set_i.h>
 
 /* string (s) */
 
