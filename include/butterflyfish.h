@@ -92,6 +92,7 @@
 #include <butterflyfish/sorted_settable_set_i.h>
 #include <butterflyfish/stream_i.h>
 #include <butterflyfish/stream_i_i.h>
+#include <butterflyfish/unordered_i.h>
 
 /* string (s) */
 

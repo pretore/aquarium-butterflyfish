@@ -12,7 +12,6 @@ flowchart LR
     A["_"] --> B[/"is order significant?"/]
     B -->|yes| C[/"are they sorted?"/]
     B -->|no| D["unordered"]
-    B -->|?| Z["_"]
     C -->|yes| E["sorted"]
     C -->|no| F["ordered"]
 ```
