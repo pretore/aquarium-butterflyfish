@@ -551,7 +551,7 @@ static void check_lower_error_on_memory_allocation_failed(void **state) {
                     (const struct butterflyfish_sorted_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_SORTED_I_ERROR_MEMORY_ALLOCATION_FAILED);
+            BUTTERFLYFISH_SORTED_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 int main(int argc, char *argv[]) {
