@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -40,8 +39,7 @@ static int as_stream(const struct butterflyfish_collection_i_i *const object,
                      const struct butterflyfish_stream_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, collection_i_i,
-            stream_i_i);
+    *out = butterflyfish_cast(object, struct object, collection_i_i, stream_i_i);
     return 0;
 }
 
@@ -82,13 +80,11 @@ const struct butterflyfish_collection_i_i collection_i_i = {
         .count = collection_count,
 };
 
-static int as_collection(
-        const struct butterflyfish_addable_i_i *const object,
-        const struct butterflyfish_collection_i_i **const out) {
+static int as_collection(const struct butterflyfish_addable_i_i *const object,
+                         const struct butterflyfish_collection_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, addable_i_i,
-            collection_i_i);
+    *out = butterflyfish_cast(object, struct object, addable_i_i, collection_i_i);
     return 0;
 }
 
@@ -119,13 +115,13 @@ const struct butterflyfish_addable_i_i addable_i_i = {
 static void check_as_stream_error_on_object_is_null(void **state) {
     assert_int_equal(
             butterflyfish_addable_i_i_as_stream(NULL, (void *) 1),
-            BUTTERFLYFISH_ADDABLE_I_ERROR_OBJECT_IS_NULL);
+            BUTTERFLYFISH_ADDABLE_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_as_stream_error_on_out_is_null(void **state) {
     assert_int_equal(
             butterflyfish_addable_i_i_as_stream((void *) 1, NULL),
-            BUTTERFLYFISH_ADDABLE_I_ERROR_OUT_IS_NULL);
+            BUTTERFLYFISH_ADDABLE_I_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_as_stream(void **state) {
@@ -134,8 +130,7 @@ static void check_as_stream(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    const void *check = (char *) &instance
-            + offsetof(struct object, stream_i_i);
+    const void *check = (char *) &instance + offsetof(struct object, stream_i_i);
     const struct butterflyfish_stream_i_i *out;
     assert_int_equal(butterflyfish_addable_i_i_as_stream(
             (const struct butterflyfish_addable_i_i *) &instance, &out), 0);
@@ -161,7 +156,7 @@ static void check_as_collection(void **state) {
             .stream_i_i = &stream_i_i
     };
     const void *check = (char *) &instance
-                        + offsetof(struct object, collection_i_i);
+            + offsetof(struct object, collection_i_i);
     const struct butterflyfish_collection_i_i *out;
     assert_int_equal(butterflyfish_addable_i_i_as_collection(
             (const struct butterflyfish_addable_i_i *) &instance, &out), 0);

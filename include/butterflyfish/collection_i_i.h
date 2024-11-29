@@ -7,6 +7,8 @@
 
 #include "stream_i_i.h"
 
+struct butterflyfish_map_i_i_entry;
+
 #define BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL \
     BUTTERFLYFISH_STREAM_I_I_ERROR_OBJECT_IS_NULL
 #define BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL \
@@ -40,8 +42,7 @@ struct butterflyfish_collection_i_i {
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  */
 int butterflyfish_collection_i_i_as_stream(
         const struct butterflyfish_collection_i_i *object,
@@ -54,8 +55,7 @@ int butterflyfish_collection_i_i_as_stream(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  */
 int butterflyfish_collection_i_i_count(
         const struct butterflyfish_collection_i_i *object,
@@ -68,8 +68,7 @@ int butterflyfish_collection_i_i_count(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_COLLECTION_IS_EMPTY if collection
  * is empty.
  */
@@ -84,8 +83,7 @@ int butterflyfish_collection_i_i_first(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_COLLECTION_IS_EMPTY if collection
  * is empty.
  */
@@ -103,8 +101,7 @@ int butterflyfish_collection_i_i_last(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_ITEM_IS_NULL if item is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_END_OF_SEQUENCE if there is no
  * next item.
  */
@@ -123,8 +120,7 @@ int butterflyfish_collection_i_i_next(
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_ITEM_IS_NULL if item is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_COLLECTION_I_I_ERROR_END_OF_SEQUENCE if there is no
  * previous item.
  */

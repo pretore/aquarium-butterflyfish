@@ -37,4 +37,3 @@ int butterflyfish_stream_i_i_next(
     }
     return INVOKE(object)->next(object, item, out);
 }
-

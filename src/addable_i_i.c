@@ -160,4 +160,3 @@ int butterflyfish_addable_i_i_add_all(
     }
     return INVOKE(object)->add_all(object, other);
 }
-

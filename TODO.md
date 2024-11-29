@@ -1,8 +1,6 @@
 ## TODO
 
 - [ ] rework `map` types show that they are derived from a `set` of entry types
-  - [ ] add `reducible_set` to `reducible_map` types
-
+- [ ] add `unordered` data classification type
 - [ ] add `queue` abstract data type
 - [ ] add `stack` abstract data type
-- [ ] add `unordered` data classification type

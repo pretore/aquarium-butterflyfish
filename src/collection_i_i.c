@@ -105,4 +105,3 @@ int butterflyfish_collection_i_i_prev(
     }
     return INVOKE(object)->prev(object, item, out);
 }
-

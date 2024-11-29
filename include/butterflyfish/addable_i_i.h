@@ -8,7 +8,7 @@
 
 #include "collection_i_i.h"
 
-struct sea_turtle_integer;
+struct butterflyfish_map_i_i_entry;
 
 #define BUTTERFLYFISH_ADDABLE_I_I_ERROR_OBJECT_IS_NULL \
     BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL
@@ -24,17 +24,16 @@ struct sea_turtle_integer;
     SEA_URCHIN_ERROR_OTHER_IS_NULL
 #define BUTTERFLYFISH_ADDABLE_I_I_ERROR_VALUE_IS_NULL \
     SEA_URCHIN_ERROR_VALUE_IS_NULL
-#define BUTTERFLYFISH_ADDABLE_I_I_ERROR_VALUE_ALREADY_EXISTS \
-    SEA_URCHIN_ERROR_VALUE_ALREADY_EXISTS
 #define BUTTERFLYFISH_ADDABLE_I_I_ERROR_VALUE_IS_INVALID \
     SEA_URCHIN_ERROR_VALUE_IS_INVALID
+#define BUTTERFLYFISH_ADDABLE_I_I_ERROR_VALUE_ALREADY_EXISTS \
+    SEA_URCHIN_ERROR_VALUE_ALREADY_EXISTS
 #define BUTTERFLYFISH_ADDABLE_I_I_ERROR_MEMORY_ALLOCATION_FAILED \
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 
 struct butterflyfish_addable_i_i {
-    int (*const as_collection)(
-            const struct butterflyfish_addable_i_i *object,
-            const struct butterflyfish_collection_i_i **out);
+    int (*const as_collection)(const struct butterflyfish_addable_i_i *object,
+                               const struct butterflyfish_collection_i_i **out);
 
     int (*const add)(struct butterflyfish_addable_i_i *object,
                      const struct butterflyfish_map_i_i_entry *value);
@@ -90,8 +89,7 @@ int butterflyfish_addable_i_i_count(
  * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_ADDABLE_IS_EMPTY if addable is
- * empty.
+ * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_ADDABLE_IS_EMPTY if addable is empty.
  */
 int butterflyfish_addable_i_i_first(
         const struct butterflyfish_addable_i_i *object,
@@ -105,8 +103,7 @@ int butterflyfish_addable_i_i_first(
  * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_ADDABLE_IS_EMPTY if addable is
- * empty.
+ * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_ADDABLE_IS_EMPTY if addable is empty.
  */
 int butterflyfish_addable_i_i_last(
         const struct butterflyfish_addable_i_i *object,
@@ -155,12 +152,10 @@ int butterflyfish_addable_i_i_prev(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_VALUE_IS_NULL if value is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_VALUE_IS_NULL if value is <i>NULL</i>.
  * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_VALUE_ALREADY_EXISTS if value is
  * already present.
- * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_VALUE_IS_INVALID if value is
- * invalid.
+ * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_VALUE_IS_INVALID if value is invalid.
  * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to add value.
  * @note <b>value</b> is copied.
@@ -176,8 +171,7 @@ int butterflyfish_addable_i_i_add(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_OTHER_IS_NULL if other is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_OTHER_IS_NULL if other is <i>NULL</i>.
  * @throws BUTTERFLYFISH_ADDABLE_I_I_ERROR_MEMORY_ALLOCATION_FAILED if there is
  * insufficient memory to add streamed values.
  * @note streamed <b>values</b> are copied.
