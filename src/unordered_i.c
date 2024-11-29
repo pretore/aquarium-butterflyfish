@@ -111,7 +111,7 @@ int butterflyfish_unordered_i_prev(
     return INVOKE_COLLECTION(collection)->prev(collection, item, out);
 }
 
-#pragma mark unordered -
+#pragma mark unordered_i -
 
 int butterflyfish_unordered_i_as_stream(
         const struct butterflyfish_unordered_i *const object,

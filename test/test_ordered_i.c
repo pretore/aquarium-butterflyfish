@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {

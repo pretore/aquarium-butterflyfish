@@ -7,6 +7,8 @@
 
 #include "collection_i_i.h"
 
+struct butterflyfish_map_i_i_entry;
+
 #define BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL \
     BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL
 #define BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL \
@@ -71,8 +73,7 @@ int butterflyfish_ordered_i_i_count(
  * @throws BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_I_I_ERROR_ORDERED_IS_EMPTY if ordered is
- * empty.
+ * @throws BUTTERFLYFISH_ORDERED_I_I_ERROR_ORDERED_IS_EMPTY if ordered is empty.
  */
 int butterflyfish_ordered_i_i_first(
         const struct butterflyfish_ordered_i_i *object,
@@ -86,8 +87,7 @@ int butterflyfish_ordered_i_i_first(
  * @throws BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
- * @throws BUTTERFLYFISH_ORDERED_I_I_ERROR_ORDERED_IS_EMPTY if ordered is
- * empty.
+ * @throws BUTTERFLYFISH_ORDERED_I_I_ERROR_ORDERED_IS_EMPTY if ordered is empty.
  */
 int butterflyfish_ordered_i_i_last(
         const struct butterflyfish_ordered_i_i *object,

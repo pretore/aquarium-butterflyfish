@@ -7,6 +7,8 @@
 
 #include "collection_i_i.h"
 
+struct butterflyfish_map_i_i_entry;
+
 #define BUTTERFLYFISH_REMOVABLE_I_I_ERROR_OBJECT_IS_NULL \
     BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL
 #define BUTTERFLYFISH_REMOVABLE_I_I_ERROR_OUT_IS_NULL \
@@ -21,16 +23,14 @@
     SEA_URCHIN_ERROR_OTHER_IS_NULL
 
 struct butterflyfish_removable_i_i {
-    int (*const as_collection)(
-            const struct butterflyfish_removable_i_i *object,
-            const struct butterflyfish_collection_i_i **out);
+    int (*const as_collection)(const struct butterflyfish_removable_i_i *object,
+                               const struct butterflyfish_collection_i_i **out);
 
     int (*const remove_item)(struct butterflyfish_removable_i_i *object,
                              const struct butterflyfish_map_i_i_entry *item);
 
-    int (*const remove_all_items)(
-            struct butterflyfish_removable_i_i *object,
-            const struct butterflyfish_stream_i_i *other);
+    int (*const remove_all_items)(struct butterflyfish_removable_i_i *object,
+                                  const struct butterflyfish_stream_i_i *other);
 };
 
 /**
@@ -110,8 +110,7 @@ int butterflyfish_removable_i_i_last(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_ITEM_IS_NULL if item is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
  * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_END_OF_SEQUENCE if there is no
  * next item.
@@ -129,8 +128,7 @@ int butterflyfish_removable_i_i_next(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_ITEM_IS_NULL if item is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
  * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_OUT_IS_NULL if out is <i>NULL</i>.
  * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_END_OF_SEQUENCE if there is no
  * previous item.
@@ -147,8 +145,7 @@ int butterflyfish_removable_i_i_prev(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_ITEM_IS_NULL if item is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_REMOVABLE_I_I_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
  * @note <b>item</b> is invalidated when removed.
  */
 int butterflyfish_removable_i_i_remove_item(

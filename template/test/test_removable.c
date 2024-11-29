@@ -7,22 +7,22 @@
 #include <test/cmocka.h>
 
 struct object {
-    const struct butterflyfish_removable_i *const removable_i;
-    const struct butterflyfish_collection_i *const collection_i;
-    const struct butterflyfish_stream_i *const stream_i;
+    const struct butterflyfish_removable_$t$ *const removable_$t$;
+    const struct butterflyfish_collection_$t$ *const collection_$t$;
+    const struct butterflyfish_stream_$t$ *const stream_$t$;
 };
 
-static int stream_first(const struct butterflyfish_stream_i *const object,
-                        const struct sea_turtle_integer **const out) {
+static int stream_first(const struct butterflyfish_stream_$t$ *const object,
+                        const $v$*const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
     return mock();
 }
 
-static int stream_next(const struct butterflyfish_stream_i *const object,
-                       const struct sea_turtle_integer *const item,
-                       const struct sea_turtle_integer **const out) {
+static int stream_next(const struct butterflyfish_stream_$t$ *const object,
+                       const $v$const item,
+                       const $v$*const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(item);
@@ -30,22 +30,22 @@ static int stream_next(const struct butterflyfish_stream_i *const object,
     return mock();
 }
 
-const struct butterflyfish_stream_i stream_i = {
+const struct butterflyfish_stream_$t$ stream_$t$ = {
         .first = stream_first,
         .next = stream_next
 };
 
-static int as_stream(const struct butterflyfish_collection_i *const object,
-                     const struct butterflyfish_stream_i **const out) {
+static int as_stream(const struct butterflyfish_collection_$t$ *const object,
+                     const struct butterflyfish_stream_$t$ **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, collection_i, stream_i);
+    *out = butterflyfish_cast(object, struct object, collection_$t$, stream_$t$);
     return 0;
 }
 
 static int
-collection_last(const struct butterflyfish_collection_i *const object,
-                const struct sea_turtle_integer **const out) {
+collection_last(const struct butterflyfish_collection_$t$ *const object,
+                const $v$*const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -53,9 +53,9 @@ collection_last(const struct butterflyfish_collection_i *const object,
 }
 
 static int
-collection_prev(const struct butterflyfish_collection_i *const object,
-                const struct sea_turtle_integer *const item,
-                const struct sea_turtle_integer **const out) {
+collection_prev(const struct butterflyfish_collection_$t$ *const object,
+                const $v$const item,
+                const $v$*const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(item);
@@ -64,7 +64,7 @@ collection_prev(const struct butterflyfish_collection_i *const object,
 }
 
 static int
-collection_count(const struct butterflyfish_collection_i *const object,
+collection_count(const struct butterflyfish_collection_$t$ *const object,
                  uintmax_t *const out) {
     function_called();
     assert_non_null(object);
@@ -73,7 +73,7 @@ collection_count(const struct butterflyfish_collection_i *const object,
     return 0;
 }
 
-const struct butterflyfish_collection_i collection_i = {
+const struct butterflyfish_collection_$t$ collection_$t$ = {
         .as_stream = as_stream,
         .last = collection_last,
         .prev = collection_prev,
@@ -81,17 +81,17 @@ const struct butterflyfish_collection_i collection_i = {
 };
 
 static int
-as_collection(const struct butterflyfish_removable_i *const object,
-              const struct butterflyfish_collection_i **const out) {
+as_collection(const struct butterflyfish_removable_$t$ *const object,
+              const struct butterflyfish_collection_$t$ **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, removable_i, collection_i);
+    *out = butterflyfish_cast(object, struct object, removable_$t$, collection_$t$);
     return 0;
 }
 
 static int
-reducible_remove_item(struct butterflyfish_removable_i *const object,
-                      const struct sea_turtle_integer *const item) {
+reducible_remove_item(struct butterflyfish_removable_$t$ *const object,
+                      const $v$const item) {
     function_called();
     assert_non_null(object);
     assert_non_null(item);
@@ -99,15 +99,15 @@ reducible_remove_item(struct butterflyfish_removable_i *const object,
 }
 
 static int
-reducible_remove_all_items(struct butterflyfish_removable_i *const object,
-                           const struct butterflyfish_stream_i *const other) {
+reducible_remove_all_items(struct butterflyfish_removable_$t$ *const object,
+                           const struct butterflyfish_stream_$t$ *const other) {
     function_called();
     assert_non_null(object);
     assert_non_null(other);
     return mock();
 }
 
-const struct butterflyfish_removable_i removable_i = {
+const struct butterflyfish_removable_$t$ removable_$t$ = {
         .as_collection = as_collection,
         .remove_item = reducible_remove_item,
         .remove_all_items = reducible_remove_all_items,
@@ -115,258 +115,258 @@ const struct butterflyfish_removable_i removable_i = {
 
 static void check_as_stream_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_as_stream(NULL, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_removable_$t$_as_stream(NULL, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_as_stream_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_as_stream((void *) 1, NULL),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OUT_IS_NULL);
+            butterflyfish_removable_$t$_as_stream((void *) 1, NULL),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_as_stream(void **state) {
     const struct object instance = {
-            .removable_i = &removable_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+            .removable_$t$ = &removable_$t$,
+            .collection_$t$ = &collection_$t$,
+            .stream_$t$ = &stream_$t$
     };
-    const void *check = (char *) &instance + offsetof(struct object, stream_i);
-    const struct butterflyfish_stream_i *out;
-    assert_int_equal(butterflyfish_removable_i_as_stream(
-            (const struct butterflyfish_removable_i *) &instance, &out), 0);
+    const void *check = (char *) &instance + offsetof(struct object, stream_$t$);
+    const struct butterflyfish_stream_$t$ *out;
+    assert_int_equal(butterflyfish_removable_$t$_as_stream(
+            (const struct butterflyfish_removable_$t$ *) &instance, &out), 0);
     assert_ptr_equal(out, check);
 }
 
 static void check_as_collection_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_as_collection(NULL, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_removable_$t$_as_collection(NULL, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_as_collection_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_as_collection((void *) 1, NULL),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OUT_IS_NULL);
+            butterflyfish_removable_$t$_as_collection((void *) 1, NULL),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_as_collection(void **state) {
     const struct object instance = {
-            .removable_i = &removable_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+            .removable_$t$ = &removable_$t$,
+            .collection_$t$ = &collection_$t$,
+            .stream_$t$ = &stream_$t$
     };
     const void *check = (char *) &instance
-                        + offsetof(struct object, collection_i);
-    const struct butterflyfish_collection_i *out;
-    assert_int_equal(butterflyfish_removable_i_as_collection(
-            (const struct butterflyfish_removable_i *) &instance, &out), 0);
+                        + offsetof(struct object, collection_$t$);
+    const struct butterflyfish_collection_$t$ *out;
+    assert_int_equal(butterflyfish_removable_$t$_as_collection(
+            (const struct butterflyfish_removable_$t$ *) &instance, &out), 0);
     assert_ptr_equal(out, check);
 }
 
 static void check_count_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_count(NULL, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_removable_$t$_count(NULL, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_count_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_count((void *) 1, NULL),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OUT_IS_NULL);
+            butterflyfish_removable_$t$_count((void *) 1, NULL),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_count(void **state) {
     srand(time(NULL));
     const struct object instance = {
-            .removable_i = &removable_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+            .removable_$t$ = &removable_$t$,
+            .collection_$t$ = &collection_$t$,
+            .stream_$t$ = &stream_$t$
     };
     expect_function_call(collection_count);
     const uintmax_t check = abs(rand());
     will_return(collection_count, check);
     uintmax_t out;
-    assert_int_equal(butterflyfish_removable_i_count(
-            (const struct butterflyfish_removable_i *) &instance, &out), 0);
+    assert_int_equal(butterflyfish_removable_$t$_count(
+            (const struct butterflyfish_removable_$t$ *) &instance, &out), 0);
     assert_int_equal(out, check);
 }
 
 static void check_first_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_first(NULL, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_removable_$t$_first(NULL, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_first_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_first((void *) 1, NULL),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OUT_IS_NULL);
+            butterflyfish_removable_$t$_first((void *) 1, NULL),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_first_error_on_ordered_is_empty(void **state) {
     const struct object instance = {
-            .removable_i = &removable_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+            .removable_$t$ = &removable_$t$,
+            .collection_$t$ = &collection_$t$,
+            .stream_$t$ = &stream_$t$
     };
     expect_function_call(stream_first);
     will_return(stream_first,
-                BUTTERFLYFISH_STREAM_I_ERROR_STREAM_IS_EMPTY);
+                BUTTERFLYFISH_STREAM_$T$_ERROR_STREAM_IS_EMPTY);
     assert_int_equal(
-            butterflyfish_removable_i_first(
-                    (const struct butterflyfish_removable_i *) &instance,
+            butterflyfish_removable_$t$_first(
+                    (const struct butterflyfish_removable_$t$ *) &instance,
                     (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_REMOVABLE_IS_EMPTY);
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_REMOVABLE_IS_EMPTY);
 }
 
 static void check_last_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_last(NULL, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_removable_$t$_last(NULL, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_last_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_last((void *) 1, NULL),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OUT_IS_NULL);
+            butterflyfish_removable_$t$_last((void *) 1, NULL),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_last_error_on_ordered_is_empty(void **state) {
     const struct object instance = {
-            .removable_i = &removable_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+            .removable_$t$ = &removable_$t$,
+            .collection_$t$ = &collection_$t$,
+            .stream_$t$ = &stream_$t$
     };
     expect_function_call(collection_last);
     will_return(collection_last,
-                BUTTERFLYFISH_COLLECTION_I_ERROR_COLLECTION_IS_EMPTY);
+                BUTTERFLYFISH_COLLECTION_$T$_ERROR_COLLECTION_IS_EMPTY);
     assert_int_equal(
-            butterflyfish_removable_i_last(
-                    (const struct butterflyfish_removable_i *) &instance,
+            butterflyfish_removable_$t$_last(
+                    (const struct butterflyfish_removable_$t$ *) &instance,
                     (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_REMOVABLE_IS_EMPTY);
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_REMOVABLE_IS_EMPTY);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_next(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_removable_$t$_next(NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_next_error_on_item_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_next((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_ITEM_IS_NULL);
+            butterflyfish_removable_$t$_next((void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_next_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_next((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OUT_IS_NULL);
+            butterflyfish_removable_$t$_next((void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_next_error_on_end_of_sequence(void **state) {
     const struct object instance = {
-            .removable_i = &removable_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+            .removable_$t$ = &removable_$t$,
+            .collection_$t$ = &collection_$t$,
+            .stream_$t$ = &stream_$t$
     };
     expect_function_call(stream_next);
     will_return(stream_next,
-                BUTTERFLYFISH_STREAM_I_ERROR_END_OF_SEQUENCE);
+                BUTTERFLYFISH_STREAM_$T$_ERROR_END_OF_SEQUENCE);
     assert_int_equal(
-            butterflyfish_removable_i_next(
-                    (const struct butterflyfish_removable_i *) &instance,
+            butterflyfish_removable_$t$_next(
+                    (const struct butterflyfish_removable_$t$ *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_END_OF_SEQUENCE);
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_prev_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_prev(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_removable_$t$_prev(NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_prev_error_on_item_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_prev((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_ITEM_IS_NULL);
+            butterflyfish_removable_$t$_prev((void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_prev_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_prev((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OUT_IS_NULL);
+            butterflyfish_removable_$t$_prev((void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_prev_error_on_end_of_sequence(void **state) {
     const struct object instance = {
-            .removable_i = &removable_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+            .removable_$t$ = &removable_$t$,
+            .collection_$t$ = &collection_$t$,
+            .stream_$t$ = &stream_$t$
     };
     expect_function_call(collection_prev);
     will_return(collection_prev,
-                BUTTERFLYFISH_COLLECTION_I_ERROR_END_OF_SEQUENCE);
+                BUTTERFLYFISH_COLLECTION_$T$_ERROR_END_OF_SEQUENCE);
     assert_int_equal(
-            butterflyfish_removable_i_prev(
-                    (const struct butterflyfish_removable_i *) &instance,
+            butterflyfish_removable_$t$_prev(
+                    (const struct butterflyfish_removable_$t$ *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_END_OF_SEQUENCE);
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_remove_item_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_remove_item(NULL, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_removable_$t$_remove_item(NULL, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_remove_item_error_on_item_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_remove_item((void *) 1, NULL),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_ITEM_IS_NULL);
+            butterflyfish_removable_$t$_remove_item((void *) 1, NULL),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_remove_item(void **state) {
     const struct object instance = {
-            .removable_i = &removable_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+            .removable_$t$ = &removable_$t$,
+            .collection_$t$ = &collection_$t$,
+            .stream_$t$ = &stream_$t$
     };
     expect_function_call(reducible_remove_item);
     will_return(reducible_remove_item, 0);
     assert_int_equal(
-            butterflyfish_removable_i_remove_item(
-                    (struct butterflyfish_removable_i *) &instance,
+            butterflyfish_removable_$t$_remove_item(
+                    (struct butterflyfish_removable_$t$ *) &instance,
                     (void *) 1), 0);
 }
 
 static void check_remove_all_items_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_remove_all_items(NULL, (void *) 1),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_removable_$t$_remove_all_items(NULL, (void *) 1),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_remove_all_items_error_on_other_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_removable_i_remove_all_items((void *) 1, NULL),
-            BUTTERFLYFISH_REMOVABLE_I_ERROR_OTHER_IS_NULL);
+            butterflyfish_removable_$t$_remove_all_items((void *) 1, NULL),
+            BUTTERFLYFISH_REMOVABLE_$T$_ERROR_OTHER_IS_NULL);
 }
 
 static void check_remove_all_items(void **state) {
     const struct object instance = {
-            .removable_i = &removable_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+            .removable_$t$ = &removable_$t$,
+            .collection_$t$ = &collection_$t$,
+            .stream_$t$ = &stream_$t$
     };
     expect_function_call(reducible_remove_all_items);
     will_return(reducible_remove_all_items, 0);
     assert_int_equal(
-            butterflyfish_removable_i_remove_all_items(
-                    (struct butterflyfish_removable_i *) &instance,
+            butterflyfish_removable_$t$_remove_all_items(
+                    (struct butterflyfish_removable_$t$ *) &instance,
                     (void *) 1), 0);
 }
 

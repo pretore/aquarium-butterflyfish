@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -40,8 +39,7 @@ static int as_stream(const struct butterflyfish_collection_i_i *const object,
                      const struct butterflyfish_stream_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, collection_i_i,
-            stream_i_i);
+    *out = butterflyfish_cast(object, struct object, collection_i_i, stream_i_i);
     return 0;
 }
 
@@ -87,8 +85,7 @@ as_collection(const struct butterflyfish_removable_i_i *const object,
               const struct butterflyfish_collection_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, removable_i_i,
-            collection_i_i);
+    *out = butterflyfish_cast(object, struct object, removable_i_i, collection_i_i);
     return 0;
 }
 
@@ -102,9 +99,8 @@ reducible_remove_item(struct butterflyfish_removable_i_i *const object,
 }
 
 static int
-reducible_remove_all_items(
-        struct butterflyfish_removable_i_i *const object,
-        const struct butterflyfish_stream_i_i *const other) {
+reducible_remove_all_items(struct butterflyfish_removable_i_i *const object,
+                           const struct butterflyfish_stream_i_i *const other) {
     function_called();
     assert_non_null(object);
     assert_non_null(other);

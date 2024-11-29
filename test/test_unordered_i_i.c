@@ -7,7 +7,7 @@
 #include <test/cmocka.h>
 
 struct object {
-    const struct butterflyfish_ordered_i_i *const ordered_i_i;
+    const struct butterflyfish_unordered_i_i *const unordered_i_i;
     const struct butterflyfish_collection_i_i *const collection_i_i;
     const struct butterflyfish_stream_i_i *const stream_i_i;
 };
@@ -80,85 +80,85 @@ const struct butterflyfish_collection_i_i collection_i_i = {
         .count = collection_count,
 };
 
-static int as_collection(const struct butterflyfish_ordered_i_i *const object,
+static int as_collection(const struct butterflyfish_unordered_i_i *const object,
                          const struct butterflyfish_collection_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, ordered_i_i, collection_i_i);
+    *out = butterflyfish_cast(object, struct object, unordered_i_i, collection_i_i);
     return 0;
 }
 
-const struct butterflyfish_ordered_i_i ordered_i_i = {
+const struct butterflyfish_unordered_i_i unordered_i_i = {
         .as_collection = as_collection,
 };
 
 static void check_as_stream_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_as_stream(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_unordered_i_i_as_stream(NULL, (void *) 1),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_as_stream_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_as_stream((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL);
+            butterflyfish_unordered_i_i_as_stream((void *) 1, NULL),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_as_stream(void **state) {
     const struct object instance = {
-            .ordered_i_i = &ordered_i_i,
+            .unordered_i_i = &unordered_i_i,
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
     const void *check = (char *) &instance + offsetof(struct object, stream_i_i);
     const struct butterflyfish_stream_i_i *out;
-    assert_int_equal(butterflyfish_ordered_i_i_as_stream(
-            (const struct butterflyfish_ordered_i_i *) &instance, &out), 0);
+    assert_int_equal(butterflyfish_unordered_i_i_as_stream(
+            (const struct butterflyfish_unordered_i_i *) &instance, &out), 0);
     assert_ptr_equal(out, check);
 }
 
 static void check_as_collection_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_as_collection(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_unordered_i_i_as_collection(NULL, (void *) 1),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_as_collection_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_as_collection((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL);
+            butterflyfish_unordered_i_i_as_collection((void *) 1, NULL),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_as_collection(void **state) {
     const struct object instance = {
-            .ordered_i_i = &ordered_i_i,
+            .unordered_i_i = &unordered_i_i,
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
     const void *check = (char *) &instance
             + offsetof(struct object, collection_i_i);
     const struct butterflyfish_collection_i_i *out;
-    assert_int_equal(butterflyfish_ordered_i_i_as_collection(
-            (const struct butterflyfish_ordered_i_i *) &instance, &out), 0);
+    assert_int_equal(butterflyfish_unordered_i_i_as_collection(
+            (const struct butterflyfish_unordered_i_i *) &instance, &out), 0);
     assert_ptr_equal(out, check);
 }
 
 static void check_count_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_count(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_unordered_i_i_count(NULL, (void *) 1),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_count_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_count((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL);
+            butterflyfish_unordered_i_i_count((void *) 1, NULL),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_count(void **state) {
     srand(time(NULL));
     const struct object instance = {
-            .ordered_i_i = &ordered_i_i,
+            .unordered_i_i = &unordered_i_i,
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
@@ -166,26 +166,26 @@ static void check_count(void **state) {
     const uintmax_t check = abs(rand());
     will_return(collection_count, check);
     uintmax_t out;
-    assert_int_equal(butterflyfish_ordered_i_i_count(
-            (const struct butterflyfish_ordered_i_i *) &instance, &out), 0);
+    assert_int_equal(butterflyfish_unordered_i_i_count(
+            (const struct butterflyfish_unordered_i_i *) &instance, &out), 0);
     assert_int_equal(out, check);
 }
 
 static void check_first_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_first(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_unordered_i_i_first(NULL, (void *) 1),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_first_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_first((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL);
+            butterflyfish_unordered_i_i_first((void *) 1, NULL),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OUT_IS_NULL);
 }
 
-static void check_first_error_on_ordered_is_empty(void **state) {
+static void check_first_error_on_unordered_is_empty(void **state) {
     const struct object instance = {
-            .ordered_i_i = &ordered_i_i,
+            .unordered_i_i = &unordered_i_i,
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
@@ -193,27 +193,27 @@ static void check_first_error_on_ordered_is_empty(void **state) {
     will_return(stream_first,
                 BUTTERFLYFISH_STREAM_I_I_ERROR_STREAM_IS_EMPTY);
     assert_int_equal(
-            butterflyfish_ordered_i_i_first(
-                    (const struct butterflyfish_ordered_i_i *) &instance,
+            butterflyfish_unordered_i_i_first(
+                    (const struct butterflyfish_unordered_i_i *) &instance,
                     (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_ORDERED_IS_EMPTY);
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_UNORDERED_IS_EMPTY);
 }
 
 static void check_last_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_last(NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_unordered_i_i_last(NULL, (void *) 1),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_last_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_last((void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL);
+            butterflyfish_unordered_i_i_last((void *) 1, NULL),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OUT_IS_NULL);
 }
 
-static void check_last_error_on_ordered_is_empty(void **state) {
+static void check_last_error_on_unordered_is_empty(void **state) {
     const struct object instance = {
-            .ordered_i_i = &ordered_i_i,
+            .unordered_i_i = &unordered_i_i,
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
@@ -221,33 +221,33 @@ static void check_last_error_on_ordered_is_empty(void **state) {
     will_return(collection_last,
                 BUTTERFLYFISH_COLLECTION_I_I_ERROR_COLLECTION_IS_EMPTY);
     assert_int_equal(
-            butterflyfish_ordered_i_i_last(
-                    (const struct butterflyfish_ordered_i_i *) &instance,
+            butterflyfish_unordered_i_i_last(
+                    (const struct butterflyfish_unordered_i_i *) &instance,
                     (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_ORDERED_IS_EMPTY);
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_UNORDERED_IS_EMPTY);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_next(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_unordered_i_i_next(NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_next_error_on_item_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_next((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_ITEM_IS_NULL);
+            butterflyfish_unordered_i_i_next((void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_ITEM_IS_NULL);
 }
 
 static void check_next_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_next((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL);
+            butterflyfish_unordered_i_i_next((void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_next_error_on_end_of_sequence(void **state) {
     const struct object instance = {
-            .ordered_i_i = &ordered_i_i,
+            .unordered_i_i = &unordered_i_i,
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
@@ -255,34 +255,34 @@ static void check_next_error_on_end_of_sequence(void **state) {
     will_return(stream_next,
                 BUTTERFLYFISH_STREAM_I_I_ERROR_END_OF_SEQUENCE);
     assert_int_equal(
-            butterflyfish_ordered_i_i_next(
-                    (const struct butterflyfish_ordered_i_i *) &instance,
+            butterflyfish_unordered_i_i_next(
+                    (const struct butterflyfish_unordered_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_END_OF_SEQUENCE);
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_prev_error_on_object_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_prev(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OBJECT_IS_NULL);
+            butterflyfish_unordered_i_i_prev(NULL, (void *) 1, (void *) 1),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_prev_error_on_item_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_prev((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_ITEM_IS_NULL);
+            butterflyfish_unordered_i_i_prev((void *) 1, NULL, (void *) 1),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_ITEM_IS_NULL);
 }
 
 static void check_prev_error_on_out_is_null(void **state) {
     assert_int_equal(
-            butterflyfish_ordered_i_i_prev((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_OUT_IS_NULL);
+            butterflyfish_unordered_i_i_prev((void *) 1, (void *) 1, NULL),
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_prev_error_on_end_of_sequence(void **state) {
     const struct object instance = {
-            .ordered_i_i = &ordered_i_i,
+            .unordered_i_i = &unordered_i_i,
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
@@ -290,11 +290,11 @@ static void check_prev_error_on_end_of_sequence(void **state) {
     will_return(collection_prev,
                 BUTTERFLYFISH_COLLECTION_I_I_ERROR_END_OF_SEQUENCE);
     assert_int_equal(
-            butterflyfish_ordered_i_i_prev(
-                    (const struct butterflyfish_ordered_i_i *) &instance,
+            butterflyfish_unordered_i_i_prev(
+                    (const struct butterflyfish_unordered_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_ORDERED_I_I_ERROR_END_OF_SEQUENCE);
+            BUTTERFLYFISH_UNORDERED_I_I_ERROR_END_OF_SEQUENCE);
 }
 
 int main(int argc, char *argv[]) {
@@ -310,10 +310,10 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_count),
             cmocka_unit_test(check_first_error_on_object_is_null),
             cmocka_unit_test(check_first_error_on_out_is_null),
-            cmocka_unit_test(check_first_error_on_ordered_is_empty),
+            cmocka_unit_test(check_first_error_on_unordered_is_empty),
             cmocka_unit_test(check_last_error_on_object_is_null),
             cmocka_unit_test(check_last_error_on_out_is_null),
-            cmocka_unit_test(check_last_error_on_ordered_is_empty),
+            cmocka_unit_test(check_last_error_on_unordered_is_empty),
             cmocka_unit_test(check_next_error_on_object_is_null),
             cmocka_unit_test(check_next_error_on_item_is_null),
             cmocka_unit_test(check_next_error_on_out_is_null),

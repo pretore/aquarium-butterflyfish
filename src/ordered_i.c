@@ -111,7 +111,7 @@ int butterflyfish_ordered_i_prev(
     return INVOKE_COLLECTION(collection)->prev(collection, item, out);
 }
 
-#pragma mark ordered -
+#pragma mark ordered_i -
 
 int butterflyfish_ordered_i_as_stream(
         const struct butterflyfish_ordered_i *const object,

@@ -13,7 +13,7 @@
 
 static inline int
 as_collection(const struct butterflyfish_sorted_i_i *const object,
-              const struct butterflyfish_collection_i_i**const out) {
+              const struct butterflyfish_collection_i_i **const out) {
     assert(object);
     assert(out);
     return INVOKE(object)->as_collection(object, out);
@@ -58,7 +58,7 @@ int butterflyfish_sorted_i_i_next(
     if (!out) {
         return BUTTERFLYFISH_SORTED_I_I_ERROR_OUT_IS_NULL;
     }
-    const struct butterflyfish_stream_i_i*stream;
+    const struct butterflyfish_stream_i_i *stream;
     seagrass_required_true(!as_stream(object, &stream));
     return INVOKE_STREAM(stream)->next(stream, item, out);
 }
@@ -111,11 +111,11 @@ int butterflyfish_sorted_i_i_prev(
     return INVOKE_COLLECTION(collection)->prev(collection, item, out);
 }
 
-#pragma mark sorted -
+#pragma mark sorted_i_i -
 
 int butterflyfish_sorted_i_i_as_stream(
-        const struct butterflyfish_sorted_i_i*const object,
-        const struct butterflyfish_stream_i_i**const out) {
+        const struct butterflyfish_sorted_i_i *const object,
+        const struct butterflyfish_stream_i_i **const out) {
     if (!object) {
         return BUTTERFLYFISH_SORTED_I_I_ERROR_OBJECT_IS_NULL;
     }

@@ -103,6 +103,7 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/stream_i_i.h
         include/butterflyfish/stream_ni.h
         include/butterflyfish/unordered_i.h
+        include/butterflyfish/unordered_i_i.h
         include/butterflyfish.h)
 set(SOURCES
         ${EXPORTED_HEADER_FILES}
@@ -188,7 +189,8 @@ set(SOURCES
         src/stream_i.c
         src/stream_i_i.c
         src/stream_ni.c
-        src/unordered_i.c)
+        src/unordered_i.c
+        src/unordered_i_i.c)
 
 if (DOXYGEN_FOUND)
     set(DOXYGEN_EXTRACT_ALL YES)
@@ -1433,6 +1435,23 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-unordered-i-unit-test
             ${PROJECT_NAME}-unordered-i-unit-test)
+    # aquarium-butterflyfish-unordered-i-i-unit-test
+    add_executable(${PROJECT_NAME}-unordered-i-i-unit-test
+            test/test_unordered_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-unordered-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-unordered-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-unordered-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-unordered-i-i-unit-test
+            ${PROJECT_NAME}-unordered-i-i-unit-test)
 
 else ()
     add_library(${PROJECT_NAME} "")

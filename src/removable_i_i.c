@@ -29,7 +29,7 @@ as_stream(const struct butterflyfish_removable_i_i *const object,
     return INVOKE_COLLECTION(collection)->as_stream(collection, out);
 }
 
-#pragma mark stream_i -
+#pragma mark stream_i_i -
 
 int butterflyfish_removable_i_i_first(
         const struct butterflyfish_removable_i_i *const object,
@@ -63,7 +63,7 @@ int butterflyfish_removable_i_i_next(
     return INVOKE_STREAM(stream)->next(stream, item, out);
 }
 
-#pragma mark collection_i -
+#pragma mark collection_i_i -
 
 int butterflyfish_removable_i_i_count(
         const struct butterflyfish_removable_i_i *const object,
@@ -111,7 +111,7 @@ int butterflyfish_removable_i_i_prev(
     return INVOKE_COLLECTION(collection)->prev(collection, item, out);
 }
 
-#pragma mark removable_i -
+#pragma mark removable_i_i -
 
 int butterflyfish_removable_i_i_as_stream(
         const struct butterflyfish_removable_i_i *const object,

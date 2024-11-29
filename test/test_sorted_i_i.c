@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -40,9 +39,7 @@ static int as_stream(const struct butterflyfish_collection_i_i *const object,
                      const struct butterflyfish_stream_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object,
-            collection_i_i,
-            stream_i_i);
+    *out = butterflyfish_cast(object, struct object, collection_i_i, stream_i_i);
     return 0;
 }
 
@@ -88,9 +85,7 @@ sorted_as_collection(const struct butterflyfish_sorted_i_i *const object,
                      const struct butterflyfish_collection_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object,
-            sorted_i_i,
-            collection_i_i);
+    *out = butterflyfish_cast(object, struct object, sorted_i_i, collection_i_i);
     return 0;
 }
 
@@ -164,8 +159,7 @@ static void check_as_stream(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    const void *check = (char *) &instance
-            + offsetof(struct object, stream_i_i);
+    const void *check = (char *) &instance + offsetof(struct object, stream_i_i);
     const struct butterflyfish_stream_i_i *out;
     assert_int_equal(butterflyfish_sorted_i_i_as_stream(
             (const struct butterflyfish_sorted_i_i *) &instance, &out), 0);
@@ -557,7 +551,7 @@ static void check_lower_error_on_memory_allocation_failed(void **state) {
                     (const struct butterflyfish_sorted_i_i *) &instance,
                     (void *) 1,
                     (void *) 1),
-            BUTTERFLYFISH_SORTED_I_I_ERROR_MEMORY_ALLOCATION_FAILED);
+            BUTTERFLYFISH_SORTED_I_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 int main(int argc, char *argv[]) {
