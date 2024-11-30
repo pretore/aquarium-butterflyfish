@@ -56,6 +56,7 @@
 #include <butterflyfish/reducible_list_i_i.h>
 #include <butterflyfish/reducible_map_i_i.h>
 #include <butterflyfish/reducible_set_i.h>
+#include <butterflyfish/reducible_set_i_i.h>
 #include <butterflyfish/removable_i.h>
 #include <butterflyfish/removable_i_i.h>
 #include <butterflyfish/set_i.h>

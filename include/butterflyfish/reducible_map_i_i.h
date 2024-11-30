@@ -8,7 +8,8 @@
 #include "map_i_i.h"
 #include "removable_i_i.h"
 
-struct sea_turtle_integer;
+struct butterflyfish_stream_i;
+struct butterflyfish_stream_i;
 struct butterflyfish_reducible_set_i;
 struct butterflyfish_ordered_reducible_list_i;
 

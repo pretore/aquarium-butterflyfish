@@ -61,7 +61,7 @@ as_stream(const struct butterflyfish_reducible_map_i_i *const object,
     return INVOKE_COLLECTION(collection)->as_stream(collection, out);
 }
 
-#pragma mark stream_i -
+#pragma mark stream_i_i -
 
 int butterflyfish_reducible_map_i_i_first(
         const struct butterflyfish_reducible_map_i_i *const object,

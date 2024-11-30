@@ -52,9 +52,9 @@ struct butterflyfish_reducible_set_i {
  * @param [in] object reducible set instance.
  * @param [out] out receive stream.
  * @return On success <i>0</i>, otherwise an error code.
- * @throws BUTTERFLYFISH_REDUCIBLE_SET_I_ERROR_OBJECT_IS_NULL if object is 
+ * @throws BUTTERFLYFISH_REDUCIBLE_SET_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_SET_I_ERROR_OUT_IS_NULL if out is 
+ * @throws BUTTERFLYFISH_REDUCIBLE_SET_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  */
 int butterflyfish_reducible_set_i_as_stream(

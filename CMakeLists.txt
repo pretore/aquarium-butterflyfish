@@ -65,6 +65,7 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/reducible_list_i_i.h
         include/butterflyfish/reducible_map_i_i.h
         include/butterflyfish/reducible_set_i.h
+        include/butterflyfish/reducible_set_i_i.h
         include/butterflyfish/removable_i.h
         include/butterflyfish/removable_i_i.h
         include/butterflyfish/set_i.h
@@ -156,6 +157,7 @@ set(SOURCES
         src/reducible_list_i_i.c
         src/reducible_map_i_i.c
         src/reducible_set_i.c
+        src/reducible_set_i_i.c
         src/removable_i.c
         src/removable_i_i.c
         src/set_i.c
@@ -1528,6 +1530,23 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-reducible-list-i-i-unit-test
             ${PROJECT_NAME}-reducible-list-i-i-unit-test)
+    # aquarium-butterflyfish-reducible-set-i-i-unit-test
+    add_executable(${PROJECT_NAME}-reducible-set-i-i-unit-test
+            test/test_reducible_set_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-reducible-set-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-reducible-set-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-reducible-set-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-reducible-set-i-i-unit-test
+            ${PROJECT_NAME}-reducible-set-i-i-unit-test)
 else ()
     add_library(${PROJECT_NAME} "")
     target_sources(${PROJECT_NAME}
