@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -564,7 +563,6 @@ static void check_incremental_list_as_list(void **state) {
     assert_int_equal(butterflyfish_incremental_list_i_as_collection(
             as, &out), 0);
     assert_ptr_equal(out, check);
-
 }
 
 static void check_count_error_on_object_is_null(void **state) {

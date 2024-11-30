@@ -64,8 +64,10 @@
 #include <butterflyfish/settable_i.h>
 #include <butterflyfish/settable_i_i.h>
 #include <butterflyfish/settable_incremental_list_i.h>
+#include <butterflyfish/settable_incremental_list_i_i.h>
 #include <butterflyfish/settable_incremental_map_i_i.h>
 #include <butterflyfish/settable_incremental_set_i.h>
+#include <butterflyfish/settable_incremental_set_i_i.h>
 #include <butterflyfish/settable_list_i.h>
 #include <butterflyfish/settable_list_i_i.h>
 #include <butterflyfish/settable_map_i_i.h>
