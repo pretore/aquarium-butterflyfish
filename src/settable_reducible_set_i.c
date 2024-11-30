@@ -239,9 +239,9 @@ int butterflyfish_settable_reducible_set_i_set_item(
     if (!value) {
         return BUTTERFLYFISH_SETTABLE_REDUCIBLE_SET_I_ERROR_VALUE_IS_NULL;
     }
-    struct butterflyfish_settable_i *settable_i;
-    seagrass_required_true(!as_settable(object, &settable_i));
-    return INVOKE_SETTABLE(settable_i)->set_item(settable_i, item, value);
+    struct butterflyfish_settable_i *settable;
+    seagrass_required_true(!as_settable(object, &settable));
+    return INVOKE_SETTABLE(settable)->set_item(settable, item, value);
 }
 
 #pragma mark settable_set_i -

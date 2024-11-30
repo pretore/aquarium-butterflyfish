@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -92,7 +91,7 @@ const struct butterflyfish_collection_i_i collection_i_i = {
 
 static int
 removable_as_collection(const struct butterflyfish_removable_i_i *const object,
-              const struct butterflyfish_collection_i_i **const out) {
+                        const struct butterflyfish_collection_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
     *out = butterflyfish_cast(object, struct object, removable_i_i,
@@ -127,7 +126,7 @@ const struct butterflyfish_removable_i_i removable_i_i = {
 
 static int
 settable_as_collection(const struct butterflyfish_settable_i_i *const object,
-              const struct butterflyfish_collection_i_i **const out) {
+                       const struct butterflyfish_collection_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
     *out = butterflyfish_cast(object, struct object, settable_i_i,
@@ -279,7 +278,8 @@ static int map_keys(const struct butterflyfish_map_i_i *const object,
 }
 
 static int map_values(const struct butterflyfish_map_i_i *const object,
-                      const struct butterflyfish_ordered_list_i **const out) {
+                      const struct butterflyfish_ordered_list_i **const
+                              out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -439,7 +439,8 @@ settable_map_keys(struct butterflyfish_settable_map_i_i *const object,
 
 static int
 settable_map_values(struct butterflyfish_settable_map_i_i *const object,
-                    struct butterflyfish_ordered_settable_list_i **const out) {
+                    struct butterflyfish_ordered_settable_list_i **const
+                            out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
