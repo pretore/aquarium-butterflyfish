@@ -8,6 +8,8 @@
 
 #include "collection_i_i.h"
 
+struct butterflyfish_map_i_i_entry;
+
 #define BUTTERFLYFISH_SETTABLE_I_I_ERROR_OBJECT_IS_NULL \
     BUTTERFLYFISH_COLLECTION_I_I_ERROR_OBJECT_IS_NULL
 #define BUTTERFLYFISH_SETTABLE_I_I_ERROR_OUT_IS_NULL \
@@ -28,9 +30,8 @@
     SEA_URCHIN_ERROR_MEMORY_ALLOCATION_FAILED
 
 struct butterflyfish_settable_i_i {
-    int (*const as_collection)(
-            const struct butterflyfish_settable_i_i *object,
-            const struct butterflyfish_collection_i_i **out);
+    int (*const as_collection)(const struct butterflyfish_settable_i_i *object,
+                               const struct butterflyfish_collection_i_i **out);
 
     int (*const set_item)(struct butterflyfish_settable_i_i *object,
                           const struct butterflyfish_map_i_i_entry *item,
@@ -152,12 +153,10 @@ int butterflyfish_settable_i_i_prev(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_SETTABLE_I_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SETTABLE_I_I_ERROR_ITEM_IS_NULL if item is
- * <i>NULL</i>.
+ * @throws BUTTERFLYFISH_SETTABLE_I_I_ERROR_ITEM_IS_NULL if item is <i>NULL</i>.
  * @throws BUTTERFLYFISH_SETTABLE_I_I_ERROR_VALUE_IS_NULL if value is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_SETTABLE_I_I_ERROR_VALUE_IS_INVALID if value is
- * invalid.
+ * @throws BUTTERFLYFISH_SETTABLE_I_I_ERROR_VALUE_IS_INVALID if value is invalid.
  * @throws BUTTERFLYFISH_SETTABLE_I_I_ERROR_VALUE_ALREADY_EXISTS if value is
  * already present.
  * @throws BUTTERFLYFISH_SETTABLE_I_I_ERROR_MEMORY_ALLOCATION_FAILED if there

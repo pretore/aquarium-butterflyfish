@@ -7,7 +7,7 @@
 
 #include "set_i_i.h"
 
-struct sea_turtle_integer;
+struct butterflyfish_stream_i;
 struct butterflyfish_stream_i;
 struct butterflyfish_set_i;
 struct butterflyfish_ordered_list_i;
@@ -52,7 +52,7 @@ struct butterflyfish_map_i_i {
     int (*const get_entry)(
             const struct butterflyfish_map_i_i *object,
             const struct sea_turtle_integer *key,
-            const struct butterflyfish_map_i_i_entry **value);
+            const struct butterflyfish_map_i_i_entry **out);
 
     int (*const contains_key)(
             const struct butterflyfish_map_i_i *object,

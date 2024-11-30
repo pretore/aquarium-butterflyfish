@@ -40,16 +40,16 @@ as_stream(const struct butterflyfish_insertable_i_i *const object,
     return INVOKE_COLLECTION(collection)->as_stream(collection, out);
 }
 
-#pragma mark stream_i -
+#pragma mark stream_i_i -
 
 int butterflyfish_insertable_i_i_first(
         const struct butterflyfish_insertable_i_i *const object,
         const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OUT_IS_NULL;
     }
     const struct butterflyfish_stream_i_i *stream;
     seagrass_required_true(!as_stream(object, &stream));
@@ -61,29 +61,29 @@ int butterflyfish_insertable_i_i_next(
         const struct butterflyfish_map_i_i_entry *const item,
         const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OUT_IS_NULL;
     }
     const struct butterflyfish_stream_i_i *stream;
     seagrass_required_true(!as_stream(object, &stream));
     return INVOKE_STREAM(stream)->next(stream, item, out);
 }
 
-#pragma mark collection_i -
+#pragma mark collection_i_i -
 
 int butterflyfish_insertable_i_i_count(
         const struct butterflyfish_insertable_i_i *const object,
         uintmax_t *const out) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OUT_IS_NULL;
     }
     const struct butterflyfish_collection_i_i *collection;
     seagrass_required_true(!as_collection(object, &collection));
@@ -94,10 +94,10 @@ int butterflyfish_insertable_i_i_last(
         const struct butterflyfish_insertable_i_i *const object,
         const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OUT_IS_NULL;
     }
     const struct butterflyfish_collection_i_i *collection;
     seagrass_required_true(!as_collection(object, &collection));
@@ -109,29 +109,29 @@ int butterflyfish_insertable_i_i_prev(
         const struct butterflyfish_map_i_i_entry *const item,
         const struct butterflyfish_map_i_i_entry **const out) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OUT_IS_NULL;
     }
     const struct butterflyfish_collection_i_i *collection;
     seagrass_required_true(!as_collection(object, &collection));
     return INVOKE_COLLECTION(collection)->prev(collection, item, out);
 }
 
-#pragma mark insertable_i -
+#pragma mark insertable_i_i -
 
 int butterflyfish_insertable_i_i_as_stream(
         const struct butterflyfish_insertable_i_i *const object,
         const struct butterflyfish_stream_i_i **const out) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OUT_IS_NULL;
     }
     return as_stream(object, out);
 }
@@ -140,10 +140,10 @@ int butterflyfish_insertable_i_i_as_collection(
         const struct butterflyfish_insertable_i_i *const object,
         const struct butterflyfish_collection_i_i **const out) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OUT_IS_NULL;
     }
     return as_collection(object, out);
 }
@@ -152,10 +152,10 @@ int butterflyfish_insertable_i_i_as_ordered(
         const struct butterflyfish_insertable_i_i *const object,
         const struct butterflyfish_ordered_i_i **const out) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OUT_IS_NULL;
     }
     return as_ordered(object, out);
 }
@@ -165,13 +165,13 @@ int butterflyfish_insertable_i_i_insert(
         const struct butterflyfish_map_i_i_entry *const item,
         const struct butterflyfish_map_i_i_entry *const value) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_ITEM_IS_NULL;
     }
     if (!value) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_VALUE_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_VALUE_IS_NULL;
     }
     return INVOKE(object)->insert(object, item, value);
 }
@@ -181,13 +181,13 @@ int butterflyfish_insertable_i_i_insert_all(
         const struct butterflyfish_map_i_i_entry *const item,
         const struct butterflyfish_stream_i_i *const other) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_ITEM_IS_NULL;
     }
     if (!other) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OTHER_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_I_I_ERROR_OTHER_IS_NULL;
     }
     return INVOKE(object)->insert_all(object, item, other);
 }

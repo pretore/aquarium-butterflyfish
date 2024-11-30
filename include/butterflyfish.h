@@ -16,11 +16,13 @@
 #include <butterflyfish/collection_i.h>
 #include <butterflyfish/collection_i_i.h>
 #include <butterflyfish/incremental_list_i.h>
+#include <butterflyfish/incremental_list_i_i.h>
 #include <butterflyfish/incremental_map_i_i.h>
 #include <butterflyfish/incremental_set_i.h>
 #include <butterflyfish/insertable_i.h>
 #include <butterflyfish/insertable_i_i.h>
 #include <butterflyfish/list_i.h>
+#include <butterflyfish/list_i_i.h>
 #include <butterflyfish/map_i_i.h>
 #include <butterflyfish/map_i_i_entry.h>
 #include <butterflyfish/mutable_list_i.h>

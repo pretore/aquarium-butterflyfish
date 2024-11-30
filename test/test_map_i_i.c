@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -211,8 +210,9 @@ static int map_keys(const struct butterflyfish_map_i_i *const object,
     return mock();
 }
 
-static int map_values(const struct butterflyfish_map_i_i *const object,
-                      const struct butterflyfish_ordered_list_i **const out) {
+static int
+map_values(const struct butterflyfish_map_i_i *const object,
+           const struct butterflyfish_ordered_list_i **const out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);

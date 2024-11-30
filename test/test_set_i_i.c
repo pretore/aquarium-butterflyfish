@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -40,8 +39,7 @@ static int as_stream(const struct butterflyfish_collection_i_i *const object,
                      const struct butterflyfish_stream_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, collection_i_i,
-            stream_i_i);
+    *out = butterflyfish_cast(object, struct object, collection_i_i, stream_i_i);
     return 0;
 }
 
@@ -82,9 +80,8 @@ const struct butterflyfish_collection_i_i collection_i_i = {
         .count = collection_count,
 };
 
-static int
-as_collection(const struct butterflyfish_set_i_i *const object,
-              const struct butterflyfish_collection_i_i **const out) {
+static int as_collection(const struct butterflyfish_set_i_i *const object,
+                         const struct butterflyfish_collection_i_i **const out) {
     assert_non_null(object);
     assert_non_null(out);
     *out = butterflyfish_cast(object, struct object, set_i_i, collection_i_i);
@@ -146,8 +143,7 @@ static void check_as_stream(void **state) {
             .collection_i_i = &collection_i_i,
             .stream_i_i = &stream_i_i
     };
-    const void *check = (char *) &instance
-            + offsetof(struct object, stream_i_i);
+    const void *check = (char *) &instance + offsetof(struct object, stream_i_i);
     const struct butterflyfish_stream_i_i *out;
     assert_int_equal(butterflyfish_set_i_i_as_stream(
             (const struct butterflyfish_set_i_i *) &instance, &out), 0);

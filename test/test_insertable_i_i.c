@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -263,7 +262,7 @@ static void check_first_error_on_ordered_is_empty(void **state) {
     };
     expect_function_call(stream_first);
     will_return(stream_first,
-                BUTTERFLYFISH_STREAM_I_ERROR_STREAM_IS_EMPTY);
+                BUTTERFLYFISH_STREAM_I_I_ERROR_STREAM_IS_EMPTY);
     assert_int_equal(
             butterflyfish_insertable_i_i_first(
                     (const struct butterflyfish_insertable_i_i *) &instance,

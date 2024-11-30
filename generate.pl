@@ -117,8 +117,26 @@ sub collection_interpolate_h_file {
         ? $args_hashref->{'declaration'} . ";"
         : q{};
 
+    my constant $mkt;
+    if (exists($args_hashref->{'map_key_code'})) {
+        $mkt = $args_hashref->{'map_key_code'};
+    }
+    my constant $mkv;
+    if (exists($args_hashref->{'map_key_value'})) {
+        $mkv = $args_hashref->{'map_key_value'};
+    }
+    my constant $mvt;
+    if (exists($args_hashref->{'map_value_code'})) {
+        $mvt = $args_hashref->{'map_value_code'};
+    }
+    my constant $mvv;
+    if (exists($args_hashref->{'map_value_value'})) {
+        $mvv = $args_hashref->{'map_value_value'};
+    }
+
     # interpolate '$' tokens
     $content =~ s/(\$[tTvd])\$/$1/eeg;
+    $content =~ s/(\$m[kv][tv])\$/$1/eeg;
 
     return $content;
 }
@@ -135,8 +153,27 @@ sub collection_interpolate_c_file {
         ? map {"#include " . $_ . "\n"} @{$args_hashref->{'includes'}}
         : ();
 
+    my $mkt;
+    if (exists($args_hashref->{'map_key_code'})) {
+        $mkt = $args_hashref->{'map_key_code'};
+    }
+    my $mkv;
+    if (exists($args_hashref->{'map_key_value'})) {
+        $mkv = $args_hashref->{'map_key_value'};
+    }
+    my $mvt;
+    if (exists($args_hashref->{'map_value_code'})) {
+        $mvt = $args_hashref->{'map_value_code'};
+    }
+    my $mvv;
+    if (exists($args_hashref->{'map_value_value'})) {
+        $mvv = $args_hashref->{'map_value_value'};
+    }
+
     # interpolate '$' tokens
     $content =~ s/(\$[tTv])\$/$1/eeg;
+    $content =~ s/(\$m[kv][tv])\$/$1/eeg;
+
     # interpolate '@' tokens
     $content = eval qq{"$content"};
     $content =~ s/^(\s+)#include/#include/gm;
@@ -147,12 +184,22 @@ sub collection_interpolate_c_file {
 sub collection_generate_type {
     my $args_hashref = shift;
     my constant $source = $args_hashref->{'source'};
-    my constant %params = (
+    my %params = (
         code        => $args_hashref->{'type'}{'code'},
         value       => $args_hashref->{'type'}{'value'},
         declaration => $args_hashref->{'type'}{'declaration'},
         includes    => $args_hashref->{'type'}{'includes'},
     );
+    if (exists($args_hashref->{'type'}{'k'})) {
+        my constant $k = $args_hashref->{'type'}{'k'};
+        $params{'map_key_code'} = $k->{'code'};
+        $params{'map_key_value'} = $k->{'value'};
+    }
+    if (exists($args_hashref->{'type'}{'v'})) {
+        my constant $v = $args_hashref->{'type'}{'v'};
+        $params{'map_value_code'} = $v->{'code'};
+        $params{'map_value_value'} = $v->{'value'};
+    }
 
     my $content;
     # source.h
@@ -207,18 +254,20 @@ my constant @types = map {s/\.c$//;$_} grep {/\.c$/} readdir $dir;
 closedir $dir;
 for my $i (@types) {
     for my $o (@entity_types) {
-        my %params;
-        $params{'source'} = $i;
-        $params{'type'} = $o;
+        my %params = (
+            source => $i,
+            type   => $o,
+        );
         collection_generate_type(\%params);
     }
     if ($i =~ /map$/) {
         next;
     }
     for my $o (@basic_types) {
-        my %params;
-        $params{'source'} = $i;
-        $params{'type'} = $o;
+        my %params = (
+            source => $i,
+            type   => $o,
+        );
         collection_generate_type(\%params);
     }
 }

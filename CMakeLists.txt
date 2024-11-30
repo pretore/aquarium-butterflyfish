@@ -25,11 +25,13 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/collection_i.h
         include/butterflyfish/collection_i_i.h
         include/butterflyfish/incremental_list_i.h
+        include/butterflyfish/incremental_list_i_i.h
         include/butterflyfish/incremental_map_i_i.h
         include/butterflyfish/incremental_set_i.h
         include/butterflyfish/insertable_i.h
         include/butterflyfish/insertable_i_i.h
         include/butterflyfish/list_i.h
+        include/butterflyfish/list_i_i.h
         include/butterflyfish/map_i_i.h
         include/butterflyfish/map_i_i_entry.h
         include/butterflyfish/mutable_list_i.h
@@ -113,11 +115,13 @@ set(SOURCES
         src/collection_i.c
         src/collection_i_i.c
         src/incremental_list_i.c
+        src/incremental_list_i_i.c
         src/incremental_map_i_i.c
         src/incremental_set_i.c
         src/insertable_i.c
         src/insertable_i_i.c
         src/list_i.c
+        src/list_i_i.c
         src/map_i_i.c
         src/mutable_list_i.c
         src/mutable_map_i_i.c
@@ -1452,7 +1456,40 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-unordered-i-i-unit-test
             ${PROJECT_NAME}-unordered-i-i-unit-test)
-
+    # aquarium-butterflyfish-incremental-list-i-i-unit-test
+    add_executable(${PROJECT_NAME}-incremental-list-i-i-unit-test
+            test/test_incremental_list_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-incremental-list-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-incremental-list-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-incremental-list-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-incremental-list-i-i-unit-test
+            ${PROJECT_NAME}-incremental-list-i-i-unit-test)
+    # aquarium-butterflyfish-list-i-i-unit-test
+    add_executable(${PROJECT_NAME}-list-i-i-unit-test
+            test/test_list_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-list-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-list-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-list-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-list-i-i-unit-test
+            ${PROJECT_NAME}-list-i-i-unit-test)
 else ()
     add_library(${PROJECT_NAME} "")
     target_sources(${PROJECT_NAME}

@@ -184,5 +184,3 @@ int butterflyfish_set_i_i_get(
     }
     return INVOKE(object)->get(object, value, out);
 }
-
-
