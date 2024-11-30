@@ -19,6 +19,7 @@
 #include <butterflyfish/incremental_list_i_i.h>
 #include <butterflyfish/incremental_map_i_i.h>
 #include <butterflyfish/incremental_set_i.h>
+#include <butterflyfish/incremental_set_i_i.h>
 #include <butterflyfish/insertable_i.h>
 #include <butterflyfish/insertable_i_i.h>
 #include <butterflyfish/list_i.h>
@@ -52,6 +53,7 @@
 #include <butterflyfish/ordered_settable_reducible_set_i.h>
 #include <butterflyfish/ordered_settable_set_i.h>
 #include <butterflyfish/reducible_list_i.h>
+#include <butterflyfish/reducible_list_i_i.h>
 #include <butterflyfish/reducible_map_i_i.h>
 #include <butterflyfish/reducible_set_i.h>
 #include <butterflyfish/removable_i.h>

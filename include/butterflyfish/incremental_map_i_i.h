@@ -10,6 +10,7 @@
 struct sea_turtle_integer;
 struct butterflyfish_addable_i_i;
 struct butterflyfish_incremental_set_i;
+struct butterflyfish_ordered_list_i;
 
 #define BUTTERFLYFISH_INCREMENTAL_MAP_I_I_ERROR_OBJECT_IS_NULL \
     BUTTERFLYFISH_MAP_I_I_ERROR_OBJECT_IS_NULL

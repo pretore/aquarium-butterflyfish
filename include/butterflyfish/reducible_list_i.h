@@ -111,7 +111,7 @@ int butterflyfish_reducible_list_i_as_removable(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is 
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  */
 int butterflyfish_reducible_list_i_count(
@@ -125,7 +125,7 @@ int butterflyfish_reducible_list_i_count(
  * @return On success <i>0</i>, otherwise an error code.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL if object is
  * <i>NULL</i>.
- * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is 
+ * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL if out is
  * <i>NULL</i>.
  * @throws BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_LIST_IS_EMPTY if list is empty.
  */

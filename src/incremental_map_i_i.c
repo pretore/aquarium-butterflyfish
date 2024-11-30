@@ -440,5 +440,3 @@ int butterflyfish_incremental_map_i_i_values(
     }
     return INVOKE(object)->values(object, out);
 }
-
-
