@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "map_i_i_entry.h"
 #include "set_i_i.h"
 
 struct butterflyfish_stream_i;

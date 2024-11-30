@@ -5,9 +5,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "map_$t$_entry.h"
 #include "map_$t$.h"
 
-struct sea_turtle_integer;
 struct butterflyfish_addable_$t$;
 struct butterflyfish_incremental_set_$mkt$;
 struct butterflyfish_ordered_list_$mvt$;

@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "map_$t$_entry.h"
 #include "set_$t$.h"
 
 struct butterflyfish_stream_$mkt$;

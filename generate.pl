@@ -136,7 +136,7 @@ sub collection_interpolate_h_file {
 
     # interpolate '$' tokens
     $content =~ s/(\$[tTvd])\$/$1/eeg;
-    $content =~ s/(\$m[kv][tv])\$/$1/eeg;
+    $content =~ s/(\$m[kv][tdv])\$/$1/eeg;
 
     return $content;
 }
@@ -153,19 +153,19 @@ sub collection_interpolate_c_file {
         ? map {"#include " . $_ . "\n"} @{$args_hashref->{'includes'}}
         : ();
 
-    my $mkt;
+    my constant $mkt;
     if (exists($args_hashref->{'map_key_code'})) {
         $mkt = $args_hashref->{'map_key_code'};
     }
-    my $mkv;
+    my constant $mkv;
     if (exists($args_hashref->{'map_key_value'})) {
         $mkv = $args_hashref->{'map_key_value'};
     }
-    my $mvt;
+    my constant $mvt;
     if (exists($args_hashref->{'map_value_code'})) {
         $mvt = $args_hashref->{'map_value_code'};
     }
-    my $mvv;
+    my constant $mvv;
     if (exists($args_hashref->{'map_value_value'})) {
         $mvv = $args_hashref->{'map_value_value'};
     }

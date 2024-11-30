@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "map_$t$_entry.h"
 #include "map_$t$.h"
 #include "removable_$t$.h"
 
