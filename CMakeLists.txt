@@ -36,8 +36,10 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/map_i_i.h
         include/butterflyfish/map_i_i_entry.h
         include/butterflyfish/mutable_list_i.h
+        include/butterflyfish/mutable_list_i_i.h
         include/butterflyfish/mutable_map_i_i.h
         include/butterflyfish/mutable_set_i.h
+        include/butterflyfish/mutable_set_i_i.h
         include/butterflyfish/ordered_i.h
         include/butterflyfish/ordered_i_i.h
         include/butterflyfish/ordered_incremental_list_i.h
@@ -134,8 +136,10 @@ set(SOURCES
         src/list_i_i.c
         src/map_i_i.c
         src/mutable_list_i.c
+        src/mutable_list_i_i.c
         src/mutable_map_i_i.c
         src/mutable_set_i.c
+        src/mutable_set_i_i.c
         src/ordered_i.c
         src/ordered_i_i.c
         src/ordered_incremental_list_i.c
@@ -1661,6 +1665,40 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-settable-reducible-set-i-i-unit-test
             ${PROJECT_NAME}-settable-reducible-set-i-i-unit-test)
+    # aquarium-butterflyfish-mutable-list-i-i-unit-test
+    add_executable(${PROJECT_NAME}-mutable-list-i-i-unit-test
+            test/test_mutable_list_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-mutable-list-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-mutable-list-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-mutable-list-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-mutable-list-i-i-unit-test
+            ${PROJECT_NAME}-mutable-list-i-i-unit-test)
+    # aquarium-butterflyfish-mutable-set-i-i-unit-test
+    add_executable(${PROJECT_NAME}-mutable-set-i-i-unit-test
+            test/test_mutable_set_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-mutable-set-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-mutable-set-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-mutable-set-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-mutable-set-i-i-unit-test
+            ${PROJECT_NAME}-mutable-set-i-i-unit-test)
 else ()
     add_library(${PROJECT_NAME} "")
     target_sources(${PROJECT_NAME}

@@ -27,8 +27,10 @@
 #include <butterflyfish/map_i_i.h>
 #include <butterflyfish/map_i_i_entry.h>
 #include <butterflyfish/mutable_list_i.h>
+#include <butterflyfish/mutable_list_i_i.h>
 #include <butterflyfish/mutable_map_i_i.h>
 #include <butterflyfish/mutable_set_i.h>
+#include <butterflyfish/mutable_set_i_i.h>
 #include <butterflyfish/ordered_i.h>
 #include <butterflyfish/ordered_i_i.h>
 #include <butterflyfish/ordered_incremental_list_i.h>

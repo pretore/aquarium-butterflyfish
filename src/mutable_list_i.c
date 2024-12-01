@@ -525,4 +525,3 @@ int butterflyfish_mutable_list_i_as_settable_reducible_list(
     }
     return as_settable_reducible_list(object, out);
 }
-
