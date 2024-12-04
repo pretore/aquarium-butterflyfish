@@ -4,7 +4,6 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <sea-urchin.h>
 
 #include "list_i.h"
 #include "ordered_i.h"

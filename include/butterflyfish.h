@@ -34,9 +34,12 @@
 #include <butterflyfish/ordered_i.h>
 #include <butterflyfish/ordered_i_i.h>
 #include <butterflyfish/ordered_incremental_list_i.h>
+#include <butterflyfish/ordered_incremental_list_i_i.h>
 #include <butterflyfish/ordered_incremental_map_i_i.h>
 #include <butterflyfish/ordered_incremental_set_i.h>
+#include <butterflyfish/ordered_incremental_set_i_i.h>
 #include <butterflyfish/ordered_list_i.h>
+#include <butterflyfish/ordered_list_i_i.h>
 #include <butterflyfish/ordered_map_i_i.h>
 #include <butterflyfish/ordered_mutable_list_i.h>
 #include <butterflyfish/ordered_mutable_map_i_i.h>
@@ -45,6 +48,7 @@
 #include <butterflyfish/ordered_reducible_map_i_i.h>
 #include <butterflyfish/ordered_reducible_set_i.h>
 #include <butterflyfish/ordered_set_i.h>
+#include <butterflyfish/ordered_set_i_i.h>
 #include <butterflyfish/ordered_settable_incremental_list_i.h>
 #include <butterflyfish/ordered_settable_incremental_map_i_i.h>
 #include <butterflyfish/ordered_settable_incremental_set_i.h>

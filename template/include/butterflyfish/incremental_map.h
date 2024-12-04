@@ -7,8 +7,10 @@
 
 #include "map_$t$_entry.h"
 #include "map_$t$.h"
+#include "addable_$t$.h"
 
-struct butterflyfish_addable_$t$;
+struct butterflyfish_stream_$mkt$;
+struct butterflyfish_stream_$mvt$;
 struct butterflyfish_incremental_set_$mkt$;
 struct butterflyfish_ordered_list_$mvt$;
 

@@ -43,9 +43,12 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/ordered_i.h
         include/butterflyfish/ordered_i_i.h
         include/butterflyfish/ordered_incremental_list_i.h
+        include/butterflyfish/ordered_incremental_list_i_i.h
         include/butterflyfish/ordered_incremental_map_i_i.h
         include/butterflyfish/ordered_incremental_set_i.h
+        include/butterflyfish/ordered_incremental_set_i_i.h
         include/butterflyfish/ordered_list_i.h
+        include/butterflyfish/ordered_list_i_i.h
         include/butterflyfish/ordered_map_i_i.h
         include/butterflyfish/ordered_mutable_list_i.h
         include/butterflyfish/ordered_mutable_map_i_i.h
@@ -54,6 +57,7 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/ordered_reducible_map_i_i.h
         include/butterflyfish/ordered_reducible_set_i.h
         include/butterflyfish/ordered_set_i.h
+        include/butterflyfish/ordered_set_i_i.h
         include/butterflyfish/ordered_settable_incremental_list_i.h
         include/butterflyfish/ordered_settable_incremental_map_i_i.h
         include/butterflyfish/ordered_settable_incremental_set_i.h
@@ -143,9 +147,12 @@ set(SOURCES
         src/ordered_i.c
         src/ordered_i_i.c
         src/ordered_incremental_list_i.c
+        src/ordered_incremental_list_i_i.c
         src/ordered_incremental_map_i_i.c
         src/ordered_incremental_set_i.c
+        src/ordered_incremental_set_i_i.c
         src/ordered_list_i.c
+        src/ordered_list_i_i.c
         src/ordered_map_i_i.c
         src/ordered_mutable_list_i.c
         src/ordered_mutable_map_i_i.c
@@ -154,6 +161,7 @@ set(SOURCES
         src/ordered_reducible_map_i_i.c
         src/ordered_reducible_set_i.c
         src/ordered_set_i.c
+        src/ordered_set_i_i.c
         src/ordered_settable_incremental_list_i.c
         src/ordered_settable_incremental_map_i_i.c
         src/ordered_settable_incremental_set_i.c
@@ -1699,6 +1707,74 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-mutable-set-i-i-unit-test
             ${PROJECT_NAME}-mutable-set-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-list-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-list-i-i-unit-test
+            test/test_ordered_list_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-list-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-list-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-list-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-list-i-i-unit-test
+            ${PROJECT_NAME}-ordered-list-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-set-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-set-i-i-unit-test
+            test/test_ordered_set_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-set-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-set-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-set-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-set-i-i-unit-test
+            ${PROJECT_NAME}-ordered-set-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-incremental-list-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-incremental-list-i-i-unit-test
+            test/test_ordered_incremental_list_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-incremental-list-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-incremental-list-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-incremental-list-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-incremental-list-i-i-unit-test
+            ${PROJECT_NAME}-ordered-incremental-list-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-incremental-set-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-incremental-set-i-i-unit-test
+            test/test_ordered_incremental_set_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-incremental-set-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-incremental-set-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-incremental-set-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-incremental-set-i-i-unit-test
+            ${PROJECT_NAME}-ordered-incremental-set-i-i-unit-test)
 else ()
     add_library(${PROJECT_NAME} "")
     target_sources(${PROJECT_NAME}

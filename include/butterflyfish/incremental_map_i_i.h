@@ -7,8 +7,10 @@
 
 #include "map_i_i_entry.h"
 #include "map_i_i.h"
+#include "addable_i_i.h"
 
-struct butterflyfish_addable_i_i;
+struct butterflyfish_stream_i;
+struct butterflyfish_stream_i;
 struct butterflyfish_incremental_set_i;
 struct butterflyfish_ordered_list_i;
 
