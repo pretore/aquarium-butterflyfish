@@ -45,8 +45,10 @@
 #include <butterflyfish/ordered_mutable_map_i_i.h>
 #include <butterflyfish/ordered_mutable_set_i.h>
 #include <butterflyfish/ordered_reducible_list_i.h>
+#include <butterflyfish/ordered_reducible_list_i_i.h>
 #include <butterflyfish/ordered_reducible_map_i_i.h>
 #include <butterflyfish/ordered_reducible_set_i.h>
+#include <butterflyfish/ordered_reducible_set_i_i.h>
 #include <butterflyfish/ordered_set_i.h>
 #include <butterflyfish/ordered_set_i_i.h>
 #include <butterflyfish/ordered_settable_incremental_list_i.h>
@@ -114,12 +116,12 @@
 
 /* string (s) */
 
-/* strong reference (r) */
+/* strong reference (sr) */
 
-/* weak reference (w) */
+/* weak reference (wr) */
 
 /**
- * @brief Cast between types within object.
+ * @brief Cast between types within an object.
  * @param [in] ptr to the embedded member.
  * @param [in] type of the object.
  * @param [in] from member of the object that ptr refers to.

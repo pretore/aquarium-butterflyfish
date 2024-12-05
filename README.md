@@ -38,5 +38,5 @@ flowchart LR
 |     p      | pointer          |       `void *`       |
 |     i      | integer          | `sea_turtle_integer` |
 |     s      | string           | `sea_turtle_string`  |
-|     r      | strong reference | `triggerfish_strong` |
-|     w      | weak reference   |  `triggerfish_weak`  |
+|     sr     | strong reference | `triggerfish_strong` |
+|     wr     | weak reference   |  `triggerfish_weak`  |

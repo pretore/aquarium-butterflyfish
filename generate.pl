@@ -34,13 +34,13 @@ my constant @basic_types =
         #     declaration => "struct triggerfish_strong",
         #     value       => "struct triggerfish_strong *",
         #     includes    => ["<triggerfish.h>"],
-        #     code        => "r",
+        #     code        => "sr",
         # },
         # { # weak reference
         #     declaration => "struct triggerfish_weak",
         #     value       => "struct triggerfish_weak *",
         #     includes    => ["<triggerfish.h>"],
-        #     code        => "w",
+        #     code        => "wr",
         # }
     );
 
