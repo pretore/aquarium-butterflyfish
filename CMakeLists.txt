@@ -64,11 +64,13 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/ordered_settable_incremental_map_i_i.h
         include/butterflyfish/ordered_settable_incremental_set_i.h
         include/butterflyfish/ordered_settable_list_i.h
+        include/butterflyfish/ordered_settable_list_i_i.h
         include/butterflyfish/ordered_settable_map_i_i.h
         include/butterflyfish/ordered_settable_reducible_list_i.h
         include/butterflyfish/ordered_settable_reducible_map_i_i.h
         include/butterflyfish/ordered_settable_reducible_set_i.h
         include/butterflyfish/ordered_settable_set_i.h
+        include/butterflyfish/ordered_settable_set_i_i.h
         include/butterflyfish/reducible_list_i.h
         include/butterflyfish/reducible_list_i_i.h
         include/butterflyfish/reducible_map_i_i.h
@@ -170,11 +172,13 @@ set(SOURCES
         src/ordered_settable_incremental_map_i_i.c
         src/ordered_settable_incremental_set_i.c
         src/ordered_settable_list_i.c
+        src/ordered_settable_list_i_i.c
         src/ordered_settable_map_i_i.c
         src/ordered_settable_reducible_list_i.c
         src/ordered_settable_reducible_map_i_i.c
         src/ordered_settable_reducible_set_i.c
         src/ordered_settable_set_i.c
+        src/ordered_settable_set_i_i.c
         src/reducible_list_i.c
         src/reducible_list_i_i.c
         src/reducible_map_i_i.c
@@ -1813,6 +1817,40 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-ordered-reducible-set-i-i-unit-test
             ${PROJECT_NAME}-ordered-reducible-set-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-settable-list-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-settable-list-i-i-unit-test
+            test/test_ordered_settable_list_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-settable-list-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-settable-list-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-settable-list-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-settable-list-i-i-unit-test
+            ${PROJECT_NAME}-ordered-settable-list-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-settable-set-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-settable-set-i-i-unit-test
+            test/test_ordered_settable_set_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-settable-set-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-settable-set-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-settable-set-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-settable-set-i-i-unit-test
+            ${PROJECT_NAME}-ordered-settable-set-i-i-unit-test)
 else ()
     add_library(${PROJECT_NAME} "")
     target_sources(${PROJECT_NAME}

@@ -239,7 +239,7 @@ int butterflyfish_ordered_settable_list_i_set(
     return INVOKE_SETTABLE_LIST(settable_list)->set(settable_list, at, value);
 }
 
-#pragma mark ordered_settable_list -
+#pragma mark ordered_settable_list_i -
 
 int butterflyfish_ordered_settable_list_i_as_stream(
         const struct butterflyfish_ordered_settable_list_i *const object,
