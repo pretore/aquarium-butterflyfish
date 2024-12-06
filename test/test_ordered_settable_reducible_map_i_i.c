@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -507,7 +506,8 @@ settable_map_keys(struct butterflyfish_settable_map_i_i *const object,
 
 static int
 settable_map_values(struct butterflyfish_settable_map_i_i *const object,
-                    struct butterflyfish_ordered_settable_list_i **const out) {
+                    struct butterflyfish_ordered_settable_list_i **const
+                            out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -609,7 +609,8 @@ settable_reducible_map_keys(
 static int
 settable_reducible_map_values(
         struct butterflyfish_settable_reducible_map_i_i *const object,
-        struct butterflyfish_ordered_settable_reducible_list_i **const out) {
+        struct butterflyfish_ordered_settable_reducible_list_i **const
+                out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -723,7 +724,8 @@ ordered_settable_reducible_map_keys(
 static int
 ordered_settable_reducible_map_values(
         struct butterflyfish_ordered_settable_reducible_map_i_i *const object,
-        struct butterflyfish_ordered_settable_reducible_list_i **const out) {
+        struct butterflyfish_ordered_settable_reducible_list_i **const
+                out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -1729,17 +1731,6 @@ static void check_prev_error_on_end_of_sequence(void **state) {
                             &instance, (void *) 1, (void *) 1),
             BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_I_I_ERROR_END_OF_SEQUENCE);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 static void check_contains_error_on_object_is_null(void **state) {
     assert_int_equal(

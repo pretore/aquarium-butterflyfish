@@ -35,7 +35,7 @@
     (*(struct butterflyfish_reducible_map_i_i **) x)
 #define INVOKE_MAP(x)           (*(struct butterflyfish_map_i_i **) x)
 #define INVOKE_INSERTABLE(x)    (*(struct butterflyfish_insertable_i_i **) x)
-#define INVOKE_ORDERED(x)       (*(struct butterflyfish_ordered_i_ **) x)
+#define INVOKE_ORDERED(x)       (*(struct butterflyfish_ordered_i_i **) x)
 #define INVOKE_ADDABLE(x)       (*(struct butterflyfish_addable_i_i **) x)
 #define INVOKE_REMOVABLE(x)     (*(struct butterflyfish_removable_i_i **) x)
 #define INVOKE_SETTABLE(x)      (*(struct butterflyfish_settable_i_i **) x)
@@ -1002,7 +1002,8 @@ int butterflyfish_ordered_mutable_map_i_i_keys(
 
 int butterflyfish_ordered_mutable_map_i_i_values(
         struct butterflyfish_ordered_mutable_map_i_i *const object,
-        struct butterflyfish_ordered_settable_reducible_list_i **const out) {
+        struct butterflyfish_ordered_settable_reducible_list_i **const
+                out) {
     if (!object) {
         return BUTTERFLYFISH_ORDERED_MUTABLE_MAP_I_I_ERROR_OBJECT_IS_NULL;
     }
@@ -1011,4 +1012,3 @@ int butterflyfish_ordered_mutable_map_i_i_values(
     }
     return INVOKE(object)->values(object, out);
 }
-

@@ -51,8 +51,10 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/ordered_list_i_i.h
         include/butterflyfish/ordered_map_i_i.h
         include/butterflyfish/ordered_mutable_list_i.h
+        include/butterflyfish/ordered_mutable_list_i_i.h
         include/butterflyfish/ordered_mutable_map_i_i.h
         include/butterflyfish/ordered_mutable_set_i.h
+        include/butterflyfish/ordered_mutable_set_i_i.h
         include/butterflyfish/ordered_reducible_list_i.h
         include/butterflyfish/ordered_reducible_list_i_i.h
         include/butterflyfish/ordered_reducible_map_i_i.h
@@ -69,8 +71,10 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/ordered_settable_list_i_i.h
         include/butterflyfish/ordered_settable_map_i_i.h
         include/butterflyfish/ordered_settable_reducible_list_i.h
+        include/butterflyfish/ordered_settable_reducible_list_i_i.h
         include/butterflyfish/ordered_settable_reducible_map_i_i.h
         include/butterflyfish/ordered_settable_reducible_set_i.h
+        include/butterflyfish/ordered_settable_reducible_set_i_i.h
         include/butterflyfish/ordered_settable_set_i.h
         include/butterflyfish/ordered_settable_set_i_i.h
         include/butterflyfish/reducible_list_i.h
@@ -161,8 +165,10 @@ set(SOURCES
         src/ordered_list_i_i.c
         src/ordered_map_i_i.c
         src/ordered_mutable_list_i.c
+        src/ordered_mutable_list_i_i.c
         src/ordered_mutable_map_i_i.c
         src/ordered_mutable_set_i.c
+        src/ordered_mutable_set_i_i.c
         src/ordered_reducible_list_i.c
         src/ordered_reducible_list_i_i.c
         src/ordered_reducible_map_i_i.c
@@ -179,8 +185,10 @@ set(SOURCES
         src/ordered_settable_list_i_i.c
         src/ordered_settable_map_i_i.c
         src/ordered_settable_reducible_list_i.c
+        src/ordered_settable_reducible_list_i_i.c
         src/ordered_settable_reducible_map_i_i.c
         src/ordered_settable_reducible_set_i.c
+        src/ordered_settable_reducible_set_i_i.c
         src/ordered_settable_set_i.c
         src/ordered_settable_set_i_i.c
         src/reducible_list_i.c
@@ -1889,6 +1897,74 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-ordered-settable-incremental-set-i-i-unit-test
             ${PROJECT_NAME}-ordered-settable-incremental-set-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-settable-reducible-list-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-settable-reducible-list-i-i-unit-test
+            test/test_ordered_settable_reducible_list_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-settable-reducible-list-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-settable-reducible-list-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-settable-reducible-list-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-settable-reducible-list-i-i-unit-test
+            ${PROJECT_NAME}-ordered-settable-reducible-list-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-settable-reducible-set-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-settable-reducible-set-i-i-unit-test
+            test/test_ordered_settable_reducible_set_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-settable-reducible-set-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-settable-reducible-set-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-settable-reducible-set-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-settable-reducible-set-i-i-unit-test
+            ${PROJECT_NAME}-ordered-settable-reducible-set-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-mutable-list-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-mutable-list-i-i-unit-test
+            test/test_ordered_mutable_list_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-mutable-list-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-mutable-list-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-mutable-list-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-mutable-list-i-i-unit-test
+            ${PROJECT_NAME}-ordered-mutable-list-i-i-unit-test)
+    # aquarium-butterflyfish-ordered-mutable-set-i-i-unit-test
+    add_executable(${PROJECT_NAME}-ordered-mutable-set-i-i-unit-test
+            test/test_ordered_mutable_set_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-ordered-mutable-set-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-ordered-mutable-set-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-ordered-mutable-set-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-ordered-mutable-set-i-i-unit-test
+            ${PROJECT_NAME}-ordered-mutable-set-i-i-unit-test)
 else ()
     add_library(${PROJECT_NAME} "")
     target_sources(${PROJECT_NAME}

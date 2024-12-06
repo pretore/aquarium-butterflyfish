@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -965,7 +964,7 @@ static void check_settable_reducible_set_as_reducible_set(void **state) {
 static void check_settable_reducible_set_as_settable_set(void **state) {
     const struct object instance = {
             .ordered_settable_reducible_set_i =
-            &ordered_settable_reducible_set_i,
+                    &ordered_settable_reducible_set_i,
             .settable_reducible_set_i = &settable_reducible_set_i,
             .ordered_reducible_set_i = &ordered_reducible_set_i,
             .ordered_settable_set_i = &ordered_settable_set_i,

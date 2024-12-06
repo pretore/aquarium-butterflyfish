@@ -790,4 +790,3 @@ int butterflyfish_ordered_mutable_list_i_as_ordered_settable_reducible_list(
     }
     return as_ordered_settable_reducible_list(object, out);
 }
-

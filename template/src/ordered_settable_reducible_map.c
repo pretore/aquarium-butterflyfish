@@ -1,0 +1,850 @@
+#include <stdlib.h>
+#include <assert.h>
+#include <seagrass.h>
+#include <butterflyfish.h>
+
+#ifdef TEST
+#include <test/cmocka.h>
+#endif
+
+#define INVOKE(x) \\
+    (*(struct butterflyfish_ordered_settable_reducible_map_$t$ **) x)
+#define INVOKE_ORDERED_SETTABLE_MAP(x) \\
+    (*(struct butterflyfish_ordered_settable_map_$t$ **) x)
+#define INVOKE_SETTABLE_REDUCIBLE_MAP(x) \\
+    (*(struct butterflyfish_settable_reducible_map_$t$ **) x)
+#define INVOKE_ORDERED_REDUCIBLE_MAP(x) \\
+    (*(struct butterflyfish_ordered_reducible_map_$t$ **) x)
+#define INVOKE_SETTABLE_MAP(x) \\
+    (*(struct butterflyfish_settable_map_$t$ **) x)
+#define INVOKE_ORDERED_MAP(x) \\
+    (*(struct butterflyfish_ordered_map_$t$ **) x)
+#define INVOKE_REDUCIBLE_MAP(x) \\
+    (*(struct butterflyfish_reducible_map_$t$ **) x)
+#define INVOKE_SETTABLE(x)      (*(struct butterflyfish_settable_$t$ **) x)
+#define INVOKE_MAP(x)           (*(struct butterflyfish_map_$t$ **) x)
+#define INVOKE_ORDERED(x)       (*(struct butterflyfish_ordered_$t$ **) x)
+#define INVOKE_REMOVABLE(x)     (*(struct butterflyfish_removable_$t$ **) x)
+#define INVOKE_SET(x)           (*(struct butterflyfish_set_$t$ **) x)
+#define INVOKE_COLLECTION(x)    (*(struct butterflyfish_collection_$t$ **) x)
+#define INVOKE_STREAM(x)        (*(struct butterflyfish_stream_$t$ **) x)
+
+static inline int
+as_ordered_settable_map(
+        struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        struct butterflyfish_ordered_settable_map_$t$ **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_ordered_settable_map(object, out);
+}
+
+static inline int
+as_settable_reducible_map(
+        struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        struct butterflyfish_settable_reducible_map_$t$ **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_settable_reducible_map(object, out);
+}
+
+static inline int
+as_ordered_reducible_map(
+        struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        struct butterflyfish_ordered_reducible_map_$t$ **const out) {
+    assert(object);
+    assert(out);
+    return INVOKE(object)->as_ordered_reducible_map(object, out);
+}
+
+static inline int
+as_ordered_map(const struct butterflyfish_ordered_settable_reducible_map_$t$
+                    *const object,
+               const struct butterflyfish_ordered_map_$t$ **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_ordered_reducible_map_$t$ *ordered_reducible_map;
+    seagrass_required_true(!as_ordered_reducible_map(
+            (void *) object, &ordered_reducible_map));
+    return INVOKE_ORDERED_REDUCIBLE_MAP(ordered_reducible_map)
+        ->as_ordered_map(ordered_reducible_map, out);
+}
+
+static inline int
+as_settable_map(struct butterflyfish_ordered_settable_reducible_map_$t$
+                    *const object,
+                struct butterflyfish_settable_map_$t$ **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_settable_reducible_map_$t$ *ordered_reducible_map;
+    seagrass_required_true(!as_settable_reducible_map(
+            object, &ordered_reducible_map));
+    return INVOKE_SETTABLE_REDUCIBLE_MAP(ordered_reducible_map)
+        ->as_settable_map(ordered_reducible_map, out);
+}
+
+static inline int
+as_reducible_map(struct butterflyfish_ordered_settable_reducible_map_$t$
+                    *const object,
+                 struct butterflyfish_reducible_map_$t$ **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_settable_reducible_map_$t$ *settable_reducible_map;
+    seagrass_required_true(!as_settable_reducible_map(
+            object, &settable_reducible_map));
+    return INVOKE_SETTABLE_REDUCIBLE_MAP(settable_reducible_map)
+        ->as_reducible_map(settable_reducible_map, out);
+}
+
+static inline int
+as_settable(struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+            struct butterflyfish_settable_$t$ **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_settable_map_$t$ *settable_map;
+    seagrass_required_true(!as_settable_map(object, &settable_map));
+    return INVOKE_SETTABLE_MAP(settable_map)->as_settable(settable_map, out);
+}
+
+static inline int
+as_removable(struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+             struct butterflyfish_removable_$t$ **const out) {
+    assert(object);
+    assert(out);
+    struct butterflyfish_reducible_map_$t$ *reducible_map;
+    seagrass_required_true(!as_reducible_map(object, &reducible_map));
+    return INVOKE_REDUCIBLE_MAP(reducible_map)
+            ->as_removable(reducible_map, out);
+}
+
+static inline int
+as_ordered(const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+           const struct butterflyfish_ordered_$t$ **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_ordered_map_$t$ *ordered_map;
+    seagrass_required_true(!as_ordered_map(object, &ordered_map));
+    return INVOKE_ORDERED_MAP(ordered_map)->as_ordered(ordered_map, out);
+}
+
+static inline int
+as_map(const struct butterflyfish_ordered_settable_reducible_map_$t$
+            *const object,
+       const struct butterflyfish_map_$t$ **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_ordered_map_$t$ *ordered_map;
+    seagrass_required_true(!as_ordered_map(object, &ordered_map));
+    return INVOKE_ORDERED_MAP(ordered_map)->as_map(ordered_map, out);
+}
+
+static inline int
+as_set(const struct butterflyfish_ordered_settable_reducible_map_$t$
+            *const object,
+       const struct butterflyfish_set_$t$ **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_map_$t$ *map;
+    seagrass_required_true(!as_map(object, &map));
+    return INVOKE_MAP(map)->as_set(map, out);
+}
+
+static inline int
+as_collection(const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+              const struct butterflyfish_collection_$t$ **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_set_$t$ *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->as_collection(set, out);
+}
+
+static inline int
+as_stream(const struct butterflyfish_ordered_settable_reducible_map_$t$
+            *const object,
+          const struct butterflyfish_stream_$t$ **const out) {
+    assert(object);
+    assert(out);
+    const struct butterflyfish_collection_$t$ *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->as_stream(collection, out);
+}
+
+#pragma mark stream_$t$ -
+
+int butterflyfish_ordered_settable_reducible_map_$t$_first(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $v$*out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_stream_$t$ *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->first(stream, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_next(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $v$const item,
+        const $v$*const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_stream_$t$ *stream;
+    seagrass_required_true(!as_stream(object, &stream));
+    return INVOKE_STREAM(stream)->next(stream, item, out);
+}
+
+#pragma mark collection_$t$ -
+
+int butterflyfish_ordered_settable_reducible_map_$t$_count(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        uintmax_t *const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_collection_$t$ *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->count(collection, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_last(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $v$*const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_collection_$t$ *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->last(collection, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_prev(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $v$const item,
+        const $v$*const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_collection_$t$ *collection;
+    seagrass_required_true(!as_collection(object, &collection));
+    return INVOKE_COLLECTION(collection)->prev(collection, item, out);
+}
+
+#pragma mark set_$t$ -
+
+int butterflyfish_ordered_settable_reducible_map_$t$_contains(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $v$const entry,
+        bool *const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!entry) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_ENTRY_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_$t$ *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->contains(set, entry, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_contains_all(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const struct butterflyfish_stream_$t$ *const other,
+        bool *const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OTHER_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_$t$ *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->contains_all(set, other, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_get(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $v$const entry,
+        const $v$*const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!entry) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_ENTRY_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_set_$t$ *set;
+    seagrass_required_true(!as_set(object, &set));
+    return INVOKE_SET(set)->get(set, entry, out);
+}
+
+#pragma mark removable_$t$ -
+
+int butterflyfish_ordered_settable_reducible_map_$t$_remove_entry(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        const $v$const entry) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!entry) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_ENTRY_IS_NULL;
+    }
+    struct butterflyfish_removable_$t$ *removable;
+    seagrass_required_true(!as_removable(object, &removable));
+    return INVOKE_REMOVABLE(removable)->remove_item(removable, entry);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_remove_all_entries(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        const struct butterflyfish_stream_$t$ *const other) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OTHER_IS_NULL;
+    }
+    struct butterflyfish_removable_$t$ *removable;
+    seagrass_required_true(!as_removable(object, &removable));
+    return INVOKE_REMOVABLE(removable)->remove_all_items(removable, other);
+}
+
+#pragma mark map_$t$ -
+
+int butterflyfish_ordered_settable_reducible_map_$t$_contains_key(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $mkv$const key,
+        bool *const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_KEY_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_map_$t$ *map;
+    seagrass_required_true(!as_map(object, &map));
+    return INVOKE_MAP(map)->contains_key(map, key, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_contains_value(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $mvv$const value,
+        bool *const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!value) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_VALUE_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_map_$t$ *map;
+    seagrass_required_true(!as_map(object, &map));
+    return INVOKE_MAP(map)->contains_value(map, value, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_contains_all_keys(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const struct butterflyfish_stream_$mkt$ *const other,
+        bool *const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OTHER_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_map_$t$ *map;
+    seagrass_required_true(!as_map(object, &map));
+    return INVOKE_MAP(map)->contains_all_keys(map, other, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_contains_all_values(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const struct butterflyfish_stream_$mvt$ *other,
+        bool *out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OTHER_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_map_$t$ *map;
+    seagrass_required_true(!as_map(object, &map));
+    return INVOKE_MAP(map)->contains_all_values(map, other, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_get_value(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $mkv$const key,
+        const $mvv$*const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_KEY_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_map_$t$ *map;
+    seagrass_required_true(!as_map(object, &map));
+    return INVOKE_MAP(map)->get_value(map, key, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_get_entry(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const $mkv$const key,
+        const $v$*const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_KEY_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    const struct butterflyfish_map_$t$ *map;
+    seagrass_required_true(!as_map(object, &map));
+    return INVOKE_MAP(map)->get_entry(map, key, out);
+}
+
+#pragma mark settable_map_$t$ -
+
+int butterflyfish_ordered_settable_reducible_map_$t$_set_value(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        const $mkv$const key,
+        const $mvv$const value) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_KEY_IS_NULL;
+    }
+    if (!value) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_VALUE_IS_NULL;
+    }
+    struct butterflyfish_settable_map_$t$ *settable_map;
+    seagrass_required_true(!as_settable_map(object, &settable_map));
+    return INVOKE_SETTABLE_MAP(settable_map)
+        ->set_value(settable_map, key, value);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_set_key(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        const $mkv$const key,
+        const $mkv$const value) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_KEY_IS_NULL;
+    }
+    if (!value) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_VALUE_IS_NULL;
+    }
+    struct butterflyfish_settable_map_$t$ *settable_map;
+    seagrass_required_true(!as_settable_map(object, &settable_map));
+    return INVOKE_SETTABLE_MAP(settable_map)
+        ->set_key(settable_map, key, value);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_set_entry(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        const $v$const entry,
+        const $v$const value) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!entry) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_ENTRY_IS_NULL;
+    }
+    if (!value) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_VALUE_IS_NULL;
+    }
+    struct butterflyfish_settable_map_$t$ *settable_map;
+    seagrass_required_true(!as_settable_map(object, &settable_map));
+    return INVOKE_SETTABLE_MAP(settable_map)
+        ->set_entry(settable_map, entry, value);
+}
+
+#pragma mark reducible_map_$t$ -
+
+int butterflyfish_ordered_settable_reducible_map_$t$_remove(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        const $mkv$const key) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!key) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_KEY_IS_NULL;
+    }
+    struct butterflyfish_reducible_map_$t$ *reducible_map;
+    seagrass_required_true(!as_reducible_map(object, &reducible_map));
+    return INVOKE_REDUCIBLE_MAP(reducible_map)->remove(reducible_map, key);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_remove_all(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        const struct butterflyfish_stream_$mkt$ *const other) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OTHER_IS_NULL;
+    }
+    struct butterflyfish_reducible_map_$t$ *reducible_map;
+    seagrass_required_true(!as_reducible_map(object, &reducible_map));
+    return INVOKE_REDUCIBLE_MAP(reducible_map)
+        ->remove_all(reducible_map, other);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_retain_all(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        const struct butterflyfish_stream_$mkt$ *const other) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!other) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OTHER_IS_NULL;
+    }
+    struct butterflyfish_reducible_map_$t$ *reducible_map;
+    seagrass_required_true(!as_reducible_map(object, &reducible_map));
+    return INVOKE_REDUCIBLE_MAP(reducible_map)
+        ->retain_all(reducible_map, other);
+}
+
+#pragma mark ordered_settable_reducible_map_$t$ -
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_stream(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const struct butterflyfish_stream_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_stream(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_collection(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const struct butterflyfish_collection_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_collection(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_set(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const struct butterflyfish_set_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_set(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_ordered(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const struct butterflyfish_ordered_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_ordered(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_settable(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        struct butterflyfish_settable_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_settable(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_map(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const struct butterflyfish_map_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_map(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_removable(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        struct butterflyfish_removable_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_removable(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_reducible_map(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        struct butterflyfish_reducible_map_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_reducible_map(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_ordered_map(
+        const struct butterflyfish_ordered_settable_reducible_map_$t$
+                *const object,
+        const struct butterflyfish_ordered_map_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_ordered_map(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_settable_map(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        struct butterflyfish_settable_map_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_settable_map(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_ordered_settable_map(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        struct butterflyfish_ordered_settable_map_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_ordered_settable_map(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_settable_reducible_map(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        struct butterflyfish_settable_reducible_map_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_settable_reducible_map(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_as_ordered_reducible_map(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        struct butterflyfish_ordered_reducible_map_$t$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return as_ordered_reducible_map(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_keys(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *const object,
+        struct butterflyfish_ordered_settable_reducible_set_$mkt$ **const out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return INVOKE(object)->keys(object, out);
+}
+
+int butterflyfish_ordered_settable_reducible_map_$t$_values(
+        struct butterflyfish_ordered_settable_reducible_map_$t$ *object,
+        struct butterflyfish_ordered_settable_reducible_list_$mvt$ **out) {
+    if (!object) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return
+        BUTTERFLYFISH_ORDERED_SETTABLE_REDUCIBLE_MAP_$T$_ERROR_OUT_IS_NULL;
+    }
+    return INVOKE(object)->values(object, out);
+}
