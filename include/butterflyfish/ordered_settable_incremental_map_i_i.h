@@ -5,11 +5,13 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "map_i_i_entry.h"
 #include "ordered_settable_map_i_i.h"
 #include "ordered_incremental_map_i_i.h"
 #include "settable_incremental_map_i_i.h"
 
-struct sea_turtle_integer;
+struct butterflyfish_stream_i;
+struct butterflyfish_stream_i;
 struct butterflyfish_ordered_settable_incremental_set_i;
 struct butterflyfish_ordered_settable_list_i;
 
