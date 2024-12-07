@@ -6,10 +6,12 @@
 #include <stdint.h>
 #include <sea-urchin.h>
 
+#include "map_i_i_entry.h"
 #include "sorted_i_i.h"
 #include "map_i_i.h"
 
-struct sea_turtle_integer;
+struct butterflyfish_stream_i;
+struct butterflyfish_stream_i;
 struct butterflyfish_sorted_set_i;
 struct butterflyfish_ordered_list_i;
 

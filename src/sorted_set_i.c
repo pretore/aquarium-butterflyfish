@@ -310,4 +310,3 @@ int butterflyfish_sorted_set_i_as_set(
     }
     return as_set(object, out);
 }
-
