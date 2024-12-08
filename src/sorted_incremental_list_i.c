@@ -7,7 +7,7 @@
 #include <test/cmocka.h>
 #endif
 
-#define INVOKE(x)               \
+#define INVOKE(x) \
     (*(struct butterflyfish_sorted_incremental_list_i **) x)
 #define INVOKE_SORTED_LIST(x)   (*(struct butterflyfish_sorted_list_i **) x)
 #define INVOKE_INCREMENTAL_LIST(x) \

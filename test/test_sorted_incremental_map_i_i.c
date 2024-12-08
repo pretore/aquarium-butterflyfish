@@ -4,7 +4,6 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
-
 #include <test/cmocka.h>
 
 struct object {
@@ -316,7 +315,8 @@ static int map_keys(const struct butterflyfish_map_i_i *const object,
 }
 
 static int map_values(const struct butterflyfish_map_i_i *const object,
-                      const struct butterflyfish_ordered_list_i **const out) {
+                      const struct butterflyfish_ordered_list_i **const
+                              out) {
     function_called();
     assert_non_null(object);
     assert_non_null(out);
@@ -375,44 +375,44 @@ sorted_map_values(const struct butterflyfish_sorted_map_i_i *const object,
 
 static int
 sorted_map_ceiling(const struct butterflyfish_sorted_map_i_i *const object,
-                   const struct sea_turtle_integer *const value,
+                   const struct sea_turtle_integer *const key,
                    const struct butterflyfish_map_i_i_entry **const out) {
     function_called();
     assert_non_null(object);
-    assert_non_null(value);
+    assert_non_null(key);
     assert_non_null(out);
     return mock();
 }
 
 static int
 sorted_map_floor(const struct butterflyfish_sorted_map_i_i *const object,
-                 const struct sea_turtle_integer *const value,
+                 const struct sea_turtle_integer *const key,
                  const struct butterflyfish_map_i_i_entry **const out) {
     function_called();
     assert_non_null(object);
-    assert_non_null(value);
+    assert_non_null(key);
     assert_non_null(out);
     return mock();
 }
 
 static int
 sorted_map_higher(const struct butterflyfish_sorted_map_i_i *const object,
-                  const struct sea_turtle_integer *const value,
+                  const struct sea_turtle_integer *const key,
                   const struct butterflyfish_map_i_i_entry **const out) {
     function_called();
     assert_non_null(object);
-    assert_non_null(value);
+    assert_non_null(key);
     assert_non_null(out);
     return mock();
 }
 
 static int
 sorted_map_lower(const struct butterflyfish_sorted_map_i_i *const object,
-                 const struct sea_turtle_integer *const value,
+                 const struct sea_turtle_integer *const key,
                  const struct butterflyfish_map_i_i_entry **const out) {
     function_called();
     assert_non_null(object);
-    assert_non_null(value);
+    assert_non_null(key);
     assert_non_null(out);
     return mock();
 }
@@ -2134,22 +2134,6 @@ static void check_as_sorted_map_keys(void **state) {
     const struct butterflyfish_sorted_set_i *out;
     assert_int_equal(butterflyfish_sorted_map_i_i_keys(as, &out), 0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 static void check_values_error_on_object_is_null(void **state) {
     assert_int_equal(butterflyfish_sorted_incremental_map_i_i_values(NULL, (void *) 1),
