@@ -124,8 +124,10 @@ set(EXPORTED_HEADER_FILES
         include/butterflyfish/sorted_set_i.h
         include/butterflyfish/sorted_set_i_i.h
         include/butterflyfish/sorted_settable_incremental_list_i.h
+        include/butterflyfish/sorted_settable_incremental_list_i_i.h
         include/butterflyfish/sorted_settable_incremental_map_i_i.h
         include/butterflyfish/sorted_settable_incremental_set_i.h
+        include/butterflyfish/sorted_settable_incremental_set_i_i.h
         include/butterflyfish/sorted_settable_list_i.h
         include/butterflyfish/sorted_settable_list_i_i.h
         include/butterflyfish/sorted_settable_map_i_i.h
@@ -246,8 +248,10 @@ set(SOURCES
         src/sorted_set_i.c
         src/sorted_set_i_i.c
         src/sorted_settable_incremental_list_i.c
+        src/sorted_settable_incremental_list_i_i.c
         src/sorted_settable_incremental_map_i_i.c
         src/sorted_settable_incremental_set_i.c
+        src/sorted_settable_incremental_set_i_i.c
         src/sorted_settable_list_i.c
         src/sorted_settable_list_i_i.c
         src/sorted_settable_map_i_i.c
@@ -2117,6 +2121,42 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
                 ${COMPILE_OPTIONS})
     add_test(${PROJECT_NAME}-sorted-settable-set-i-i-unit-test
             ${PROJECT_NAME}-sorted-settable-set-i-i-unit-test)
+    # aquarium-butterflyfish-sorted-settable-incremental-list-i-i-unit-test
+    add_executable(
+            ${PROJECT_NAME}-sorted-settable-incremental-list-i-i-unit-test
+            test/test_sorted_settable_incremental_list_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-sorted-settable-incremental-list-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-sorted-settable-incremental-list-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-sorted-settable-incremental-list-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-sorted-settable-incremental-list-i-i-unit-test
+            ${PROJECT_NAME}-sorted-settable-incremental-list-i-i-unit-test)
+    # aquarium-butterflyfish-sorted-settable-incremental-set-i-i-unit-test
+    add_executable(
+            ${PROJECT_NAME}-sorted-settable-incremental-set-i-i-unit-test
+            test/test_sorted_settable_incremental_set_i_i.c)
+    target_include_directories(
+            ${PROJECT_NAME}-sorted-settable-incremental-set-i-i-unit-test
+            PRIVATE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
+    target_link_libraries(
+            ${PROJECT_NAME}-sorted-settable-incremental-set-i-i-unit-test
+            PRIVATE
+                ${PROJECT_NAME})
+    target_compile_options(
+            ${PROJECT_NAME}-sorted-settable-incremental-set-i-i-unit-test
+            PRIVATE
+                ${COMPILE_OPTIONS})
+    add_test(${PROJECT_NAME}-sorted-settable-incremental-set-i-i-unit-test
+            ${PROJECT_NAME}-sorted-settable-incremental-set-i-i-unit-test)
 else ()
     add_library(${PROJECT_NAME} "")
     target_sources(${PROJECT_NAME}
