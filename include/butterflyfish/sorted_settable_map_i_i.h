@@ -5,10 +5,12 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "map_i_i_entry.h"
 #include "sorted_map_i_i.h"
 #include "settable_map_i_i.h"
 
-struct sea_turtle_integer;
+struct butterflyfish_stream_i;
+struct butterflyfish_stream_i;
 struct butterflyfish_sorted_settable_set_i;
 struct butterflyfish_ordered_settable_list_i;
 

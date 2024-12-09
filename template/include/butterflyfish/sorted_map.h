@@ -4,7 +4,6 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <sea-urchin.h>
 
 #include "map_$t$_entry.h"
 #include "sorted_$t$.h"

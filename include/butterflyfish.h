@@ -118,11 +118,13 @@
 #include <butterflyfish/sorted_settable_incremental_map_i_i.h>
 #include <butterflyfish/sorted_settable_incremental_set_i.h>
 #include <butterflyfish/sorted_settable_list_i.h>
+#include <butterflyfish/sorted_settable_list_i_i.h>
 #include <butterflyfish/sorted_settable_map_i_i.h>
 #include <butterflyfish/sorted_settable_reducible_list_i.h>
 #include <butterflyfish/sorted_settable_reducible_map_i_i.h>
 #include <butterflyfish/sorted_settable_reducible_set_i.h>
 #include <butterflyfish/sorted_settable_set_i.h>
+#include <butterflyfish/sorted_settable_set_i_i.h>
 #include <butterflyfish/stream_i.h>
 #include <butterflyfish/stream_i_i.h>
 #include <butterflyfish/unordered_i.h>
