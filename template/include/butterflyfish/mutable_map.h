@@ -53,8 +53,9 @@ struct butterflyfish_mutable_map_$t$ {
     const struct butterflyfish_settable_reducible_map_$t$ *const
             as_settable_reducible_map;
 
-    const struct butterflyfish_mutable_set_i *const keys;
-    const struct butterflyfish_ordered_settable_reducible_list_i *const values;
+    const struct butterflyfish_mutable_set_$mkt$ *const keys;
+    const struct butterflyfish_ordered_settable_reducible_list_$mvt$ *const
+            values;
 
     /**
      * @brief Retrieve the count of items.
