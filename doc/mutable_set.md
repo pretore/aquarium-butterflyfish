@@ -22,20 +22,17 @@ classDiagram
     collection *-- settable
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set
     collection *-- set
     class addable {
         add()
-        add_all()
     }
     <<interface>> addable
     collection *-- addable
     class removable {
         remove_item()
-        remove_all_items()
     }
     <<interface>> removable
     collection *-- removable
@@ -51,8 +48,6 @@ classDiagram
     addable *-- incremental_set
     class reducible_set {
         remove()
-        remove_all()
-        retain_all()
     }
     <<interface>> reducible_set
     removable *-- reducible_set

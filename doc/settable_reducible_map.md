@@ -17,14 +17,12 @@ classDiagram
     stream *-- collection
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set
     collection *-- set
     class removable {
         remove_item()
-        remove_all_items()
     }
     <<interface>> removable
     collection *-- removable
@@ -35,10 +33,8 @@ classDiagram
     collection *-- settable
     class map {
         contains_key()
-        contains_all_keys()
         contains_value()
-        contains_all_values()
-        get_value()
+        get()
         get_entry()
         keys()
         values()
@@ -47,10 +43,6 @@ classDiagram
     set *-- map
     class reducible_map {
         remove()
-        remove_all()
-        retain_all()
-        remove_entry()
-        remove_all_entries()
         keys()
         values()
     }
@@ -58,9 +50,9 @@ classDiagram
     removable *-- reducible_map
     map *-- reducible_map
     class settable_map {
-        set_entry()
         set_key()
         set_value()
+        set_entry()
         keys()
         values()
     }

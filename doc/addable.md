@@ -17,7 +17,6 @@ classDiagram
     stream *-- collection
     class addable {
         add()
-        add_all()
     }
     <<interface>> addable
     collection *-- addable
@@ -26,4 +25,3 @@ classDiagram
 [addable](addable.md) _is a_ [collection](collection.md) where you may add 
 items.
 - add value
-- add all values

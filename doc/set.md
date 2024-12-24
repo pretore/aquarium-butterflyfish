@@ -17,7 +17,6 @@ classDiagram
     stream *-- collection
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set
@@ -26,5 +25,4 @@ classDiagram
 
 [set](set.md) _is a_ [collection](collection.md) where unique items are looked up by value.
 - contains value
-- contains all values
 - get item by value

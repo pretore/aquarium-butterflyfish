@@ -23,13 +23,11 @@ classDiagram
     collection *-- list
     class removable {
         remove_item()
-        remove_all_items()
     }
     <<interface>> removable
     collection *-- removable
     class reducible_list {
         remove()
-        remove_all()
     }
     <<interface>> reducible_list
     removable *-- reducible_list
@@ -39,4 +37,3 @@ classDiagram
 [reducible_list](reducible_list.md) _is a_ [list](list.md) where the item 
 count may be reduced. 
 - remove
-- remove all

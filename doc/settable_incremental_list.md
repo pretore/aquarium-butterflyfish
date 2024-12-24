@@ -34,7 +34,6 @@ classDiagram
     list *-- settable_list
     class addable {
         add()
-        add_all()
     }
     <<interface>> addable
     collection *-- addable

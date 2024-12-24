@@ -22,7 +22,6 @@ classDiagram
     collection *-- settable
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set

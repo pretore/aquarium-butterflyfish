@@ -17,7 +17,6 @@ classDiagram
     stream *-- collection
     class removable {
         remove_item()
-        remove_all_items()
     }
     <<interface>> removable
     collection *-- removable
@@ -25,4 +24,3 @@ classDiagram
 
 [reducible](removable.md) _is a_ [collection](collection.md) where you may remove items.
 - remove item
-- remove all items

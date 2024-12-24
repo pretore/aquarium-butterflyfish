@@ -4,31 +4,45 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
+#include <seagrass.h>
 #include <test/cmocka.h>
 
-struct object {
-    const struct butterflyfish_reducible_list_i *const reducible_list_i;
-    const struct butterflyfish_removable_i *const removable_i;
-    const struct butterflyfish_list_i *const list_i;
-    const struct butterflyfish_collection_i *const collection_i;
-    const struct butterflyfish_stream_i *const stream_i;
+struct instance {
+    const struct butterflyfish_reducible_list_i *const id;
+    void *data;
 };
 
-static int stream_first(const struct butterflyfish_stream_i *const object,
+const struct butterflyfish_reducible_list_i reducible_list_i;
+
+static int stream_first(const void *const object,
                         const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_STREAM_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&reducible_list_i == instance->id);
     return mock();
 }
 
-static int stream_next(const struct butterflyfish_stream_i *const object,
+static int stream_next(const void *const object,
                        const struct sea_turtle_integer *const item,
                        const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_STREAM_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_STREAM_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(item);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&reducible_list_i == instance->id);
     return mock();
 }
 
@@ -37,694 +51,392 @@ const struct butterflyfish_stream_i stream_i = {
         .next = stream_next
 };
 
-static int as_stream(const struct butterflyfish_collection_i *const object,
-                     const struct butterflyfish_stream_i **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, collection_i, stream_i);
-    return 0;
-}
-
 static int
-collection_last(const struct butterflyfish_collection_i *const object,
+collection_last(const void *const object,
                 const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&reducible_list_i == instance->id);
     return mock();
 }
 
 static int
-collection_prev(const struct butterflyfish_collection_i *const object,
+collection_prev(const void *const object,
                 const struct sea_turtle_integer *const item,
                 const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_COLLECTION_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(item);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&reducible_list_i == instance->id);
     return mock();
 }
 
 static int
-collection_count(const struct butterflyfish_collection_i *const object,
-                 uintmax_t *const out) {
+collection_count(const void *const object, uintmax_t *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&reducible_list_i == instance->id);
     *out = mock();
     return 0;
 }
 
 const struct butterflyfish_collection_i collection_i = {
-        .as_stream = as_stream,
+        .as_stream = &stream_i,
+        .first = stream_first,
+        .next = stream_next,
+        .count = collection_count,
         .last = collection_last,
         .prev = collection_prev,
-        .count = collection_count,
 };
 
-static int
-list_as_collection(const struct butterflyfish_list_i *const object,
-                   const struct butterflyfish_collection_i **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, list_i, collection_i);
-    return 0;
-}
-
-static int list_get(const struct butterflyfish_list_i *const object,
+static int list_get(const void *const object,
                     const uintmax_t at,
                     const struct sea_turtle_integer **const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_I_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&reducible_list_i == instance->id);
     return mock();
 }
 
-static int list_at(const struct butterflyfish_list_i *const object,
+static int list_at(const void *const object,
                    const struct sea_turtle_integer *const item,
                    uintmax_t *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_I_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_I_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(item);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&reducible_list_i == instance->id);
     return mock();
 }
 
 const struct butterflyfish_list_i list_i = {
-        .as_collection = list_as_collection,
+        .as_stream = &stream_i,
+        .as_collection = &collection_i,
+        .first = stream_first,
+        .next = stream_next,
+        .count = collection_count,
+        .last = collection_last,
+        .prev = collection_prev,
         .get = list_get,
         .at = list_at
 };
 
 static int
-removable_as_collection(const struct butterflyfish_removable_i *const object,
-                        const struct butterflyfish_collection_i **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, removable_i, collection_i);
-    return 0;
-}
-
-static int
-removable_remove_item(struct butterflyfish_removable_i *const object,
-                      const struct sea_turtle_integer *const other) {
+reducible_remove_item(void *const object,
+                      const struct sea_turtle_integer *const item) {
+    if (!object) {
+        return BUTTERFLYFISH_REMOVABLE_I_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_REMOVABLE_I_ERROR_ITEM_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(other);
-    return mock();
-}
-
-static int
-removable_remove_all_items(struct butterflyfish_removable_i *const object,
-                           const struct butterflyfish_stream_i *const other) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(other);
+    const struct instance *instance = object;
+    seagrass_required_true(&reducible_list_i == instance->id);
     return mock();
 }
 
 const struct butterflyfish_removable_i removable_i = {
-        .as_collection = removable_as_collection,
-        .remove_item = removable_remove_item,
-        .remove_all_items = removable_remove_all_items,
+        .as_stream = &stream_i,
+        .as_collection = &collection_i,
+        .first = stream_first,
+        .next = stream_next,
+        .count = collection_count,
+        .last = collection_last,
+        .prev = collection_prev,
+        .remove_item = reducible_remove_item,
 };
 
 static int
-reducible_list_as_list(
-        const struct butterflyfish_reducible_list_i *const object,
-        const struct butterflyfish_list_i **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, reducible_list_i,
-                              list_i);
-    return 0;
-}
-
-static int
-reducible_list_as_removable(
-        struct butterflyfish_reducible_list_i *const object,
-        struct butterflyfish_removable_i **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, reducible_list_i,
-                              removable_i);
-    return 0;
-}
-
-static int
-reducible_list_remove(struct butterflyfish_reducible_list_i *const object,
-                      const uintmax_t at) {
+reducible_list_remove(void *const object, const uintmax_t at) {
+    if (!object) {
+        return BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    return mock();
-}
-
-static int
-reducible_list_remove_all(struct butterflyfish_reducible_list_i *const object,
-                          const struct butterflyfish_stream_ni *const other) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(other);
+    const struct instance *instance = object;
+    seagrass_required_true(&reducible_list_i == instance->id);
     return mock();
 }
 
 const struct butterflyfish_reducible_list_i reducible_list_i = {
-        .as_list = reducible_list_as_list,
-        .as_removable = reducible_list_as_removable,
+        .as_stream = &stream_i,
+        .as_collection = &collection_i,
+        .as_list = &list_i,
+        .as_removable = &removable_i,
+        .first = stream_first,
+        .next = stream_next,
+        .count = collection_count,
+        .last = collection_last,
+        .prev = collection_prev,
+        .get = list_get,
+        .at = list_at,
+        .remove_item = reducible_remove_item,
         .remove = reducible_list_remove,
-        .remove_all = reducible_list_remove_all,
 };
 
-static void check_as_stream_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_as_stream(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_as_stream_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_as_stream((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
-}
-
 static void check_as_stream(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
-    };
-    const void *check = (char *) &instance + offsetof(struct object, stream_i);
-    const struct butterflyfish_stream_i *out;
-    assert_int_equal(butterflyfish_reducible_list_i_as_stream(
-            (const struct butterflyfish_reducible_list_i *) &instance,
-            &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_as_collection_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_as_collection(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_as_collection_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_as_collection((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_ptr_equal(reducible_list_i.as_stream, &stream_i);
 }
 
 static void check_as_collection(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
-    };
-    const void *check = (char *) &instance
-                        + offsetof(struct object, collection_i);
-    const struct butterflyfish_collection_i *out;
-    assert_int_equal(butterflyfish_reducible_list_i_as_collection(
-            (const struct butterflyfish_reducible_list_i *) &instance,
-            &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_as_list_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_as_list(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_as_list_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_as_list((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_ptr_equal(reducible_list_i.as_collection, &collection_i);
 }
 
 static void check_as_list(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
-    };
-    const void *check = (char *) &instance + offsetof(struct object, list_i);
-    const struct butterflyfish_list_i *out;
-    assert_int_equal(butterflyfish_reducible_list_i_as_list(
-            (const struct butterflyfish_reducible_list_i *) &instance,
-            &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_as_removable_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_as_removable(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_as_removable_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_as_removable((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_ptr_equal(reducible_list_i.as_list, &list_i);
 }
 
 static void check_as_removable(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
-    };
-    const void *check = (char *) &instance
-            + offsetof(struct object, removable_i);
-    struct butterflyfish_removable_i *out;
-    assert_int_equal(butterflyfish_reducible_list_i_as_removable(
-            (struct butterflyfish_reducible_list_i *) &instance, &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_list_as_collection(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
-    };
-    const void *check = (char *) &instance
-                        + offsetof(struct object, collection_i);
-    const struct butterflyfish_list_i *as;
-    assert_int_equal(butterflyfish_reducible_list_i_as_list(
-            (const struct butterflyfish_reducible_list_i *) &instance,
-            &as), 0);
-    const struct butterflyfish_collection_i *out;
-    assert_int_equal(butterflyfish_list_i_as_collection(as, &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_removable_as_collection(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
-    };
-    const void *check = (char *) &instance
-                        + offsetof(struct object, collection_i);
-    struct butterflyfish_removable_i *as;
-    assert_int_equal(butterflyfish_reducible_list_i_as_removable(
-            (struct butterflyfish_reducible_list_i *) &instance, &as), 0);
-    const struct butterflyfish_collection_i *out;
-    assert_int_equal(butterflyfish_removable_i_as_collection(as, &out), 0);
-    assert_ptr_equal(out, check);
+    assert_ptr_equal(reducible_list_i.as_removable, &removable_i);
 }
 
 static void check_count_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_count(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(reducible_list_i.count(NULL, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_count_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_count((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(reducible_list_i.count((void *) 1, NULL),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_count(void **state) {
     srand(time(NULL));
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i
     };
     expect_function_call(collection_count);
     const uintmax_t check = abs(rand());
     will_return(collection_count, check);
     uintmax_t out;
-    assert_int_equal(butterflyfish_reducible_list_i_count(
-            (const struct butterflyfish_reducible_list_i *) &instance,
-            &out), 0);
+    assert_int_equal(instance.id->count(&instance, &out), 0);
     assert_int_equal(out, check);
 }
 
 static void check_first_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_first(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(reducible_list_i.first(NULL, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_first_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_first((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(reducible_list_i.first((void *) 1, NULL),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_first_error_on_list_is_empty(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i,
     };
     expect_function_call(stream_first);
     will_return(stream_first,
                 BUTTERFLYFISH_STREAM_I_ERROR_STREAM_IS_EMPTY);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_first(
-                    (const struct butterflyfish_reducible_list_i *)
-                            &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_INCREMENTAL_LIST_I_ERROR_LIST_IS_EMPTY);
+    assert_int_equal(instance.id->first(&instance, (void *) 1),
+                     BUTTERFLYFISH_INCREMENTAL_LIST_I_ERROR_LIST_IS_EMPTY);
 }
 
 static void check_last_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_last(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(reducible_list_i.last(NULL, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_last_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_last((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(reducible_list_i.last((void *) 1, NULL),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_last_error_on_list_is_empty(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i,
     };
     expect_function_call(collection_last);
     will_return(collection_last,
                 BUTTERFLYFISH_COLLECTION_I_ERROR_COLLECTION_IS_EMPTY);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_last(
-                    (const struct butterflyfish_reducible_list_i *)
-                            &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_LIST_IS_EMPTY);
+    assert_int_equal(instance.id->last(&instance, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_LIST_IS_EMPTY);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_next(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(reducible_list_i.next(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_next_error_on_item_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_next((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(reducible_list_i.next((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL);
 }
 
 static void check_next_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_next((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(reducible_list_i.next((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_next_error_on_end_of_sequence(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i,
     };
     expect_function_call(stream_next);
     will_return(stream_next,
                 BUTTERFLYFISH_STREAM_I_ERROR_END_OF_SEQUENCE);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_next(
-                    (const struct butterflyfish_reducible_list_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(instance.id->next(&instance, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_prev_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_prev(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(reducible_list_i.prev(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_prev_error_on_item_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_prev((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_INCREMENTAL_LIST_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(reducible_list_i.prev((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_INCREMENTAL_LIST_I_ERROR_ITEM_IS_NULL);
 }
 
 static void check_prev_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_prev((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(reducible_list_i.prev((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_prev_error_on_end_of_sequence(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i,
     };
     expect_function_call(collection_prev);
     will_return(collection_prev,
                 BUTTERFLYFISH_COLLECTION_I_ERROR_END_OF_SEQUENCE);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_prev(
-                    (const struct butterflyfish_reducible_list_i *)
-                            &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(instance.id->prev(&instance, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_get_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_get(NULL, 0, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(reducible_list_i.get(NULL, 0, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_get_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_get((void *) 1, 0, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(reducible_list_i.get((void *) 1, 0, NULL),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_get_error_on_index_out_of_bounds(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i,
     };
     expect_function_call(list_get);
     will_return(list_get,
                 BUTTERFLYFISH_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_get(
-                    (const struct butterflyfish_reducible_list_i *) &instance,
-                    0,
-                    (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS);
+    assert_int_equal(instance.id->get(&instance, 0, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS);
 }
 
 static void check_at_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_at(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(reducible_list_i.at(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_at_error_on_item_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_at((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(reducible_list_i.at((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL);
 }
 
 static void check_at_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_at((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(reducible_list_i.at((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OUT_IS_NULL);
 }
 
 static void check_at_error_on_item_not_found(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i,
     };
     expect_function_call(list_at);
     will_return(list_at,
                 BUTTERFLYFISH_LIST_I_ERROR_ITEM_NOT_FOUND);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_at(
-                    (const struct butterflyfish_reducible_list_i *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_NOT_FOUND);
+    assert_int_equal(instance.id->at(&instance, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_NOT_FOUND);
 }
 
 static void check_remove_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove(NULL, 0),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(reducible_list_i.remove(NULL, 0),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_remove(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i,
     };
     expect_function_call(reducible_list_remove);
     will_return(reducible_list_remove, 0);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove(
-                    (struct butterflyfish_reducible_list_i *) &instance, 0),
-            0);
+    assert_int_equal(instance.id->remove(&instance, 0), 0);
 }
 
 static void check_remove_error_on_index_out_of_bounds(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i
     };
     expect_function_call(reducible_list_remove);
     will_return(reducible_list_remove,
                 BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove(
-                    (struct butterflyfish_reducible_list_i *) &instance,
-                    0),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS);
-}
-
-static void check_remove_all_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove_all(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_remove_all_error_on_other_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove_all((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OTHER_IS_NULL);
-}
-
-static void check_remove_all_error_on_memory_allocation_failed(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
-    };
-    expect_function_call(reducible_list_remove_all);
-    will_return(reducible_list_remove_all,
-                BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove_all(
-                    (struct butterflyfish_reducible_list_i *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(instance.id->remove(&instance, 0),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS);
 }
 
 static void check_remove_item_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove_item(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(reducible_list_i.remove_item(NULL, (void *) 1),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_remove_item_error_on_item_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove_item((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(reducible_list_i.remove_item((void *) 1, NULL),
+                     BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_ITEM_IS_NULL);
 }
 
 static void check_remove_item(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
+    struct instance instance = {
+            .id = &reducible_list_i,
     };
-    expect_function_call(removable_remove_item);
-    will_return(removable_remove_item, 0);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove_item(
-                    (struct butterflyfish_reducible_list_i *) &instance,
-                    (void *) 1),
-            0);
-}
-
-static void check_remove_all_items_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove_all_items(NULL, (void *) 1),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_remove_all_items_error_on_other_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove_all_items((void *) 1, NULL),
-            BUTTERFLYFISH_REDUCIBLE_LIST_I_ERROR_OTHER_IS_NULL);
-}
-
-static void check_remove_all_items(void **state) {
-    const struct object instance = {
-            .reducible_list_i = &reducible_list_i,
-            .removable_i = &removable_i,
-            .list_i = &list_i,
-            .collection_i = &collection_i,
-            .stream_i = &stream_i
-    };
-    expect_function_call(removable_remove_all_items);
-    will_return(removable_remove_all_items, 0);
-    assert_int_equal(
-            butterflyfish_reducible_list_i_remove_all_items(
-                    (struct butterflyfish_reducible_list_i *) &instance,
-                    (void *) 1),
-            0);
+    expect_function_call(reducible_remove_item);
+    will_return(reducible_remove_item, 0);
+    assert_int_equal(reducible_list_i.remove_item(&instance, (void *) 1), 0);
 }
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
-            cmocka_unit_test(check_as_stream_error_on_object_is_null),
-            cmocka_unit_test(check_as_stream_error_on_out_is_null),
             cmocka_unit_test(check_as_stream),
-            cmocka_unit_test(check_as_collection_error_on_object_is_null),
-            cmocka_unit_test(check_as_collection_error_on_out_is_null),
             cmocka_unit_test(check_as_collection),
-            cmocka_unit_test(check_as_list_error_on_object_is_null),
-            cmocka_unit_test(check_as_list_error_on_out_is_null),
             cmocka_unit_test(check_as_list),
-            cmocka_unit_test(check_as_removable_error_on_object_is_null),
-            cmocka_unit_test(check_as_removable_error_on_out_is_null),
             cmocka_unit_test(check_as_removable),
-            cmocka_unit_test(check_removable_as_collection),
-            cmocka_unit_test(check_list_as_collection),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),
@@ -752,15 +464,9 @@ int main(int argc, char *argv[]) {
             cmocka_unit_test(check_remove_error_on_object_is_null),
             cmocka_unit_test(check_remove),
             cmocka_unit_test(check_remove_error_on_index_out_of_bounds),
-            cmocka_unit_test(check_remove_all_error_on_object_is_null),
-            cmocka_unit_test(check_remove_all_error_on_other_is_null),
-            cmocka_unit_test(check_remove_all_error_on_memory_allocation_failed),
             cmocka_unit_test(check_remove_item_error_on_object_is_null),
             cmocka_unit_test(check_remove_item),
             cmocka_unit_test(check_remove_item_error_on_item_is_null),
-            cmocka_unit_test(check_remove_all_items_error_on_object_is_null),
-            cmocka_unit_test(check_remove_all_items),
-            cmocka_unit_test(check_remove_all_items_error_on_other_is_null),
     };
     //cmocka_set_message_output(CM_OUTPUT_XML);
     return cmocka_run_group_tests(tests, NULL, NULL);

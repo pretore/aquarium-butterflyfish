@@ -17,14 +17,12 @@ classDiagram
     stream *-- collection
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set
     collection *-- set
     class addable {
         add()
-        add_all()
     }
     <<interface>> addable
     collection *-- addable
@@ -35,10 +33,8 @@ classDiagram
     collection *-- settable
     class map {
         contains_key()
-        contains_all_keys()
         contains_value()
-        contains_all_values()
-        get_value()
+        get()
         get_entry()
         keys()
         values()
@@ -46,7 +42,7 @@ classDiagram
     <<interface>> map
     set *-- map
     class incremental_map {
-        add_value()
+        add()
         keys()
         values()
     }
@@ -54,9 +50,9 @@ classDiagram
     addable *-- incremental_map
     map *-- incremental_map
     class settable_map {
-        set_entry()
         set_key()
         set_value()
+        set_entry()
         keys()
         values()
     }

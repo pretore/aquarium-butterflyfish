@@ -23,7 +23,6 @@ classDiagram
     collection *-- list
     class addable {
         add()
-        add_all()
     }
     <<interface>> addable
     collection *-- addable

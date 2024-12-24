@@ -20,7 +20,6 @@ classDiagram
     collection *-- ordered
     class insertable {
         insert()
-        insert_all()
     }
     <<interface>> insertable
     ordered *-- insertable
@@ -28,4 +27,3 @@ classDiagram
 
 [insertable](insertable.md) _is an_ [ordered](ordered.md) where you may insert items.
 - insert value
-- insert all values

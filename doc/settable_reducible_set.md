@@ -23,7 +23,6 @@ direction LR
     collection *-- settable
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set
@@ -36,14 +35,11 @@ direction LR
     set *-- settable_set
     class removable {
         remove_item()
-        remove_all_items()
     }
     <<interface>> removable
     collection *-- removable
     class reducible_set {
         remove()
-        remove_all()
-        retain_all()
     }
     <<interface>> reducible_set
     set *-- reducible_set

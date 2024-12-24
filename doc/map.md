@@ -17,17 +17,14 @@ classDiagram
     stream *-- collection
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set
     collection *-- set
     class map {
         contains_key()
-        contains_all_keys()
         contains_value()
-        contains_all_values()
-        get_value()
+        get()
         get_entry()
         keys()
         values()
@@ -40,5 +37,6 @@ classDiagram
 - contains key
 - contains value
 - get value for key
+- get entry for key
 - [set](set.md) view of keys
 - [ordered_list](ordered_list.md) view of values

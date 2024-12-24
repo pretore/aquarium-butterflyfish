@@ -4,31 +4,45 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <butterflyfish.h>
+#include <seagrass.h>
 #include <test/cmocka.h>
 
-struct object {
-    const struct butterflyfish_settable_list_$t$ *const settable_list_$t$;
-    const struct butterflyfish_settable_$t$ *const settable_$t$;
-    const struct butterflyfish_list_$t$ *const list_$t$;
-    const struct butterflyfish_collection_$t$ *const collection_$t$;
-    const struct butterflyfish_stream_$t$ *const stream_$t$;
+struct instance {
+    const struct butterflyfish_settable_list_$t$ *const id;
+    void *data;
 };
 
-static int stream_first(const struct butterflyfish_stream_$t$ *const object,
+const struct butterflyfish_settable_list_$t$ settable_list_$t$;
+
+static int stream_first(const void *const object,
                         const $v$*const out) {
+    if (!object) {
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&settable_list_$t$ == instance->id);
     return mock();
 }
 
-static int stream_next(const struct butterflyfish_stream_$t$ *const object,
+static int stream_next(const void *const object,
                        const $v$const item,
                        const $v$*const out) {
+    if (!object) {
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(item);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&settable_list_$t$ == instance->id);
     return mock();
 }
 
@@ -37,668 +51,437 @@ const struct butterflyfish_stream_$t$ stream_$t$ = {
         .next = stream_next
 };
 
-static int as_stream(const struct butterflyfish_collection_$t$ *const object,
-                     const struct butterflyfish_stream_$t$ **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, collection_$t$, stream_$t$);
-    return 0;
-}
-
 static int
-collection_last(const struct butterflyfish_collection_$t$ *const object,
+collection_last(const void *const object,
                 const $v$*const out) {
+    if (!object) {
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&settable_list_$t$ == instance->id);
     return mock();
 }
 
 static int
-collection_prev(const struct butterflyfish_collection_$t$ *const object,
+collection_prev(const void *const object,
                 const $v$const item,
                 const $v$*const out) {
+    if (!object) {
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(item);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&settable_list_$t$ == instance->id);
     return mock();
 }
 
 static int
-collection_count(const struct butterflyfish_collection_$t$ *const object,
-                 uintmax_t *const out) {
+collection_count(const void *const object, uintmax_t *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&settable_list_$t$ == instance->id);
     *out = mock();
     return 0;
 }
 
 const struct butterflyfish_collection_$t$ collection_$t$ = {
-        .as_stream = as_stream,
+        .as_stream = &stream_$t$,
+        .first = stream_first,
+        .next = stream_next,
+        .count = collection_count,
         .last = collection_last,
         .prev = collection_prev,
-        .count = collection_count,
 };
 
-static int
-settable_as_collection(const struct butterflyfish_settable_$t$ *const object,
-                       const struct butterflyfish_collection_$t$ **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, settable_$t$, collection_$t$);
-    return 0;
-}
-
-
-static int
-settable_set_item(struct butterflyfish_settable_$t$ *const object,
-                  const $v$const item,
-                  const $v$const value) {
-    function_called();
-    assert_non_null(object);
-    assert_non_null(item);
-    assert_non_null(value);
-    return mock();
-}
-
-const struct butterflyfish_settable_$t$ settable_$t$ = {
-        .as_collection = settable_as_collection,
-        .set_item = settable_set_item
-};
-
-static int
-list_as_collection(const struct butterflyfish_list_$t$ *const object,
-                   const struct butterflyfish_collection_$t$ **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, list_$t$, collection_$t$);
-    return 0;
-}
-
-static int list_get(const struct butterflyfish_list_$t$ *const object,
+static int list_get(const void *const object,
                     const uintmax_t at,
                     const $v$*const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_$T$_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&settable_list_$t$ == instance->id);
     return mock();
 }
 
-static int list_at(const struct butterflyfish_list_$t$ *const object,
+static int list_at(const void *const object,
                    const $v$const item,
                    uintmax_t *const out) {
+    if (!object) {
+        return BUTTERFLYFISH_LIST_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_LIST_$T$_ERROR_ITEM_IS_NULL;
+    }
+    if (!out) {
+        return BUTTERFLYFISH_LIST_$T$_ERROR_OUT_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(item);
-    assert_non_null(out);
+    const struct instance *instance = object;
+    seagrass_required_true(&settable_list_$t$ == instance->id);
     return mock();
 }
 
 const struct butterflyfish_list_$t$ list_$t$ = {
-        .as_collection = list_as_collection,
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
+        .first = stream_first,
+        .next = stream_next,
+        .count = collection_count,
+        .last = collection_last,
+        .prev = collection_prev,
         .get = list_get,
         .at = list_at
 };
 
 static int
-settable_list_as_settable(struct butterflyfish_settable_list_$t$ *const object,
-                          struct butterflyfish_settable_$t$ **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, settable_list_$t$,
-            settable_$t$);
-    return 0;
-}
-
-static int
-settable_list_as_list(const struct butterflyfish_settable_list_$t$ *const object,
-                      const struct butterflyfish_list_$t$ **const out) {
-    assert_non_null(object);
-    assert_non_null(out);
-    *out = butterflyfish_cast(object, struct object, settable_list_$t$, list_$t$);
-    return 0;
-}
-
-static int
-settable_list_set(struct butterflyfish_settable_list_$t$ *const object,
-               const uintmax_t at,
-               const $v$const value) {
+settable_set_item(void *const object,
+                  const $v$const item,
+                  const $v$const value) {
+    if (!object) {
+        return BUTTERFLYFISH_SETTABLE_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!item) {
+        return BUTTERFLYFISH_SETTABLE_$T$_ERROR_ITEM_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_SETTABLE_$T$_ERROR_VALUE_IS_NULL;
+    }
     function_called();
-    assert_non_null(object);
-    assert_non_null(value);
+    const struct instance *instance = object;
+    seagrass_required_true(&settable_list_$t$ == instance->id);
+    return mock();
+}
+
+const struct butterflyfish_settable_$t$ settable_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
+        .first = stream_first,
+        .next = stream_next,
+        .count = collection_count,
+        .last = collection_last,
+        .prev = collection_prev,
+        .set_item = settable_set_item,
+};
+
+static int
+settable_list_set(void *const object,
+                  uintmax_t at,
+                  const $v$const value) {
+    if (!object) {
+        return BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL;
+    }
+    if (!value) {
+        return BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_NULL;
+    }
+    function_called();
+    const struct instance *instance = object;
+    seagrass_required_true(&settable_list_$t$ == instance->id);
     return mock();
 }
 
 const struct butterflyfish_settable_list_$t$ settable_list_$t$ = {
-        .as_settable = settable_list_as_settable,
-        .as_list = settable_list_as_list,
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
+        .as_list = &list_$t$,
+        .as_settable = &settable_$t$,
+        .first = stream_first,
+        .next = stream_next,
+        .count = collection_count,
+        .last = collection_last,
+        .prev = collection_prev,
+        .get = list_get,
+        .at = list_at,
+        .set_item = settable_set_item,
         .set = settable_list_set,
 };
 
-static void check_as_stream_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_as_stream(NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_as_stream_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_as_stream((void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
-}
-
 static void check_as_stream(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
-    };
-    const void *check = (char *) &instance + offsetof(struct object, stream_$t$);
-    const struct butterflyfish_stream_$t$ *out;
-    assert_int_equal(butterflyfish_settable_list_$t$_as_stream(
-            (const struct butterflyfish_settable_list_$t$ *) &instance, &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_as_collection_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_as_collection(NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_as_collection_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_as_collection((void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_ptr_equal(settable_list_$t$.as_stream, &stream_$t$);
 }
 
 static void check_as_collection(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
-    };
-    const void *check = (char *) &instance
-            + offsetof(struct object, collection_$t$);
-    const struct butterflyfish_collection_$t$ *out;
-    assert_int_equal(butterflyfish_settable_list_$t$_as_collection(
-            (const struct butterflyfish_settable_list_$t$ *) &instance, &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_as_list_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_as_list(NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_as_list_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_as_list((void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_ptr_equal(settable_list_$t$.as_collection, &collection_$t$);
 }
 
 static void check_as_list(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
-    };
-    const void *check = (char *) &instance + offsetof(struct object, list_$t$);
-    const struct butterflyfish_list_$t$ *out;
-    assert_int_equal(butterflyfish_settable_list_$t$_as_list(
-            (const struct butterflyfish_settable_list_$t$ *) &instance, &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_as_settable_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_as_settable(NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
-}
-
-static void check_as_settable_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_as_settable((void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_ptr_equal(settable_list_$t$.as_list, &list_$t$);
 }
 
 static void check_as_settable(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
-    };
-    const void *check = (char *) &instance
-            + offsetof(struct object, settable_$t$);
-    struct butterflyfish_settable_$t$ *out;
-    assert_int_equal(butterflyfish_settable_list_$t$_as_settable(
-            (struct butterflyfish_settable_list_$t$ *) &instance, &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_list_as_collection(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
-    };
-    const void *check = (char *) &instance
-            + offsetof(struct object, collection_$t$);
-    const struct butterflyfish_list_$t$ *as;
-    assert_int_equal(butterflyfish_settable_list_$t$_as_list(
-            (const struct butterflyfish_settable_list_$t$ *) &instance, &as), 0);
-    const struct butterflyfish_collection_$t$ *out;
-    assert_int_equal(butterflyfish_list_$t$_as_collection(as, &out), 0);
-    assert_ptr_equal(out, check);
-}
-
-static void check_settable_as_collection(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
-    };
-    const void *check = (char *) &instance
-                        + offsetof(struct object, collection_$t$);
-    struct butterflyfish_settable_$t$ *as;
-    assert_int_equal(butterflyfish_settable_list_$t$_as_settable(
-            (struct butterflyfish_settable_list_$t$ *) &instance, &as), 0);
-    const struct butterflyfish_collection_$t$ *out;
-    assert_int_equal(butterflyfish_settable_$t$_as_collection(as, &out), 0);
-    assert_ptr_equal(out, check);
+    assert_ptr_equal(settable_list_$t$.as_settable, &settable_$t$);
 }
 
 static void check_count_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_count(NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(settable_list_$t$.count(NULL, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_count_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_count((void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_int_equal(settable_list_$t$.count((void *) 1, NULL),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_count(void **state) {
     srand(time(NULL));
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(collection_count);
     const uintmax_t check = abs(rand());
     will_return(collection_count, check);
     uintmax_t out;
-    assert_int_equal(butterflyfish_settable_list_$t$_count(
-            (const struct butterflyfish_settable_list_$t$ *) &instance, &out), 0);
+    assert_int_equal(instance.id->count(&instance, &out), 0);
     assert_int_equal(out, check);
 }
 
 static void check_first_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_first(NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(settable_list_$t$.first(NULL, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_first_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_first((void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_int_equal(settable_list_$t$.first((void *) 1, NULL),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_first_error_on_list_is_empty(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(stream_first);
     will_return(stream_first,
                 BUTTERFLYFISH_STREAM_$T$_ERROR_STREAM_IS_EMPTY);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_first(
-                    (const struct butterflyfish_settable_list_$t$ *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_LIST_IS_EMPTY);
+    assert_int_equal(instance.id->first(&instance, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_LIST_IS_EMPTY);
 }
 
 static void check_last_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_last(NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(settable_list_$t$.last(NULL, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_last_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_last((void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_int_equal(settable_list_$t$.last((void *) 1, NULL),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_last_error_on_list_is_empty(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(collection_last);
     will_return(collection_last,
                 BUTTERFLYFISH_COLLECTION_$T$_ERROR_COLLECTION_IS_EMPTY);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_last(
-                    (const struct butterflyfish_settable_list_$t$ *) &instance,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_LIST_IS_EMPTY);
+    assert_int_equal(instance.id->last(&instance, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_LIST_IS_EMPTY);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_next(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(settable_list_$t$.next(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_next_error_on_item_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_next((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_IS_NULL);
+    assert_int_equal(settable_list_$t$.next((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_next_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_next((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_int_equal(settable_list_$t$.next((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_next_error_on_end_of_sequence(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(stream_next);
     will_return(stream_next,
                 BUTTERFLYFISH_STREAM_$T$_ERROR_END_OF_SEQUENCE);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_next(
-                    (const struct butterflyfish_settable_list_$t$ *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(instance.id->next(&instance, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_prev_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_prev(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(settable_list_$t$.prev(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_prev_error_on_item_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_prev((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_IS_NULL);
+    assert_int_equal(settable_list_$t$.prev((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_prev_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_prev((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_int_equal(settable_list_$t$.prev((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_prev_error_on_end_of_sequence(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(collection_prev);
     will_return(collection_prev,
                 BUTTERFLYFISH_COLLECTION_$T$_ERROR_END_OF_SEQUENCE);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_prev(
-                    (const struct butterflyfish_settable_list_$t$ *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_END_OF_SEQUENCE);
+    assert_int_equal(instance.id->prev(&instance, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_get_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_get(NULL, 0, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(settable_list_$t$.get(NULL, 0, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_get_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_get((void *) 1, 0, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_int_equal(settable_list_$t$.get((void *) 1, 0, NULL),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_get_error_on_index_out_of_bounds(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(list_get);
     will_return(list_get,
                 BUTTERFLYFISH_LIST_$T$_ERROR_INDEX_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_get(
-                    (const struct butterflyfish_settable_list_$t$ *) &instance,
-                    0,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_INDEX_IS_OUT_OF_BOUNDS);
+    assert_int_equal(instance.id->get(&instance, 0, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_INDEX_IS_OUT_OF_BOUNDS);
 }
 
 static void check_at_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_at(NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(settable_list_$t$.at(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_at_error_on_item_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_at((void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_IS_NULL);
+    assert_int_equal(settable_list_$t$.at((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_at_error_on_out_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_at((void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
+    assert_int_equal(settable_list_$t$.at((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_at_error_on_item_not_found(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(list_at);
     will_return(list_at,
                 BUTTERFLYFISH_LIST_$T$_ERROR_ITEM_NOT_FOUND);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_at(
-                    (const struct butterflyfish_settable_list_$t$ *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_NOT_FOUND);
+    assert_int_equal(instance.id->at(&instance, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_NOT_FOUND);
 }
 
 static void check_set_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set(NULL, 0, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(settable_list_$t$.set(NULL, 0, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_set_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set((void *) 1, 0, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_NULL);
+    assert_int_equal(settable_list_$t$.set((void *) 1, 0, NULL),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_NULL);
 }
 
 static void check_set_error_on_index_out_of_bounds(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(settable_list_set);
     will_return(settable_list_set,
                 BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_INDEX_IS_OUT_OF_BOUNDS);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set(
-                    (struct butterflyfish_settable_list_$t$ *) &instance,
-                    0,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_INDEX_IS_OUT_OF_BOUNDS);
+    assert_int_equal(instance.id->set(&instance, 0, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_INDEX_IS_OUT_OF_BOUNDS);
 }
 
 static void check_set_error_on_memory_allocation_failed(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(settable_list_set);
     will_return(settable_list_set,
                 BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set(
-                    (struct butterflyfish_settable_list_$t$ *) &instance,
-                    0,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(instance.id->set(&instance, 0, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 static void check_set_error_on_value_is_invalid(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(settable_list_set);
     will_return(settable_list_set,
                 BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_INVALID);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set(
-                    (struct butterflyfish_settable_list_$t$ *) &instance,
-                    0,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(instance.id->set(&instance, 0, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_INVALID);
 }
 
 static void check_set_item_error_on_object_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set_item(
-                    NULL, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(settable_list_$t$.set_item(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_set_item_error_on_item_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set_item(
-                    (void *) 1, NULL, (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_IS_NULL);
+    assert_int_equal(settable_list_$t$.set_item((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_set_item_error_on_value_is_null(void **state) {
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set_item(
-                    (void *) 1, (void *) 1, NULL),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_NULL);
+    assert_int_equal(settable_list_$t$.set_item((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_NULL);
 }
 
 static void check_set_item_error_on_memory_allocation_failed(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(settable_set_item);
     will_return(settable_set_item,
                 BUTTERFLYFISH_SETTABLE_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set_item(
-                    (struct butterflyfish_settable_list_$t$ *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
+    assert_int_equal(instance.id->set_item(&instance, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 static void check_set_item_error_on_value_is_invalid(void **state) {
-    const struct object instance = {
-            .settable_list_$t$ = &settable_list_$t$,
-            .settable_$t$ = &settable_$t$,
-            .list_$t$ = &list_$t$,
-            .collection_$t$ = &collection_$t$,
-            .stream_$t$ = &stream_$t$
+    struct instance instance = {
+            .id = &settable_list_$t$,
     };
     expect_function_call(settable_set_item);
     will_return(settable_set_item,
                 BUTTERFLYFISH_SETTABLE_$T$_ERROR_VALUE_IS_INVALID);
-    assert_int_equal(
-            butterflyfish_settable_list_$t$_set_item(
-                    (struct butterflyfish_settable_list_$t$ *) &instance,
-                    (void *) 1,
-                    (void *) 1),
-            BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(instance.id->set_item(&instance, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_SETTABLE_LIST_$T$_ERROR_VALUE_IS_INVALID);
 }
 
 int main(int argc, char *argv[]) {
     const struct CMUnitTest tests[] = {
-            cmocka_unit_test(check_as_stream_error_on_object_is_null),
-            cmocka_unit_test(check_as_stream_error_on_out_is_null),
             cmocka_unit_test(check_as_stream),
-            cmocka_unit_test(check_as_collection_error_on_object_is_null),
-            cmocka_unit_test(check_as_collection_error_on_out_is_null),
             cmocka_unit_test(check_as_collection),
-            cmocka_unit_test(check_as_list_error_on_object_is_null),
-            cmocka_unit_test(check_as_list_error_on_out_is_null),
             cmocka_unit_test(check_as_list),
-            cmocka_unit_test(check_as_settable_error_on_object_is_null),
-            cmocka_unit_test(check_as_settable_error_on_out_is_null),
             cmocka_unit_test(check_as_settable),
-            cmocka_unit_test(check_list_as_collection),
-            cmocka_unit_test(check_settable_as_collection),
             cmocka_unit_test(check_count_error_on_object_is_null),
             cmocka_unit_test(check_count_error_on_out_is_null),
             cmocka_unit_test(check_count),

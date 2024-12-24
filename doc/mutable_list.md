@@ -34,7 +34,6 @@ classDiagram
     list *-- settable_list
     class addable {
         add()
-        add_all()
     }
     <<interface>> addable
     collection *-- addable
@@ -44,13 +43,11 @@ classDiagram
     list *-- incremental_list
     class removable {
         remove_item()
-        remove_all_items()
     }
     <<interface>> removable
     collection *-- removable
     class reducible_list {
         remove()
-        remove_all()
     }
     <<interface>> reducible_list
     removable *-- reducible_list
