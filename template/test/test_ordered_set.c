@@ -8,100 +8,100 @@
 #include <test/cmocka.h>
 
 struct instance {
-    const struct butterflyfish_ordered_set_i *const id;
+    const struct butterflyfish_ordered_set_$t$ *const id;
     void *data;
 };
 
-const struct butterflyfish_ordered_set_i ordered_set_i;
+const struct butterflyfish_ordered_set_$t$ ordered_set_$t$;
 
 static int stream_first(const void *const object,
-                        const struct sea_turtle_integer **const out) {
+                        const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_set_i == instance->id);
+    seagrass_required_true(&ordered_set_$t$ == instance->id);
     return mock();
 }
 
 static int stream_next(const void *const object,
-                       const struct sea_turtle_integer *const item,
-                       const struct sea_turtle_integer **const out) {
+                       const $v$const item,
+                       const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_set_i == instance->id);
+    seagrass_required_true(&ordered_set_$t$ == instance->id);
     return mock();
 }
 
-const struct butterflyfish_stream_i stream_i = {
+const struct butterflyfish_stream_$t$ stream_$t$ = {
         .first = stream_first,
         .next = stream_next
 };
 
 static int
 collection_last(const void *const object,
-                const struct sea_turtle_integer **const out) {
+                const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_set_i == instance->id);
+    seagrass_required_true(&ordered_set_$t$ == instance->id);
     return mock();
 }
 
 static int
 collection_prev(const void *const object,
-                const struct sea_turtle_integer *const item,
-                const struct sea_turtle_integer **const out) {
+                const $v$const item,
+                const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_set_i == instance->id);
+    seagrass_required_true(&ordered_set_$t$ == instance->id);
     return mock();
 }
 
 static int
 collection_count(const void *const object, uintmax_t *const out) {
     if (!object) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_set_i == instance->id);
+    seagrass_required_true(&ordered_set_$t$ == instance->id);
     *out = mock();
     return 0;
 }
 
-const struct butterflyfish_collection_i collection_i = {
-        .as_stream = &stream_i,
+const struct butterflyfish_collection_$t$ collection_$t$ = {
+        .as_stream = &stream_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -109,9 +109,9 @@ const struct butterflyfish_collection_i collection_i = {
         .prev = collection_prev,
 };
 
-const struct butterflyfish_ordered_i ordered_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
+const struct butterflyfish_ordered_$t$ ordered_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -120,44 +120,44 @@ const struct butterflyfish_ordered_i ordered_i = {
 };
 
 static int set_contains(const void *const object,
-                        const struct sea_turtle_integer *const value,
+                        const $v$const value,
                         bool *const out) {
     if (!object) {
-        return BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_SET_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!value) {
-        return BUTTERFLYFISH_SET_I_ERROR_VALUE_IS_NULL;
+        return BUTTERFLYFISH_SET_$T$_ERROR_VALUE_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_SET_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_SET_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_set_i == instance->id);
+    seagrass_required_true(&ordered_set_$t$ == instance->id);
     return mock();
 }
 
 static int set_get(const void *const object,
-                   const struct sea_turtle_integer *const value,
-                   const struct sea_turtle_integer **const out) {
+                   const $v$const value,
+                   const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_SET_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_SET_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!value) {
-        return BUTTERFLYFISH_SET_I_ERROR_VALUE_IS_NULL;
+        return BUTTERFLYFISH_SET_$T$_ERROR_VALUE_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_SET_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_SET_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_set_i == instance->id);
+    seagrass_required_true(&ordered_set_$t$ == instance->id);
     return mock();
 }
 
-const struct butterflyfish_set_i set_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
+const struct butterflyfish_set_$t$ set_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -167,11 +167,11 @@ const struct butterflyfish_set_i set_i = {
         .get = set_get,
 };
 
-const struct butterflyfish_ordered_set_i ordered_set_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
-        .as_set = &set_i,
-        .as_ordered = &ordered_i,
+const struct butterflyfish_ordered_set_$t$ ordered_set_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
+        .as_set = &set_$t$,
+        .as_ordered = &ordered_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -182,35 +182,35 @@ const struct butterflyfish_ordered_set_i ordered_set_i = {
 };
 
 static void check_as_stream(void **state) {
-    assert_ptr_equal(ordered_set_i.as_stream, &stream_i);
+    assert_ptr_equal(ordered_set_$t$.as_stream, &stream_$t$);
 }
 
 static void check_as_collection(void **state) {
-    assert_ptr_equal(ordered_set_i.as_collection, &collection_i);
+    assert_ptr_equal(ordered_set_$t$.as_collection, &collection_$t$);
 }
 
 static void check_as_ordered(void **state) {
-    assert_ptr_equal(ordered_set_i.as_ordered, &ordered_i);
+    assert_ptr_equal(ordered_set_$t$.as_ordered, &ordered_$t$);
 }
 
 static void check_as_set(void **state) {
-    assert_ptr_equal(ordered_set_i.as_set, &set_i);
+    assert_ptr_equal(ordered_set_$t$.as_set, &set_$t$);
 }
 
 static void check_count_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_set_i.count(NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.count(NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_count_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_set_i.count((void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.count((void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_count(void **state) {
     srand(time(NULL));
     struct instance instance = {
-            .id = &ordered_set_i,
+            .id = &ordered_set_$t$,
     };
     expect_function_call(collection_count);
     const uintmax_t check = abs(rand());
@@ -221,160 +221,160 @@ static void check_count(void **state) {
 }
 
 static void check_first_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_set_i.first(NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.first(NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_first_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_set_i.first((void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.first((void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_first_error_on_set_is_empty(void **state) {
     struct instance instance = {
-            .id = &ordered_set_i,
+            .id = &ordered_set_$t$,
     };
     expect_function_call(stream_first);
     will_return(stream_first,
-                BUTTERFLYFISH_STREAM_I_ERROR_STREAM_IS_EMPTY);
+                BUTTERFLYFISH_STREAM_$T$_ERROR_STREAM_IS_EMPTY);
     assert_int_equal(instance.id->first(&instance, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_SET_IS_EMPTY);
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_SET_IS_EMPTY);
 }
 
 static void check_last_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_set_i.last(NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.last(NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_last_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_set_i.last((void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.last((void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_last_error_on_set_is_empty(void **state) {
     struct instance instance = {
-            .id = &ordered_set_i,
+            .id = &ordered_set_$t$,
     };
     expect_function_call(collection_last);
     will_return(collection_last,
-                BUTTERFLYFISH_COLLECTION_I_ERROR_COLLECTION_IS_EMPTY);
+                BUTTERFLYFISH_COLLECTION_$T$_ERROR_COLLECTION_IS_EMPTY);
     assert_int_equal(instance.id->last(&instance, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_SET_IS_EMPTY);
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_SET_IS_EMPTY);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_set_i.next(NULL, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.next(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_next_error_on_item_is_null(void **state) {
-    assert_int_equal(ordered_set_i.next((void *) 1, NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(ordered_set_$t$.next((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_next_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_set_i.next((void *) 1, (void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.next((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_next_error_on_end_of_sequence(void **state) {
     struct instance instance = {
-            .id = &ordered_set_i,
+            .id = &ordered_set_$t$,
     };
     expect_function_call(stream_next);
     will_return(stream_next,
-                BUTTERFLYFISH_STREAM_I_ERROR_END_OF_SEQUENCE);
+                BUTTERFLYFISH_STREAM_$T$_ERROR_END_OF_SEQUENCE);
     assert_int_equal(instance.id->next(&instance, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_END_OF_SEQUENCE);
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_prev_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_set_i.prev(NULL, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.prev(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_prev_error_on_item_is_null(void **state) {
-    assert_int_equal(ordered_set_i.prev((void *) 1, NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(ordered_set_$t$.prev((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_prev_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_set_i.prev((void *) 1, (void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.prev((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_prev_error_on_end_of_sequence(void **state) {
     struct instance instance = {
-            .id = &ordered_set_i,
+            .id = &ordered_set_$t$,
     };
     expect_function_call(collection_prev);
     will_return(collection_prev,
-                BUTTERFLYFISH_COLLECTION_I_ERROR_END_OF_SEQUENCE);
+                BUTTERFLYFISH_COLLECTION_$T$_ERROR_END_OF_SEQUENCE);
     assert_int_equal(instance.id->prev(&instance, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_END_OF_SEQUENCE);
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_contains_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_set_i.contains(NULL, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.contains(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_contains_error_on_value_is_null(void **state) {
-    assert_int_equal(ordered_set_i.contains((void *) 1, NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_IS_NULL);
+    assert_int_equal(ordered_set_$t$.contains((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_VALUE_IS_NULL);
 }
 
 static void check_contains_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_set_i.contains((void *) 1, (void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.contains((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_contains_error_on_memory_allocation_failed(void **state) {
     struct instance instance = {
-            .id = &ordered_set_i,
+            .id = &ordered_set_$t$,
     };
     expect_function_call(set_contains);
     will_return(set_contains,
-                BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED);
+                BUTTERFLYFISH_SET_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(instance.id->contains(&instance, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_MEMORY_ALLOCATION_FAILED);
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 static void check_get_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_set_i.get(NULL, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.get(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_get_error_on_value_is_null(void **state) {
-    assert_int_equal(ordered_set_i.get((void *) 1, NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_IS_NULL);
+    assert_int_equal(ordered_set_$t$.get((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_VALUE_IS_NULL);
 }
 
 static void check_get_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_set_i.get((void *) 1, (void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_set_$t$.get((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_get_error_on_value_not_found(void **state) {
     struct instance instance = {
-            .id = &ordered_set_i,
+            .id = &ordered_set_$t$,
     };
     expect_function_call(set_get);
     will_return(set_get,
-                BUTTERFLYFISH_SET_I_ERROR_VALUE_NOT_FOUND);
+                BUTTERFLYFISH_SET_$T$_ERROR_VALUE_NOT_FOUND);
     assert_int_equal(instance.id->get(&instance, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_VALUE_NOT_FOUND);
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_VALUE_NOT_FOUND);
 }
 
 static void check_get_error_on_memory_allocation_failed(void **state) {
     struct instance instance = {
-            .id = &ordered_set_i,
+            .id = &ordered_set_$t$,
     };
     expect_function_call(set_get);
     will_return(set_get,
-                BUTTERFLYFISH_SET_I_ERROR_MEMORY_ALLOCATION_FAILED);
+                BUTTERFLYFISH_SET_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(instance.id->get(&instance, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_SET_I_ERROR_MEMORY_ALLOCATION_FAILED);
+                     BUTTERFLYFISH_ORDERED_SET_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 int main(int argc, char *argv[]) {

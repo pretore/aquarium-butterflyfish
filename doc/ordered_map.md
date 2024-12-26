@@ -27,10 +27,8 @@ classDiagram
     collection *-- set
     class map {
         contains_key()
-        contains_all_keys()
         contains_value()
-        contains_all_values()
-        get_value()
+        get()
         get_entry()
         keys()
         values()

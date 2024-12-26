@@ -20,7 +20,6 @@ classDiagram
     collection *-- ordered
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set
