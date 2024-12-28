@@ -20,7 +20,6 @@ classDiagram
     collection *-- ordered
     class insertable {
         insert()
-        insert_all()
     }
     <<interface>> insertable
     ordered *-- insertable
@@ -36,7 +35,6 @@ classDiagram
     list *-- ordered_list
     class addable {
         add()
-        add_all()
     }
     <<interface>> addable
     collection *-- addable

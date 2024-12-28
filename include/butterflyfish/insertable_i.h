@@ -127,7 +127,7 @@ struct butterflyfish_insertable_i {
      * @throws BUTTERFLYFISH_INSERTABLE_I_ERROR_VALUE_IS_NULL if value is
      * <i>NULL</i>.
      * @throws BUTTERFLYFISH_INSERTABLE_I_ERROR_VALUE_ALREADY_EXISTS if value
-     * is  already present.
+     * is already present.
      * @throws BUTTERFLYFISH_INSERTABLE_I_ERROR_VALUE_IS_INVALID if value is
      * invalid.
      * @throws BUTTERFLYFISH_INSERTABLE_I_ERROR_MEMORY_ALLOCATION_FAILED

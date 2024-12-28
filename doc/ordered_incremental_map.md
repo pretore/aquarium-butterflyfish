@@ -20,29 +20,24 @@ classDiagram
     collection *-- ordered
     class insertable {
         insert()
-        insert_all()
     }
     <<interface>> insertable
     ordered *-- insertable
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set
     collection *-- set
     class addable {
         add()
-        add_all()      
     }
     <<interface>> addable
     collection *-- addable
     class map {
         contains_key()
-        contains_all_keys()
         contains_value()
-        contains_all_values()
-        get_value()
+        get()
         get_entry()
         keys()
         values()
@@ -50,7 +45,7 @@ classDiagram
     <<interface>> map
     set *-- map
     class incremental_map {
-        add_value()
+        add()
         keys()
         values()
     }

@@ -8,101 +8,101 @@
 #include <test/cmocka.h>
 
 struct instance {
-    const struct butterflyfish_ordered_incremental_list_i *const id;
+    const struct butterflyfish_ordered_incremental_list_$t$ *const id;
     void *data;
 };
 
-const struct butterflyfish_ordered_incremental_list_i
-        ordered_incremental_list_i;
+const struct butterflyfish_ordered_incremental_list_$t$
+        ordered_incremental_list_$t$;
 
 static int stream_first(const void *const object,
-                        const struct sea_turtle_integer **const out) {
+                        const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_incremental_list_i == instance->id);
+    seagrass_required_true(&ordered_incremental_list_$t$ == instance->id);
     return mock();
 }
 
 static int stream_next(const void *const object,
-                       const struct sea_turtle_integer *const item,
-                       const struct sea_turtle_integer **const out) {
+                       const $v$const item,
+                       const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_STREAM_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_STREAM_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_incremental_list_i == instance->id);
+    seagrass_required_true(&ordered_incremental_list_$t$ == instance->id);
     return mock();
 }
 
-const struct butterflyfish_stream_i stream_i = {
+const struct butterflyfish_stream_$t$ stream_$t$ = {
         .first = stream_first,
         .next = stream_next
 };
 
 static int
 collection_last(const void *const object,
-                const struct sea_turtle_integer **const out) {
+                const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_incremental_list_i == instance->id);
+    seagrass_required_true(&ordered_incremental_list_$t$ == instance->id);
     return mock();
 }
 
 static int
 collection_prev(const void *const object,
-                const struct sea_turtle_integer *const item,
-                const struct sea_turtle_integer **const out) {
+                const $v$const item,
+                const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_incremental_list_i == instance->id);
+    seagrass_required_true(&ordered_incremental_list_$t$ == instance->id);
     return mock();
 }
 
 static int
 collection_count(const void *const object, uintmax_t *const out) {
     if (!object) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_COLLECTION_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_COLLECTION_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_incremental_list_i == instance->id);
+    seagrass_required_true(&ordered_incremental_list_$t$ == instance->id);
     *out = mock();
     return 0;
 }
 
-const struct butterflyfish_collection_i collection_i = {
-        .as_stream = &stream_i,
+const struct butterflyfish_collection_$t$ collection_$t$ = {
+        .as_stream = &stream_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -112,40 +112,40 @@ const struct butterflyfish_collection_i collection_i = {
 
 static int list_get(const void *const object,
                     const uintmax_t at,
-                    const struct sea_turtle_integer **const out) {
+                    const $v$*const out) {
     if (!object) {
-        return BUTTERFLYFISH_LIST_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_LIST_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_LIST_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_LIST_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_incremental_list_i == instance->id);
+    seagrass_required_true(&ordered_incremental_list_$t$ == instance->id);
     return mock();
 }
 
 static int list_at(const void *const object,
-                   const struct sea_turtle_integer *const item,
+                   const $v$const item,
                    uintmax_t *const out) {
     if (!object) {
-        return BUTTERFLYFISH_LIST_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_LIST_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_LIST_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_LIST_$T$_ERROR_ITEM_IS_NULL;
     }
     if (!out) {
-        return BUTTERFLYFISH_LIST_I_ERROR_OUT_IS_NULL;
+        return BUTTERFLYFISH_LIST_$T$_ERROR_OUT_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_incremental_list_i == instance->id);
+    seagrass_required_true(&ordered_incremental_list_$t$ == instance->id);
     return mock();
 }
 
-const struct butterflyfish_list_i list_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
+const struct butterflyfish_list_$t$ list_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -155,9 +155,9 @@ const struct butterflyfish_list_i list_i = {
         .at = list_at
 };
 
-const struct butterflyfish_ordered_i ordered_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
+const struct butterflyfish_ordered_$t$ ordered_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -165,11 +165,11 @@ const struct butterflyfish_ordered_i ordered_i = {
         .prev = collection_prev,
 };
 
-const struct butterflyfish_ordered_list_i ordered_list_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
-        .as_ordered = &ordered_i,
-        .as_list = &list_i,
+const struct butterflyfish_ordered_list_$t$ ordered_list_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
+        .as_ordered = &ordered_$t$,
+        .as_list = &list_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -181,22 +181,22 @@ const struct butterflyfish_ordered_list_i ordered_list_i = {
 
 static int
 addable_add(void *const object,
-            const struct sea_turtle_integer *const value) {
+            const $v$const value) {
     if (!object) {
-        return BUTTERFLYFISH_ADDABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_ADDABLE_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!value) {
-        return BUTTERFLYFISH_ADDABLE_I_ERROR_VALUE_IS_NULL;
+        return BUTTERFLYFISH_ADDABLE_$T$_ERROR_VALUE_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_incremental_list_i == instance->id);
+    seagrass_required_true(&ordered_incremental_list_$t$ == instance->id);
     return mock();
 }
 
-const struct butterflyfish_addable_i addable_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
+const struct butterflyfish_addable_$t$ addable_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -205,11 +205,11 @@ const struct butterflyfish_addable_i addable_i = {
         .add = addable_add,
 };
 
-const struct butterflyfish_incremental_list_i incremental_list_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
-        .as_list = &list_i,
-        .as_addable = &addable_i,
+const struct butterflyfish_incremental_list_$t$ incremental_list_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
+        .as_list = &list_$t$,
+        .as_addable = &addable_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -222,27 +222,27 @@ const struct butterflyfish_incremental_list_i incremental_list_i = {
 
 static int
 insertable_insert(void *const object,
-                  const struct sea_turtle_integer *const item,
-                  const struct sea_turtle_integer *const value) {
+                  const $v$const item,
+                  const $v$const value) {
     if (!object) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_OBJECT_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_$T$_ERROR_OBJECT_IS_NULL;
     }
     if (!item) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_ITEM_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_$T$_ERROR_ITEM_IS_NULL;
     }
     if (!value) {
-        return BUTTERFLYFISH_INSERTABLE_I_ERROR_VALUE_IS_NULL;
+        return BUTTERFLYFISH_INSERTABLE_$T$_ERROR_VALUE_IS_NULL;
     }
     function_called();
     const struct instance *instance = object;
-    seagrass_required_true(&ordered_incremental_list_i == instance->id);
+    seagrass_required_true(&ordered_incremental_list_$t$ == instance->id);
     return mock();
 }
 
-const struct butterflyfish_insertable_i insertable_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
-        .as_ordered = &ordered_i,
+const struct butterflyfish_insertable_$t$ insertable_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
+        .as_ordered = &ordered_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -252,15 +252,15 @@ const struct butterflyfish_insertable_i insertable_i = {
 };
 
 const struct
-butterflyfish_ordered_incremental_list_i ordered_incremental_list_i = {
-        .as_stream = &stream_i,
-        .as_collection = &collection_i,
-        .as_list = &list_i,
-        .as_addable = &addable_i,
-        .as_ordered = &ordered_i,
-        .as_insertable = &insertable_i,
-        .as_ordered_list = &ordered_list_i,
-        .as_incremental_list = &incremental_list_i,
+butterflyfish_ordered_incremental_list_$t$ ordered_incremental_list_$t$ = {
+        .as_stream = &stream_$t$,
+        .as_collection = &collection_$t$,
+        .as_list = &list_$t$,
+        .as_addable = &addable_$t$,
+        .as_ordered = &ordered_$t$,
+        .as_insertable = &insertable_$t$,
+        .as_ordered_list = &ordered_list_$t$,
+        .as_incremental_list = &incremental_list_$t$,
         .first = stream_first,
         .next = stream_next,
         .count = collection_count,
@@ -273,53 +273,53 @@ butterflyfish_ordered_incremental_list_i ordered_incremental_list_i = {
 };
 
 static void check_as_stream(void **state) {
-    assert_ptr_equal(ordered_incremental_list_i.as_stream, &stream_i);
+    assert_ptr_equal(ordered_incremental_list_$t$.as_stream, &stream_$t$);
 }
 
 static void check_as_collection(void **state) {
-    assert_ptr_equal(ordered_incremental_list_i.as_collection, &collection_i);
+    assert_ptr_equal(ordered_incremental_list_$t$.as_collection, &collection_$t$);
 }
 
 static void check_as_ordered(void **state) {
-    assert_ptr_equal(ordered_incremental_list_i.as_ordered, &ordered_i);
+    assert_ptr_equal(ordered_incremental_list_$t$.as_ordered, &ordered_$t$);
 }
 
 static void check_as_list(void **state) {
-    assert_ptr_equal(ordered_incremental_list_i.as_list, &list_i);
+    assert_ptr_equal(ordered_incremental_list_$t$.as_list, &list_$t$);
 }
 
 static void check_as_insertable(void **state) {
-    assert_ptr_equal(ordered_incremental_list_i.as_insertable, &insertable_i);
+    assert_ptr_equal(ordered_incremental_list_$t$.as_insertable, &insertable_$t$);
 }
 
 static void check_as_addable(void **state) {
-    assert_ptr_equal(ordered_incremental_list_i.as_addable, &addable_i);
+    assert_ptr_equal(ordered_incremental_list_$t$.as_addable, &addable_$t$);
 }
 
 static void check_as_ordered_list(void **state) {
-    assert_ptr_equal(ordered_incremental_list_i.as_ordered_list,
-                     &ordered_list_i);
+    assert_ptr_equal(ordered_incremental_list_$t$.as_ordered_list,
+                     &ordered_list_$t$);
 }
 
 static void check_as_incremental_list(void **state) {
-    assert_ptr_equal(ordered_incremental_list_i.as_incremental_list,
-                     &incremental_list_i);
+    assert_ptr_equal(ordered_incremental_list_$t$.as_incremental_list,
+                     &incremental_list_$t$);
 }
 
 static void check_count_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.count(NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.count(NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_count_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.count((void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.count((void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_count(void **state) {
     srand(time(NULL));
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(collection_count);
     const uintmax_t check = abs(rand());
@@ -330,213 +330,213 @@ static void check_count(void **state) {
 }
 
 static void check_first_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.first(NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.first(NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_first_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.first((void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.first((void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_first_error_on_list_is_empty(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(stream_first);
     will_return(stream_first,
-                BUTTERFLYFISH_STREAM_I_ERROR_STREAM_IS_EMPTY);
+                BUTTERFLYFISH_STREAM_$T$_ERROR_STREAM_IS_EMPTY);
     assert_int_equal(instance.id->first(&instance, (void *) 1),
-            BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_LIST_IS_EMPTY);
+            BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_LIST_IS_EMPTY);
 }
 
 static void check_last_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.last(NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.last(NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_last_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.last((void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.last((void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_last_error_on_list_is_empty(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(collection_last);
     will_return(collection_last,
-                BUTTERFLYFISH_COLLECTION_I_ERROR_COLLECTION_IS_EMPTY);
+                BUTTERFLYFISH_COLLECTION_$T$_ERROR_COLLECTION_IS_EMPTY);
     assert_int_equal(instance.id->last(&instance, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_LIST_IS_EMPTY);
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_LIST_IS_EMPTY);
 }
 
 static void check_next_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.next(NULL, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.next(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_next_error_on_item_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.next((void *) 1, NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.next((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_next_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.next((void *) 1, (void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.next((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_next_error_on_end_of_sequence(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(stream_next);
     will_return(stream_next,
-                BUTTERFLYFISH_STREAM_I_ERROR_END_OF_SEQUENCE);
+                BUTTERFLYFISH_STREAM_$T$_ERROR_END_OF_SEQUENCE);
     assert_int_equal(instance.id->next(&instance, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_END_OF_SEQUENCE);
+            BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_prev_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.prev(NULL, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.prev(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_prev_error_on_item_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.prev((void *) 1, NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.prev((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_prev_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.prev((void *) 1, (void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.prev((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_prev_error_on_end_of_sequence(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(collection_prev);
     will_return(collection_prev,
-                BUTTERFLYFISH_COLLECTION_I_ERROR_END_OF_SEQUENCE);
+                BUTTERFLYFISH_COLLECTION_$T$_ERROR_END_OF_SEQUENCE);
     assert_int_equal(instance.id->prev(&instance, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_END_OF_SEQUENCE);
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_END_OF_SEQUENCE);
 }
 
 static void check_get_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.get(NULL, 0, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.get(NULL, 0, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_get_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.get((void *) 1, 0, NULL),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.get((void *) 1, 0, NULL),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_get_error_on_index_out_of_bounds(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(list_get);
     will_return(list_get,
-                BUTTERFLYFISH_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS);
-    assert_int_equal(ordered_incremental_list_i.get(&instance, 0, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_INDEX_IS_OUT_OF_BOUNDS);
+                BUTTERFLYFISH_LIST_$T$_ERROR_INDEX_IS_OUT_OF_BOUNDS);
+    assert_int_equal(ordered_incremental_list_$t$.get(&instance, 0, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_INDEX_IS_OUT_OF_BOUNDS);
 }
 
 static void check_at_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.at(NULL, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.at(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_at_error_on_item_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.at((void *) 1, NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.at((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_at_error_on_out_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.at((void *) 1, (void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OUT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.at((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OUT_IS_NULL);
 }
 
 static void check_get_error_on_item_not_found(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(list_at);
     will_return(list_at,
-                BUTTERFLYFISH_LIST_I_ERROR_ITEM_NOT_FOUND);
+                BUTTERFLYFISH_LIST_$T$_ERROR_ITEM_NOT_FOUND);
     assert_int_equal(instance.id->at(&instance, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_ITEM_NOT_FOUND);
+            BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_ITEM_NOT_FOUND);
 }
 
 static void check_add_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.add(NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.add(NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_add_error_on_value_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.add((void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_VALUE_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.add((void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_VALUE_IS_NULL);
 }
 
 static void check_add_error_on_memory_allocation_failed(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(addable_add);
     will_return(addable_add,
-                BUTTERFLYFISH_ADDABLE_I_ERROR_MEMORY_ALLOCATION_FAILED);
+                BUTTERFLYFISH_ADDABLE_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(instance.id->add(&instance, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED);
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 static void check_add_error_on_value_is_invalid(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(addable_add);
     will_return(addable_add,
-                BUTTERFLYFISH_ADDABLE_I_ERROR_VALUE_IS_INVALID);
-    assert_int_equal(ordered_incremental_list_i.add(&instance, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_VALUE_IS_INVALID);
+                BUTTERFLYFISH_ADDABLE_$T$_ERROR_VALUE_IS_INVALID);
+    assert_int_equal(ordered_incremental_list_$t$.add(&instance, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_VALUE_IS_INVALID);
 }
 
 static void check_insert_error_on_object_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.insert(NULL, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_OBJECT_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.insert(NULL, (void *) 1, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_OBJECT_IS_NULL);
 }
 
 static void check_insert_error_on_item_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.insert((void *) 1, NULL, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_ITEM_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.insert((void *) 1, NULL, (void *) 1),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_ITEM_IS_NULL);
 }
 
 static void check_insert_error_on_value_is_null(void **state) {
-    assert_int_equal(ordered_incremental_list_i.insert((void *) 1, (void *) 1, NULL),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_VALUE_IS_NULL);
+    assert_int_equal(ordered_incremental_list_$t$.insert((void *) 1, (void *) 1, NULL),
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_VALUE_IS_NULL);
 }
 
 static void check_insert_error_on_value_is_invalid(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(insertable_insert);
     will_return(insertable_insert,
-                BUTTERFLYFISH_INSERTABLE_I_ERROR_VALUE_IS_INVALID);
+                BUTTERFLYFISH_INSERTABLE_$T$_ERROR_VALUE_IS_INVALID);
     assert_int_equal(instance.id->insert(&instance, (void *) 1, (void *) 1),
-            BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_VALUE_IS_INVALID);
+            BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_VALUE_IS_INVALID);
 }
 
 static void check_insert_error_on_memory_allocation_failed(void **state) {
     struct instance instance = {
-            .id = &ordered_incremental_list_i,
+            .id = &ordered_incremental_list_$t$,
     };
     expect_function_call(insertable_insert);
     will_return(insertable_insert,
-                BUTTERFLYFISH_INSERTABLE_I_ERROR_MEMORY_ALLOCATION_FAILED);
+                BUTTERFLYFISH_INSERTABLE_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
     assert_int_equal(instance.id->insert(&instance, (void *) 1, (void *) 1),
-                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_I_ERROR_MEMORY_ALLOCATION_FAILED);
+                     BUTTERFLYFISH_ORDERED_INCREMENTAL_LIST_$T$_ERROR_MEMORY_ALLOCATION_FAILED);
 }
 
 int main(int argc, char *argv[]) {

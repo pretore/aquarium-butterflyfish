@@ -20,20 +20,17 @@ classDiagram
     collection *-- ordered
     class insertable {
         insert()
-        insert_all()
     }
     <<interface>> insertable
     ordered *-- insertable
     class set {
         contains()
-        contains_all()
         get()
     }
     <<interface>> set
     collection *-- set
     class addable {
         add()
-        add_all()
     }
     <<interface>> addable
     collection *-- addable
