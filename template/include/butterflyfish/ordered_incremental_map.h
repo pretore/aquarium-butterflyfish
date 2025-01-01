@@ -48,7 +48,7 @@ struct butterflyfish_ordered_incremental_map_$t$ {
     const struct butterflyfish_incremental_map_$t$ *const as_incremental_map;
 
     const struct butterflyfish_ordered_incremental_set_$mkt$ *const keys;
-    const struct butterflyfish_ordered_list_$mvt$ *values;
+    const struct butterflyfish_ordered_list_$mvt$ *const values;
 
     /**
      * @brief Retrieve the count of items.

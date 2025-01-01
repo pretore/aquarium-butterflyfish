@@ -32,10 +32,8 @@ classDiagram
     collection *-- settable
     class map {
         contains_key()
-        contains_all_keys()
         contains_value()
-        contains_all_values()
-        get_value()
+        get()
         get_entry()
         keys()
         values()
@@ -50,9 +48,9 @@ classDiagram
     map *-- ordered_map
     ordered *-- ordered_map
     class settable_map {
-        set_entry()
         set_key()
         set_value()
+        set_entry()
         keys()
         values()
     }
